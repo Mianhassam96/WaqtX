@@ -3,8 +3,6 @@
 A PWA built with vanilla HTML, CSS, and JavaScript.
 
 🔗 **Live:** [mianhassam96.github.io/WaqtX](https://mianhassam96.github.io/WaqtX/)  
-📦 **Repo:** [github.com/Mianhassam96/WaqtX](https://github.com/Mianhassam96/WaqtX)  
-👨‍💻 **Author:** [MultiMian](https://github.com/Mianhassam96/)
 
 ---
 
