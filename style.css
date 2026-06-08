@@ -29,6 +29,8 @@
   --font-logo: 'Cinzel', 'Palatino Linotype', 'Book Antiqua', serif;
   --nav-h:     64px;
   --transition: 0.25s ease;
+  --navbar-bg: rgba(4,10,5,0.96);
+  --navbar-border: rgba(201,168,76,0.14);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -65,16 +67,37 @@ img { max-width: 100%; }
 /* ── 3. Utility ── */
 .hidden { display: none !important; }
 
+[data-theme="light"] {
+  --bg: #f4efe4;
+  --bg2: #f7efe0;
+  --bg3: #ece0ca;
+  --gold: #8a5f1c;
+  --gold2: #c19643;
+  --gold3: #7f5a2c;
+  --green: #166c3d;
+  --green2: #1d9a55;
+  --text: #1d1a16;
+  --text2: rgba(29,26,22,0.72);
+  --text3: rgba(29,26,22,0.45);
+  --card-bg: rgba(255,255,255,0.92);
+  --card-border: rgba(144,111,62,0.18);
+  --card-hover: rgba(144,111,62,0.18);
+  --shadow: 0 4px 26px rgba(0,0,0,0.08);
+  --shadow-gold: 0 0 18px rgba(144,111,62,0.12);
+  --navbar-bg: rgba(255,255,255,0.92);
+  --navbar-border: rgba(144,111,62,0.18);
+}
+
 /* ── 4. Navbar ── */
 .navbar {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
   height: var(--nav-h);
-  background: rgba(4,10,5,0.96);
+  background: var(--navbar-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(201,168,76,0.14);
+  border-bottom: 1px solid var(--navbar-border);
   box-shadow: 0 1px 0 rgba(201,168,76,0.06), 0 4px 24px rgba(0,0,0,0.4);
 }
 .nav-inner {
@@ -176,6 +199,22 @@ img { max-width: 100%; }
 .btn-share-nav:hover {
   background: rgba(201,168,76,0.1);
   box-shadow: 0 0 16px rgba(201,168,76,0.2);
+}
+.btn-theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  color: var(--gold);
+  font-size: 1rem;
+  background: transparent;
+  transition: all var(--transition);
+}
+.btn-theme-toggle:hover {
+  background: rgba(201,168,76,0.1);
 }
 .hamburger {
   display: none;

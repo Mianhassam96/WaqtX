@@ -20,7 +20,8 @@ var ASSETS = [
   './lang/en.json',
   './lang/ur.json',
   './lang/ar.json',
-  './lang/roman.json'
+  './lang/roman.json',
+  'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'
 ];
 
 self.addEventListener('install', function(e) {
@@ -54,8 +55,8 @@ self.addEventListener('fetch', function(e) {
   e.respondWith(
     fetch(e.request)
       .then(function(response) {
-        /* Cache a copy of fresh responses */
-        if (response && response.status === 200 && response.type === 'basic') {
+        /* Cache a copy of fresh responses, including opaque cross-origin assets like CDN scripts. */
+        if (response && response.status === 200 && (response.type === 'basic' || response.type === 'opaque')) {
           var clone = response.clone();
           caches.open(CACHE).then(function(cache) {
             cache.put(e.request, clone);

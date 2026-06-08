@@ -42,6 +42,40 @@ function applyDocumentDir(dir) {
     _lang === 'ur' ? 'ur' : _lang === 'ar' ? 'ar' : 'en');
 }
 
+var THEME_STORAGE_KEY = 'waqtx_theme';
+
+function getSavedTheme() {
+  try { return localStorage.getItem(THEME_STORAGE_KEY) || 'dark'; } catch(e) { return 'dark'; }
+}
+
+function updateThemeButton(theme) {
+  var btn = el('btn-theme-toggle');
+  if (!btn) return;
+  btn.textContent = theme === 'light' ? '🌙' : '☀️';
+  btn.setAttribute('aria-label', t('theme_toggle'));
+  btn.title = theme === 'light' ? t('theme_switch_dark') : t('theme_switch_light');
+}
+
+function applyTheme(theme) {
+  if (theme === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+  }
+  try { localStorage.setItem(THEME_STORAGE_KEY, theme === 'light' ? 'light' : 'dark'); } catch(e) {}
+  updateThemeButton(theme);
+}
+
+function initThemeToggle() {
+  var btn = el('btn-theme-toggle');
+  if (!btn) return;
+  btn.addEventListener('click', function() {
+    var current = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    applyTheme(current === 'light' ? 'dark' : 'light');
+  });
+  applyTheme(getSavedTheme());
+}
+
 function applyLangToDOM() {
   /* Navbar */
   var navLinks = [
@@ -60,6 +94,13 @@ function applyLangToDOM() {
     shareNavBtn.innerHTML =
       '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v13"/></svg> ' +
       t('nav_share');
+  }
+
+  var themeBtn = el('btn-theme-toggle');
+  if (themeBtn) {
+    themeBtn.setAttribute('aria-label', t('theme_toggle'));
+    themeBtn.title = document.documentElement.getAttribute('data-theme') === 'light'
+      ? t('theme_switch_dark') : t('theme_switch_light');
   }
 
   /* Section headings */
@@ -341,8 +382,9 @@ function loadLanguage(lang, callback) {
   });
 })();
 
-/* Load saved language on startup */
+/* Load saved language and theme on startup */
 (function() {
+  initThemeToggle();
   var saved;
   try { saved = localStorage.getItem('waqtx_lang') || 'en'; } catch(e) { saved = 'en'; }
   loadLanguage(saved);
@@ -528,7 +570,9 @@ function getWorldData(year) {
     currency: 'British Indian Rupee', pop: 'Below 2.3 Billion',
     event: 'World War II Era', tech: 'Early Radio & Aviation'
   };
-  return WORLD_DATA[2025];
+  var years = Object.keys(WORLD_DATA).map(Number);
+  var latest = Math.max.apply(null, years);
+  return WORLD_DATA[latest];
 }
 
 /* ── Islamic Dates ── */
@@ -997,7 +1041,7 @@ var SHARE_CAPTIONS = {
     { label: '🔗 Curious', text: 'This tool shows your life in days, heartbeats and Islamic history. Genuinely hit different.' }
   ],
   ibadah: [
-    { label: '💪 Flex', text: 'Tracking my salah changed how I think about my day. Day {streak} streak.' },
+    { label: '💪 Flex', text: 'Tracking my salah changed how I think about my day. Day {streak} streak.', template: 'Tracking my salah changed how I think about my day. Day {streak} streak.' },
     { label: '🤲 Invite', text: 'Started tracking my ibadah daily. If you want accountability, try this.' },
     { label: '🌱 Honest', text: 'Not perfect. But consistent. That\'s the goal.' }
   ],
@@ -1083,8 +1127,6 @@ function openShareModalV2() {
       }
     }
 
-    /* Personalise captions with streak */
-    SHARE_CAPTIONS.ibadah[0].text = SHARE_CAPTIONS.ibadah[0].text.replace('{streak}', streak);
   }
 
   /* Render captions for active mode */
@@ -1100,8 +1142,9 @@ function renderV2Captions(mode) {
   if (!container) return;
   var captions = SHARE_CAPTIONS[mode] || [];
   container.innerHTML = captions.map(function(c, i) {
+    var captionText = c.template ? c.template.replace('{streak}', getStreakCount()) : c.text;
     return '<button class="v2-caption-btn" data-idx="' + i + '" data-mode="' + mode + '">' +
-      '<span class="v2-caption-text">' + c.text.replace(/\n/g, '<br>') + '</span>' +
+      '<span class="v2-caption-text">' + captionText.replace(/\n/g, '<br>') + '</span>' +
       '<span class="v2-caption-copy">Copy ' + c.label + '</span>' +
     '</button>';
   }).join('');
@@ -1110,7 +1153,8 @@ function renderV2Captions(mode) {
     btn.addEventListener('click', function() {
       var idx  = parseInt(btn.getAttribute('data-idx'));
       var mode2 = btn.getAttribute('data-mode');
-      var text = SHARE_CAPTIONS[mode2][idx].text;
+      var caption = SHARE_CAPTIONS[mode2][idx] || {};
+      var text = caption.template ? caption.template.replace('{streak}', getStreakCount()) : caption.text || '';
       /* Append link */
       var url = 'https://mianhassam96.github.io/WaqtX/';
       if (_birth) {

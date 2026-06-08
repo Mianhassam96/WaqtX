@@ -57,6 +57,7 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v13"/></svg>
         Share WaqtX
       </button>
+      <button class="btn-theme-toggle" id="btn-theme-toggle" aria-label="Toggle theme" title="Toggle theme">☀️</button>
       <button class="hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
@@ -1271,18 +1272,8 @@
 <script src="daily-islam.js" defer></script>
 <script src="app.js" defer></script>
 <script>
-  /* Force-clear old service worker caches, then register new one */
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.getRegistrations().then(function(regs) {
-      var unregPromises = regs.map(function(r) { return r.unregister(); });
-      return Promise.all(unregPromises);
-    }).then(function() {
-      return caches.keys().then(function(keys) {
-        return Promise.all(keys.map(function(k) { return caches.delete(k); }));
-      });
-    }).then(function() {
-      return navigator.serviceWorker.register('./sw.js');
-    }).catch(function() {});
+    navigator.serviceWorker.register('./sw.js').catch(function() {});
   }
 </script>
 </body>
