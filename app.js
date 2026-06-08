@@ -385,9 +385,21 @@ function loadLanguage(lang, callback) {
 /* Load saved language and theme on startup */
 (function() {
   initThemeToggle();
+  updateHeroPrayerState();
+  setInterval(updateHeroPrayerState, 60000);
   var saved;
   try { saved = localStorage.getItem('waqtx_lang') || 'en'; } catch(e) { saved = 'en'; }
   loadLanguage(saved);
+})();
+
+/* Smooth scroll to prayer section from hero CTA */
+(function() {
+  var btn = el('btn-prayer-info');
+  var target = el('qibla-section');
+  if (!btn || !target) return;
+  btn.addEventListener('click', function() {
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
 })();
 
 function setText(id, v) { const e = el(id); if (e) e.textContent = v; }
@@ -686,6 +698,9 @@ function updateHeroPreview(birth) {
   const ramEl = el('hsp-ramadans');
   if (ramEl) ramEl.textContent = ramadans;
 
+  const heroRamEl = el('hero-meta-ramadans');
+  if (heroRamEl) heroRamEl.textContent = ramadans;
+
   const pctEl = el('hsp-pct');
   if (pctEl) pctEl.textContent = Math.round(pct) + '%';
 
@@ -694,6 +709,32 @@ function updateHeroPreview(birth) {
 
   const preview = el('hero-stats-preview');
   if (preview) preview.classList.add('hsp-visible');
+}
+
+function getPrayerPeriod(date) {
+  const minutes = date.getHours() * 60 + date.getMinutes();
+  if (minutes >= 330 && minutes < 390) return 'fajr';
+  if (minutes >= 390 && minutes < 720) return 'dhuhr';
+  if (minutes >= 720 && minutes < 1020) return 'asr';
+  if (minutes >= 1020 && minutes < 1140) return 'maghrib';
+  return 'isha';
+}
+
+function updateHeroPrayerState() {
+  const hero = el('hero');
+  if (!hero) return;
+  const period = getPrayerPeriod(new Date());
+  hero.setAttribute('data-prayer', period);
+
+  const labels = {
+    fajr: 'Fajr time',
+    dhuhr: 'Dhuhr focus',
+    asr: 'Asr reflection',
+    maghrib: 'Maghrib peace',
+    isha: 'Isha calm'
+  };
+  const nextPrayer = el('hero-next-prayer');
+  if (nextPrayer) nextPrayer.textContent = labels[period] || 'Prayer time';
 }
 
 /* Update hero preview live as user types DOB */
