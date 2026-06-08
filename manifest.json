@@ -1,7 +1,7 @@
 {
-  "name": "WaqtX — Your Personal Islamic Dashboard",
+  "name": "WaqtX — See Your Journey Through Time",
   "short_name": "WaqtX",
-  "description": "A calm Islamic dashboard for prayer rhythm, reflection, and meaningful daily focus.",
+  "description": "An Islamic reflection dashboard that helps you live each day as part of your story, with rhythm, meaning, and quiet focus.",
   "start_url": "/WaqtX/",
   "scope": "/WaqtX/",
   "display": "standalone",

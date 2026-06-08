@@ -392,10 +392,10 @@ function loadLanguage(lang, callback) {
   loadLanguage(saved);
 })();
 
-/* Smooth scroll to prayer section from hero CTA */
+/* Smooth scroll to the core capsule section from hero CTA */
 (function() {
   var btn = el('btn-prayer-info');
-  var target = el('qibla-section');
+  var target = el('profile-section');
   if (!btn || !target) return;
   btn.addEventListener('click', function() {
     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -687,10 +687,9 @@ function updateHeroPreview(birth) {
   const t = getTotals(birth);
   const b = getBreakdown(birth);
   const ageYears = b.yy + b.mo / 12 + b.dd / 365;
-  const pct = Math.min(100, (ageYears / AVG_LIFESPAN_YEARS) * 100);
   const ramadans = Math.floor(ageYears);
-  /* Estimated missed Fajrs: days counted × ~0.6 average miss rate */
-  const missedFajr = Math.round(t.day * 0.6);
+  const fridays = Math.floor(t.day / 7);
+  const prayerMoments = Math.floor(t.day * 5);
 
   const daysEl = el('hero-days-lived');
   if (daysEl) daysEl.textContent = fmt(t.day) + ' days.';
@@ -702,10 +701,10 @@ function updateHeroPreview(birth) {
   if (heroRamEl) heroRamEl.textContent = ramadans;
 
   const pctEl = el('hsp-pct');
-  if (pctEl) pctEl.textContent = Math.round(pct) + '%';
+  if (pctEl) pctEl.textContent = fmt(fridays);
 
   const fajrEl = el('hsp-fajr');
-  if (fajrEl) fajrEl.textContent = '~' + fmt(missedFajr);
+  if (fajrEl) fajrEl.textContent = fmt(prayerMoments);
 
   const preview = el('hero-stats-preview');
   if (preview) preview.classList.add('hsp-visible');
@@ -781,7 +780,7 @@ function updateHeroPrayerState() {
 
   const greetingName = el('hero-greeting-name');
   if (greetingName) {
-    greetingName.textContent = _name ? _name + ', your personal dashboard.' : 'start your personal Islamic dashboard.';
+    greetingName.textContent = _name ? _name + ', your journey begins here.' : 'Every day is a page in your story.';
   }
 }
 
@@ -1395,7 +1394,7 @@ window.addEventListener('scroll', function () {
 });
 
 function updateScrollNavState() {
-  const sectionIds = ['hero', 'story-section', 'prayer-section', 'reflect-gen-section', 'profile-section'];
+  const sectionIds = ['hero', 'todays-story-section', 'profile-section', 'insight-section', 'reflect-gen-section'];
   const offset = window.innerHeight * 0.35;
   let activeId = 'hero';
   sectionIds.forEach(function(id) {
