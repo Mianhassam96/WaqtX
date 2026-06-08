@@ -31,6 +31,15 @@
   --transition: 0.25s ease;
   --navbar-bg: rgba(4,10,5,0.96);
   --navbar-border: rgba(201,168,76,0.14);
+  --panel-bg: rgba(6,16,8,0.98);
+  --dropdown-bg: #0a1a0d;
+  --dropdown-border: rgba(201,168,76,0.2);
+  --dropdown-shadow: 0 8px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,168,76,0.06);
+  --modal-overlay: rgba(0,0,0,0.8);
+  --modal-bg: #0d2010;
+  --modal-border: rgba(201,168,76,0.3);
+  --share-card-bg: linear-gradient(145deg, #061008, #0a1a0d);
+  --share-card-border: rgba(201,168,76,0.2);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -86,6 +95,15 @@ img { max-width: 100%; }
   --shadow-gold: 0 0 18px rgba(144,111,62,0.12);
   --navbar-bg: rgba(255,255,255,0.92);
   --navbar-border: rgba(144,111,62,0.18);
+  --panel-bg: rgba(255,255,255,0.96);
+  --dropdown-bg: #f7efe0;
+  --dropdown-border: rgba(138,96,28,0.18);
+  --dropdown-shadow: 0 8px 40px rgba(0,0,0,0.08), 0 0 0 1px rgba(138,96,28,0.05);
+  --modal-overlay: rgba(0,0,0,0.12);
+  --modal-bg: #f5f0e8;
+  --modal-border: rgba(138,96,28,0.18);
+  --share-card-bg: linear-gradient(145deg, #f7efe0, #efe5d4);
+  --share-card-border: rgba(138,96,28,0.18);
 }
 
 /* ── 4. Navbar ── */
@@ -1142,7 +1160,7 @@ img { max-width: 100%; }
   position: fixed;
   inset: 0;
   z-index: 300;
-  background: rgba(0,0,0,0.8);
+  background: var(--modal-overlay);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1150,14 +1168,14 @@ img { max-width: 100%; }
   padding: 24px;
 }
 .share-modal-inner {
-  background: #0d2010;
-  border: 1px solid rgba(201,168,76,0.3);
+  background: var(--modal-bg);
+  border: 1px solid var(--modal-border);
   border-radius: 16px;
   padding: 32px;
   max-width: 380px;
   width: 100%;
   position: relative;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  box-shadow: var(--dropdown-shadow);
 }
 .modal-close {
   position: absolute;
@@ -1174,8 +1192,8 @@ img { max-width: 100%; }
 }
 .modal-close:hover { background: rgba(255,255,255,0.12); color: var(--text); }
 .share-card-dl {
-  background: linear-gradient(145deg, #061008, #0a1a0d);
-  border: 1px solid rgba(201,168,76,0.2);
+  background: var(--share-card-bg);
+  border: 1px solid var(--share-card-border);
   border-radius: var(--radius);
   padding: 28px 24px;
   text-align: center;
@@ -1782,11 +1800,12 @@ img { max-width: 100%; }
   :root { --nav-h: 56px; }
 
   /* Nav */
+  .nav-actions { gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
   .nav-links {
     display: none;
     position: fixed;
     top: var(--nav-h); left: 0; right: 0;
-    background: rgba(6,16,8,0.98);
+    background: var(--panel-bg);
     flex-direction: column;
     padding: 16px 20px;
     border-bottom: 1px solid rgba(201,168,76,0.15);
@@ -3296,10 +3315,10 @@ img { max-width: 100%; }
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
-  background: #0a1a0d;
-  border: 1px solid rgba(201,168,76,0.2);
+  background: var(--dropdown-bg);
+  border: 1px solid var(--dropdown-border);
   border-radius: var(--radius);
-  box-shadow: 0 8px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,168,76,0.06);
+  box-shadow: var(--dropdown-shadow);
   min-width: 160px;
   z-index: 200;
   overflow: hidden;
