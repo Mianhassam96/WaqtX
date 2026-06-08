@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>WaqtX — How Many Days Have You Lived?</title>
-  <meta name="description" content="Enter your date of birth. See exactly how many days, heartbeats and Ramadans you have lived — through Islamic history and world events. Free. Private. No account needed."/>
+  <title>WaqtX — Your Personal Islamic Dashboard</title>
+  <meta name="description" content="A calm, premium personal Islamic dashboard for prayer rhythm, reflection, and daily spiritual focus. Designed to help you live your day with purpose."/>
   <meta name="theme-color" content="#0d1a0f"/>
   <meta property="og:type" content="website"/>
-  <meta property="og:title" content="WaqtX — How Many Days Have You Lived?"/>
-  <meta property="og:description" content="Most people never stop to count. Enter your DOB and see your life in days, heartbeats &amp; Islamic history. Qibla, prayer times, daily reflection. Free &amp; private."/>
+  <meta property="og:title" content="WaqtX — Your Personal Islamic Dashboard"/>
+  <meta property="og:description" content="A calm, premium Islamic dashboard that brings prayer rhythm, daily reflection, and spiritual focus together in one place."/>
   <meta property="og:url" content="https://mianhassam96.github.io/WaqtX/"/>
   <meta property="og:image" content="https://mianhassam96.github.io/WaqtX/og-image.svg"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
   <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:title" content="WaqtX — How Many Days Have You Lived?"/>
-  <meta name="twitter:description" content="Most people never stop to count. See your life in days, heartbeats &amp; Islamic history. Qibla, prayer times, daily reflection."/>
+  <meta name="twitter:title" content="WaqtX — Your Personal Islamic Dashboard"/>
+  <meta name="twitter:description" content="A calm, premium Islamic dashboard that brings prayer rhythm, daily reflection, and spiritual focus together in one place."/>
   <meta name="twitter:image" content="https://mianhassam96.github.io/WaqtX/og-image.svg"/>
   <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
   <link rel="manifest" href="manifest.json"/>
@@ -33,11 +33,11 @@
       <span class="nav-logo-text">Waqt<span class="nav-logo-x">X</span></span>
     </a>
     <div class="nav-links" id="nav-links">
-      <a href="#" class="nav-link active">Home</a>
-      <a href="stories.html" class="nav-link">Stories</a>
-      <a href="#tracker-section" class="nav-link">Tracker</a>
-      <a href="#reflect-gen-section" class="nav-link">Reflect</a>
-      <a href="about.html" class="nav-link">About</a>
+      <a href="#hero" class="nav-link active">Home</a>
+      <a href="#story-section" class="nav-link">Journey</a>
+      <a href="#prayer-section" class="nav-link">Prayers</a>
+      <a href="#reflect-gen-section" class="nav-link">Reflection</a>
+      <a href="#profile-section" class="nav-link">Profile</a>
     </div>
     <div class="nav-actions">
       <!-- Language switcher -->
@@ -53,9 +53,9 @@
           <button class="lang-option" data-lang="roman">🔤 Roman Urdu</button>
         </div>
       </div>
-      <button class="btn-share-nav" id="btn-share-nav">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v13"/></svg>
-        Share WaqtX
+      <button class="btn-install-app" id="btn-install-app">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/><path d="M5 19h14"/></svg>
+        Install App
       </button>
       <button class="btn-theme-toggle" id="btn-theme-toggle" aria-label="Toggle theme" title="Toggle theme">☀️</button>
       <button class="hamburger" id="hamburger" aria-label="Menu">
@@ -64,6 +64,29 @@
     </div>
   </div>
 </nav>
+
+<div class="bottom-nav" id="bottom-nav" aria-label="Bottom navigation">
+  <a href="#hero" class="bottom-nav-item active">
+    <span class="bottom-nav-icon">🏠</span>
+    <span>Home</span>
+  </a>
+  <a href="#story-section" class="bottom-nav-item">
+    <span class="bottom-nav-icon">📈</span>
+    <span>Journey</span>
+  </a>
+  <a href="#prayer-section" class="bottom-nav-item">
+    <span class="bottom-nav-icon">🕌</span>
+    <span>Prayers</span>
+  </a>
+  <a href="#reflect-gen-section" class="bottom-nav-item">
+    <span class="bottom-nav-icon">📖</span>
+    <span>Reflection</span>
+  </a>
+  <a href="#profile-section" class="bottom-nav-item">
+    <span class="bottom-nav-icon">👤</span>
+    <span>Profile</span>
+  </a>
+</div>
 
 <!-- ═══ HERO ═══ -->
 <section class="hero" id="hero">
@@ -116,28 +139,32 @@
       </div>
       <h1 class="hero-headline">
         Assalamu Alaikum,
-        <span class="hero-headline-gold">start your prayer journey.</span>
+        <span class="hero-headline-gold" id="hero-greeting-name">start your personal Islamic dashboard.</span>
       </h1>
-      <p class="hero-sub">Track your life in days, discover the next sacred moment, and turn every prayer opportunity into a meaningful habit.</p>
-      <div class="hero-meta">
-        <span class="hero-meta-pill">Days lived <strong id="hero-days-lived">—</strong></span>
-        <span class="hero-meta-pill">Next focus <strong id="hero-next-prayer">—</strong></span>
-        <span class="hero-meta-pill">Ramadans witnessed <strong id="hero-meta-ramadans">—</strong></span>
+      <div class="hero-state">
+        <div class="hero-state-line" id="hero-hijri-date">12 Muharram 1448 AH</div>
+        <div class="hero-state-title">Today is your <span id="hero-day-rank">9,213th</span> day</div>
       </div>
+      <div class="hero-prayer-panel">
+        <div class="hero-prayer-label">Next Prayer</div>
+        <div class="hero-prayer-name" id="hero-next-prayer">Asr</div>
+        <div class="hero-prayer-countdown" id="hero-next-countdown">01:34:23</div>
+      </div>
+      <p class="hero-sub">Your personal Islamic dashboard for the day, your prayers, your worship, and your journey.</p>
       <div class="hero-actions">
-        <a href="#results-section" class="btn btn-hero">View My Journey</a>
-        <button type="button" class="btn btn-secondary" id="btn-prayer-info">Explore Prayer Times</button>
+        <a href="#results-section" class="btn btn-hero">Open My Dashboard</a>
+        <button type="button" class="btn btn-secondary" id="btn-prayer-info">Today’s Focus</button>
       </div>
       <div class="hero-feature-strip">
+        <span class="hero-feature-pill">Day journey</span>
         <span class="hero-feature-pill">Prayer rhythm</span>
-        <span class="hero-feature-pill">Ramadan readiness</span>
-        <span class="hero-feature-pill">Qibla direction</span>
-        <span class="hero-feature-pill">Privacy-first tracker</span>
+        <span class="hero-feature-pill">Reflection</span>
+        <span class="hero-feature-pill">Islamic history</span>
       </div>
       <div class="hero-stats-preview" id="hero-stats-preview" aria-hidden="true">
         <div class="hsp-item">
           <span class="hsp-val" id="hsp-ramadans">—</span>
-          <span class="hsp-label">Ramadans lived</span>
+          <span class="hsp-label">Ramadans experienced</span>
         </div>
         <div class="hsp-divider"></div>
         <div class="hsp-item">
@@ -161,7 +188,7 @@
     <div class="hero-right">
       <div class="input-card">
         <div class="input-card-title">Your spiritual snapshot</div>
-        <div class="input-card-sub">Enter your birth date to reveal the prayer timeline, missed opportunities, and daily worship rhythm that shape your legacy.</div>
+        <div class="input-card-sub">Enter your birth date to reveal today’s prayer rhythm, missed opportunities, and your personal worship dashboard.</div>
 
         <div class="input-group">
           <label class="input-label">Your Name (Optional)</label>
@@ -203,7 +230,7 @@
         <div class="input-error hidden" id="hero-error" role="alert"></div>
 
         <button class="btn-reveal" id="btn-calculate">
-          Reveal My Timeline ✦
+          Reveal My Dashboard ✦
         </button>
 
         <div class="input-trust">
@@ -241,7 +268,7 @@
   <div class="journey-step-line"></div>
   <div class="journey-step" data-step="4"><span class="js-num">4</span><span class="js-label">Your Story</span></div>
 </div>
-<div class="results-name-bar"><span id="results-name">Your Timeline</span></div>
+<div class="results-name-bar"><span id="results-name">Your Dashboard</span></div>
 
 <!-- ══ STEP 1: YOUR TIME ══ -->
 <div class="step-block" id="step-1">
@@ -252,22 +279,22 @@
       <div class="section-heading">
         <span class="sh-line"></span>
         <span class="sh-icon">◆</span>
-        <span class="sh-text">YOUR LIFE AT A GLANCE</span>
+        <span class="sh-text">YOUR PERSONAL DASHBOARD</span>
         <span class="sh-icon">◆</span>
         <span class="sh-line"></span>
       </div>
       <div class="glance-grid">
         <div class="glance-card">
           <div class="glance-icon">🕐</div>
-          <div class="glance-label">Days Lived</div>
+          <div class="glance-label">Days Counted</div>
           <div class="glance-value" id="g-days">—</div>
           <div class="glance-unit">Days</div>
-          <div class="glance-desc">A journey of time given to you.</div>
+          <div class="glance-desc">A reminder that every day is part of your divine rhythm.</div>
           <div class="glance-reflect" id="gr-days"></div>
         </div>
         <div class="glance-card">
           <div class="glance-icon">⏳</div>
-          <div class="glance-label">Hours Lived</div>
+          <div class="glance-label">Hours Counted</div>
           <div class="glance-value" id="g-hours">—</div>
           <div class="glance-unit">Hours</div>
           <div class="glance-desc">Every hour is a blessing.</div>
@@ -278,7 +305,7 @@
           <div class="glance-label">Time Sleeping</div>
           <div class="glance-value" id="g-sleep">—</div>
           <div class="glance-unit">Years</div>
-          <div class="glance-desc">About one third of your life.</div>
+          <div class="glance-desc">The nights and mornings Allah gifted you.</div>
           <div class="glance-reflect" id="gr-sleep"></div>
         </div>
         <div class="glance-card">
@@ -286,7 +313,7 @@
           <div class="glance-label">Heartbeats</div>
           <div class="glance-value" id="g-hearts">—</div>
           <div class="glance-unit">Billion</div>
-          <div class="glance-desc">Your heart has never stopped.</div>
+          <div class="glance-desc">Your heart continues to beat for every prayer.</div>
           <div class="glance-reflect" id="gr-hearts"></div>
         </div>
         <div class="glance-card">
@@ -299,10 +326,10 @@
         </div>
         <div class="glance-card">
           <div class="glance-icon">⏱</div>
-          <div class="glance-label">Seconds Lived</div>
+          <div class="glance-label">Seconds Counted</div>
           <div class="glance-value" id="g-seconds">—</div>
           <div class="glance-unit">Million</div>
-          <div class="glance-desc">Every second counts.</div>
+          <div class="glance-desc">Each moment offers a chance to draw closer.</div>
           <div class="glance-reflect" id="gr-seconds"></div>
         </div>
       </div>
@@ -315,7 +342,7 @@
       <div class="section-heading">
         <span class="sh-line"></span>
         <span class="sh-icon">◆</span>
-        <span class="sh-text">YOUR LIFE THROUGH ISLAMIC TIME</span>
+        <span class="sh-text">YOUR ISLAMIC JOURNEY</span>
         <span class="sh-icon">◆</span>
         <span class="sh-line"></span>
       </div>
@@ -335,19 +362,19 @@
         </div>
         <div class="islamic-card">
           <div class="ic-icon">🌙</div>
-          <div class="ic-sub">Ramadans lived</div>
+          <div class="ic-sub">Ramadans experienced</div>
           <div class="ic-value" id="ih-ramadans">—</div>
           <div class="ic-label">You have witnessed <span id="ih-ramadans2">—</span> Ramadans.</div>
         </div>
         <div class="islamic-card">
           <div class="ic-icon">🕋</div>
-          <div class="ic-sub">Hajj seasons lived</div>
+          <div class="ic-sub">Hajj seasons experienced</div>
           <div class="ic-value" id="ih-hajj">—</div>
-          <div class="ic-label">You have lived through <span id="ih-hajj2">—</span> Hajj seasons.</div>
+          <div class="ic-label">You have experienced <span id="ih-hajj2">—</span> Hajj seasons.</div>
         </div>
         <div class="islamic-card">
           <div class="ic-icon">📖</div>
-          <div class="ic-sub">Islamic years lived</div>
+          <div class="ic-sub">Islamic years counted</div>
           <div class="ic-value" id="ih-islamic-years">—</div>
           <div class="ic-label">From <span id="ih-hijri-range">— AH</span>.</div>
         </div>
@@ -367,7 +394,7 @@
       <div class="section-heading">
         <span class="sh-line"></span>
         <span class="sh-icon">◆</span>
-        <span class="sh-text">THE WORLD AT YOUR BIRTH</span>
+        <span class="sh-text">THE WORLD WHEN YOUR JOURNEY BEGAN</span>
         <span class="sh-icon">◆</span>
         <span class="sh-line"></span>
       </div>
@@ -429,18 +456,18 @@
             <div class="journey-pct" id="journey-pct">0%</div>
           </div>
           <div class="journey-text">
-            You have completed <strong id="journey-pct2">—%</strong> of your estimated life journey.
+            You have completed <strong id="journey-pct2">—%</strong> of your journey toward mindful living.
           </div>
-          <div class="journey-cta">Use your time wisely.</div>
+          <div class="journey-cta">Turn awareness into action.</div>
           <div class="journey-note">Based on average lifespan of 75 years</div>
         </div>
 
         <div class="reflection-card">
-          <div class="reflection-title">REFLECTION</div>
+          <div class="reflection-title">DAILY REFLECTION</div>
           <div class="reflection-quote-mark">"</div>
           <div class="reflection-headline">Time is a trust.</div>
           <div class="reflection-body">
-            Every moment you have lived is a part of your journey. Make the rest meaningful.
+            Every moment you have experienced is part of your journey. Make the rest meaningful.
           </div>
           <div class="reflection-ayah">
             "And say, 'My Lord, increase me in knowledge.'"<br>
@@ -473,7 +500,7 @@
       <div class="section-heading">
         <span class="sh-line"></span>
         <span class="sh-icon">◆</span>
-        <span class="sh-text">WHERE YOUR TIME GOES</span>
+        <span class="sh-text">HOW YOUR DAY IS SPENT</span>
         <span class="sh-icon">◆</span>
         <span class="sh-line"></span>
       </div>
@@ -488,7 +515,7 @@
     <div class="step-continue-inner">
       <div class="step-continue-label">Step 3 of 4 complete</div>
       <button class="btn-continue" onclick="revealStep(4)">
-        Read Your Life Story ✦
+        Read Your Story ✦
       </button>
     </div>
   </div>
@@ -503,7 +530,7 @@
       <div class="section-heading">
         <span class="sh-line"></span>
         <span class="sh-icon">◆</span>
-        <span class="sh-text">YOUR LIFE STORY</span>
+        <span class="sh-text">YOUR LIFE IN TIME</span>
         <span class="sh-icon">◆</span>
         <span class="sh-line"></span>
       </div>
@@ -526,14 +553,14 @@
           <div class="ms-title">UPCOMING MILESTONES</div>
           <div class="ms-list">
             <div class="ms-row"><span class="ms-icon">📅</span><span class="ms-label">Next Jumu'ah</span><span class="ms-val" id="ms-jumua">—</span></div>
-            <div class="ms-row"><span class="ms-icon">📆</span><span class="ms-label">10,000 Days of Life</span><span class="ms-val" id="ms-10k">—</span></div>
+            <div class="ms-row"><span class="ms-icon">📆</span><span class="ms-label">10,000 Daily Moments</span><span class="ms-val" id="ms-10k">—</span></div>
             <div class="ms-row"><span class="ms-icon">👤</span><span class="ms-label">Age 30</span><span class="ms-val" id="ms-age30">—</span></div>
             <div class="ms-row"><span class="ms-icon">✅</span><span class="ms-label">1 Billion Seconds</span><span class="ms-val" id="ms-1b">—</span></div>
           </div>
         </div>
         <div class="share-card">
-          <div class="share-title">SHARE YOUR TIMELINE</div>
-          <div class="share-sub">Create and share your Islamic timeline with your loved ones.</div>
+          <div class="share-title">SHARE YOUR DASHBOARD</div>
+          <div class="share-sub">Create and share a calm spiritual snapshot with your loved ones.</div>
           <div class="share-btns">
             <button class="btn-download" id="btn-download">⬇ Download Image</button>
             <button class="btn-copy" id="btn-copy-link">🔗 Copy Link</button>
@@ -543,7 +570,7 @@
         <!-- Upgraded emotional share preview -->
         <div class="share-preview" id="share-preview">
           <div class="sp-logo">✦ WaqtX</div>
-          <div class="sp-emotional" id="sp-emotional">I've lived <span id="sp-days">—</span> days.</div>
+          <div class="sp-emotional" id="sp-emotional">Your dashboard shows <span id="sp-days">—</span> days.</div>
           <div class="sp-question" id="sp-question">How many of them truly mattered?</div>
           <div class="sp-hijri" id="sp-hijri">— AH</div>
           <div class="sp-tagline">— WaqtX</div>
@@ -571,7 +598,7 @@
 <!-- ═══════════════════════════════════════════════
      DAILY ISLAM DASHBOARD — First thing users see
      ═══════════════════════════════════════════════ -->
-<section class="section daily-dashboard-section" id="daily-dashboard-section">
+<section class="section daily-dashboard-section" id="profile-section" data-section="profile">
   <div class="section-inner">
     <div class="section-heading">
       <span class="sh-line"></span>
@@ -580,7 +607,7 @@
       <span class="sh-icon">◆</span>
       <span class="sh-line"></span>
     </div>
-    <div class="section-sub">A compact daily dashboard for Quran, dua, and your actionable worship plan.</div>
+    <div class="section-sub">A calm daily dashboard for Quran, dua, and meaningful worship today.</div>
     <div class="daily-dashboard" id="daily-dashboard">
 
       <!-- Today's Ayah -->
@@ -630,7 +657,7 @@
       <span class="sh-icon">◆</span>
       <span class="sh-line"></span>
     </div>
-    <div class="situation-sub">Find what Islam says about exactly what you are going through right now.</div>
+    <div class="situation-sub">Turn how you feel into clear Islamic guidance for your day.</div>
     <div class="situation-grid" id="situation-grid">
       <!-- Rendered by JS -->
     </div>
@@ -670,7 +697,7 @@
       </div>
     </div>
 
-    <div class="tracker-sub-heading">Track your daily عبادات — saved on your device, private to you.</div>
+    <div class="tracker-sub-heading">Track your daily عبادات in a private, device-first dashboard.</div>
     <div class="tracker-grid">
 
       <!-- Salah -->
@@ -706,7 +733,7 @@
         </div>
       </div>
 
-      <!-- Weekly Report — upgraded to Consistency Timeline -->
+      <!-- Weekly Report — upgraded to Consistency Dashboard -->
       <div class="tracker-card tracker-report">
         <div class="tracker-card-title">📊 This Week</div>
         <div class="week-grid" id="week-grid"></div>
@@ -833,14 +860,14 @@
     <div class="section-heading">
       <span class="sh-line"></span>
       <span class="sh-icon">◆</span>
-      <span class="sh-text">GIVE ME SOMETHING I NEED TO HEAR</span>
+      <span class="sh-text">REFLECTION FOR YOUR DAY</span>
       <span class="sh-icon">◆</span>
       <span class="sh-line"></span>
     </div>
     <div class="reflect-gen-card" id="reflect-gen-card">
       <div class="rg-placeholder">
         <div class="rg-placeholder-icon">🎲</div>
-        <div class="rg-placeholder-text">Tap the button — get one story, one reflection, one action.</div>
+        <div class="rg-placeholder-text">Tap the button to receive a reflection tailored for your day.</div>
       </div>
     </div>
     <div class="reflect-gen-actions">
@@ -994,7 +1021,7 @@
       <span class="sh-icon">◆</span>
       <span class="sh-line"></span>
     </div>
-    <div class="liveage-sub" id="liveage-sub">Enter your date of birth above to see your live age.</div>
+    <div class="liveage-sub" id="liveage-sub">Enter your date of birth to see your life count update live.</div>
 
     <!-- Empty state — shown before DOB -->
     <div class="liveage-empty" id="liveage-empty">
@@ -1090,7 +1117,7 @@
     <div class="share-card-dl" id="story-card-dl">
       <div class="scdl-logo">✦ WaqtX</div>
       <div class="story-sc-days" id="story-sc-days">—</div>
-      <div class="story-sc-label">days of life</div>
+      <div class="story-sc-label">days of your journey</div>
       <div class="story-sc-ramadans" id="story-sc-ramadans">— Ramadans witnessed</div>
       <div class="story-sc-hijri" id="story-sc-hijri">— AH</div>
       <div class="story-sc-quote">Still writing my story.</div>
@@ -1101,7 +1128,7 @@
 </div>
 
 <!-- ═══ VIRAL SHARE MODAL 2.0 ═══ -->
-<div class="share-modal hidden" id="share-modal" role="dialog" aria-modal="true" aria-label="Share your timeline">
+<div class="share-modal hidden" id="share-modal" role="dialog" aria-modal="true" aria-label="Share your dashboard">
   <div class="share-modal-inner v2-modal-inner">
     <button class="modal-close" id="share-close" aria-label="Close">✕</button>
 
@@ -1128,7 +1155,7 @@
           <span class="v2c-tag">Reality Check</span>
         </div>
         <div class="v2c-main-num" id="v2r-days">—</div>
-        <div class="v2c-main-label">days of life have passed.</div>
+        <div class="v2c-main-label">days of your journey have passed.</div>
         <div class="v2c-divider"></div>
         <div class="v2c-stat-row">
           <div class="v2c-stat">
@@ -1141,7 +1168,7 @@
           </div>
           <div class="v2c-stat">
             <span class="v2c-stat-val" id="v2r-hijri">—</span>
-            <span class="v2c-stat-lbl">Hijri years lived</span>
+            <span class="v2c-stat-lbl">Hijri years passed</span>
           </div>
         </div>
         <div class="v2c-ayah">وَمَا تَدْرِي نَفْسٌ مَّاذَا تَكْسِبُ غَدًا</div>

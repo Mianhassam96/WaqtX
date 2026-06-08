@@ -689,7 +689,7 @@ function updateHeroPreview(birth) {
   const ageYears = b.yy + b.mo / 12 + b.dd / 365;
   const pct = Math.min(100, (ageYears / AVG_LIFESPAN_YEARS) * 100);
   const ramadans = Math.floor(ageYears);
-  /* Estimated missed Fajrs: days lived × ~0.6 average miss rate */
+  /* Estimated missed Fajrs: days counted × ~0.6 average miss rate */
   const missedFajr = Math.round(t.day * 0.6);
 
   const daysEl = el('hero-days-lived');
@@ -720,10 +720,30 @@ function getPrayerPeriod(date) {
   return 'isha';
 }
 
+function formatIslamicDate(date) {
+  try {
+    return new Intl.DateTimeFormat('en-u-ca-islamic', {
+      day: 'numeric', month: 'long', year: 'numeric'
+    }).format(date);
+  } catch (e) {
+    return date.toLocaleDateString('en-US', {
+      weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'
+    });
+  }
+}
+
+function formatCountdownSeconds(seconds) {
+  const hrs = String(Math.floor(seconds / 3600)).padStart(2, '0');
+  const mins = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
+  const secs = String(seconds % 60).padStart(2, '0');
+  return hrs + ':' + mins + ':' + secs;
+}
+
 function updateHeroPrayerState() {
   const hero = el('hero');
   if (!hero) return;
-  const period = getPrayerPeriod(new Date());
+  const now = new Date();
+  const period = getPrayerPeriod(now);
   hero.setAttribute('data-prayer', period);
 
   const labels = {
@@ -733,8 +753,36 @@ function updateHeroPrayerState() {
     maghrib: 'Maghrib peace',
     isha: 'Isha calm'
   };
+
   const nextPrayer = el('hero-next-prayer');
-  if (nextPrayer) nextPrayer.textContent = labels[period] || 'Prayer time';
+  const nextCountdown = el('hero-next-countdown');
+
+  if (_prayerTimes) {
+    const next = getNextPrayer(_prayerTimes);
+    if (nextPrayer) nextPrayer.textContent = next.name + (next.isTomorrow ? ' (tomorrow)' : '');
+    const nowSec = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+    let nextSec = next.minutes * 60;
+    let diff = nextSec - nowSec;
+    if (diff < 0) diff += 86400;
+    if (nextCountdown) nextCountdown.textContent = formatCountdownSeconds(diff);
+  } else {
+    if (nextPrayer) nextPrayer.textContent = labels[period] || 'Prayer time';
+    if (nextCountdown) nextCountdown.textContent = 'Loading…';
+  }
+
+  const hijriEl = el('hero-hijri-date');
+  if (hijriEl) hijriEl.textContent = formatIslamicDate(now);
+
+  const dayRank = el('hero-day-rank');
+  if (dayRank) {
+    const days = _birth ? fmt(getTotals(_birth).day) : String(Math.floor((now - new Date(now.getFullYear(), 0, 1)) / 86400000) + 1);
+    dayRank.textContent = days + ' days';
+  }
+
+  const greetingName = el('hero-greeting-name');
+  if (greetingName) {
+    greetingName.textContent = _name ? _name + ', your personal dashboard.' : 'start your personal Islamic dashboard.';
+  }
 }
 
 /* Update hero preview live as user types DOB */
@@ -792,7 +840,7 @@ function updateHeroPrayerState() {
     } else if (savedDob) {
       var birth = parseDOB(savedDob);
       var tots = getTotals(birth);
-      msg = '⏳ Another day has passed — you\'ve now lived ' + fmt(tots.day) + ' days. Make today count.';
+      msg = '⏳ Another day has passed — you\'ve now counted ' + fmt(tots.day) + ' days. Make today count.';
     }
 
     if (!msg) return;
@@ -857,7 +905,7 @@ function renderAll(birth) {
 
   /* Personalise heading if name given */
   const nameEl = el('results-name');
-  if (nameEl) nameEl.textContent = _name ? _name : 'Your Timeline';
+  if (nameEl) nameEl.textContent = _name ? _name : 'Your Dashboard';
 
   /* Glance */
   setText('g-days',    fmt(t.day));
@@ -908,7 +956,7 @@ function renderAll(birth) {
 
   /* Modal card */
   setText('scdl-pct',   pctInt + '%');
-  setText('scdl-days',  fmt(t.day) + ' Days Lived');
+  setText('scdl-days',  fmt(t.day) + ' Days Counted');
   setText('scdl-hijri', hijriBirth.year + ' AH \u2013 ' + hijriNow.year + ' AH');
   const scdlLogo = el('scdl-logo');
   if (scdlLogo) scdlLogo.textContent = _name ? '\u2736 ' + _name + ' \u2014 WaqtX' : '\u2736 WaqtX';
@@ -999,7 +1047,7 @@ function showLoading(cb) {
   const msgs = [
     'Analyzing your time\u2026',
     'Calculating your Islamic history\u2026',
-    'Building your timeline\u2026'
+    'Building your dashboard\u2026'
   ];
   let i = 0;
   textEl.textContent = msgs[0];
@@ -1077,7 +1125,7 @@ el('btn-start-again').addEventListener('click', function () {
 /* ── Caption sets per mode ── */
 var SHARE_CAPTIONS = {
   reality: [
-    { label: '💭 Deep', text: 'I just counted how many days I\'ve lived. I wasn\'t ready for the number. Try it yourself.' },
+    { label: '💭 Deep', text: 'I just counted how many days I\'ve tracked. I wasn\'t ready for the number. Try it yourself.' },
     { label: '🌙 Islamic', text: 'وَمَا تَدْرِي نَفْسٌ مَّاذَا تَكْسِبُ غَدًا\n\nNo soul knows what it will earn tomorrow. This app made me think.' },
     { label: '🔗 Curious', text: 'This tool shows your life in days, heartbeats and Islamic history. Genuinely hit different.' }
   ],
@@ -1144,7 +1192,7 @@ function openShareModalV2() {
 
     /* Reflection card */
     var reflLines = [
-      'I have lived ' + fmt(t2.day) + ' days.',
+      'I have counted ' + fmt(t2.day) + ' days.',
       'I have witnessed ' + ramadans + ' Ramadans.',
       'Only Allah knows how many remain.'
     ];
@@ -1343,7 +1391,30 @@ window.addEventListener('scroll', function () {
       nav.style.borderBottomColor = 'rgba(201,168,76,0.12)';
     }
   }
+  updateScrollNavState();
 });
+
+function updateScrollNavState() {
+  const sectionIds = ['hero', 'story-section', 'prayer-section', 'reflect-gen-section', 'profile-section'];
+  const offset = window.innerHeight * 0.35;
+  let activeId = 'hero';
+  sectionIds.forEach(function(id) {
+    const section = document.getElementById(id);
+    if (!section) return;
+    const top = section.getBoundingClientRect().top;
+    if (top <= offset) activeId = id;
+  });
+
+  document.querySelectorAll('.nav-link').forEach(function(link) {
+    const href = link.getAttribute('href');
+    link.classList.toggle('active', href === '#' + activeId);
+  });
+  document.querySelectorAll('.bottom-nav-item').forEach(function(link) {
+    const href = link.getAttribute('href');
+    link.classList.toggle('active', href === '#' + activeId);
+  });
+}
+updateScrollNavState();
 
 /* Story Share Modal */
 (function() {
@@ -1387,7 +1458,8 @@ window.addEventListener('beforeinstallprompt', function (e) {
 
 const pwaInstall = el('pwa-install');
 const pwaDismiss = el('pwa-dismiss');
-if (pwaInstall) pwaInstall.addEventListener('click', function () {
+const btnInstallApp = el('btn-install-app');
+function triggerPwaInstall() {
   if (!_deferredInstall) return;
   _deferredInstall.prompt();
   _deferredInstall.userChoice.then(function () {
@@ -1395,7 +1467,9 @@ if (pwaInstall) pwaInstall.addEventListener('click', function () {
     const p = el('pwa-prompt');
     if (p) p.classList.add('hidden');
   });
-});
+}
+if (pwaInstall) pwaInstall.addEventListener('click', triggerPwaInstall);
+if (btnInstallApp) btnInstallApp.addEventListener('click', triggerPwaInstall);
 if (pwaDismiss) pwaDismiss.addEventListener('click', function () {
   const p = el('pwa-prompt');
   if (p) p.classList.add('hidden');
@@ -1499,14 +1573,14 @@ function renderLifeStory(birth, ageYears, hijriBirth, hijriNow, ramadans, t) {
   const lines = [
     greeting + ' on a <strong>' + birthDay + '</strong> in <em>' + birthMonth + ' ' + birthYear + '</em> — a day chosen by Allah, not by chance.',
     'In the Islamic calendar, that was the year <strong>' + hijriBirth.year + ' AH</strong>, in the month of <em>' + (HIJRI_MONTHS[(hijriBirth.month - 1) || 0]) + '</em>.',
-    'Since that day, you have lived <strong>' + fmt(t.day) + ' days</strong> — each one a gift, each one a test.',
+    'Since that day, you have counted <strong>' + fmt(t.day) + ' days</strong> — each one a gift, each one a test.',
     'You have witnessed <strong>' + ramadans + ' Ramadans</strong> — ' + ramadans + ' months of mercy, forgiveness, and renewal.',
     'The Fajr prayer was called <strong>' + fmt(fajrOpportunities) + ' times</strong> since you were born. Each one was a chance to stand before Allah.',
     'You have seen <strong>' + fmt(fridaysPassed) + ' Fridays</strong> — the best day of the week, repeated ' + fmt(fridaysPassed) + ' times in your life.',
     'You have slept for approximately <strong>' + sleepYears + ' years</strong> — your body resting while your soul continued its journey.',
-    'The world has changed around you — from <em>' + (birthYear < 2000 ? 'the pre-internet era' : 'the digital age') + '</em> to today. You lived through all of it.',
+    'The world has changed around you — from <em>' + (birthYear < 2000 ? 'the pre-internet era' : 'the digital age') + '</em> to today. You experienced all of it.',
     'You are now <strong>' + b.yy + ' years, ' + b.mo + ' months, and ' + b.dd + ' days</strong> old. Your story is still unfolding.',
-    'From <strong>' + hijriBirth.year + ' AH</strong> to <strong>' + hijriNow.year + ' AH</strong> — that is your Islamic timeline. ' + (hijriNow.year - hijriBirth.year) + ' Islamic years of life.'
+    'From <strong>' + hijriBirth.year + ' AH</strong> to <strong>' + hijriNow.year + ' AH</strong> — that is your Islamic journey. ' + (hijriNow.year - hijriBirth.year) + ' Islamic years of life.'
   ];
 
   container.innerHTML = lines.map(function(line) {
@@ -1534,7 +1608,7 @@ function renderTimeTruth(ageYears, t) {
   const meaningPct = Math.round((meaningYears / ageYears) * 100);
 
   if (introEl) {
-    introEl.innerHTML = 'You have lived <strong>' + ageYears.toFixed(1) + ' years</strong>. Here is where that time actually went — based on global averages.';
+    introEl.innerHTML = 'You have spent <strong>' + ageYears.toFixed(1) + ' years</strong>. Here is where that time actually went — based on global averages.';
   }
 
   const cards = [
@@ -1840,7 +1914,7 @@ function renderInsightCard(container, idx, dateStr, daysLived) {
   const insight = DAILY_INSIGHTS[idx];
   /* Only show day count if DOB has been entered */
   const dayLabel = (daysLived && daysLived > 0)
-    ? ' &nbsp;\u00b7&nbsp; Day ' + fmt(daysLived) + ' of your life'
+    ? ' &nbsp;\u00b7&nbsp; Day ' + fmt(daysLived) + ' of your journey'
     : '';
   container.innerHTML =
     '<div class="insight-date">' + dateStr + dayLabel + '</div>' +
@@ -2382,11 +2456,11 @@ function buildMirrorCard() {
     '<div class="mc-name">' + name + '</div>' +
     (days !== '—' ? (
       '<div class="mc-stats">' +
-        '<div class="mc-stat"><div class="mc-stat-val">' + days + '</div><div class="mc-stat-lbl">Days Lived</div></div>' +
+        '<div class="mc-stat"><div class="mc-stat-val">' + days + '</div><div class="mc-stat-lbl">Days Counted</div></div>' +
         '<div class="mc-stat-sep">·</div>' +
         '<div class="mc-stat"><div class="mc-stat-val">' + pct + '%</div><div class="mc-stat-lbl">Life Used</div></div>' +
         '<div class="mc-stat-sep">·</div>' +
-        '<div class="mc-stat"><div class="mc-stat-val mc-stat-hijri">' + hijri + '</div><div class="mc-stat-lbl">Islamic Timeline</div></div>' +
+        '<div class="mc-stat"><div class="mc-stat-val mc-stat-hijri">' + hijri + '</div><div class="mc-stat-lbl">Islamic Journey</div></div>' +
       '</div>'
     ) : '') +
     '<div class="mc-ayah">وَمَا تَدْرِي نَفْسٌ مَّاذَا تَكْسِبُ غَدًا</div>' +
@@ -2598,11 +2672,15 @@ function startPrayerCountdown(timings) {
     var nowSec = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
     var next = getNextPrayer(timings);
     var nextSec = next.minutes * 60;
-    if (next.isTomorrow) nextSec = next.minutes * 60; /* already +1440min */
+    if (next.isTomorrow) nextSec = next.minutes * 60;
     var diff = nextSec - nowSec;
     if (diff < 0) diff += 86400;
 
+    var heroCountdownEl = el('hero-next-countdown');
+    var heroPrayerNameEl = el('hero-next-prayer');
     if (nextNameEl) nextNameEl.textContent = next.name + (next.isTomorrow ? ' (tomorrow)' : '');
+    if (heroPrayerNameEl) heroPrayerNameEl.textContent = next.name + (next.isTomorrow ? ' (tomorrow)' : '');
+    if (heroCountdownEl) heroCountdownEl.textContent = formatCountdown(diff);
     countdownEl.textContent = formatCountdown(diff);
 
     /* Re-render grid every minute to update past/next state */
@@ -2763,7 +2841,7 @@ function updateSharePreview() {
 
   /* Emotional text */
   var spEl = el('sp-emotional');
-  if (spEl) spEl.innerHTML = 'I\u2019ve lived <span id="sp-days">' + days + '</span> days.';
+  if (spEl) spEl.innerHTML = 'I\u2019ve counted <span id="sp-days">' + days + '</span> days.';
   var spQ = el('sp-question');
   var dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
   if (spQ) spQ.textContent = SNAPSHOT_HOOKS[dayOfYear % SNAPSHOT_HOOKS.length];
