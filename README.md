@@ -26,8 +26,8 @@ A PWA built with vanilla HTML, CSS, and JavaScript.
 | File | Purpose |
 |------|---------|
 | `index.html` | Main app |
-| `about.html` | About page |
-| `contact.html` | Contact page |
+| `privacy.html` | Privacy page |
+| `archive/` | Archived pages (About, Contact, FAQ) |
 | `privacy.html` | Privacy page |
 | `style.css` | All styles |
 | `app.js` | All app logic |

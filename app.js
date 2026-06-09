@@ -81,8 +81,7 @@ function applyLangToDOM() {
   var navLinks = [
     ['a[href="#"].nav-link',              'nav_home'],
     ['a[href="#islamic-section"].nav-link','nav_islamic'],
-    ['a[href="#features-section"].nav-link','nav_features'],
-    ['a[href="about.html"].nav-link',     'nav_about']
+    ['a[href="#features-section"].nav-link','nav_features']
   ];
   navLinks.forEach(function(pair) {
     var el2 = document.querySelector(pair[0]);

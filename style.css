@@ -6,40 +6,41 @@
 
 /* ── 1. Variables & Reset ── */
 :root {
-  --bg:        #060e08;
-  --bg2:       #0a1a0d;
-  --bg3:       #0d2010;
-  --gold:      #c9a84c;
-  --gold2:     #e8c96a;
-  --gold3:     #a07830;
-  --green:     #16a34a;
-  --green2:    #22c55e;
-  --text:      #f0ead8;
-  --text2:     rgba(240,234,216,0.68);
-  --text3:     rgba(240,234,216,0.38);
-  --card-bg:   rgba(255,255,255,0.035);
-  --card-border: rgba(201,168,76,0.16);
-  --card-hover: rgba(201,168,76,0.28);
+  --bg:        #0B1220;
+  --bg2:       #07121B;
+  --bg3:       #0b1320;
+  --gold:      #D4A017; /* accent */
+  --gold2:     #FFD36A;
+  --gold3:     #A67C18;
+  --green:     #14B8A6; /* primary */
+  --green2:    #2DD4BF;
+  --text:      #F8FAFC;
+  --text2:     rgba(248,250,252,0.75);
+  --text3:     rgba(248,250,252,0.5);
+  --card-bg:   rgba(255,255,255,0.03);
+  --card-border: rgba(212,160,23,0.08);
+  --card-hover: rgba(212,160,23,0.12);
   --radius:    12px;
   --radius-sm: 8px;
-  --shadow:    0 4px 32px rgba(0,0,0,0.6);
-  --shadow-gold: 0 0 28px rgba(201,168,76,0.18);
+  --shadow:    0 6px 36px rgba(0,0,0,0.6);
+  --shadow-gold: 0 0 28px rgba(212,160,23,0.12);
   --font:      'Inter', system-ui, sans-serif;
+  --font-heading: 'Outfit', system-ui, sans-serif;
   --font-ar:   'Amiri', serif;
   --font-logo: 'Cinzel', 'Palatino Linotype', 'Book Antiqua', serif;
   --nav-h:     64px;
   --transition: 0.25s ease;
-  --navbar-bg: rgba(4,10,5,0.96);
-  --navbar-border: rgba(201,168,76,0.14);
-  --panel-bg: rgba(6,16,8,0.98);
-  --dropdown-bg: #0a1a0d;
-  --dropdown-border: rgba(201,168,76,0.2);
-  --dropdown-shadow: 0 8px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,168,76,0.06);
+  --navbar-bg: rgba(4,10,15,0.88);
+  --navbar-border: rgba(212,160,23,0.06);
+  --panel-bg: #111827;
+  --dropdown-bg: #07121B;
+  --dropdown-border: rgba(212,160,23,0.08);
+  --dropdown-shadow: 0 8px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(212,160,23,0.03);
   --modal-overlay: rgba(0,0,0,0.8);
-  --modal-bg: #0d2010;
-  --modal-border: rgba(201,168,76,0.3);
-  --share-card-bg: linear-gradient(145deg, #061008, #0a1a0d);
-  --share-card-border: rgba(201,168,76,0.2);
+  --modal-bg: #0f1722;
+  --modal-border: rgba(212,160,23,0.12);
+  --share-card-bg: linear-gradient(145deg, #07121B, #0b1220);
+  --share-card-border: rgba(212,160,23,0.08);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -76,6 +77,9 @@ img { max-width: 100%; }
 
 /* ── 3. Utility ── */
 .hidden { display: none !important; }
+
+/* Headings use Outfit for a clean, modern look */
+h1,h2,h3,h4,h5,h6 { font-family: var(--font-heading); }
 
 [data-theme="light"] {
   --bg: #f4efe4;

@@ -5,8 +5,8 @@
   "start_url": "/WaqtX/",
   "scope": "/WaqtX/",
   "display": "standalone",
-  "background_color": "#0d1a0f",
-  "theme_color": "#0d1a0f",
+  "background_color": "#0B1220",
+  "theme_color": "#0B1220",
   "orientation": "portrait-primary",
   "icons": [
     { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
