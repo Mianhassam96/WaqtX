@@ -36,11 +36,7 @@ A PWA built with vanilla HTML, CSS, and JavaScript.
 | `favicon.svg` | App icon (clock + mosque + crescent) |
 | `favicon-32.svg` | Navbar logo (32px) |
 
-## Run locally
 
-```bash
-npx serve .
-```
 
 ## License
 
