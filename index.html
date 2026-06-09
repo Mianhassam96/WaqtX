@@ -34,10 +34,10 @@
     </a>
     <div class="nav-links" id="nav-links">
       <a href="#hero" class="nav-link active">Home</a>
+      <a href="#prayer-timeline-section" class="nav-link">Prayers</a>
       <a href="#todays-story-section" class="nav-link">Journey</a>
-      <a href="#profile-section" class="nav-link">This Day</a>
+      <a href="#profile-section" class="nav-link">Daily Islam</a>
       <a href="#insight-section" class="nav-link">Reflection</a>
-      <a href="#reflect-gen-section" class="nav-link">Capsule</a>
     </div>
     <div class="nav-actions">
       <!-- Language switcher -->
@@ -57,7 +57,15 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/><path d="M5 19h14"/></svg>
         Install App
       </button>
-      <button class="btn-theme-toggle" id="btn-theme-toggle" aria-label="Toggle theme" title="Toggle theme">☀️</button>
+      <div class="theme-wrapper">
+        <button class="btn-theme-toggle" id="btn-theme-toggle" aria-label="Theme" title="Theme selector">☀️</button>
+        <div class="theme-dropdown hidden" id="theme-dropdown" aria-hidden="true" role="menu" aria-label="Theme selector">
+          <button class="theme-option" data-theme="dark" role="menuitem" aria-label="Dark theme">Dark</button>
+          <button class="theme-option" data-theme="light" role="menuitem" aria-label="Light theme">Light</button>
+          <button class="theme-option" data-theme="ramadan" role="menuitem" aria-label="Ramadan theme">Ramadan</button>
+          <button class="theme-option" data-theme="friday" role="menuitem" aria-label="Friday theme">Friday</button>
+        </div>
+      </div>
       <button class="hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
@@ -70,21 +78,21 @@
     <span class="bottom-nav-icon">🏠</span>
     <span>Home</span>
   </a>
+  <a href="#prayer-timeline-section" class="bottom-nav-item">
+    <span class="bottom-nav-icon">�</span>
+    <span>Prayers</span>
+  </a>
   <a href="#todays-story-section" class="bottom-nav-item">
-    <span class="bottom-nav-icon">📈</span>
+    <span class="bottom-nav-icon">�</span>
     <span>Journey</span>
   </a>
   <a href="#profile-section" class="bottom-nav-item">
-    <span class="bottom-nav-icon">📅</span>
-    <span>This Day</span>
+    <span class="bottom-nav-icon">📖</span>
+    <span>Daily</span>
   </a>
   <a href="#insight-section" class="bottom-nav-item">
-    <span class="bottom-nav-icon">📖</span>
-    <span>Reflection</span>
-  </a>
-  <a href="#reflect-gen-section" class="bottom-nav-item">
     <span class="bottom-nav-icon">🪔</span>
-    <span>Capsule</span>
+    <span>Reflect</span>
   </a>
 </div>
 

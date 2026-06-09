@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>WaqtX — Settings</title>
+  <meta name="description" content="Customise WaqtX — prayer method, theme, language, location, notifications, and accessibility."/>
+  <meta name="theme-color" content="#0B1220"/>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+  <link rel="manifest" href="manifest.json"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="style-pages.css"/>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-text">Waqt<span class="nav-logo-x">X</span></span>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html"      class="nav-link">Home</a>
+      <a href="prayers.html"    class="nav-link">Prayers</a>
+      <a href="journey.html"    class="nav-link">Journey</a>
+      <a href="reflection.html" class="nav-link">Reflection</a>
+      <a href="calendar.html"   class="nav-link">Calendar</a>
+      <a href="profile.html"    class="nav-link">Profile</a>
+      <a href="settings.html"   class="nav-link">Settings</a>
+    </div>
+    <div class="nav-actions">
+      <div class="lang-switcher" id="lang-switcher">
+        <button class="lang-btn" id="lang-btn" aria-label="Change language">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 014-10z"/></svg>
+          <span id="lang-current">EN</span>
+        </button>
+        <div class="lang-dropdown hidden" id="lang-dropdown">
+          <button class="lang-option active" data-lang="en">🇬🇧 English</button>
+          <button class="lang-option" data-lang="ur">🇵🇰 اردو</button>
+          <button class="lang-option" data-lang="ar">🌙 العربية</button>
+          <button class="lang-option" data-lang="roman">🔤 Roman Urdu</button>
+        </div>
+      </div>
+      <span class="mode-badge ramadan-badge hidden" id="ramadan-badge">🌙 Ramadan</span>
+      <div class="theme-wrapper">
+        <button class="btn-theme-toggle" id="btn-theme-toggle" aria-label="Theme">☀️</button>
+        <div class="theme-dropdown hidden" id="theme-dropdown" role="menu">
+          <button class="theme-option" data-theme="dark">Dark</button>
+          <button class="theme-option" data-theme="light">Light</button>
+          <button class="theme-option" data-theme="ramadan">Ramadan</button>
+          <button class="theme-option" data-theme="friday">Friday</button>
+        </div>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="friday-banner hidden" id="friday-banner">
+  🌙 Jumu'ah Mubarak — May this Friday bring you peace and blessings.
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-hero-icon">⚙️</div>
+    <h1 class="page-hero-title">Settings</h1>
+    <p class="page-hero-sub">Customise WaqtX to fit your life. All changes save instantly.</p>
+  </div>
+</div>
+
+<main class="settings-page">
+
+  <!-- Prayer Method -->
+  <div class="settings-group">
+    <div class="settings-group-title">🕌 Prayer Calculation</div>
+    <div class="settings-row">
+      <div>
+        <div class="settings-label">Calculation Method</div>
+        <div class="settings-desc">Affects Fajr and Isha calculation</div>
+      </div>
+      <select class="settings-select" id="setting-prayer-method" aria-label="Prayer calculation method">
+        <option value="2">ISNA (North America)</option>
+        <option value="3">Muslim World League</option>
+        <option value="5">Egyptian General Authority</option>
+        <option value="1">Karachi (Hanafi)</option>
+        <option value="4">Umm Al-Qura (Makkah)</option>
+        <option value="7">Tehran</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Theme -->
+  <div class="settings-group">
+    <div class="settings-group-title">🎨 Theme</div>
+    <div class="theme-previews">
+      <button class="theme-preview-btn" data-theme="dark" aria-label="Dark theme">
+        <div class="theme-preview-dot" style="background:#0B1220;border:2px solid #14B8A6;"></div>
+        <div class="theme-preview-label">Dark</div>
+      </button>
+      <button class="theme-preview-btn" data-theme="light" aria-label="Light theme">
+        <div class="theme-preview-dot" style="background:#F8FAFC;border:2px solid #0F766E;"></div>
+        <div class="theme-preview-label">Light</div>
+      </button>
+      <button class="theme-preview-btn" data-theme="ramadan" aria-label="Ramadan theme">
+        <div class="theme-preview-dot" style="background:#07121F;border:2px solid #C9A227;"></div>
+        <div class="theme-preview-label">Ramadan</div>
+      </button>
+      <button class="theme-preview-btn" data-theme="friday" aria-label="Friday theme">
+        <div class="theme-preview-dot" style="background:#0A1A2F;border:2px solid #EAB308;"></div>
+        <div class="theme-preview-label">Friday</div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Language -->
+  <div class="settings-group">
+    <div class="settings-group-title">🌐 Language</div>
+    <div class="settings-row">
+      <div>
+        <div class="settings-label">Interface Language</div>
+        <div class="settings-desc">Arabic Quran text is never translated</div>
+      </div>
+      <select class="settings-select" id="setting-language" aria-label="Interface language">
+        <option value="en">🇬🇧 English</option>
+        <option value="ur">🇵🇰 اردو</option>
+        <option value="ar">🌙 العربية</option>
+        <option value="roman">🔤 Roman Urdu</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Location -->
+  <div class="settings-group">
+    <div class="settings-group-title">📍 Location</div>
+    <div class="settings-row">
+      <div class="settings-label">Location Mode</div>
+    </div>
+    <div class="radio-group">
+      <label class="radio-row">
+        <input type="radio" name="location-mode" id="location-auto" value="auto"/>
+        Auto-detect (GPS)
+      </label>
+      <label class="radio-row">
+        <input type="radio" name="location-mode" id="location-manual" value="manual"/>
+        Enter city manually
+      </label>
+    </div>
+    <div class="location-city-row">
+      <input type="text" id="setting-city" class="settings-city-input" placeholder="e.g. Karachi, Lahore, London" aria-label="City name" disabled/>
+      <button class="btn-city-lookup" id="btn-city-lookup" disabled aria-label="Look up city">Look up</button>
+    </div>
+    <div class="city-status" id="city-status"></div>
+    <div class="location-current" id="location-current"></div>
+  </div>
+
+  <!-- Notifications -->
+  <div class="settings-group">
+    <div class="settings-group-title">🔔 Prayer Reminders</div>
+    <div class="notif-cards">
+      <div class="notif-card">
+        <div class="notif-card-icon">🔔</div>
+        <div class="notif-card-info">
+          <div class="notif-card-title">Adhan</div>
+          <div class="notif-card-desc">Notification at prayer time.</div>
+        </div>
+        <label class="toggle-switch" aria-label="Adhan notification">
+          <input type="checkbox" id="notif-adhan-s"/>
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div class="notif-card">
+        <div class="notif-card-icon">⏰</div>
+        <div class="notif-card-info">
+          <div class="notif-card-title">Reminder</div>
+          <div class="notif-card-desc">15 minutes before each prayer.</div>
+        </div>
+        <label class="toggle-switch" aria-label="Reminder notification">
+          <input type="checkbox" id="notif-reminder-s"/>
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div class="notif-card">
+        <div class="notif-card-icon">🔕</div>
+        <div class="notif-card-info">
+          <div class="notif-card-title">Silent</div>
+          <div class="notif-card-desc">Notification only, no sound.</div>
+        </div>
+        <label class="toggle-switch" aria-label="Silent notification">
+          <input type="checkbox" id="notif-silent-s"/>
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+    <div class="notif-denied hidden" id="notif-denied-msg">
+      Notification permission denied. Enable it in your browser settings and reload.
+    </div>
+    <div class="notif-support-msg" id="notif-support-msg"></div>
+  </div>
+
+  <!-- Accessibility -->
+  <div class="settings-group">
+    <div class="settings-group-title">♿ Accessibility</div>
+    <div class="settings-row">
+      <div>
+        <div class="settings-label">Font Size</div>
+        <div class="settings-desc">Applies across the whole app</div>
+      </div>
+      <div class="font-size-btns">
+        <button class="font-size-btn" data-size="small"   aria-label="Small font">A</button>
+        <button class="font-size-btn" data-size="default" aria-label="Default font" style="font-size:1em;">A</button>
+        <button class="font-size-btn" data-size="large"   aria-label="Large font"  style="font-size:1.2em;">A</button>
+      </div>
+    </div>
+    <div class="settings-row">
+      <div>
+        <div class="settings-label">High Contrast</div>
+        <div class="settings-desc">Increases text and border contrast</div>
+      </div>
+      <label class="toggle-switch" aria-label="High contrast">
+        <input type="checkbox" id="setting-contrast"/>
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Data -->
+  <div class="settings-group">
+    <div class="settings-group-title">🗑️ Your Data</div>
+    <div class="settings-row">
+      <div>
+        <div class="settings-label">Clear All Data</div>
+        <div class="settings-desc">Removes all saved data — journal, streak, tracker, preferences</div>
+      </div>
+      <button class="btn-clear-data" id="btn-clear-data" aria-label="Clear all data">Clear All</button>
+    </div>
+    <div class="clear-confirm hidden" id="clear-confirm">
+      <p>This will permanently delete all your WaqtX data including your streak, journal, and prayer tracker. This cannot be undone.</p>
+      <div class="clear-confirm-btns">
+        <button class="btn-confirm-yes" id="btn-clear-confirm-yes">Yes, clear everything</button>
+        <button class="btn-confirm-no"  id="btn-clear-confirm-no">Cancel</button>
+      </div>
+    </div>
+    <div class="privacy-notice" style="margin-top:12px;">🔒 All data is stored only on your device. WaqtX never sends your data anywhere.</div>
+  </div>
+
+</main>
+
+<!-- Toast -->
+<div class="settings-toast hidden" id="settings-toast" aria-live="polite"></div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav" id="bottom-nav">
+  <a href="index.html"      class="bottom-nav-item"><span class="bottom-nav-icon">🏠</span><span>Home</span></a>
+  <a href="prayers.html"    class="bottom-nav-item"><span class="bottom-nav-icon">🕌</span><span>Prayers</span></a>
+  <a href="journey.html"    class="bottom-nav-item"><span class="bottom-nav-icon">🌙</span><span>Journey</span></a>
+  <a href="reflection.html" class="bottom-nav-item"><span class="bottom-nav-icon">🪔</span><span>Reflect</span></a>
+  <a href="profile.html"    class="bottom-nav-item"><span class="bottom-nav-icon">👤</span><span>Profile</span></a>
+</div>
+
+<script src="js/core.js"></script>
+<script src="js/settings.js"></script>
+</body>
+</html>

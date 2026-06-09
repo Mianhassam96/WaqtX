@@ -1,24 +1,38 @@
 'use strict';
-var CACHE = 'waqtx-v11';
+var CACHE = 'waqtx-v12';
 var ASSETS = [
   './',
   './index.html',
+  './prayers.html',
+  './journey.html',
+  './reflection.html',
+  './calendar.html',
+  './profile.html',
+  './settings.html',
+  './qibla.html',
+  './stories.html',
+  './privacy.html',
   './style.css',
+  './style-pages.css',
   './app.js',
+  './js/core.js',
+  './js/prayers.js',
+  './js/journey.js',
+  './js/reflection.js',
+  './js/calendar.js',
+  './js/profile.js',
+  './js/settings.js',
+  './daily-islam.js',
+  './stories-data.js',
+  './stories.js',
   './manifest.json',
   './favicon.svg',
   './favicon-32.svg',
   './og-image.svg',
-  './privacy.html',
-  './stories.html',
-  './stories-data.js',
-  './stories.js',
-  './daily-islam.js',
   './lang/en.json',
   './lang/ur.json',
   './lang/ar.json',
-  './lang/roman.json',
-  'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'
+  './lang/roman.json'
 ];
 
 self.addEventListener('install', function(e) {
@@ -44,6 +58,27 @@ self.addEventListener('activate', function(e) {
       return self.clients.claim();
     })
   );
+});
+
+/* ── Prayer notification scheduling ── */
+self.addEventListener('message', function(event) {
+  if (!event.data || event.data.type !== 'SCHEDULE_NOTIFICATION') return;
+  var prayer = event.data.prayer || 'Prayer';
+  var fireAt = event.data.fireAt || 0;
+  var mode   = event.data.mode   || 'adhan';
+  var delay  = fireAt - Date.now();
+  if (delay < 0 || delay > 86400000) return; /* ignore stale / too far */
+  setTimeout(function() {
+    self.registration.showNotification('WaqtX — ' + prayer, {
+      body: mode === 'reminder'
+        ? prayer + ' in 15 minutes. Take a moment to prepare.'
+        : 'It is time for ' + prayer + '. Allahu Akbar.',
+      icon: './favicon.svg',
+      badge: './favicon-32.svg',
+      silent: mode === 'silent',
+      tag: 'prayer-' + prayer
+    });
+  }, delay);
 });
 
 self.addEventListener('fetch', function(e) {

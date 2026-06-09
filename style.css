@@ -111,6 +111,32 @@ h1,h2,h3,h4,h5,h6 { font-family: var(--font-heading); }
   --share-card-border: rgba(138,96,28,0.18);
 }
 
+/* ── Special themes ── */
+[data-theme="ramadan"] {
+  --bg: #07121F;
+  --panel-bg: #07121F;
+  --gold: #C9A227; /* Ramadan gold */
+  --gold2: #FFD700;
+  --text: #F8FAFC;
+  --navbar-bg: rgba(7,18,31,0.92);
+}
+
+[data-theme="friday"] {
+  --bg: #0A1A2F;
+  --panel-bg: #0B2036;
+  --gold: #0F766E; /* Friday primary */
+  --gold2: #EAB308; /* Friday accent */
+  --text: #F8FAFC;
+  --navbar-bg: rgba(10,26,47,0.92);
+}
+
+/* Theme dropdown */
+.theme-wrapper { position: relative; }
+.theme-dropdown { position: absolute; right: 0; top: 44px; background: var(--dropdown-bg); border: 1px solid var(--dropdown-border); box-shadow: var(--dropdown-shadow); border-radius: 10px; overflow: hidden; z-index: 300; }
+.theme-dropdown .theme-option { display:block; padding:10px 14px; width:160px; text-align:left; color:var(--text2); background:none; border:none; font-size:0.95rem; }
+.theme-dropdown .theme-option:hover, .theme-dropdown .theme-option:focus { background: rgba(255,255,255,0.02); color:var(--text); outline:none; }
+.theme-dropdown.hidden { display:none !important; }
+
 /* ── 4. Navbar ── */
 .navbar {
   position: fixed;

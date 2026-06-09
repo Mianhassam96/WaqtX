@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>WaqtX — Your Journey</title>
+  <meta name="description" content="See your personal Islamic journey — the Ramadans, Fridays, and prayer moments you've lived."/>
+  <meta name="theme-color" content="#0B1220"/>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+  <link rel="manifest" href="manifest.json"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="style-pages.css"/>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-text">Waqt<span class="nav-logo-x">X</span></span>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html"      class="nav-link">Home</a>
+      <a href="prayers.html"    class="nav-link">Prayers</a>
+      <a href="journey.html"    class="nav-link">Journey</a>
+      <a href="reflection.html" class="nav-link">Reflection</a>
+      <a href="calendar.html"   class="nav-link">Calendar</a>
+      <a href="profile.html"    class="nav-link">Profile</a>
+      <a href="settings.html"   class="nav-link">Settings</a>
+    </div>
+    <div class="nav-actions">
+      <div class="lang-switcher" id="lang-switcher">
+        <button class="lang-btn" id="lang-btn" aria-label="Change language">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          <span id="lang-current">EN</span>
+        </button>
+        <div class="lang-dropdown hidden" id="lang-dropdown">
+          <button class="lang-option active" data-lang="en">🇬🇧 English</button>
+          <button class="lang-option" data-lang="ur">🇵🇰 اردو</button>
+          <button class="lang-option" data-lang="ar">🌙 العربية</button>
+          <button class="lang-option" data-lang="roman">🔤 Roman Urdu</button>
+        </div>
+      </div>
+      <span class="mode-badge ramadan-badge hidden" id="ramadan-badge">🌙 Ramadan</span>
+      <div class="theme-wrapper">
+        <button class="btn-theme-toggle" id="btn-theme-toggle" aria-label="Theme">☀️</button>
+        <div class="theme-dropdown hidden" id="theme-dropdown" role="menu">
+          <button class="theme-option" data-theme="dark">Dark</button>
+          <button class="theme-option" data-theme="light">Light</button>
+          <button class="theme-option" data-theme="ramadan">Ramadan</button>
+          <button class="theme-option" data-theme="friday">Friday</button>
+        </div>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="friday-banner hidden" id="friday-banner">
+  🌙 Jumu'ah Mubarak — May this Friday bring you peace and blessings.
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-hero-icon">🌙</div>
+    <h1 class="page-hero-title" id="journey-name">Your Journey</h1>
+    <p class="page-hero-sub">Every day lived is a chapter Allah wrote for you.</p>
+  </div>
+</div>
+
+<!-- SECTION 1: LIFE OVERVIEW -->
+<section class="section life-overview-section" id="life-overview">
+  <div class="section-inner">
+    <div class="section-heading">
+      <span class="sh-line"></span><span class="sh-icon">◆</span>
+      <span class="sh-text">LIFE OVERVIEW</span>
+      <span class="sh-icon">◆</span><span class="sh-line"></span>
+    </div>
+    <div class="overview-stats-grid">
+      <div class="ov-stat">
+        <div class="ov-stat-icon">📅</div>
+        <div class="ov-stat-val" id="journey-dob-greg">—</div>
+        <div class="ov-stat-label">Date of Birth</div>
+      </div>
+      <div class="ov-stat">
+        <div class="ov-stat-icon">🌙</div>
+        <div class="ov-stat-val" id="journey-dob-hijri">—</div>
+        <div class="ov-stat-label">Islamic Birthday</div>
+      </div>
+      <div class="ov-stat">
+        <div class="ov-stat-icon">⏳</div>
+        <div class="ov-stat-val" id="journey-age">—</div>
+        <div class="ov-stat-label">Age</div>
+      </div>
+      <div class="ov-stat">
+        <div class="ov-stat-icon">🕐</div>
+        <div class="ov-stat-val" id="journey-days">—</div>
+        <div class="ov-stat-label">Days Lived</div>
+      </div>
+    </div>
+
+    <!-- DOB update form -->
+    <form class="journey-dob-form" id="journey-dob-form">
+      <div class="jdf-title">Update Your Details</div>
+      <div class="jdf-row">
+        <input type="text" id="journey-name-input" class="jdf-input" placeholder="Your name (optional)" maxlength="40"/>
+        <input type="date" id="journey-dob-input" class="jdf-input" required/>
+        <button type="submit" class="jdf-btn">Update ✦</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- SECTION 2: ISLAMIC JOURNEY COUNTERS -->
+<section class="section counters-section">
+  <div class="section-inner">
+    <div class="section-heading">
+      <span class="sh-line"></span><span class="sh-icon">◆</span>
+      <span class="sh-text">YOUR ISLAMIC JOURNEY</span>
+      <span class="sh-icon">◆</span><span class="sh-line"></span>
+    </div>
+    <div class="section-sub">These are not just numbers — they are gifts from Allah.</div>
+    <div class="counter-grid">
+      <div class="counter-card">
+        <div class="counter-icon">🌙</div>
+        <div class="counter-value" id="counter-ramadans" data-counter="0">—</div>
+        <div class="counter-label">Ramadans Experienced</div>
+        <div class="counter-desc">Months of mercy, forgiveness, and renewal.</div>
+      </div>
+      <div class="counter-card">
+        <div class="counter-icon">🎉</div>
+        <div class="counter-value" id="counter-eids-fitr" data-counter="0">—</div>
+        <div class="counter-label">Eids ul-Fitr</div>
+        <div class="counter-desc">The celebration after fasting — a gift after patience.</div>
+      </div>
+      <div class="counter-card">
+        <div class="counter-icon">🕋</div>
+        <div class="counter-value" id="counter-eids-adha" data-counter="0">—</div>
+        <div class="counter-label">Eids ul-Adha</div>
+        <div class="counter-desc">The feast of sacrifice — remembering Ibrahim (AS).</div>
+      </div>
+      <div class="counter-card">
+        <div class="counter-icon">🕌</div>
+        <div class="counter-value" id="counter-jumuahs" data-counter="0">—</div>
+        <div class="counter-label">Jumu'ahs Lived</div>
+        <div class="counter-desc">The best day of the week — repeated just for you.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: PRAYER MOMENTS -->
+<section class="section prayer-moments-section">
+  <div class="section-inner">
+    <div class="section-heading">
+      <span class="sh-line"></span><span class="sh-icon">◆</span>
+      <span class="sh-text">PRAYER OPPORTUNITIES</span>
+      <span class="sh-icon">◆</span><span class="sh-line"></span>
+    </div>
+    <div class="prayer-moments-card">
+      <div class="pm-icon">📿</div>
+      <div class="pm-count" id="prayer-moments-count" data-counter="0">—</div>
+      <div class="pm-label">Prayer Moments Since Birth</div>
+      <div class="pm-desc">Every prayer was an invitation from Allah — sent to you personally, five times every day.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: LIFE CHAPTERS -->
+<section class="section chapters-section">
+  <div class="section-inner">
+    <div class="section-heading">
+      <span class="sh-line"></span><span class="sh-icon">◆</span>
+      <span class="sh-text">LIFE CHAPTERS</span>
+      <span class="sh-icon">◆</span><span class="sh-line"></span>
+    </div>
+    <div class="section-sub">Your story, told in stages.</div>
+    <div class="life-chapters" id="life-chapters">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: TIME CAPSULE -->
+<section class="section capsule-section">
+  <div class="section-inner">
+    <div class="section-heading">
+      <span class="sh-line"></span><span class="sh-icon">◆</span>
+      <span class="sh-text">ISLAMIC TIME CAPSULE</span>
+      <span class="sh-icon">◆</span><span class="sh-line"></span>
+    </div>
+    <div class="section-sub">A snapshot of your journey — shareable with the world.</div>
+    <div class="capsule-card" id="capsule-card">
+      <!-- Rendered by JS -->
+    </div>
+    <div class="capsule-actions">
+      <button class="btn-capsule" id="btn-capsule-download">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        Download Image
+      </button>
+      <button class="btn-capsule btn-capsule-share" id="btn-capsule-share">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        🔗 Copy Link
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav" id="bottom-nav">
+  <a href="index.html"      class="bottom-nav-item"><span class="bottom-nav-icon">🏠</span><span>Home</span></a>
+  <a href="prayers.html"    class="bottom-nav-item"><span class="bottom-nav-icon">🕌</span><span>Prayers</span></a>
+  <a href="journey.html"    class="bottom-nav-item"><span class="bottom-nav-icon">🌙</span><span>Journey</span></a>
+  <a href="reflection.html" class="bottom-nav-item"><span class="bottom-nav-icon">🪔</span><span>Reflect</span></a>
+  <a href="profile.html"    class="bottom-nav-item"><span class="bottom-nav-icon">👤</span><span>Profile</span></a>
+</div>
+
+<script src="js/core.js"></script>
+<script src="js/journey.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" crossorigin="anonymous"></script>
+</body>
+</html>

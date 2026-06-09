@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>WaqtX — Qibla</title>
+  <meta name="description" content="Find the direction of the Kaaba from anywhere in the world — clean, simple, accurate."/>
+  <meta name="theme-color" content="#0B1220"/>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+  <link rel="manifest" href="manifest.json"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="style-pages.css"/>
+</head>
+<body>
+
+<!-- MINIMAL NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-text">Waqt<span class="nav-logo-x">X</span></span>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html"      class="nav-link">Home</a>
+      <a href="prayers.html"    class="nav-link">Prayers</a>
+      <a href="journey.html"    class="nav-link">Journey</a>
+      <a href="reflection.html" class="nav-link">Reflection</a>
+      <a href="calendar.html"   class="nav-link">Calendar</a>
+      <a href="profile.html"    class="nav-link">Profile</a>
+      <a href="settings.html"   class="nav-link">Settings</a>
+    </div>
+    <div class="nav-actions">
+      <div class="theme-wrapper">
+        <button class="btn-theme-toggle" id="btn-theme-toggle" aria-label="Theme">☀️</button>
+        <div class="theme-dropdown hidden" id="theme-dropdown" role="menu">
+          <button class="theme-option" data-theme="dark">Dark</button>
+          <button class="theme-option" data-theme="light">Light</button>
+          <button class="theme-option" data-theme="ramadan">Ramadan</button>
+          <button class="theme-option" data-theme="friday">Friday</button>
+        </div>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- QIBLA MAIN -->
+<main class="qibla-page">
+
+  <div style="text-align:center;margin-bottom:8px;">
+    <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);opacity:0.8;margin-bottom:6px;">QIBLA DIRECTION</div>
+    <h1 style="font-size:clamp(1.8rem,4vw,2.4rem);font-weight:900;color:var(--text);letter-spacing:-0.02em;margin-bottom:6px;">Face the Kaaba</h1>
+    <p style="font-size:0.9rem;color:var(--text2);line-height:1.6;max-width:320px;margin:0 auto;">Enable location to find the direction of the Kaaba from where you are.</p>
+  </div>
+
+  <!-- Compass -->
+  <div class="qibla-compass-wrap">
+    <svg class="qibla-compass-svg" viewBox="0 0 280 280" aria-label="Qibla compass">
+      <!-- Outer ring -->
+      <circle cx="140" cy="140" r="128" fill="none" stroke="rgba(212,160,23,0.1)" stroke-width="2"/>
+      <!-- Inner rings -->
+      <circle cx="140" cy="140" r="108" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+      <circle cx="140" cy="140" r="88"  fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+      <!-- Tick marks -->
+      <g stroke="rgba(212,160,23,0.25)" stroke-width="1">
+        <line x1="140" y1="12"  x2="140" y2="24"/>  <!-- N -->
+        <line x1="268" y1="140" x2="256" y2="140"/> <!-- E -->
+        <line x1="140" y1="268" x2="140" y2="256"/> <!-- S -->
+        <line x1="12"  y1="140" x2="24"  y2="140"/> <!-- W -->
+      </g>
+      <!-- Cardinal labels -->
+      <text x="140" y="10" text-anchor="middle" fill="rgba(212,160,23,0.6)" font-size="11" font-family="Outfit,sans-serif" font-weight="700">N</text>
+      <text x="273" y="144" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="10" font-family="Outfit,sans-serif">E</text>
+      <text x="140" y="278" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="10" font-family="Outfit,sans-serif">S</text>
+      <text x="8" y="144" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="10" font-family="Outfit,sans-serif">W</text>
+      <!-- Needle group — rotated by JS -->
+      <g id="qibla-needle" class="qibla-needle">
+        <!-- Kaaba direction (gold) -->
+        <polygon points="140,28 134,140 140,150 146,140" fill="var(--gold)" opacity="0.9"/>
+        <!-- Opposite tail (dim) -->
+        <polygon points="140,252 134,140 140,130 146,140" fill="rgba(255,255,255,0.15)"/>
+        <!-- Center dot -->
+        <circle cx="140" cy="140" r="7" fill="var(--bg)" stroke="var(--gold)" stroke-width="2"/>
+      </g>
+      <!-- Kaaba icon at top -->
+      <text id="qibla-kaaba-icon" x="140" y="50" text-anchor="middle" font-size="18" opacity="0.5">🕋</text>
+    </svg>
+  </div>
+
+  <!-- Info card -->
+  <div class="qibla-info-card">
+    <div class="qibla-info-row">
+      <span class="qi-label">📍 Location</span>
+      <span class="qi-val" id="qibla-location">—</span>
+    </div>
+    <div class="qibla-info-row">
+      <span class="qi-label">📏 Distance to Kaaba</span>
+      <span class="qi-val" id="qibla-distance">—</span>
+    </div>
+    <div class="qibla-info-row">
+      <span class="qi-label">🧭 Bearing</span>
+      <span class="qi-val" id="qibla-bearing">—</span>
+    </div>
+  </div>
+
+  <button class="btn-qibla-find" id="btn-qibla-find" aria-label="Find Qibla direction">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+    Find Qibla
+  </button>
+
+  <div class="qibla-direction-label" id="qibla-direction-label"></div>
+  <div class="qibla-status" id="qibla-status">Tap "Find Qibla" to detect your location.</div>
+
+  <p style="font-size:0.72rem;color:var(--text3);text-align:center;margin-top:24px;opacity:0.6;max-width:320px;">
+    For best accuracy, use on a mobile device with compass support. Calculation uses the great-circle bearing to Makkah (21.4225° N, 39.8262° E).
+  </p>
+
+</main>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav" id="bottom-nav">
+  <a href="index.html"      class="bottom-nav-item"><span class="bottom-nav-icon">🏠</span><span>Home</span></a>
+  <a href="prayers.html"    class="bottom-nav-item"><span class="bottom-nav-icon">🕌</span><span>Prayers</span></a>
+  <a href="journey.html"    class="bottom-nav-item"><span class="bottom-nav-icon">🌙</span><span>Journey</span></a>
+  <a href="reflection.html" class="bottom-nav-item"><span class="bottom-nav-icon">🪔</span><span>Reflect</span></a>
+  <a href="profile.html"    class="bottom-nav-item"><span class="bottom-nav-icon">👤</span><span>Profile</span></a>
+</div>
+
+<script src="js/core.js"></script>
+<script>
+'use strict';
+/* Qibla page logic — standalone, no separate JS file needed */
+var KAABA_LAT = 21.4225;
+var KAABA_LNG = 39.8262;
+
+function toRad(d) { return d * Math.PI / 180; }
+function toDeg(r) { return r * 180 / Math.PI; }
+
+function calcQibla(lat, lng) {
+  var dLng = toRad(KAABA_LNG - lng);
+  var lat1 = toRad(lat);
+  var lat2 = toRad(KAABA_LAT);
+  var y = Math.sin(dLng) * Math.cos(lat2);
+  var x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLng);
+  var bearing = (toDeg(Math.atan2(y, x)) + 360) % 360;
+  return bearing;
+}
+
+function calcDistance(lat1, lng1) {
+  var R = 6371;
+  var dLat = toRad(KAABA_LAT - lat1);
+  var dLng = toRad(KAABA_LNG - lng1);
+  var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+          Math.cos(toRad(lat1)) * Math.cos(toRad(KAABA_LAT)) *
+          Math.sin(dLng/2) * Math.sin(dLng/2);
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+
+function bearingToDirection(b) {
+  var dirs = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+  return dirs[Math.round(b / 22.5) % 16];
+}
+
+var _qiblaBearing = null;
+var _deviceAlpha = null;
+
+function rotateNeedle(bearing, alpha) {
+  var needle = document.getElementById('qibla-needle');
+  if (!needle) return;
+  var rot = bearing;
+  if (alpha !== null) rot = bearing - alpha;
+  needle.setAttribute('transform', 'rotate(' + rot + ',140,140)');
+}
+
+document.getElementById('btn-qibla-find').addEventListener('click', function() {
+  var btn = this;
+  var status = document.getElementById('qibla-status');
+  if (!navigator.geolocation) {
+    status.textContent = 'Geolocation is not supported by your browser.';
+    return;
+  }
+  btn.disabled = true;
+  btn.textContent = 'Locating…';
+  status.textContent = 'Detecting your location…';
+
+  navigator.geolocation.getCurrentPosition(function(pos) {
+    var lat = pos.coords.latitude;
+    var lng = pos.coords.longitude;
+
+    /* Save for reuse */
+    try {
+      localStorage.setItem('waqtx_location_lat', lat);
+      localStorage.setItem('waqtx_location_lng', lng);
+    } catch(e) {}
+
+    _qiblaBearing = calcQibla(lat, lng);
+    var dist = calcDistance(lat, lng);
+    var dir = bearingToDirection(_qiblaBearing);
+
+    /* Update UI */
+    var locEl = document.getElementById('qibla-location');
+    var distEl = document.getElementById('qibla-distance');
+    var bearEl = document.getElementById('qibla-bearing');
+    var dirLbl = document.getElementById('qibla-direction-label');
+
+    if (locEl) locEl.textContent = lat.toFixed(3) + '°, ' + lng.toFixed(3) + '°';
+    if (distEl) distEl.textContent = dist.toFixed(0) + ' km';
+    if (bearEl) bearEl.textContent = _qiblaBearing.toFixed(1) + '° ' + dir;
+    if (dirLbl) dirLbl.textContent = 'Face ' + _qiblaBearing.toFixed(0) + '° — ' + dir;
+
+    rotateNeedle(_qiblaBearing, _deviceAlpha);
+
+    btn.textContent = '↺ Refresh';
+    btn.disabled = false;
+    status.textContent = 'Qibla found. Turn until the gold needle points toward you.';
+
+    /* Try device orientation */
+    if (window.DeviceOrientationEvent) {
+      if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+        DeviceOrientationEvent.requestPermission().then(function(p) {
+          if (p === 'granted') listenOrientation();
+        }).catch(function() {});
+      } else {
+        listenOrientation();
+      }
+    }
+  }, function(err) {
+    var msgs = { 1:'Location access denied.', 2:'Location unavailable.', 3:'Request timed out.' };
+    status.textContent = msgs[err.code] || 'Could not get location.';
+    btn.disabled = false;
+    btn.textContent = 'Try Again';
+  }, { timeout: 10000, maximumAge: 300000 });
+});
+
+function listenOrientation() {
+  window.addEventListener('deviceorientation', function(e) {
+    if (e.alpha === null) return;
+    _deviceAlpha = e.webkitCompassHeading !== undefined ? e.webkitCompassHeading : (360 - e.alpha);
+    if (_qiblaBearing !== null) rotateNeedle(_qiblaBearing, _deviceAlpha);
+  });
+}
+
+/* Auto-load if location was previously saved */
+(function() {
+  try {
+    var lat = parseFloat(localStorage.getItem('waqtx_location_lat'));
+    var lng = parseFloat(localStorage.getItem('waqtx_location_lng'));
+    if (lat && lng) {
+      _qiblaBearing = calcQibla(lat, lng);
+      var dist = calcDistance(lat, lng);
+      var dir = bearingToDirection(_qiblaBearing);
+      var locEl = document.getElementById('qibla-location');
+      var distEl = document.getElementById('qibla-distance');
+      var bearEl = document.getElementById('qibla-bearing');
+      var dirLbl = document.getElementById('qibla-direction-label');
+      if (locEl) locEl.textContent = lat.toFixed(3) + '°, ' + lng.toFixed(3) + '°';
+      if (distEl) distEl.textContent = dist.toFixed(0) + ' km';
+      if (bearEl) bearEl.textContent = _qiblaBearing.toFixed(1) + '° ' + dir;
+      if (dirLbl) dirLbl.textContent = 'Face ' + _qiblaBearing.toFixed(0) + '° — ' + dir;
+      rotateNeedle(_qiblaBearing, null);
+      var status = document.getElementById('qibla-status');
+      if (status) status.textContent = 'Using saved location. Tap Refresh for current position.';
+      var btn = document.getElementById('btn-qibla-find');
+      if (btn) btn.textContent = '↺ Refresh';
+    }
+  } catch(e) {}
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>WaqtX — Reflection</title>
+  <meta name="description" content="Your daily Quranic verse, reflection journal, gratitude practice, and personal notes — all private, all yours."/>
+  <meta name="theme-color" content="#0B1220"/>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+  <link rel="manifest" href="manifest.json"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="style-pages.css"/>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-text">Waqt<span class="nav-logo-x">X</span></span>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html"      class="nav-link">Home</a>
+      <a href="prayers.html"    class="nav-link">Prayers</a>
+      <a href="journey.html"    class="nav-link">Journey</a>
+      <a href="reflection.html" class="nav-link">Reflection</a>
+      <a href="calendar.html"   class="nav-link">Calendar</a>
+      <a href="profile.html"    class="nav-link">Profile</a>
+      <a href="settings.html"   class="nav-link">Settings</a>
+    </div>
+    <div class="nav-actions">
+      <div class="lang-switcher" id="lang-switcher">
+        <button class="lang-btn" id="lang-btn" aria-label="Change language">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          <span id="lang-current">EN</span>
+        </button>
+        <div class="lang-dropdown hidden" id="lang-dropdown">
+          <button class="lang-option active" data-lang="en">🇬🇧 English</button>
+          <button class="lang-option" data-lang="ur">🇵🇰 اردو</button>
+          <button class="lang-option" data-lang="ar">🌙 العربية</button>
+          <button class="lang-option" data-lang="roman">🔤 Roman Urdu</button>
+        </div>
+      </div>
+      <span class="mode-badge ramadan-badge hidden" id="ramadan-badge">🌙 Ramadan</span>
+      <div class="theme-wrapper">
+        <button class="btn-theme-toggle" id="btn-theme-toggle" aria-label="Theme">☀️</button>
+        <div class="theme-dropdown hidden" id="theme-dropdown" role="menu">
+          <button class="theme-option" data-theme="dark">Dark</button>
+          <button class="theme-option" data-theme="light">Light</button>
+          <button class="theme-option" data-theme="ramadan">Ramadan</button>
+          <button class="theme-option" data-theme="friday">Friday</button>
+        </div>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="friday-banner hidden" id="friday-banner">
+  🌙 Jumu'ah Mubarak — May this Friday bring you peace and blessings.
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-hero-icon">🪔</div>
+    <h1 class="page-hero-title">Reflection</h1>
+    <p class="page-hero-sub">A quiet space to read, write, and remember what matters.</p>
+  </div>
+</div>
+
+<!-- SECTION 1: DAILY VERSE -->
+<section class="section verse-section" id="daily-verse">
+  <div class="section-inner">
+    <div class="section-heading">
+      <span class="sh-line"></span><span class="sh-icon">◆</span>
+      <span class="sh-text">TODAY'S VERSE</span>
+      <span class="sh-icon">◆</span><span class="sh-line"></span>
+    </div>
+    <div class="verse-card">
+      <div class="verse-arabic-text" id="verse-arabic" lang="ar" dir="rtl"></div>
+      <div class="verse-translation" id="verse-translation"></div>
+      <div class="verse-source" id="verse-source"></div>
+      <div class="verse-reflection-txt" id="verse-reflection"></div>
+      <button class="btn-verse-play" id="btn-verse-audio" aria-label="Play verse recitation">
+        ▶ Play Recitation
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: REFLECTION JOURNAL -->
+<section class="section journal-section" id="reflection-prompt">
+  <div class="section-inner">
+    <div class="section-heading">
+      <span class="sh-line"></span><span class="sh-icon">◆</span>
+      <span class="sh-text">TODAY'S REFLECTION</span>
+      <span class="sh-icon">◆</span><span class="sh-line"></span>
+    </div>
+    <div class="journal-card">
+      <div class="journal-prompt-label">Today's Prompt</div>
+      <div class="journal-prompt" id="reflection-prompt-text">Loading prompt…</div>
+      <textarea
+        class="journal-textarea"
+        id="reflection-journal"
+        placeholder="Write your thoughts here — only you can see this."
+        aria-label="Reflection journal entry"></textarea>
+      <div class="journal-status" id="journal-status">Start writing — only you can see this.</div>
+    </div>
+    <p class="privacy-notice">🔒 100% Private — stored on your device only.</p>
+  </div>
+</section>
+
+<!-- SECTION 3: GRATITUDE JOURNAL -->
+<section class="section gratitude-section" id="gratitude">
+  <div class="section-inner">
+    <div class="section-heading">
+      <span class="sh-line"></span><span class="sh-icon">◆</span>
+      <span class="sh-text">THREE BLESSINGS TODAY</span>
+      <span class="sh-icon">◆</span><span class="sh-line"></span>
+    </div>
+    <div class="section-sub">The Prophet ﷺ said: "Look at those below you, not those above you — it is better so that you do not undervalue Allah's blessings." — Muslim</div>
+    <div class="gratitude-card">
+      <div class="gratitude-inputs">
+        <div class="gratitude-label-row">
+          <div class="gratitude-num">1</div>
+          <input type="text" id="gratitude-1" class="gratitude-input" placeholder="I am grateful for…" aria-label="Blessing one" maxlength="200"/>
+        </div>
+        <div class="gratitude-label-row">
+          <div class="gratitude-num">2</div>
+          <input type="text" id="gratitude-2" class="gratitude-input" placeholder="I am grateful for…" aria-label="Blessing two" maxlength="200"/>
+        </div>
+        <div class="gratitude-label-row">
+          <div class="gratitude-num">3</div>
+          <input type="text" id="gratitude-3" class="gratitude-input" placeholder="I am grateful for…" aria-label="Blessing three" maxlength="200"/>
+        </div>
+      </div>
+    </div>
+    <p class="privacy-notice">🔒 Saved locally — only you can see this.</p>
+  </div>
+</section>
+
+<!-- SECTION 4: PERSONAL NOTES -->
+<section class="section notes-section" id="personal-notes">
+  <div class="section-inner">
+    <div class="section-heading">
+      <span class="sh-line"></span><span class="sh-icon">◆</span>
+      <span class="sh-text">PERSONAL NOTES</span>
+      <span class="sh-icon">◆</span><span class="sh-line"></span>
+    </div>
+    <div class="section-sub">A permanent notepad — your thoughts, duas, goals. Stays here between visits.</div>
+    <div class="notes-card">
+      <textarea
+        class="notes-textarea"
+        id="personal-notes"
+        placeholder="Anything on your mind — duas you want to make, goals for this week, reminders to yourself…"
+        aria-label="Personal notes"></textarea>
+      <div class="notes-status" id="notes-status"></div>
+    </div>
+    <p class="privacy-notice">🔒 100% Private — stored on your device only.</p>
+  </div>
+</section>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav" id="bottom-nav">
+  <a href="index.html"      class="bottom-nav-item"><span class="bottom-nav-icon">🏠</span><span>Home</span></a>
+  <a href="prayers.html"    class="bottom-nav-item"><span class="bottom-nav-icon">🕌</span><span>Prayers</span></a>
+  <a href="journey.html"    class="bottom-nav-item"><span class="bottom-nav-icon">🌙</span><span>Journey</span></a>
+  <a href="reflection.html" class="bottom-nav-item"><span class="bottom-nav-icon">🪔</span><span>Reflect</span></a>
+  <a href="profile.html"    class="bottom-nav-item"><span class="bottom-nav-icon">👤</span><span>Profile</span></a>
+</div>
+
+<script src="js/core.js"></script>
+<script src="daily-islam.js"></script>
+<script src="js/reflection.js"></script>
+</body>
+</html>

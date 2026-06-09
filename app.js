@@ -51,27 +51,41 @@ function getSavedTheme() {
 function updateThemeButton(theme) {
   var btn = el('btn-theme-toggle');
   if (!btn) return;
-  btn.textContent = theme === 'light' ? '🌙' : '☀️';
+  var map = { dark: '☀️', light: '🌙', ramadan: '🌙✦', friday: '✦' };
+  btn.textContent = map[theme] || '☀️';
   btn.setAttribute('aria-label', t('theme_toggle'));
   btn.title = theme === 'light' ? t('theme_switch_dark') : t('theme_switch_light');
 }
 
 function applyTheme(theme) {
-  if (theme === 'light') {
-    document.documentElement.setAttribute('data-theme', 'light');
-  } else {
-    document.documentElement.removeAttribute('data-theme');
-  }
-  try { localStorage.setItem(THEME_STORAGE_KEY, theme === 'light' ? 'light' : 'dark'); } catch(e) {}
-  updateThemeButton(theme);
+  try {
+    if (!theme || theme === 'dark') {
+      document.documentElement.removeAttribute('data-theme');
+    } else {
+      document.documentElement.setAttribute('data-theme', theme);
+    }
+    localStorage.setItem(THEME_STORAGE_KEY, theme || 'dark');
+  } catch(e) {}
+  updateThemeButton(theme || 'dark');
 }
 
 function initThemeToggle() {
   var btn = el('btn-theme-toggle');
-  if (!btn) return;
-  btn.addEventListener('click', function() {
-    var current = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-    applyTheme(current === 'light' ? 'dark' : 'light');
+  var dropdown = el('theme-dropdown');
+  if (!btn || !dropdown) return;
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    dropdown.classList.toggle('hidden');
+    dropdown.setAttribute('aria-hidden', dropdown.classList.contains('hidden') ? 'true' : 'false');
+  });
+  document.addEventListener('click', function() { if (!dropdown.classList.contains('hidden')) { dropdown.classList.add('hidden'); dropdown.setAttribute('aria-hidden','true'); } });
+  dropdown.querySelectorAll('.theme-option').forEach(function(opt) {
+    opt.addEventListener('click', function(e) {
+      var theme = opt.getAttribute('data-theme');
+      applyTheme(theme);
+      dropdown.classList.add('hidden');
+      dropdown.setAttribute('aria-hidden','true');
+    });
   });
   applyTheme(getSavedTheme());
 }
