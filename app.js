@@ -3776,3 +3776,223 @@ function openSituationModal(sit) {
     if (e.target === modal) { modal.classList.add('hidden'); document.body.style.overflow = ''; }
   });
 })();
+
+
+/* ═══════════════════════════════════════════════
+   HOME PAGE — New Sections (v2)
+   Timeline · Prayer Status · Reflection · Overview
+   ═══════════════════════════════════════════════ */
+
+(function() {
+  'use strict';
+
+  /* ── Today's Journey Timeline ── */
+  function renderHomeTimeline(timings) {
+    var container = document.getElementById('ht-placeholder');
+    if (!container) return;
+    var PRAYERS = ['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha'];
+    if (!timings) return; /* keep static default */
+
+    var now = new Date();
+    var nowMin = now.getHours() * 60 + now.getMinutes();
+
+    function timeToMin(t) {
+      var clean = (t || '').split(' ')[0];
+      var p = clean.split(':');
+      return p.length < 2 ? 0 : parseInt(p[0]) * 60 + parseInt(p[1]);
+    }
+
+    var html = '';
+    PRAYERS.forEach(function(name, idx) {
+      var pMin = timeToMin(timings[name]);
+      var isPast   = pMin < nowMin;
+      var isActive = false;
+      /* active = current period: from this prayer until next */
+      if (idx < PRAYERS.length - 1) {
+        var nextMin = timeToMin(timings[PRAYERS[idx + 1]]);
+        isActive = nowMin >= pMin && nowMin < nextMin;
+      } else {
+        isActive = nowMin >= pMin;
+      }
+      var cls = isActive ? 'ht-active' : isPast ? 'ht-past' : 'ht-upcoming';
+      var timeStr = timings[name] ? timings[name].split(' ')[0] : '';
+      html += '<span class="ht-pill ' + cls + '" title="' + name + (timeStr ? ' · ' + timeStr : '') + '">' +
+              name + (timeStr ? '<br><small style="font-size:0.65em;font-weight:400;opacity:0.7">' + timeStr + '</small>' : '') +
+              '</span>';
+      if (idx < PRAYERS.length - 1) {
+        html += '<span class="ht-connector' + (isPast ? ' ht-connector-past' : '') + '"></span>';
+      }
+    });
+    container.innerHTML = html;
+  }
+
+  /* ── Prayer Status Cards ── */
+  function renderHomePrayerStatus(timings) {
+    var PRAYERS = ['Fajr','Dhuhr','Asr','Maghrib','Isha'];
+    var ICONS   = { Fajr:'🌙', Dhuhr:'☀️', Asr:'🌤', Maghrib:'🌇', Isha:'🌃' };
+    if (!timings) return;
+
+    var now    = new Date();
+    var nowMin = now.getHours() * 60 + now.getMinutes();
+
+    function timeToMin(t) {
+      var clean = (t || '').split(' ')[0];
+      var p = clean.split(':');
+      return p.length < 2 ? 0 : parseInt(p[0]) * 60 + parseInt(p[1]);
+    }
+
+    /* Determine next prayer */
+    var nextName = null;
+    for (var i = 0; i < PRAYERS.length; i++) {
+      if (timeToMin(timings[PRAYERS[i]]) > nowMin) { nextName = PRAYERS[i]; break; }
+    }
+
+    PRAYERS.forEach(function(name) {
+      var timeEl  = document.getElementById('hps-time-' + name);
+      var badgeEl = document.getElementById('hps-badge-' + name);
+      var card    = timeEl ? timeEl.closest('.hps-card') : null;
+      if (!timeEl || !badgeEl || !card) return;
+
+      var pMin    = timeToMin(timings[name]);
+      var isPast  = pMin < nowMin;
+      var isCurr  = name === nextName || (!nextName && name === 'Isha');
+      var timeStr = timings[name] ? timings[name].split(' ')[0] : '—';
+
+      timeEl.textContent = timeStr;
+
+      card.classList.remove('hps-current','hps-done-card');
+      badgeEl.className = 'hps-badge';
+
+      if (isCurr && !isPast) {
+        card.classList.add('hps-current');
+        badgeEl.classList.add('hps-current');
+        badgeEl.textContent = 'Current';
+      } else if (isPast) {
+        card.classList.add('hps-done-card');
+        badgeEl.classList.add('hps-done');
+        badgeEl.textContent = '✓ Done';
+      } else {
+        badgeEl.classList.add('hps-upcoming');
+        badgeEl.textContent = 'Upcoming';
+      }
+    });
+  }
+
+  /* ── Daily Reflection Card (Home) ── */
+  function renderHomeReflection() {
+    if (!window.DAILY_AYAHS || !DAILY_AYAHS.length) return;
+    var start   = new Date(new Date().getFullYear(), 0, 0);
+    var dayOfYear = Math.floor((Date.now() - start) / 86400000);
+    var ayah    = DAILY_AYAHS[dayOfYear % DAILY_AYAHS.length];
+    var arabicEl  = document.getElementById('hrc-arabic');
+    var transEl   = document.getElementById('hrc-translation');
+    var sourceEl  = document.getElementById('hrc-source');
+    if (arabicEl)  arabicEl.textContent  = ayah.arabic     || '';
+    if (transEl)   transEl.textContent   = ayah.translation || '';
+    if (sourceEl)  sourceEl.textContent  = ayah.source      || '';
+  }
+
+  /* ── Quick Overview Strip ── */
+  function renderHomeOverview() {
+    /* Streak */
+    var streak = 0;
+    try { streak = parseInt(localStorage.getItem('waqtx_streak')) || 0; } catch(e) {}
+    var streakEl = document.getElementById('hov-streak');
+    if (streakEl) streakEl.textContent = streak;
+
+    /* Journal — did user write today? */
+    var today = (function() {
+      var d = new Date();
+      return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+    })();
+    var journalEl = document.getElementById('hov-journal');
+    if (journalEl) {
+      var hasJournal = false;
+      try { hasJournal = !!(localStorage.getItem('waqtx_journal_' + today)); } catch(e) {}
+      journalEl.textContent = hasJournal ? 'Updated' : '—';
+    }
+
+    /* Next Friday */
+    var friEl = document.getElementById('hov-friday');
+    if (friEl) {
+      var dow = new Date().getDay(); /* 0=Sun, 5=Fri */
+      var daysToFri = dow === 5 ? 0 : (5 - dow + 7) % 7;
+      friEl.textContent = daysToFri === 0 ? 'Today!' : daysToFri + ' days';
+    }
+  }
+
+  /* ── Wire up + auto-update ── */
+  function initHomeSections() {
+    var timings = null;
+    try {
+      var raw = localStorage.getItem('waqtx_prayer_times');
+      if (raw) timings = JSON.parse(raw);
+    } catch(e) {}
+
+    renderHomeTimeline(timings);
+    renderHomePrayerStatus(timings);
+    renderHomeReflection();
+    renderHomeOverview();
+
+    /* Re-render every minute */
+    setInterval(function() {
+      var t = null;
+      try { var r = localStorage.getItem('waqtx_prayer_times'); if (r) t = JSON.parse(r); } catch(e) {}
+      renderHomeTimeline(t);
+      renderHomePrayerStatus(t);
+    }, 60000);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHomeSections);
+  } else {
+    initHomeSections();
+  }
+})();
+
+
+/* ── Hero auto-populate from saved DOB/Name ── */
+(function() {
+  'use strict';
+  function heroAutoPopulate() {
+    try {
+      var name = localStorage.getItem('waqtx_name');
+      var dob  = localStorage.getItem('waqtx_dob');
+      /* Pre-fill inputs */
+      var nameInput = document.getElementById('hero-name');
+      var dobInput  = document.getElementById('hero-dob');
+      if (nameInput && name) nameInput.value = name;
+      if (dobInput  && dob)  dobInput.value  = dob;
+
+      /* Update greeting */
+      var greetEl = document.getElementById('hero-greeting-name');
+      if (greetEl && name) greetEl.textContent = 'Assalamu Alaikum, ' + name + '.';
+
+      /* Show days lived */
+      if (dob) {
+        var birth = new Date(dob.replace(/-/g, '/'));
+        var days  = Math.floor((Date.now() - birth.getTime()) / 86400000);
+        var rankEl = document.getElementById('hero-day-rank');
+        if (rankEl) rankEl.textContent = days.toLocaleString() + 'th';
+        /* Hero stats preview */
+        var ramadans = Math.floor(days / 365.25);
+        var fridays  = Math.floor(days / 7);
+        var prayers  = days * 5;
+        var hspRam  = document.getElementById('hsp-ramadans');
+        var hspPct  = document.getElementById('hsp-pct');
+        var hspFajr = document.getElementById('hsp-fajr');
+        if (hspRam)  hspRam.textContent  = ramadans;
+        if (hspPct)  hspPct.textContent  = fridays.toLocaleString();
+        if (hspFajr) hspFajr.textContent = prayers.toLocaleString();
+        var preview = document.getElementById('hero-stats-preview');
+        if (preview) preview.classList.add('hsp-visible');
+      }
+    } catch(e) {}
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', heroAutoPopulate);
+  } else {
+    heroAutoPopulate();
+  }
+})();

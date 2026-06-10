@@ -1181,3 +1181,207 @@
   .counter-grid { grid-template-columns: repeat(4, 1fr); }
   .prayer-grid { grid-template-columns: repeat(6, 1fr); }
 }
+
+/* ════════════════════════════════════════
+   HOME PAGE — New Sections
+   ════════════════════════════════════════ */
+
+/* Today's Journey Timeline */
+.home-timeline-section { background: var(--bg2); }
+.home-timeline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 16px 0;
+}
+.ht-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 18px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  color: var(--text2);
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+.ht-pill.ht-past {
+  background: rgba(20,184,166,0.1);
+  border-color: rgba(20,184,166,0.3);
+  color: var(--green2);
+  opacity: 0.65;
+}
+.ht-pill.ht-active {
+  background: rgba(212,160,23,0.15);
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: scale(1.06);
+  box-shadow: 0 0 18px rgba(212,160,23,0.2);
+  font-size: 0.9rem;
+}
+.ht-pill.ht-upcoming { opacity: 0.4; }
+.ht-connector {
+  display: inline-block;
+  width: 20px;
+  height: 2px;
+  background: var(--card-border);
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+.btn-timeline-full {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 20px;
+  border: 1px solid rgba(212,160,23,0.3);
+  border-radius: 999px;
+  color: var(--gold);
+  font-size: 0.82rem;
+  font-weight: 700;
+  background: rgba(212,160,23,0.06);
+  text-decoration: none;
+  transition: all var(--transition);
+}
+.btn-timeline-full:hover { background: rgba(212,160,23,0.12); box-shadow: 0 0 16px rgba(212,160,23,0.15); }
+
+/* Prayer Status Cards (Home) */
+.home-prayer-status-section { background: var(--bg2); }
+.home-prayer-status-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.hps-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 20px 12px;
+  text-align: center;
+  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+.hps-card.hps-current {
+  border-color: var(--green);
+  box-shadow: 0 0 20px rgba(20,184,166,0.15);
+  transform: translateY(-2px);
+}
+.hps-card.hps-done-card { opacity: 0.55; }
+.hps-icon { font-size: 1.4rem; margin-bottom: 6px; }
+.hps-name { font-size: 0.72rem; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+.hps-time { font-size: 1.1rem; font-weight: 900; color: var(--text); margin-bottom: 8px; }
+.hps-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.62rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.hps-badge.hps-current  { background: rgba(20,184,166,0.15);  color: var(--green2);  border: 1px solid rgba(20,184,166,0.3); }
+.hps-badge.hps-done     { background: rgba(20,184,166,0.08);  color: var(--green);   border: 1px solid rgba(20,184,166,0.15); }
+.hps-badge.hps-upcoming { background: rgba(255,255,255,0.04); color: var(--text3);   border: 1px solid rgba(255,255,255,0.08); }
+
+/* Daily Reflection Card (Home) */
+.home-reflection-section { background: var(--bg); }
+.home-reflection-card {
+  max-width: 680px;
+  margin: 0 auto;
+  background: var(--card-bg);
+  border: 1px solid rgba(212,160,23,0.18);
+  border-radius: var(--radius);
+  padding: 36px 32px;
+  text-align: center;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+}
+.hrc-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  background: rgba(212,160,23,0.1);
+  border: 1px solid rgba(212,160,23,0.2);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+}
+.hrc-arabic {
+  font-family: var(--font-ar);
+  font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+  color: var(--gold);
+  line-height: 2;
+  margin-bottom: 14px;
+}
+.hrc-translation {
+  font-size: 0.95rem;
+  color: var(--text2);
+  line-height: 1.7;
+  font-style: italic;
+  margin-bottom: 6px;
+}
+.hrc-source {
+  font-size: 0.78rem;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.btn-reflect {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 24px;
+  background: linear-gradient(135deg, var(--gold3), var(--gold));
+  color: #09130b;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: all var(--transition);
+  box-shadow: 0 4px 16px rgba(212,160,23,0.2);
+}
+.btn-reflect:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(212,160,23,0.3); }
+
+/* Quick Overview Strip */
+.home-overview-section { background: var(--bg2); }
+.home-overview-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.hov-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 24px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+  min-height: 48px;
+}
+a.hov-card:hover { border-color: var(--gold); transform: translateY(-2px); box-shadow: var(--shadow-gold); }
+.hov-icon  { font-size: 1.6rem; margin-bottom: 8px; }
+.hov-val   { font-size: 1.8rem; font-weight: 900; color: var(--gold); line-height: 1; letter-spacing: -0.02em; margin-bottom: 6px; }
+.hov-label { font-size: 0.7rem; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; }
+
+@media (max-width: 639px) {
+  .home-prayer-status-grid { grid-template-columns: repeat(5, 1fr); gap: 6px; }
+  .hps-card { padding: 14px 6px; }
+  .hps-time { font-size: 0.88rem; }
+  .hps-name { font-size: 0.6rem; }
+  .hps-badge { display: none; }
+  .home-overview-strip { grid-template-columns: 1fr 1fr; }
+  .home-timeline { gap: 4px; }
+  .ht-pill { padding: 7px 12px; font-size: 0.75rem; }
+  .ht-connector { width: 10px; }
+}
