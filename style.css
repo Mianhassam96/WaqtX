@@ -4926,6 +4926,23 @@ h1,h2,h3,h4,h5,h6 { font-family: var(--font-heading); }
 .dd-dua-card .dd-badge { color: var(--green2); background: rgba(34,197,94,0.08); border-color: rgba(34,197,94,0.2); }
 .dd-action-card .dd-badge { color: #60a5fa; background: rgba(96,165,250,0.08); border-color: rgba(96,165,250,0.2); }
 
+/* Link button inside dd-card */
+.dd-link-btn {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 14px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.2);
+  color: var(--gold);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all var(--transition);
+}
+.dd-link-btn:hover { background: rgba(201,168,76,0.16); border-color: rgba(201,168,76,0.4); }
+
 .dd-arabic {
   font-family: 'Amiri', serif;
   font-size: 1.25rem;

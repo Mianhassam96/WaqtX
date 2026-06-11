@@ -127,16 +127,18 @@ function renderFeatured() {
   });
 }
 
-/* ── Pain point cards ── */
+/* ── When You Feel… — emotional entry points ── */
 var PAIN_POINTS = [
-  { emotion: '😔', feeling: 'When you feel alone',        story: 'Story of Yusuf (AS)',  id: 'moment-completely-alone' },
-  { emotion: '😤', feeling: 'When you feel overwhelmed',  story: 'Story of Musa (AS)',   id: 'prophet-musa-red-sea' },
-  { emotion: '😢', feeling: 'When people mock you',       story: 'Story of Nuh (AS)',    id: 'prophet-nuh-950-years' },
-  { emotion: '💔', feeling: 'When you are betrayed',      story: 'Story of Yusuf (AS)',  id: 'prophet-yusuf-betrayed-by-brothers' },
-  { emotion: '😡', feeling: 'When treated unjustly',      story: 'Story of Bilal (RA)',  id: 'moment-treated-unjustly' },
-  { emotion: '😰', feeling: 'When you want to give up',   story: 'Story of Nuh (AS)',    id: 'moment-want-to-give-up' },
-  { emotion: '🤐', feeling: 'When misunderstood',         story: 'Story of Maryam (AS)', id: 'maryam-alone-and-misunderstood' },
-  { emotion: '😞', feeling: 'When you lose everything',   story: 'Story of Ayyub (AS)',  id: 'prophet-ayyub-everything-taken' }
+  { emotion: '🌫️', feeling: 'Lost',          label: 'When you feel lost',          story: 'Musa (AS) in the desert',      id: 'prophet-musa-red-sea' },
+  { emotion: '😔',  feeling: 'Alone',         label: 'When you feel completely alone', story: 'Yusuf (AS) in the well',    id: 'moment-completely-alone' },
+  { emotion: '😞',  feeling: 'Unmotivated',   label: 'When you have lost motivation', story: 'Nuh (AS) — 950 years',       id: 'prophet-nuh-950-years' },
+  { emotion: '💔',  feeling: 'Guilty',        label: 'When you feel weighed down by guilt', story: 'The door of tawbah',   id: 'prophet-yusuf-betrayed-by-brothers' },
+  { emotion: '😡',  feeling: 'Angry',         label: 'When anger takes over',       story: 'Bilal (RA) under the sun',     id: 'moment-treated-unjustly' },
+  { emotion: '😰',  feeling: 'Afraid',        label: 'When fear grips your heart',  story: 'Nuh (AS) — keep going',        id: 'moment-want-to-give-up' },
+  { emotion: '🤐',  feeling: 'Misunderstood', label: 'When no one understands you', story: 'Maryam (AS) stood alone',      id: 'maryam-alone-and-misunderstood' },
+  { emotion: '💸',  feeling: 'Heartbroken',   label: 'When everything falls apart', story: 'Ayyub (AS) — patience',        id: 'prophet-ayyub-everything-taken' },
+  { emotion: '😤',  feeling: 'Overwhelmed',   label: 'When life is too much',       story: 'Musa (AS) at the Red Sea',     id: 'prophet-musa-red-sea' },
+  { emotion: '🥀',  feeling: 'Grieving',      label: 'When grief will not leave',   story: 'Yaqub (AS) — beautiful patience', id: 'moment-completely-alone' }
 ];
 
 function renderPainPoints() {
@@ -146,13 +148,20 @@ function renderPainPoints() {
   PAIN_POINTS.forEach(function(p) {
     var div = document.createElement('div');
     div.className = 'pain-card';
+    div.setAttribute('role', 'button');
+    div.setAttribute('tabindex', '0');
+    div.setAttribute('aria-label', p.label + ' — ' + p.story);
     div.innerHTML =
       '<div class="pain-card-emotion">' + p.emotion + '</div>' +
       '<div class="pain-card-text">' +
-        '<div class="pain-card-feeling">' + p.feeling + '</div>' +
+        '<div class="pain-card-feeling">' + p.label + '</div>' +
         '<div class="pain-card-story">' + p.story + '</div>' +
-      '</div>';
+      '</div>' +
+      '<div class="pain-card-arrow">→</div>';
     div.addEventListener('click', function() { openStory(p.id); });
+    div.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') openStory(p.id);
+    });
     grid.appendChild(div);
   });
 }
@@ -177,7 +186,10 @@ function filterByCategory(cat) {
 
   var filtered = stories.filter(function(s) { return s.category === cat; });
 
-  if (cat === 'prophet' && prophets) {
+  if (cat === 'feel' && painSec) {
+    painSec.classList.remove('hidden');
+    renderPainPoints();
+  } else if (cat === 'prophet' && prophets) {
     prophets.classList.remove('hidden');
     renderGrid('prophets-grid', filtered);
   } else if (cat === 'sahabi' && sahaba) {

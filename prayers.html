@@ -138,15 +138,52 @@
   </div>
 </section>
 
-<!-- SECTION 4: STREAK -->
+<!-- SECTION 4: STREAK + CONSISTENCY -->
 <section class="section streak-section">
   <div class="section-inner">
-    <div class="streak-card">
-      <div class="streak-icon">🔥</div>
-      <div class="streak-number" id="streak-count">0</div>
-      <div class="streak-label-text" id="streak-label">Day Streak</div>
-      <div class="streak-desc">Pray all 5 prayers every day to keep your streak alive.</div>
+    <div class="section-heading">
+      <span class="sh-line"></span><span class="sh-icon">◆</span>
+      <span class="sh-text">YOUR SALAH CONSISTENCY</span>
+      <span class="sh-icon">◆</span><span class="sh-line"></span>
     </div>
+    <div class="consistency-grid">
+      <div class="streak-card">
+        <div class="streak-icon">🔥</div>
+        <div class="streak-number" id="streak-count">0</div>
+        <div class="streak-label-text" id="streak-label">Day Streak</div>
+        <div class="streak-desc">Pray all 5 prayers every day to keep your streak alive.</div>
+      </div>
+      <div class="consistency-card">
+        <div class="cons-icon">📊</div>
+        <div class="cons-title">This Week</div>
+        <div class="cons-score" id="cons-weekly">—%</div>
+        <div class="cons-bar-wrap"><div class="cons-bar"><div class="cons-bar-fill" id="cons-weekly-bar" style="width:0%"></div></div></div>
+        <div class="cons-sub" id="cons-weekly-sub">—</div>
+      </div>
+      <div class="consistency-card">
+        <div class="cons-icon">📅</div>
+        <div class="cons-title">This Month</div>
+        <div class="cons-score" id="cons-monthly">—%</div>
+        <div class="cons-bar-wrap"><div class="cons-bar"><div class="cons-bar-fill" id="cons-monthly-bar" style="width:0%"></div></div></div>
+        <div class="cons-sub" id="cons-monthly-sub">—</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: POST-PRAYER REFLECTION -->
+<section class="section prayer-reflection-section" style="background:var(--bg2)">
+  <div class="section-inner">
+    <div class="section-heading">
+      <span class="sh-line"></span><span class="sh-icon">◆</span>
+      <span class="sh-text">AFTER PRAYER REFLECTION</span>
+      <span class="sh-icon">◆</span><span class="sh-line"></span>
+    </div>
+    <div class="section-sub">One tap. One note. What did this prayer remind you of?</div>
+    <div class="prayer-reflect-grid" id="prayer-reflect-grid">
+      <!-- Rendered by JS -->
+    </div>
+    <p class="privacy-notice" style="text-align:center;margin-top:16px;">🔒 Stored on your device only.</p>
   </div>
 </section>
 

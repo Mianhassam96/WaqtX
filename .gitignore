@@ -1,0 +1,10 @@
+# Kiro IDE workspace files
+.kiro/
+
+# Lighthouse / audit files
+lighthouse-report.html
+audit2.js
+
+# OS files
+.DS_Store
+Thumbs.db

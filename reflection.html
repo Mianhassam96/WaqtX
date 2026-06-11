@@ -94,25 +94,62 @@
   </div>
 </section>
 
-<!-- SECTION 2: REFLECTION JOURNAL -->
+<!-- SECTION 2: DAILY MUHASABAH -->
 <section class="section journal-section" id="reflection-prompt">
   <div class="section-inner">
     <div class="section-heading">
       <span class="sh-line"></span><span class="sh-icon">◆</span>
-      <span class="sh-text">TODAY'S REFLECTION</span>
+      <span class="sh-text">DAILY MUHASABAH</span>
       <span class="sh-icon">◆</span><span class="sh-line"></span>
     </div>
-    <div class="journal-card">
-      <div class="journal-prompt-label">Today's Prompt</div>
-      <div class="journal-prompt" id="reflection-prompt-text">Loading prompt…</div>
-      <textarea
-        class="journal-textarea"
-        id="reflection-journal"
-        placeholder="Write your thoughts here — only you can see this."
-        aria-label="Reflection journal entry"></textarea>
-      <div class="journal-status" id="journal-status">Start writing — only you can see this.</div>
+    <div class="section-sub">Three questions. Every day. Stored privately on your device.</div>
+
+    <!-- Reflection streak badge -->
+    <div class="reflection-streak-bar" id="reflection-streak-bar">
+      <span class="rsb-icon">🪔</span>
+      <span class="rsb-text" id="rsb-text">Reflect today to begin your streak</span>
     </div>
-    <p class="privacy-notice">🔒 100% Private — stored on your device only.</p>
+
+    <div class="muhasabah-card">
+      <!-- Q1 -->
+      <div class="mq-block">
+        <div class="mq-num">01</div>
+        <div class="mq-question">What blessing am I most grateful for today?</div>
+        <textarea
+          class="mq-textarea"
+          id="mq-gratitude"
+          placeholder="Write freely — only you can see this."
+          aria-label="Gratitude reflection"
+          rows="3"></textarea>
+      </div>
+      <!-- Q2 -->
+      <div class="mq-block">
+        <div class="mq-num">02</div>
+        <div class="mq-question">What mistake should I correct or improve tomorrow?</div>
+        <textarea
+          class="mq-textarea"
+          id="mq-mistake"
+          placeholder="Be honest with yourself."
+          aria-label="Mistake reflection"
+          rows="3"></textarea>
+      </div>
+      <!-- Q3 -->
+      <div class="mq-block">
+        <div class="mq-num">03</div>
+        <div class="mq-question">What good deed brought me closer to Allah today?</div>
+        <textarea
+          class="mq-textarea"
+          id="mq-deed"
+          placeholder="Even something small counts."
+          aria-label="Good deed reflection"
+          rows="3"></textarea>
+      </div>
+
+      <div class="mq-footer">
+        <div class="mq-status" id="mq-status">Start writing — your answers are saved as you type.</div>
+        <p class="privacy-notice">🔒 Stored on your device only. Never sent anywhere.</p>
+      </div>
+    </div>
   </div>
 </section>
 

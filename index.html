@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>WaqtX — See Your Journey Through Time</title>
-  <meta name="description" content="See your Islamic journey through time — one day, one reflection, one sacred moment at a time. A premium personal dashboard for daily meaning."/>
+  <title>WaqtX — Your Time is a Trust</title>
+  <meta name="description" content="Your time is a trust from Allah. See how you are spending it — prayer rhythm, daily guidance, and your personal Islamic journey dashboard."/>
   <meta name="theme-color" content="#0d1a0f"/>
   <meta property="og:type" content="website"/>
   <meta property="og:title" content="WaqtX — See Your Journey Through Time"/>
@@ -134,8 +134,8 @@
         <span class="hero-divider-line"></span>
       </div>
       <h1 class="hero-headline">
-        See your journey through time.
-        <span class="hero-headline-gold" id="hero-greeting-name">Every day is a page in your story.</span>
+        Your time is a trust. See how you are spending it.
+        <span class="hero-headline-gold" id="hero-greeting-name">Every day Allah gives you is part of your story.</span>
       </h1>
       <div class="hero-state">
         <div class="hero-state-line" id="hero-hijri-date">12 Muharram 1448 AH</div>
@@ -146,7 +146,7 @@
         <div class="hero-prayer-name" id="hero-next-prayer">Asr</div>
         <div class="hero-prayer-countdown" id="hero-next-countdown">01:34:23</div>
       </div>
-      <p class="hero-sub">Your premium reflection dashboard for each day, every prayer moment, and the story you are writing.</p>
+      <p class="hero-sub">Your Muslim personal growth dashboard — prayer rhythm, daily guidance, and the story you are writing with your time.</p>
       <div class="hero-actions">
         <a href="journey.html" class="btn btn-hero">Explore My Journey</a>
         <a href="prayers.html" class="btn btn-secondary">View Prayers</a>
@@ -493,17 +493,19 @@
 </div><!-- /results-section -->
 
 
-<!-- ======================================================
-     HOME: TODAY'S JOURNEY TIMELINE
-     ====================================================== -->
-<section class="section home-timeline-section" id="prayer-timeline-section">
+<!-- ══════════════════════════════════════════════════
+     PRAYER SNAPSHOT — Timeline + Status Cards merged
+     ══════════════════════════════════════════════════ -->
+<section class="section home-prayer-snapshot-section" id="prayer-timeline-section">
   <div class="section-inner">
     <div class="section-heading">
       <span class="sh-line"></span><span class="sh-icon">◆</span>
-      <span class="sh-text">TODAY'S JOURNEY</span>
+      <span class="sh-text">TODAY'S PRAYER RHYTHM</span>
       <span class="sh-icon">◆</span><span class="sh-line"></span>
     </div>
-    <div class="section-sub">The sacred rhythm of your day — six moments of connection.</div>
+    <div class="section-sub">Six moments of connection — the sacred structure of your day.</div>
+
+    <!-- Timeline strip -->
     <div class="home-timeline" id="home-timeline">
       <div class="ht-placeholder" id="ht-placeholder">
         <span class="ht-pill ht-past">Fajr</span>
@@ -519,104 +521,35 @@
         <span class="ht-pill ht-upcoming">Isha</span>
       </div>
     </div>
-    <div style="text-align:center;margin-top:20px;">
-      <a href="prayers.html" class="btn-timeline-full">View Full Prayer Schedule &rarr;</a>
-    </div>
-  </div>
-</section>
 
-<!-- ======================================================
-     HOME: PRAYER STATUS CARDS
-     ====================================================== -->
-<section class="section home-prayer-status-section" id="home-prayer-status" style="background:var(--bg2)">
-  <div class="section-inner">
-    <div class="section-heading">
-      <span class="sh-line"></span><span class="sh-icon">◆</span>
-      <span class="sh-text">TODAY'S PRAYERS</span>
-      <span class="sh-icon">◆</span><span class="sh-line"></span>
-    </div>
+    <!-- Prayer status cards -->
     <div class="home-prayer-status-grid" id="home-prayer-status-grid">
-      <div class="hps-card"><div class="hps-icon">&#127769;</div><div class="hps-name">Fajr</div><div class="hps-time" id="hps-time-Fajr">&#8212;</div><div class="hps-badge hps-upcoming" id="hps-badge-Fajr">Upcoming</div></div>
-      <div class="hps-card"><div class="hps-icon">&#9728;&#65039;</div><div class="hps-name">Dhuhr</div><div class="hps-time" id="hps-time-Dhuhr">&#8212;</div><div class="hps-badge hps-upcoming" id="hps-badge-Dhuhr">Upcoming</div></div>
-      <div class="hps-card"><div class="hps-icon">&#127780;&#65039;</div><div class="hps-name">Asr</div><div class="hps-time" id="hps-time-Asr">&#8212;</div><div class="hps-badge hps-upcoming" id="hps-badge-Asr">Upcoming</div></div>
-      <div class="hps-card"><div class="hps-icon">&#127751;</div><div class="hps-name">Maghrib</div><div class="hps-time" id="hps-time-Maghrib">&#8212;</div><div class="hps-badge hps-upcoming" id="hps-badge-Maghrib">Upcoming</div></div>
-      <div class="hps-card"><div class="hps-icon">&#127747;</div><div class="hps-name">Isha</div><div class="hps-time" id="hps-time-Isha">&#8212;</div><div class="hps-badge hps-upcoming" id="hps-badge-Isha">Upcoming</div></div>
+      <div class="hps-card"><div class="hps-icon">🌙</div><div class="hps-name">Fajr</div><div class="hps-time" id="hps-time-Fajr">—</div><div class="hps-badge hps-upcoming" id="hps-badge-Fajr">Upcoming</div></div>
+      <div class="hps-card"><div class="hps-icon">☀️</div><div class="hps-name">Dhuhr</div><div class="hps-time" id="hps-time-Dhuhr">—</div><div class="hps-badge hps-upcoming" id="hps-badge-Dhuhr">Upcoming</div></div>
+      <div class="hps-card"><div class="hps-icon">🌤️</div><div class="hps-name">Asr</div><div class="hps-time" id="hps-time-Asr">—</div><div class="hps-badge hps-upcoming" id="hps-badge-Asr">Upcoming</div></div>
+      <div class="hps-card"><div class="hps-icon">🌇</div><div class="hps-name">Maghrib</div><div class="hps-time" id="hps-time-Maghrib">—</div><div class="hps-badge hps-upcoming" id="hps-badge-Maghrib">Upcoming</div></div>
+      <div class="hps-card"><div class="hps-icon">🌃</div><div class="hps-name">Isha</div><div class="hps-time" id="hps-time-Isha">—</div><div class="hps-badge hps-upcoming" id="hps-badge-Isha">Upcoming</div></div>
     </div>
-    <div style="text-align:center;margin-top:20px;">
-      <a href="prayers.html" class="btn-timeline-full">Open Prayer Tracker &rarr;</a>
+
+    <div style="text-align:center;margin-top:24px;">
+      <a href="prayers.html" class="btn-timeline-full">Open Prayer Tracker →</a>
     </div>
   </div>
 </section>
 
-<!-- ======================================================
-     HOME: DAILY REFLECTION CARD
-     ====================================================== -->
-<section class="section home-reflection-section" id="home-daily-reflection">
-  <div class="section-inner">
-    <div class="section-heading">
-      <span class="sh-line"></span><span class="sh-icon">◆</span>
-      <span class="sh-text">TODAY'S REFLECTION</span>
-      <span class="sh-icon">◆</span><span class="sh-line"></span>
-    </div>
-    <div class="home-reflection-card">
-      <div class="hrc-badge">&#128214; Ayah of the Day</div>
-      <div class="hrc-arabic" id="hrc-arabic" lang="ar" dir="rtl"></div>
-      <div class="hrc-translation" id="hrc-translation"></div>
-      <div class="hrc-source" id="hrc-source"></div>
-      <a href="reflection.html" class="btn-reflect">Reflect &rarr;</a>
-    </div>
-  </div>
-</section>
-
-<!-- ======================================================
-     HOME: QUICK OVERVIEW STRIP
-     ====================================================== -->
-<section class="section home-overview-section" id="home-quick-overview" style="background:var(--bg2)">
-  <div class="section-inner">
-    <div class="section-heading">
-      <span class="sh-line"></span><span class="sh-icon">◆</span>
-      <span class="sh-text">YOUR OVERVIEW</span>
-      <span class="sh-icon">◆</span><span class="sh-line"></span>
-    </div>
-    <div class="home-overview-strip">
-      <a href="prayers.html" class="hov-card">
-        <div class="hov-icon">&#128293;</div>
-        <div class="hov-val" id="hov-streak">0</div>
-        <div class="hov-label">Day Streak</div>
-      </a>
-      <div class="hov-card">
-        <div class="hov-icon">&#128351;</div>
-        <div class="hov-val" id="hov-dhikr">Today</div>
-        <div class="hov-label">Dhikr</div>
-      </div>
-      <a href="reflection.html" class="hov-card">
-        <div class="hov-icon">&#128211;</div>
-        <div class="hov-val" id="hov-journal">&#8212;</div>
-        <div class="hov-label">Journal</div>
-      </a>
-      <a href="calendar.html" class="hov-card">
-        <div class="hov-icon">&#128332;</div>
-        <div class="hov-val" id="hov-friday">&#8212;</div>
-        <div class="hov-label">Next Jumu'ah</div>
-      </a>
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════
-     DAILY ISLAM DASHBOARD — First thing users see
-     ═══════════════════════════════════════════════ -->
-<section class="section daily-dashboard-section" id="profile-section" data-section="profile">
+<!-- ══════════════════════════════════════════════════
+     TODAY'S GUIDANCE — Ayah + Dua + Action (merged)
+     ══════════════════════════════════════════════════ -->
+<section class="section daily-dashboard-section" id="profile-section" data-section="profile" style="background:var(--bg2)">
   <div class="section-inner">
     <div class="section-heading">
       <span class="sh-line"></span>
       <span class="sh-icon">◆</span>
-      <span class="sh-text">YOUR DAILY ISLAM</span>
+      <span class="sh-text">TODAY'S GUIDANCE</span>
       <span class="sh-icon">◆</span>
       <span class="sh-line"></span>
     </div>
-    <div class="section-sub">A calm daily dashboard for Quran, dua, and meaningful worship today.</div>
+    <div class="section-sub">One Ayah. One Dua. One action. Everything you need today.</div>
     <div class="daily-dashboard" id="daily-dashboard">
 
       <!-- Today's Ayah -->
@@ -626,6 +559,7 @@
         <div class="dd-translation" id="dd-ayah-translation"></div>
         <div class="dd-source" id="dd-ayah-source"></div>
         <div class="dd-reflection" id="dd-ayah-reflection"></div>
+        <a href="reflection.html" class="dd-link-btn">Reflect on this →</a>
       </div>
 
       <!-- Today's Dua -->
@@ -654,52 +588,59 @@
   </div>
 </section>
 
-
-<!-- ═══════════════════════════════════════════════
-     ALWAYS-VISIBLE: TODAY'S STORY
-     ═══════════════════════════════════════════════ -->
-<section class="section todays-story-section" id="todays-story-section">
+<!-- ══════════════════════════════════════════════════
+     JOURNEY SNAPSHOT — Overview strip + story
+     ══════════════════════════════════════════════════ -->
+<section class="section home-journey-snapshot-section" id="home-quick-overview">
   <div class="section-inner">
     <div class="section-heading">
-      <span class="sh-line"></span>
-      <span class="sh-icon">◆</span>
-      <span class="sh-text">LIFE CHAPTERS</span>
-      <span class="sh-icon">◆</span>
-      <span class="sh-line"></span>
+      <span class="sh-line"></span><span class="sh-icon">◆</span>
+      <span class="sh-text">YOUR JOURNEY SNAPSHOT</span>
+      <span class="sh-icon">◆</span><span class="sh-line"></span>
     </div>
-    <div class="section-sub">A quiet story of this day in Islam and the moments that shaped it.</div>
-    <div class="todays-story-card" id="todays-story-card">
+    <div class="section-sub">A quiet look at where you are — and where you are headed.</div>
+
+    <!-- Stats strip -->
+    <div class="home-overview-strip">
+      <a href="prayers.html" class="hov-card">
+        <div class="hov-icon">🔥</div>
+        <div class="hov-val" id="hov-streak">0</div>
+        <div class="hov-label">Prayer Streak</div>
+      </a>
+      <a href="reflection.html" class="hov-card">
+        <div class="hov-icon">📓</div>
+        <div class="hov-val" id="hov-journal">—</div>
+        <div class="hov-label">Journal Days</div>
+      </a>
+      <a href="journey.html" class="hov-card">
+        <div class="hov-icon">🌙</div>
+        <div class="hov-val" id="hov-ramadans">—</div>
+        <div class="hov-label">Ramadans</div>
+      </a>
+      <a href="calendar.html" class="hov-card">
+        <div class="hov-icon">🕌</div>
+        <div class="hov-val" id="hov-friday">—</div>
+        <div class="hov-label">Next Jumu'ah</div>
+      </a>
+    </div>
+
+    <!-- Today's story card -->
+    <div class="todays-story-card" id="todays-story-card" style="margin-top:32px;">
       <!-- Rendered by JS -->
     </div>
-    <div class="todays-story-cta">
+    <div class="todays-story-cta" style="margin-top:20px;">
       <a href="stories.html" class="btn-stories-all">
-        🌙 Explore All Stories — Lives That Changed Time
+        � Explore All Stories — Lives That Changed Time
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════
-     ALWAYS-VISIBLE: DAILY INSIGHT
-     ═══════════════════════════════════════════════ -->
-<section class="section insight-section" id="insight-section">
-  <div class="section-inner">
-    <div class="section-heading">
-      <span class="sh-line"></span>
-      <span class="sh-icon">◆</span>
-      <span class="sh-text">DAILY REFLECTION</span>
-      <span class="sh-icon">◆</span>
-      <span class="sh-line"></span>
-    </div>
-    <div class="insight-card" id="insight-card"></div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════
-     ALWAYS-VISIBLE: TODAY IN ISLAM
-     ═══════════════════════════════════════════════ -->
-<section class="section hadith-section" id="hadith-section">
+<!-- ══════════════════════════════════════════════════
+     THIS DAY IN ISLAM
+     ══════════════════════════════════════════════════ -->
+<section class="section hadith-section" id="hadith-section" style="background:var(--bg2)">
   <div class="section-inner">
     <div class="section-heading">
       <span class="sh-line"></span>
@@ -710,75 +651,6 @@
     </div>
     <div class="wakeup-card" id="wakeup-card">
       <!-- Rendered by JS -->
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════
-     ALWAYS-VISIBLE: RANDOM REFLECTION GENERATOR
-     ═══════════════════════════════════════════════ -->
-<section class="section reflect-gen-section" id="reflect-gen-section">
-  <div class="section-inner">
-    <div class="section-heading">
-      <span class="sh-line"></span>
-      <span class="sh-icon">◆</span>
-      <span class="sh-text">REFLECTION FOR YOUR DAY</span>
-      <span class="sh-icon">◆</span>
-      <span class="sh-line"></span>
-    </div>
-    <div class="reflect-gen-card" id="reflect-gen-card">
-      <div class="rg-placeholder">
-        <div class="rg-placeholder-icon">🎲</div>
-        <div class="rg-placeholder-text">Tap the button to receive a reflection tailored for your day.</div>
-      </div>
-    </div>
-    <div class="reflect-gen-actions">
-      <button class="btn-reflect-gen" id="btn-reflect-gen">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><polyline points="23 20 23 14 17 14"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
-        Give Me Something I Need to Hear
-      </button>
-      <button class="btn-share-reflection hidden" id="btn-share-reflection">📤 Share This</button>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════
-     ALWAYS-VISIBLE: LIVE AGE BREAKDOWN + BIRTHDAY
-     ═══════════════════════════════════════════════ -->
-<section class="section liveage-section" id="liveage-section">
-  <div class="section-inner">
-    <div class="section-heading">
-      <span class="sh-line"></span>
-      <span class="sh-icon">◆</span>
-      <span class="sh-text">YOUR AGE — LIVE</span>
-      <span class="sh-icon">◆</span>
-      <span class="sh-line"></span>
-    </div>
-    <div class="liveage-sub" id="liveage-sub">Enter your date of birth to see your life count update live.</div>
-
-    <!-- Empty state — shown before DOB -->
-    <div class="liveage-empty" id="liveage-empty">
-      <div class="le-icon">⏱</div>
-      <div class="le-text">Enter your date of birth above — your age will tick live, every second.</div>
-    </div>
-
-    <!-- Live grid — hidden until DOB entered -->
-    <div class="liveage-grid hidden" id="liveage-grid">
-      <div class="la-card"><div class="la-val" id="la-years">—</div><div class="la-label">Years</div></div>
-      <div class="la-card"><div class="la-val" id="la-months">—</div><div class="la-label">Months</div></div>
-      <div class="la-card"><div class="la-val" id="la-weeks">—</div><div class="la-label">Weeks</div></div>
-      <div class="la-card la-card-accent"><div class="la-val" id="la-days">—</div><div class="la-label">Days</div></div>
-      <div class="la-card"><div class="la-val" id="la-hours">—</div><div class="la-label">Hours</div></div>
-      <div class="la-card"><div class="la-val" id="la-minutes">—</div><div class="la-label">Minutes</div></div>
-      <div class="la-card la-card-live"><div class="la-val" id="la-seconds">—</div><div class="la-label">Seconds ⚡</div></div>
-    </div>
-
-    <!-- Birthday Countdown — hidden until DOB entered -->
-    <div class="birthday-card hidden" id="birthday-card">
-      <div class="bday-icon" id="bday-icon">🎂</div>
-      <div class="bday-title" id="bday-title">Next Birthday</div>
-      <div class="bday-val" id="bday-val">—</div>
-      <div class="bday-sub" id="bday-sub">—</div>
     </div>
   </div>
 </section>
@@ -983,6 +855,17 @@
 
 <!-- Keep legacy share-card-dl for html2canvas targeting -->
 <div style="position:absolute;left:-9999px;top:-9999px;pointer-events:none" aria-hidden="true">
+  <!-- JS compatibility stubs — removed sections -->
+  <div id="insight-card"></div>
+  <div id="reflect-gen-card"></div>
+  <button id="btn-reflect-gen"></button>
+  <button id="btn-share-reflection"></button>
+  <div id="liveage-empty"></div>
+  <div id="liveage-grid"></div>
+  <div id="birthday-card"><div id="bday-icon"></div><div id="bday-title"></div><div id="bday-val"></div><div id="bday-sub"></div></div>
+  <span id="la-years"></span><span id="la-months"></span><span id="la-weeks"></span>
+  <span id="la-days"></span><span id="la-hours"></span><span id="la-minutes"></span><span id="la-seconds"></span>
+  <span id="liveage-sub"></span>
   <div class="share-card-dl" id="share-card-dl">
     <div class="scdl-logo">✦ WaqtX</div>
     <div class="scdl-pct" id="scdl-pct">—%</div>

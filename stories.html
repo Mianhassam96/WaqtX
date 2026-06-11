@@ -182,23 +182,31 @@
     .pain-grid {
       display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
     }
+    @media (min-width: 700px) { .pain-grid { grid-template-columns: repeat(5, 1fr); } }
     .pain-card {
       background: var(--card-bg); border: 1px solid var(--card-border);
-      border-radius: var(--radius); padding: 18px 20px;
+      border-radius: var(--radius); padding: 16px 14px;
       cursor: pointer; transition: all var(--transition);
-      display: flex; align-items: flex-start; gap: 14px;
+      display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
+      position: relative;
     }
-    .pain-card:hover { border-color: var(--card-hover); transform: translateY(-2px); }
+    .pain-card:hover { border-color: var(--gold); transform: translateY(-2px); box-shadow: var(--shadow-gold); }
     .pain-card-emotion {
-      font-size: 1.4rem; flex-shrink: 0; margin-top: 2px;
+      font-size: 1.8rem; line-height: 1;
     }
     .pain-card-text { flex: 1; }
     .pain-card-feeling {
-      font-size: 0.78rem; font-weight: 700; color: var(--text); margin-bottom: 4px;
+      font-size: 0.8rem; font-weight: 700; color: var(--text); margin-bottom: 4px; line-height: 1.3;
     }
     .pain-card-story {
-      font-size: 0.72rem; color: var(--gold); font-weight: 600;
+      font-size: 0.7rem; color: var(--gold); font-weight: 600;
     }
+    .pain-card-arrow {
+      position: absolute; bottom: 12px; right: 14px;
+      font-size: 0.75rem; color: var(--text3);
+      transition: color var(--transition), transform var(--transition);
+    }
+    .pain-card:hover .pain-card-arrow { color: var(--gold); transform: translateX(3px); }
 
     /* Story detail modal */
     .story-modal {
@@ -370,6 +378,7 @@
   <!-- Category tabs -->
   <div class="stories-tabs" id="stories-tabs">
     <button class="stories-tab active" data-cat="all">All Stories</button>
+    <button class="stories-tab" data-cat="feel">💔 When You Feel…</button>
     <button class="stories-tab" data-cat="prophet">🌟 Prophets</button>
     <button class="stories-tab" data-cat="sahabi">🛡 Companions</button>
     <button class="stories-tab" data-cat="woman">💎 Women of Islam</button>
@@ -391,9 +400,10 @@
     </div>
   </div>
 
-  <!-- Pain points -->
+  <!-- Pain points / When You Feel -->
   <div id="pain-section">
     <div class="stories-section-title">💔 When You Feel…</div>
+    <div class="stories-section-sub" style="font-size:0.82rem;color:var(--text3);margin-bottom:20px;text-align:center;">Find a story that speaks to exactly where you are right now.</div>
     <div class="pain-grid" id="pain-grid"></div>
   </div>
 

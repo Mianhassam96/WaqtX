@@ -211,6 +211,91 @@ function updateStreakDisplay() {
   var streak = recalcStreak();
   setText('streak-count', streak);
   setText('streak-label', streak === 1 ? 'Day Streak' : 'Day Streak');
+  renderConsistency();
+  renderPrayerReflections();
+}
+
+/* ══════════════════════════════════════
+   SALAH CONSISTENCY SCORES
+   ══════════════════════════════════════ */
+function calcConsistency(days) {
+  var totalPossible = days * 5;
+  var totalDone = 0;
+  for (var i = 0; i < days; i++) {
+    var key  = getDateKey(-i);
+    var data = S.get('tracker_' + key) || {};
+    PRAYERS_5.forEach(function(p) { if (data[p]) totalDone++; });
+  }
+  if (totalPossible === 0) return 0;
+  return Math.round((totalDone / totalPossible) * 100);
+}
+
+function renderConsistency() {
+  var weekly  = calcConsistency(7);
+  var monthly = calcConsistency(30);
+
+  /* Weekly */
+  var wEl  = el('cons-weekly');
+  var wBar = el('cons-weekly-bar');
+  var wSub = el('cons-weekly-sub');
+  if (wEl)  wEl.textContent  = weekly + '%';
+  if (wBar) wBar.style.width = weekly + '%';
+  if (wSub) {
+    var weeklyDone = Math.round((weekly / 100) * 35); /* 7 days × 5 prayers */
+    wSub.textContent = weeklyDone + ' of 35 prayers this week';
+  }
+
+  /* Monthly */
+  var mEl  = el('cons-monthly');
+  var mBar = el('cons-monthly-bar');
+  var mSub = el('cons-monthly-sub');
+  if (mEl)  mEl.textContent  = monthly + '%';
+  if (mBar) mBar.style.width = monthly + '%';
+  if (mSub) {
+    var monthlyDone = Math.round((monthly / 100) * 150); /* 30 days × 5 prayers */
+    mSub.textContent = monthlyDone + ' of 150 prayers this month';
+  }
+
+  /* Colour the bars by score */
+  [wBar, mBar].forEach(function(bar) {
+    if (!bar) return;
+    bar.className = 'cons-bar-fill';
+    var pct = parseInt(bar.style.width);
+    if (pct >= 80)      bar.classList.add('cons-good');
+    else if (pct >= 50) bar.classList.add('cons-mid');
+    else                bar.classList.add('cons-low');
+  });
+}
+
+/* ══════════════════════════════════════
+   POST-PRAYER REFLECTION NOTES
+   ══════════════════════════════════════ */
+function renderPrayerReflections() {
+  var grid = el('prayer-reflect-grid');
+  if (!grid) return;
+  var today = getTodayKey();
+
+  var html = PRAYERS_5.map(function(prayer) {
+    var saved = S.get('prayer_note_' + prayer + '_' + today) || '';
+    return '<div class="pr-card">' +
+      '<div class="pr-name">' + prayer + '</div>' +
+      '<textarea class="pr-textarea" ' +
+        'id="pr-note-' + prayer + '" ' +
+        'placeholder="What did this prayer remind you of?" ' +
+        'aria-label="' + prayer + ' reflection note" ' +
+        'rows="2">' + saved + '</textarea>' +
+    '</div>';
+  }).join('');
+
+  grid.innerHTML = html;
+
+  PRAYERS_5.forEach(function(prayer) {
+    var ta = el('pr-note-' + prayer);
+    if (!ta) return;
+    ta.addEventListener('input', function() {
+      S.set('prayer_note_' + prayer + '_' + today, ta.value);
+    });
+  });
 }
 
 /* ══════════════════════════════════════
@@ -359,6 +444,8 @@ function initPrayerPage() {
 
   renderTracker();
   updateStreakDisplay();
+  renderConsistency();
+  renderPrayerReflections();
   initNotifications();
 }
 

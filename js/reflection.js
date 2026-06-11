@@ -42,53 +42,95 @@ function renderDailyVerse() {
 }
 
 /* ══════════════════════════════════════
-   REFLECTION PROMPTS (daily rotation)
+   DAILY MUHASABAH — 3 guided questions
+   Replaces random reflection generator
    ══════════════════════════════════════ */
-var PROMPTS = [
-  'What lesson stood out to me today from the Quran or Sunnah?',
-  'How did I feel during my salah today? What was on my mind?',
-  'What am I struggling with, and how can I bring Allah into that?',
-  'What is one habit I want to build this week for my deen?',
-  'Who in my life needs my dua right now, and why?',
-  'What did Allah protect me from today that I may not even know about?',
-  'How did I use my time today? Would I be pleased to show it to Allah?',
-  'What is one thing I can do tomorrow that my future self will thank me for?',
-  'When did I feel closest to Allah today?',
-  'What would I do differently if I truly believed this day might be my last?',
-  'What blessing am I most taking for granted right now?',
-  'If I could have one conversation with the Prophet ﷺ, what would I ask?',
-  'What sin am I holding onto that I need to seek forgiveness for?',
-  'How can I be of more service to others this week?',
-  'What does "trusting Allah" actually look like in my current situation?'
-];
+function renderMuhasabah() {
+  var today  = getTodayKey();
+  var saved  = S.get('muhasabah_' + today) || {};
 
-function renderReflectionPrompt() {
-  var dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
-  var prompt = PROMPTS[dayOfYear % PROMPTS.length];
-  setText('reflection-prompt-text', prompt);
+  var fields = [
+    { id: 'mq-gratitude', key: 'gratitude' },
+    { id: 'mq-mistake',   key: 'mistake'   },
+    { id: 'mq-deed',      key: 'deed'      }
+  ];
 
-  var today = getTodayKey();
-  var saved = S.get('journal_' + today) || '';
-  var textarea = el('reflection-journal');
-  if (textarea) {
-    textarea.value = saved;
-    textarea.addEventListener('input', function() {
-      S.set('journal_' + today, textarea.value);
-      updateJournalStatus();
+  fields.forEach(function(f) {
+    var el2 = el(f.id);
+    if (!el2) return;
+    el2.value = saved[f.key] || '';
+    el2.addEventListener('input', function() {
+      var data = S.get('muhasabah_' + today) || {};
+      data[f.key] = el2.value;
+      S.set('muhasabah_' + today, data);
+      updateMuhasabahStatus();
+      updateReflectionStreak();
     });
-  }
-  updateJournalStatus();
+  });
+
+  updateMuhasabahStatus();
+  updateReflectionStreak();
 }
 
-function updateJournalStatus() {
-  var today = getTodayKey();
-  var val = S.get('journal_' + today) || '';
-  var status = el('journal-status');
-  if (status) {
-    status.textContent = val.length > 0
-      ? '✓ Saved (' + val.length + ' chars)'
-      : 'Start writing — only you can see this.';
+function updateMuhasabahStatus() {
+  var today  = getTodayKey();
+  var saved  = S.get('muhasabah_' + today) || {};
+  var filled = ['gratitude','mistake','deed'].filter(function(k) {
+    return (saved[k] || '').trim().length > 0;
+  }).length;
+  var status = el('mq-status');
+  if (!status) return;
+  if (filled === 0) {
+    status.textContent = 'Start writing — your answers are saved as you type.';
+  } else if (filled < 3) {
+    status.textContent = filled + ' of 3 answered. Take your time.';
+  } else {
+    status.textContent = '✓ Muhasabah complete for today. Alhamdulillah.';
   }
+}
+
+function updateReflectionStreak() {
+  /* Count consecutive days with at least one muhasabah answer */
+  var streak = 0;
+  var d = new Date();
+  for (var i = 0; i < 365; i++) {
+    var key  = d.getFullYear() + '-' +
+               String(d.getMonth() + 1).padStart(2,'0') + '-' +
+               String(d.getDate()).padStart(2,'0');
+    var data = S.get('muhasabah_' + key) || {};
+    var hasAny = ['gratitude','mistake','deed'].some(function(k) {
+      return (data[k] || '').trim().length > 0;
+    });
+    /* Also count old journal entries for backward compat */
+    var hasJournal = !!(S.get('journal_' + key) || '').trim();
+    if (hasAny || hasJournal) {
+      streak++;
+      d.setDate(d.getDate() - 1);
+    } else if (i === 0) {
+      /* Haven't reflected today yet — don't break streak */
+      d.setDate(d.getDate() - 1);
+    } else {
+      break;
+    }
+  }
+
+  var bar  = el('reflection-streak-bar');
+  var text = el('rsb-text');
+  if (!bar || !text) return;
+
+  if (streak === 0) {
+    text.textContent = 'Reflect today to begin your streak.';
+    bar.className = 'reflection-streak-bar';
+  } else if (streak === 1) {
+    text.textContent = 'Reflected today ✓  —  Start your streak tomorrow.';
+    bar.className = 'reflection-streak-bar rsb-active';
+  } else {
+    text.textContent = streak + ' day reflection streak 🔥  —  Keep going.';
+    bar.className = 'reflection-streak-bar rsb-active rsb-streak';
+  }
+
+  /* Store streak for profile page */
+  S.set('reflection_streak', streak);
 }
 
 /* ══════════════════════════════════════
@@ -131,7 +173,7 @@ function renderNotes() {
    ══════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', function() {
   renderDailyVerse();
-  renderReflectionPrompt();
+  renderMuhasabah();
   renderGratitude();
   renderNotes();
 });

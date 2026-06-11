@@ -1407,7 +1407,7 @@ window.addEventListener('scroll', function () {
 });
 
 function updateScrollNavState() {
-  const sectionIds = ['hero', 'todays-story-section', 'profile-section', 'insight-section', 'reflect-gen-section'];
+  const sectionIds = ['hero', 'prayer-timeline-section', 'profile-section', 'home-quick-overview', 'hadith-section'];
   const offset = window.innerHeight * 0.35;
   let activeId = 'hero';
   sectionIds.forEach(function(id) {
@@ -3918,6 +3918,22 @@ function openSituationModal(sit) {
       var dow = new Date().getDay(); /* 0=Sun, 5=Fri */
       var daysToFri = dow === 5 ? 0 : (5 - dow + 7) % 7;
       friEl.textContent = daysToFri === 0 ? 'Today!' : daysToFri + ' days';
+    }
+
+    /* Ramadans — from saved DOB */
+    var ramEl = document.getElementById('hov-ramadans');
+    if (ramEl) {
+      try {
+        var savedDob = localStorage.getItem('waqtx_dob');
+        if (savedDob) {
+          var dobParts = savedDob.split('-');
+          var dobDate = new Date(+dobParts[0], +dobParts[1]-1, +dobParts[2]);
+          var ageYrs = (Date.now() - dobDate.getTime()) / (365.25 * 86400000);
+          ramEl.textContent = Math.floor(ageYrs);
+        } else {
+          ramEl.textContent = '—';
+        }
+      } catch(e) { ramEl.textContent = '—'; }
     }
   }
 
