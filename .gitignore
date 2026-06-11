@@ -1,7 +1,7 @@
 # Kiro IDE workspace files
 .kiro/
 
-# Lighthouse / audit files
+# Dev/audit files — not part of the app
 lighthouse-report.html
 audit2.js
 
