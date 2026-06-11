@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>WaqtX — Your Time is a Trust</title>
   <meta name="description" content="Your time is a trust from Allah. See how you are spending it — prayer rhythm, daily guidance, and your personal Islamic journey dashboard."/>
-  <meta name="theme-color" content="#0d1a0f"/>
+  <meta name="theme-color" content="#0B1220"/>
   <meta property="og:type" content="website"/>
   <meta property="og:title" content="WaqtX — See Your Journey Through Time"/>
   <meta property="og:description" content="An Islamic reflection dashboard that helps you experience every day as part of your story, with ritual rhythm, daily meaning, and gentle focus."/>
@@ -24,13 +24,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&family=Amiri:wght@400;700&family=Cinzel:wght@400;600;700;900&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
   <link rel="stylesheet" href="style-pages.css"/>
+  <!-- Inline theme flash-prevention -->
+  <script>
+    (function(){
+      var s='dark';try{s=localStorage.getItem('waqtx_theme')||'dark';}catch(e){}
+      if(s&&s!=='dark') document.documentElement.setAttribute('data-theme',s);
+    })();
+  </script>
 </head>
 <body>
 
-<!-- ═══ NAVBAR ═══ -->
+<!-- ═══════════════════════════════════════════
+     NAVBAR
+     ═══════════════════════════════════════════ -->
 <nav class="navbar" id="navbar">
   <div class="nav-inner">
-    <a href="#" class="nav-logo">
+    <a href="index.html" class="nav-logo">
       <span class="nav-logo-text">Waqt<span class="nav-logo-x">X</span></span>
     </a>
     <div class="nav-links" id="nav-links">
@@ -39,6 +48,8 @@
       <a href="journey.html"    class="nav-link">Journey</a>
       <a href="reflection.html" class="nav-link">Reflection</a>
       <a href="calendar.html"   class="nav-link">Calendar</a>
+      <a href="stories.html"    class="nav-link">Stories</a>
+      <a href="qibla.html"      class="nav-link">Qibla</a>
       <a href="profile.html"    class="nav-link">Profile</a>
       <a href="settings.html"   class="nav-link">Settings</a>
     </div>
@@ -56,17 +67,17 @@
           <button class="lang-option" data-lang="roman">🔤 Roman Urdu</button>
         </div>
       </div>
-      <button class="btn-install-app" id="btn-install-app">
+      <button class="btn-install-app hidden" id="btn-install-app" aria-label="Install App">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/><path d="M5 19h14"/></svg>
         Install App
       </button>
       <div class="theme-wrapper">
-        <button class="btn-theme-toggle" id="btn-theme-toggle" aria-label="Theme" title="Theme selector">☀️</button>
+        <button class="btn-theme-toggle" id="btn-theme-toggle" aria-label="Theme selector" title="Theme selector">☀️</button>
         <div class="theme-dropdown hidden" id="theme-dropdown" aria-hidden="true" role="menu" aria-label="Theme selector">
-          <button class="theme-option" data-theme="dark" role="menuitem" aria-label="Dark theme">Dark</button>
-          <button class="theme-option" data-theme="light" role="menuitem" aria-label="Light theme">Light</button>
-          <button class="theme-option" data-theme="ramadan" role="menuitem" aria-label="Ramadan theme">Ramadan</button>
-          <button class="theme-option" data-theme="friday" role="menuitem" aria-label="Friday theme">Friday</button>
+          <button class="theme-option" data-theme="dark"    role="menuitem">Dark</button>
+          <button class="theme-option" data-theme="light"   role="menuitem">Light</button>
+          <button class="theme-option" data-theme="ramadan" role="menuitem">Ramadan</button>
+          <button class="theme-option" data-theme="friday"  role="menuitem">Friday</button>
         </div>
       </div>
       <button class="hamburger" id="hamburger" aria-label="Menu">
@@ -76,6 +87,7 @@
   </div>
 </nav>
 
+<!-- Bottom Nav -->
 <div class="bottom-nav" id="bottom-nav" aria-label="Bottom navigation">
   <a href="index.html"      class="bottom-nav-item active"><span class="bottom-nav-icon">🏠</span><span>Home</span></a>
   <a href="prayers.html"    class="bottom-nav-item"><span class="bottom-nav-icon">🕌</span><span>Prayers</span></a>
@@ -84,33 +96,30 @@
   <a href="profile.html"    class="bottom-nav-item"><span class="bottom-nav-icon">👤</span><span>Profile</span></a>
 </div>
 
-<!-- ═══ HERO ═══ -->
+
+<!-- ═══════════════════════════════════════════
+     SECTION 1 — HERO (90–100vh)
+     ═══════════════════════════════════════════ -->
 <section class="hero" id="hero">
+  <!-- Atmospheric background -->
   <div class="hero-bg" aria-hidden="true">
     <div class="hero-bg-img"></div>
     <div class="hero-bg-mosque">
       <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet">
-        <!-- Main dome -->
-        <ellipse cx="400" cy="200" rx="120" ry="110" fill="none" stroke="rgba(201,168,76,0.12)" stroke-width="1"/>
-        <path d="M280 200 Q400 80 520 200" fill="rgba(201,168,76,0.06)" stroke="rgba(201,168,76,0.15)" stroke-width="1"/>
-        <!-- Crescent on dome -->
-        <path d="M395 95 Q408 88 415 95 Q408 102 395 95Z" fill="rgba(201,168,76,0.4)"/>
-        <line x1="405" y1="95" x2="405" y2="75" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
-        <!-- Left minaret -->
-        <rect x="230" y="120" width="18" height="120" fill="rgba(201,168,76,0.05)" stroke="rgba(201,168,76,0.12)" stroke-width="1"/>
-        <path d="M228 120 Q239 100 250 120Z" fill="rgba(201,168,76,0.1)"/>
-        <line x1="239" y1="100" x2="239" y2="85" stroke="rgba(201,168,76,0.25)" stroke-width="1"/>
-        <!-- Right minaret -->
-        <rect x="552" y="120" width="18" height="120" fill="rgba(201,168,76,0.05)" stroke="rgba(201,168,76,0.12)" stroke-width="1"/>
-        <path d="M550 120 Q561 100 572 120Z" fill="rgba(201,168,76,0.1)"/>
-        <line x1="561" y1="100" x2="561" y2="85" stroke="rgba(201,168,76,0.25)" stroke-width="1"/>
-        <!-- Base wall -->
-        <rect x="200" y="240" width="400" height="60" fill="rgba(201,168,76,0.04)" stroke="rgba(201,168,76,0.1)" stroke-width="1"/>
-        <!-- Arched windows -->
-        <path d="M310 240 Q310 210 330 210 Q350 210 350 240Z" fill="rgba(201,168,76,0.06)" stroke="rgba(201,168,76,0.1)" stroke-width="1"/>
-        <path d="M380 240 Q380 205 400 205 Q420 205 420 240Z" fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.12)" stroke-width="1"/>
-        <path d="M450 240 Q450 210 470 210 Q490 210 490 240Z" fill="rgba(201,168,76,0.06)" stroke="rgba(201,168,76,0.1)" stroke-width="1"/>
-        <!-- Ground fade -->
+        <ellipse cx="400" cy="200" rx="120" ry="110" fill="none" stroke="rgba(201,168,76,0.10)" stroke-width="1"/>
+        <path d="M280 200 Q400 80 520 200" fill="rgba(201,168,76,0.05)" stroke="rgba(201,168,76,0.12)" stroke-width="1"/>
+        <path d="M395 95 Q408 88 415 95 Q408 102 395 95Z" fill="rgba(201,168,76,0.38)"/>
+        <line x1="405" y1="95" x2="405" y2="75" stroke="rgba(201,168,76,0.28)" stroke-width="1"/>
+        <rect x="230" y="120" width="18" height="120" fill="rgba(201,168,76,0.04)" stroke="rgba(201,168,76,0.10)" stroke-width="1"/>
+        <path d="M228 120 Q239 100 250 120Z" fill="rgba(201,168,76,0.08)"/>
+        <line x1="239" y1="100" x2="239" y2="85" stroke="rgba(201,168,76,0.22)" stroke-width="1"/>
+        <rect x="552" y="120" width="18" height="120" fill="rgba(201,168,76,0.04)" stroke="rgba(201,168,76,0.10)" stroke-width="1"/>
+        <path d="M550 120 Q561 100 572 120Z" fill="rgba(201,168,76,0.08)"/>
+        <line x1="561" y1="100" x2="561" y2="85" stroke="rgba(201,168,76,0.22)" stroke-width="1"/>
+        <rect x="200" y="240" width="400" height="60" fill="rgba(201,168,76,0.03)" stroke="rgba(201,168,76,0.08)" stroke-width="1"/>
+        <path d="M310 240 Q310 210 330 210 Q350 210 350 240Z" fill="rgba(201,168,76,0.05)" stroke="rgba(201,168,76,0.08)" stroke-width="1"/>
+        <path d="M380 240 Q380 205 400 205 Q420 205 420 240Z" fill="rgba(201,168,76,0.07)" stroke="rgba(201,168,76,0.10)" stroke-width="1"/>
+        <path d="M450 240 Q450 210 470 210 Q490 210 490 240Z" fill="rgba(201,168,76,0.05)" stroke="rgba(201,168,76,0.08)" stroke-width="1"/>
         <rect x="0" y="290" width="800" height="110" fill="url(#groundFade)"/>
         <defs>
           <linearGradient id="groundFade" x1="0" y1="0" x2="0" y2="1">
@@ -122,127 +131,131 @@
     </div>
     <div class="hero-bg-overlay"></div>
   </div>
-  <div class="hero-inner">
 
-    <!-- LEFT -->
+  <div class="hero-inner">
+    <!-- LEFT — Content -->
     <div class="hero-left">
-      <div class="hero-arabic">وَمَا تَدْرِي نَفْسٌ مَّاذَا تَكْسِبُ غَدًا</div>
-      <div class="hero-arabic-trans">No soul knows what it will earn tomorrow — (Quran 31:34)</div>
+
+      <!-- Date badge -->
+      <div class="hero-date-badge" id="hero-date-badge">
+        <span class="hdb-moon">🌙</span>
+        <span class="hdb-hijri" id="hero-hijri-date">Loading…</span>
+        <span class="hdb-sep">•</span>
+        <span class="hdb-greg"  id="hero-greg-date">Loading…</span>
+      </div>
+
+      <!-- Quran verse -->
+      <div class="hero-verse-block">
+        <div class="hero-arabic">وَمَا تَدْرِي نَفْسٌ مَّاذَا تَكْسِبُ غَدًا</div>
+        <div class="hero-arabic-trans">"No soul knows what it will earn tomorrow." — Quran 31:34</div>
+      </div>
+
+      <!-- Divider -->
       <div class="hero-divider">
         <span class="hero-divider-line"></span>
         <span class="hero-divider-icon">✦</span>
         <span class="hero-divider-line"></span>
       </div>
+
+      <!-- Headline -->
       <h1 class="hero-headline">
-        Your time is a trust. See how you are spending it.
-        <span class="hero-headline-gold" id="hero-greeting-name">Every day Allah gives you is part of your story.</span>
+        Your time is a trust.
+        <span class="hero-headline-gold">See how you are spending it.</span>
       </h1>
-      <div class="hero-state">
-        <div class="hero-state-line" id="hero-hijri-date">12 Muharram 1448 AH</div>
-        <div class="hero-state-title">Today is your <span id="hero-day-rank">9,213th</span> page</div>
-      </div>
-      <div class="hero-prayer-panel">
-        <div class="hero-prayer-label">Next rhythm</div>
-        <div class="hero-prayer-name" id="hero-next-prayer">Asr</div>
-        <div class="hero-prayer-countdown" id="hero-next-countdown">01:34:23</div>
-      </div>
-      <p class="hero-sub">Your Muslim personal growth dashboard — prayer rhythm, daily guidance, and the story you are writing with your time.</p>
+
+      <!-- Sub -->
+      <p class="hero-sub">Every prayer, every day, every Ramadan and every reflection becomes part of your journey with Allah.</p>
+
+      <!-- CTAs -->
       <div class="hero-actions">
-        <a href="journey.html" class="btn btn-hero">Explore My Journey</a>
-        <a href="prayers.html" class="btn btn-secondary">View Prayers</a>
+        <a href="journey.html" class="btn btn-hero">Begin My Journey ✦</a>
+        <a href="reflection.html" class="btn btn-hero-glass">Today's Reflection</a>
       </div>
-      <div class="hero-feature-strip">
-        <span class="hero-feature-pill">See your time</span>
-        <span class="hero-feature-pill">Feel each day</span>
-        <span class="hero-feature-pill">Carry sacred rhythm</span>
-        <span class="hero-feature-pill">Build your story</span>
+
+      <!-- Trust strip -->
+      <div class="hero-trust-strip">
+        <span>🔒 Private First</span>
+        <span class="trust-dot">·</span>
+        <span>📱 Works Offline</span>
+        <span class="trust-dot">·</span>
+        <span>🕌 Built for Muslims</span>
+        <span class="trust-dot">·</span>
+        <span>☁ No Account Required</span>
       </div>
-      <div class="hero-stats-preview" id="hero-stats-preview" aria-hidden="true">
-        <div class="hsp-item">
-          <span class="hsp-val" id="hsp-ramadans">—</span>
-          <span class="hsp-label">Ramadans experienced</span>
-        </div>
-        <div class="hsp-divider"></div>
-        <div class="hsp-item">
-          <span class="hsp-val" id="hsp-pct">—</span>
-          <span class="hsp-label">Fridays lived</span>
-        </div>
-        <div class="hsp-divider"></div>
-        <div class="hsp-item">
-          <span class="hsp-val" id="hsp-fajr">—</span>
-          <span class="hsp-label">Prayer moments</span>
-        </div>
-      </div>
-      <blockquote class="hero-quote">
-        <span class="hero-quote-mark">"</span>
-        Take advantage of five before five: your youth, your health, your wealth, your free time, and your life.
-        <cite>— Prophet Muhammad ﷺ (Al-Bayhaqi)</cite>
-      </blockquote>
     </div>
 
-    <!-- RIGHT: form card -->
+    <!-- RIGHT — Personal Dashboard Card -->
     <div class="hero-right">
-      <div class="input-card">
-        <div class="input-card-title">Your spiritual snapshot</div>
-        <div class="input-card-sub">Enter your birth date to reveal today’s prayer rhythm, missed opportunities, and your personal worship dashboard.</div>
-
-        <div class="input-group">
-          <label class="input-label">Your Name (Optional)</label>
-          <div class="input-wrap">
-            <span class="input-icon">✍️</span>
-            <input type="text" id="hero-name" class="dob-input" placeholder="e.g. Hassam" autocomplete="off" maxlength="40"/>
-          </div>
+      <div class="hero-dashboard-card" id="hero-dashboard-card">
+        <!-- Greeting -->
+        <div class="hdc-greeting">
+          <span class="hdc-salam">Assalamu Alaikum</span>
+          <span class="hdc-name" id="hdc-name">— Welcome</span>
         </div>
 
-        <div class="input-group">
-          <label class="input-label">Date of Birth</label>
-          <div class="input-wrap">
-            <span class="input-icon">📅</span>
-            <input type="date" id="hero-dob" class="dob-input" placeholder="MM / DD / YYYY"/>
-          </div>
-        </div>
-
-        <div class="input-row">
-          <div class="input-group half">
-            <label class="input-label">Time (Optional)</label>
-            <div class="input-wrap">
-              <span class="input-icon">🕐</span>
-              <input type="time" id="hero-time" class="dob-input" value="12:00"/>
+        <!-- Age Journey (no raw number — Islamic counts) -->
+        <div class="hdc-age-journey">
+          <div class="hdc-age-label">Your Journey So Far</div>
+          <div class="hdc-age-stats" id="hdc-age-stats">
+            <div class="hdc-age-item">
+              <span class="hdc-age-val" id="hdc-ramadans">—</span>
+              <span class="hdc-age-key">Ramadans</span>
+            </div>
+            <div class="hdc-age-divider"></div>
+            <div class="hdc-age-item">
+              <span class="hdc-age-val" id="hdc-jumuahs">—</span>
+              <span class="hdc-age-key">Jumu'ahs</span>
+            </div>
+            <div class="hdc-age-divider"></div>
+            <div class="hdc-age-item">
+              <span class="hdc-age-val" id="hdc-prayers">—</span>
+              <span class="hdc-age-key">Prayer Opps</span>
             </div>
           </div>
-          <div class="input-group half">
-            <label class="input-label">Gender (Optional)</label>
-            <div class="input-wrap select-wrap">
-              <span class="input-icon">👤</span>
-              <select id="hero-gender" class="dob-input select-input">
-                <option value="">Select</option>
-                <option value="male" selected>Male</option>
-                <option value="female">Female</option>
-              </select>
-            </div>
+          <div class="hdc-no-dob hidden" id="hdc-no-dob">
+            <a href="journey.html" class="hdc-dob-link">Enter birth date on Journey page →</a>
           </div>
         </div>
 
-        <div class="input-error hidden" id="hero-error" role="alert"></div>
+        <div class="hdc-divider"></div>
 
-        <button class="btn-reveal" id="btn-calculate">
-          Reveal My Dashboard ✦
-        </button>
+        <!-- Next Prayer -->
+        <div class="hdc-next-prayer" id="hdc-next-prayer-block">
+          <div class="hdc-next-label">Next Prayer</div>
+          <div class="hdc-next-row">
+            <span class="hdc-next-icon" id="hdc-prayer-icon">🕌</span>
+            <span class="hdc-next-name" id="hdc-prayer-name">Loading…</span>
+            <span class="hdc-next-countdown" id="hdc-prayer-countdown">—</span>
+          </div>
+        </div>
 
-        <div class="input-trust">
-          <span>🔒 100% Private</span>
-          <span class="trust-dot">•</span>
-          <span>No Data Stored</span>
-          <span class="trust-dot">•</span>
-          <span>You're in Control</span>
+        <div class="hdc-divider"></div>
+
+        <!-- Spiritual Snapshot -->
+        <div class="hdc-snapshot">
+          <div class="hdc-snapshot-label">Spiritual Snapshot</div>
+          <div class="hdc-snapshot-row">
+            <span class="hdc-snap-key">Prayer Consistency</span>
+            <span class="hdc-snap-val" id="hdc-prayer-consistency">—</span>
+          </div>
+          <div class="hdc-bar-wrap"><div class="hdc-bar" id="hdc-bar-prayer"></div></div>
+          <div class="hdc-snapshot-row">
+            <span class="hdc-snap-key">Muhasabah Streak</span>
+            <span class="hdc-snap-val" id="hdc-muhasabah-streak">—</span>
+          </div>
+          <div class="hdc-bar-wrap"><div class="hdc-bar hdc-bar-teal" id="hdc-bar-muhasabah"></div></div>
+          <div class="hdc-snapshot-row">
+            <span class="hdc-snap-key">Gratitude Streak</span>
+            <span class="hdc-snap-val" id="hdc-gratitude-streak">—</span>
+          </div>
+          <div class="hdc-bar-wrap"><div class="hdc-bar hdc-bar-green" id="hdc-bar-gratitude"></div></div>
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- ═══ LOADING ═══ -->
+<!-- Loading overlay (legacy support) -->
 <div class="loading-overlay hidden" id="loading-overlay" aria-live="polite">
   <div class="loading-inner">
     <div class="loading-crescent">☽</div>
@@ -251,296 +264,122 @@
   </div>
 </div>
 
-<!-- ═══ RESULTS ═══ -->
-<div id="results-section" class="hidden">
-
-<!-- ── JOURNEY PROGRESS BAR ── -->
-<div class="journey-steps" id="journey-steps">
-  <div class="journey-step active" data-step="1"><span class="js-num">1</span><span class="js-label">Your Time</span></div>
-  <div class="journey-step-line"></div>
-  <div class="journey-step" data-step="2"><span class="js-num">2</span><span class="js-label">Your Journey</span></div>
-  <div class="journey-step-line"></div>
-  <div class="journey-step" data-step="3"><span class="js-num">3</span><span class="js-label">Your Reality</span></div>
-  <div class="journey-step-line"></div>
-  <div class="journey-step" data-step="4"><span class="js-num">4</span><span class="js-label">Your Story</span></div>
+<!-- Legacy hidden spans for app.js compatibility -->
+<div style="display:none" aria-hidden="true">
+  <span id="hero-greeting-name"></span>
+  <span id="hero-day-rank"></span>
+  <div id="hero-stats-preview">
+    <span id="hsp-ramadans"></span>
+    <span id="hsp-pct"></span>
+    <span id="hsp-fajr"></span>
+  </div>
+  <div id="results-section"></div>
+  <span id="g-days"></span><span id="g-hours"></span><span id="g-sleep"></span>
+  <span id="g-hearts"></span><span id="g-sunsets"></span><span id="g-seconds"></span>
+  <span id="gr-days"></span><span id="gr-hours"></span><span id="gr-sleep"></span>
+  <span id="gr-hearts"></span><span id="gr-sunsets"></span><span id="gr-seconds"></span>
+  <span id="ih-hijri-year"></span><span id="ih-hijri-month"></span>
+  <span id="ih-day"></span><span id="ih-day-sub"></span>
+  <span id="ih-ramadans"></span><span id="ih-ramadans2"></span>
+  <span id="ih-hajj"></span><span id="ih-hajj2"></span>
+  <span id="ih-islamic-years"></span><span id="ih-hijri-range"></span>
+  <span id="ih-next-ramadan"></span>
+  <span id="w-flag"></span><span id="w-country"></span>
+  <span id="w-pm"></span><span id="w-president"></span><span id="w-currency"></span>
+  <span id="w-population"></span><span id="w-event"></span><span id="w-tech"></span>
+  <span id="journey-pct"></span><span id="journey-pct2"></span>
+  <circle id="ring-fill"></circle>
+  <span id="results-name"></span>
+  <div id="journey-steps"></div>
 </div>
-<div class="results-name-bar"><span id="results-name">Your Dashboard</span></div>
-
-<!-- ══ STEP 1: YOUR TIME ══ -->
-<div class="step-block" id="step-1">
-
-  <!-- ── YOUR TIME AT A GLANCE ── -->
-  <section class="section glance-section">
-    <div class="section-inner">
-      <div class="section-heading">
-        <span class="sh-line"></span>
-        <span class="sh-icon">◆</span>
-        <span class="sh-text">YOUR PERSONAL DASHBOARD</span>
-        <span class="sh-icon">◆</span>
-        <span class="sh-line"></span>
-      </div>
-      <div class="glance-grid">
-        <div class="glance-card">
-          <div class="glance-icon">🕐</div>
-          <div class="glance-label">Days Counted</div>
-          <div class="glance-value" id="g-days">—</div>
-          <div class="glance-unit">Days</div>
-          <div class="glance-desc">A reminder that every day is part of your divine rhythm.</div>
-          <div class="glance-reflect" id="gr-days"></div>
-        </div>
-        <div class="glance-card">
-          <div class="glance-icon">⏳</div>
-          <div class="glance-label">Hours Counted</div>
-          <div class="glance-value" id="g-hours">—</div>
-          <div class="glance-unit">Hours</div>
-          <div class="glance-desc">Every hour is a blessing.</div>
-          <div class="glance-reflect" id="gr-hours"></div>
-        </div>
-        <div class="glance-card">
-          <div class="glance-icon">🌙</div>
-          <div class="glance-label">Time Sleeping</div>
-          <div class="glance-value" id="g-sleep">—</div>
-          <div class="glance-unit">Years</div>
-          <div class="glance-desc">The nights and mornings Allah gifted you.</div>
-          <div class="glance-reflect" id="gr-sleep"></div>
-        </div>
-        <div class="glance-card">
-          <div class="glance-icon">❤️</div>
-          <div class="glance-label">Heartbeats</div>
-          <div class="glance-value" id="g-hearts">—</div>
-          <div class="glance-unit">Billion</div>
-          <div class="glance-desc">Your heart continues to beat for every prayer.</div>
-          <div class="glance-reflect" id="gr-hearts"></div>
-        </div>
-        <div class="glance-card">
-          <div class="glance-icon">🌅</div>
-          <div class="glance-label">Sunsets Seen</div>
-          <div class="glance-value" id="g-sunsets">—</div>
-          <div class="glance-unit"></div>
-          <div class="glance-desc">You've seen thousands of beautiful sunsets.</div>
-          <div class="glance-reflect" id="gr-sunsets"></div>
-        </div>
-        <div class="glance-card">
-          <div class="glance-icon">⏱</div>
-          <div class="glance-label">Seconds Counted</div>
-          <div class="glance-value" id="g-seconds">—</div>
-          <div class="glance-unit">Million</div>
-          <div class="glance-desc">Each moment offers a chance to draw closer.</div>
-          <div class="glance-reflect" id="gr-seconds"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── YOUR LIFE & ISLAMIC HISTORY ── -->
-  <section class="section islamic-section" id="islamic-section">
-    <div class="section-inner">
-      <div class="section-heading">
-        <span class="sh-line"></span>
-        <span class="sh-icon">◆</span>
-        <span class="sh-text">YOUR ISLAMIC JOURNEY</span>
-        <span class="sh-icon">◆</span>
-        <span class="sh-line"></span>
-      </div>
-      <div class="islamic-grid">
-        <div class="islamic-card">
-          <div class="ic-icon">🕌</div>
-          <div class="ic-sub">You were born in</div>
-          <div class="ic-value" id="ih-hijri-year">—</div>
-          <div class="ic-label" id="ih-hijri-month">AH</div>
-          <div class="ic-note">Approx. ±1 day</div>
-        </div>
-        <div class="islamic-card">
-          <div class="ic-icon">📅</div>
-          <div class="ic-sub">Your birth day</div>
-          <div class="ic-value" id="ih-day">—</div>
-          <div class="ic-label" id="ih-day-sub">—</div>
-        </div>
-        <div class="islamic-card">
-          <div class="ic-icon">🌙</div>
-          <div class="ic-sub">Ramadans experienced</div>
-          <div class="ic-value" id="ih-ramadans">—</div>
-          <div class="ic-label">You have witnessed <span id="ih-ramadans2">—</span> Ramadans.</div>
-        </div>
-        <div class="islamic-card">
-          <div class="ic-icon">🕋</div>
-          <div class="ic-sub">Hajj seasons experienced</div>
-          <div class="ic-value" id="ih-hajj">—</div>
-          <div class="ic-label">You have experienced <span id="ih-hajj2">—</span> Hajj seasons.</div>
-        </div>
-        <div class="islamic-card">
-          <div class="ic-icon">📖</div>
-          <div class="ic-sub">Islamic years counted</div>
-          <div class="ic-value" id="ih-islamic-years">—</div>
-          <div class="ic-label">From <span id="ih-hijri-range">— AH</span>.</div>
-        </div>
-        <div class="islamic-card">
-          <div class="ic-icon">🪔</div>
-          <div class="ic-sub">Next Ramadan</div>
-          <div class="ic-value">In Sha Allah</div>
-          <div class="ic-label" id="ih-next-ramadan">—</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── THE WORLD WHEN YOU WERE BORN ── -->
-  <section class="section world-section">
-    <div class="section-inner">
-      <div class="section-heading">
-        <span class="sh-line"></span>
-        <span class="sh-icon">◆</span>
-        <span class="sh-text">THE WORLD WHEN YOUR JOURNEY BEGAN</span>
-        <span class="sh-icon">◆</span>
-        <span class="sh-line"></span>
-      </div>
-      <div class="world-grid">
-        <div class="world-card world-pk">
-          <div class="world-flag" id="w-flag">🇵🇰</div>
-          <div class="world-country" id="w-country">In Pakistan</div>
-          <div class="world-facts">
-            <div class="wf-row"><span class="wf-key">Prime Minister</span><span class="wf-val" id="w-pm">—</span></div>
-            <div class="wf-row"><span class="wf-key">President</span><span class="wf-val" id="w-president">—</span></div>
-            <div class="wf-row"><span class="wf-key">Currency</span><span class="wf-val" id="w-currency">—</span></div>
-          </div>
-        </div>
-        <div class="world-card world-globe">
-          <div class="world-globe-icon">🌍</div>
-          <div class="world-country">In The World</div>
-          <div class="world-facts">
-            <div class="wf-row"><span class="wf-key">World Population</span><span class="wf-val" id="w-population">—</span></div>
-            <div class="wf-row"><span class="wf-key">Major Event</span><span class="wf-val" id="w-event">—</span></div>
-            <div class="wf-row"><span class="wf-key">Technology</span><span class="wf-val" id="w-tech">—</span></div>
-          </div>
-        </div>
-        <div class="world-card world-moment">
-          <div class="world-moment-icon">🔖</div>
-          <div class="world-moment-title">A moment in time</div>
-          <div class="world-moment-text">The world was different, but your journey had just begun.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Step 1 → 2 continue -->
-  <div class="step-continue" id="continue-1">
-    <div class="step-continue-inner">
-      <div class="step-continue-label">Step 1 of 4 complete</div>
-      <button class="btn-continue" onclick="revealStep(2)">
-        See Your Journey &amp; History ✦
-      </button>
-    </div>
-  </div>
-</div><!-- /step-1 -->
-
-<!-- ══ STEP 2: YOUR JOURNEY ══ -->
-<div class="step-block hidden" id="step-2">
-
-  <!-- ── JOURNEY + REFLECTION ── -->
-  <section class="section jr-section">
-    <div class="section-inner">
-      <div class="jr-grid">
-
-        <div class="journey-card">
-          <div class="journey-title">YOUR JOURNEY SO FAR</div>
-          <div class="journey-ring-wrap">
-            <svg class="journey-ring" viewBox="0 0 120 120" aria-hidden="true">
-              <circle class="ring-bg" cx="60" cy="60" r="50"/>
-              <circle class="ring-fill" id="ring-fill" cx="60" cy="60" r="50"
-                stroke-dasharray="314" stroke-dashoffset="314"/>
-            </svg>
-            <div class="journey-pct" id="journey-pct">0%</div>
-          </div>
-          <div class="journey-text">
-            You have completed <strong id="journey-pct2">—%</strong> of your journey toward mindful living.
-          </div>
-          <div class="journey-cta">Turn awareness into action.</div>
-          <div class="journey-note">Based on average lifespan of 75 years</div>
-        </div>
-
-        <div class="reflection-card">
-          <div class="reflection-title">DAILY REFLECTION</div>
-          <div class="reflection-quote-mark">"</div>
-          <div class="reflection-headline">Time is a trust.</div>
-          <div class="reflection-body">
-            Every moment you have experienced is part of your journey. Make the rest meaningful.
-          </div>
-          <div class="reflection-ayah">
-            "And say, 'My Lord, increase me in knowledge.'"<br>
-            <span class="reflection-ref">(Quran 20:114)</span>
-          </div>
-          <div class="reflection-lamp" aria-hidden="true">🪔</div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Step 2 → 3 continue -->
-  <div class="step-continue" id="continue-2">
-    <div class="step-continue-inner">
-      <div class="step-continue-label">Step 2 of 4 complete</div>
-      <button class="btn-continue" onclick="revealStep(3)">
-        See Where Your Time Goes ✦
-      </button>
-    </div>
-  </div>
-</div><!-- /step-2 -->
-
-<!-- ══ STEP 3: YOUR REALITY ══ -->
-<!-- STEP 3 & 4 (truth + story) removed per product simplification -->
-
-</div><!-- /results-section -->
 
 
-<!-- ══════════════════════════════════════════════════
-     PRAYER SNAPSHOT — Timeline + Status Cards merged
-     ══════════════════════════════════════════════════ -->
-<section class="section home-prayer-snapshot-section" id="prayer-timeline-section">
+<!-- ═══════════════════════════════════════════
+     SECTION 2 — PRAYER RHYTHM
+     ═══════════════════════════════════════════ -->
+<section class="section home-prayer-section" id="prayer-rhythm-section" style="background:var(--bg2)">
   <div class="section-inner">
     <div class="section-heading">
-      <span class="sh-line"></span><span class="sh-icon">◆</span>
+      <span class="sh-line"></span>
+      <span class="sh-icon">◆</span>
       <span class="sh-text">TODAY'S PRAYER RHYTHM</span>
-      <span class="sh-icon">◆</span><span class="sh-line"></span>
+      <span class="sh-icon">◆</span>
+      <span class="sh-line"></span>
     </div>
-    <div class="section-sub">Six moments of connection — the sacred structure of your day.</div>
+    <p class="section-sub">The day is divided by remembrance.</p>
 
-    <!-- Timeline strip -->
+    <!-- Timeline -->
     <div class="home-timeline" id="home-timeline">
       <div class="ht-placeholder" id="ht-placeholder">
-        <span class="ht-pill ht-past">Fajr</span>
+        <span class="ht-pill ht-past"    id="ht-Fajr">Fajr</span>
         <span class="ht-connector"></span>
-        <span class="ht-pill ht-past">Sunrise</span>
+        <span class="ht-pill ht-past"    id="ht-Sunrise">Sunrise</span>
         <span class="ht-connector"></span>
-        <span class="ht-pill ht-active">Dhuhr</span>
+        <span class="ht-pill ht-upcoming" id="ht-Dhuhr">Dhuhr</span>
         <span class="ht-connector"></span>
-        <span class="ht-pill ht-upcoming">Asr</span>
+        <span class="ht-pill ht-upcoming" id="ht-Asr">Asr</span>
         <span class="ht-connector"></span>
-        <span class="ht-pill ht-upcoming">Maghrib</span>
+        <span class="ht-pill ht-upcoming" id="ht-Maghrib">Maghrib</span>
         <span class="ht-connector"></span>
-        <span class="ht-pill ht-upcoming">Isha</span>
+        <span class="ht-pill ht-upcoming" id="ht-Isha">Isha</span>
       </div>
     </div>
 
     <!-- Prayer status cards -->
     <div class="home-prayer-status-grid" id="home-prayer-status-grid">
-      <div class="hps-card"><div class="hps-icon">🌙</div><div class="hps-name">Fajr</div><div class="hps-time" id="hps-time-Fajr">—</div><div class="hps-badge hps-upcoming" id="hps-badge-Fajr">Upcoming</div></div>
-      <div class="hps-card"><div class="hps-icon">☀️</div><div class="hps-name">Dhuhr</div><div class="hps-time" id="hps-time-Dhuhr">—</div><div class="hps-badge hps-upcoming" id="hps-badge-Dhuhr">Upcoming</div></div>
-      <div class="hps-card"><div class="hps-icon">🌤️</div><div class="hps-name">Asr</div><div class="hps-time" id="hps-time-Asr">—</div><div class="hps-badge hps-upcoming" id="hps-badge-Asr">Upcoming</div></div>
-      <div class="hps-card"><div class="hps-icon">🌇</div><div class="hps-name">Maghrib</div><div class="hps-time" id="hps-time-Maghrib">—</div><div class="hps-badge hps-upcoming" id="hps-badge-Maghrib">Upcoming</div></div>
-      <div class="hps-card"><div class="hps-icon">🌃</div><div class="hps-name">Isha</div><div class="hps-time" id="hps-time-Isha">—</div><div class="hps-badge hps-upcoming" id="hps-badge-Isha">Upcoming</div></div>
+      <div class="hps-card">
+        <div class="hps-icon">🌙</div>
+        <div class="hps-name">Fajr</div>
+        <div class="hps-time" id="hps-time-Fajr">—</div>
+        <div class="hps-badge hps-upcoming" id="hps-badge-Fajr">Upcoming</div>
+      </div>
+      <div class="hps-card">
+        <div class="hps-icon">☀️</div>
+        <div class="hps-name">Dhuhr</div>
+        <div class="hps-time" id="hps-time-Dhuhr">—</div>
+        <div class="hps-badge hps-upcoming" id="hps-badge-Dhuhr">Upcoming</div>
+      </div>
+      <div class="hps-card">
+        <div class="hps-icon">🌤️</div>
+        <div class="hps-name">Asr</div>
+        <div class="hps-time" id="hps-time-Asr">—</div>
+        <div class="hps-badge hps-upcoming" id="hps-badge-Asr">Upcoming</div>
+      </div>
+      <div class="hps-card">
+        <div class="hps-icon">🌇</div>
+        <div class="hps-name">Maghrib</div>
+        <div class="hps-time" id="hps-time-Maghrib">—</div>
+        <div class="hps-badge hps-upcoming" id="hps-badge-Maghrib">Upcoming</div>
+      </div>
+      <div class="hps-card">
+        <div class="hps-icon">🌃</div>
+        <div class="hps-name">Isha</div>
+        <div class="hps-time" id="hps-time-Isha">—</div>
+        <div class="hps-badge hps-upcoming" id="hps-badge-Isha">Upcoming</div>
+      </div>
     </div>
 
-    <div style="text-align:center;margin-top:24px;">
+    <!-- Next Prayer highlight -->
+    <div class="home-next-prayer-card" id="home-next-prayer-card">
+      <div class="hnp-label">Next Prayer</div>
+      <div class="hnp-row">
+        <span class="hnp-icon" id="hnp-icon">🕌</span>
+        <span class="hnp-name" id="hnp-name">Loading…</span>
+        <span class="hnp-countdown" id="hnp-countdown">—</span>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:28px;">
       <a href="prayers.html" class="btn-timeline-full">Open Prayer Tracker →</a>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════
-     TODAY'S GUIDANCE — Ayah + Dua + Action (merged)
-     ══════════════════════════════════════════════════ -->
-<section class="section daily-dashboard-section" id="profile-section" data-section="profile" style="background:var(--bg2)">
+
+<!-- ═══════════════════════════════════════════
+     SECTION 3 — TODAY'S GUIDANCE
+     ═══════════════════════════════════════════ -->
+<section class="section daily-guidance-section" id="guidance-section">
   <div class="section-inner">
     <div class="section-heading">
       <span class="sh-line"></span>
@@ -549,388 +388,652 @@
       <span class="sh-icon">◆</span>
       <span class="sh-line"></span>
     </div>
-    <div class="section-sub">One Ayah. One Dua. One action. Everything you need today.</div>
-    <div class="daily-dashboard" id="daily-dashboard">
+    <p class="section-sub">One Ayah. One Dua. One action. One reflection. Everything you need today.</p>
 
-      <!-- Today's Ayah -->
-      <div class="dd-card dd-ayah-card">
-        <div class="dd-badge">📖 Ayah of the Day</div>
-        <div class="dd-arabic" id="dd-ayah-arabic"></div>
-        <div class="dd-translation" id="dd-ayah-translation"></div>
-        <div class="dd-source" id="dd-ayah-source"></div>
-        <div class="dd-reflection" id="dd-ayah-reflection"></div>
-        <a href="reflection.html" class="dd-link-btn">Reflect on this →</a>
+    <div class="guidance-grid">
+
+      <!-- Card 1: Ayah of the Day -->
+      <div class="guidance-card gc-ayah">
+        <div class="gc-badge"><span class="gc-badge-icon">📖</span> Ayah of the Day</div>
+        <div class="gc-arabic" id="dd-ayah-arabic"></div>
+        <div class="gc-translation" id="dd-ayah-translation"></div>
+        <div class="gc-source" id="dd-ayah-source"></div>
+        <div class="gc-reflection" id="dd-ayah-reflection"></div>
+        <a href="reflection.html" class="gc-link-btn">Reflect →</a>
       </div>
 
-      <!-- Today's Dua -->
-      <div class="dd-card dd-dua-card">
-        <div class="dd-badge">🤲 Dua of the Day</div>
-        <div class="dd-dua-situation" id="dd-dua-situation"></div>
-        <div class="dd-arabic" id="dd-dua-arabic"></div>
-        <div class="dd-transliteration" id="dd-dua-transliteration"></div>
-        <div class="dd-translation" id="dd-dua-translation"></div>
-        <div class="dd-source" id="dd-dua-source"></div>
+      <!-- Card 2: Dua of the Day -->
+      <div class="guidance-card gc-dua">
+        <div class="gc-badge"><span class="gc-badge-icon">🤲</span> Dua of the Day</div>
+        <div class="gc-situation" id="dd-dua-situation"></div>
+        <div class="gc-arabic" id="dd-dua-arabic"></div>
+        <div class="gc-transliteration" id="dd-dua-transliteration"></div>
+        <div class="gc-translation" id="dd-dua-translation"></div>
+        <div class="gc-source" id="dd-dua-source"></div>
       </div>
 
-      <!-- Today's Action -->
-      <div class="dd-card dd-action-card">
-        <div class="dd-badge">🎯 One Action Today</div>
-        <div class="dd-action-text" id="dd-action-text"></div>
-        <div class="dd-action-why" id="dd-action-why"></div>
-        <div class="dd-action-btns">
-          <button class="dd-done-btn" id="dd-done-btn">✓ Done for Today</button>
-          <button class="dd-share-action-btn" id="dd-share-action-btn">📤 Share</button>
+      <!-- Card 3: One Action Today -->
+      <div class="guidance-card gc-action">
+        <div class="gc-badge"><span class="gc-badge-icon">🎯</span> One Action Today</div>
+        <div class="gc-action-text" id="dd-action-text"></div>
+        <div class="gc-action-why"  id="dd-action-why"></div>
+        <div class="gc-action-btns">
+          <button class="gc-done-btn" id="dd-done-btn">✓ Done for Today</button>
+          <button class="gc-share-btn" id="dd-share-action-btn">📤 Share</button>
         </div>
-        <div class="dd-done-msg hidden" id="dd-done-msg">Alhamdulillah. See you tomorrow. ✦</div>
+        <div class="gc-done-msg hidden" id="dd-done-msg">Alhamdulillah. See you tomorrow. ✦</div>
+      </div>
+
+      <!-- Card 4: Reflection -->
+      <div class="guidance-card gc-reflect-card">
+        <div class="gc-badge"><span class="gc-badge-icon">🪔</span> Today's Reflection</div>
+        <div class="gc-reflect-quote" id="daily-reflect-quote">
+          Time passes whether we use it wisely or not. The believer measures success not by years lived, but by what was done within them.
+        </div>
+        <a href="reflection.html" class="gc-link-btn">Write Your Reflection →</a>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════
-     JOURNEY SNAPSHOT — Overview strip + story
-     ══════════════════════════════════════════════════ -->
-<section class="section home-journey-snapshot-section" id="home-quick-overview">
+
+<!-- ═══════════════════════════════════════════
+     SECTION 4 — JOURNEY SNAPSHOT
+     ═══════════════════════════════════════════ -->
+<section class="section journey-snapshot-section" id="home-quick-overview" style="background:var(--bg2)">
   <div class="section-inner">
     <div class="section-heading">
-      <span class="sh-line"></span><span class="sh-icon">◆</span>
+      <span class="sh-line"></span>
+      <span class="sh-icon">◆</span>
       <span class="sh-text">YOUR JOURNEY SNAPSHOT</span>
-      <span class="sh-icon">◆</span><span class="sh-line"></span>
+      <span class="sh-icon">◆</span>
+      <span class="sh-line"></span>
     </div>
-    <div class="section-sub">A quiet look at where you are — and where you are headed.</div>
+    <p class="section-sub">A quiet look at where you are — and where you are headed.</p>
 
-    <!-- Stats strip -->
-    <div class="home-overview-strip">
-      <a href="prayers.html" class="hov-card">
-        <div class="hov-icon">🔥</div>
-        <div class="hov-val" id="hov-streak">0</div>
-        <div class="hov-label">Prayer Streak</div>
-      </a>
-      <a href="reflection.html" class="hov-card">
-        <div class="hov-icon">📓</div>
-        <div class="hov-val" id="hov-journal">—</div>
-        <div class="hov-label">Journal Days</div>
-      </a>
-      <a href="journey.html" class="hov-card">
-        <div class="hov-icon">🌙</div>
-        <div class="hov-val" id="hov-ramadans">—</div>
-        <div class="hov-label">Ramadans</div>
-      </a>
-      <a href="calendar.html" class="hov-card">
-        <div class="hov-icon">🕌</div>
-        <div class="hov-val" id="hov-friday">—</div>
-        <div class="hov-label">Next Jumu'ah</div>
-      </a>
-    </div>
+    <div class="journey-snapshot-grid">
+      <!-- Left: Journey counters -->
+      <div class="jsn-left">
+        <div class="jsn-left-title">My Journey</div>
+        <div class="jsn-counter-list">
+          <div class="jsn-counter">
+            <span class="jsn-icon">🌙</span>
+            <span class="jsn-label">Ramadans Witnessed</span>
+            <span class="jsn-val" id="hov-ramadans">—</span>
+          </div>
+          <div class="jsn-counter">
+            <span class="jsn-icon">🕌</span>
+            <span class="jsn-label">Jumu'ahs Lived</span>
+            <span class="jsn-val" id="hov-jumuahs">—</span>
+          </div>
+          <div class="jsn-counter">
+            <span class="jsn-icon">📿</span>
+            <span class="jsn-label">Prayer Opportunities</span>
+            <span class="jsn-val" id="hov-prayer-opps">—</span>
+          </div>
+          <div class="jsn-counter">
+            <span class="jsn-icon">✨</span>
+            <span class="jsn-label">Laylat al-Qadr Opportunities</span>
+            <span class="jsn-val" id="hov-laylatul">—</span>
+          </div>
+        </div>
+        <a href="journey.html" class="jsn-cta-link">See Full Journey →</a>
+      </div>
 
-    <!-- Today's story card -->
-    <div class="todays-story-card" id="todays-story-card" style="margin-top:32px;">
-      <!-- Rendered by JS -->
-    </div>
-    <div class="todays-story-cta" style="margin-top:20px;">
-      <a href="stories.html" class="btn-stories-all">
-        � Explore All Stories — Lives That Changed Time
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
+      <!-- Right: Ring chart -->
+      <div class="jsn-right">
+        <div class="jsn-right-title">Your Time With Allah</div>
+        <div class="jsn-ring-wrap">
+          <svg class="jsn-ring-svg" viewBox="0 0 160 160" aria-hidden="true">
+            <circle class="jsn-ring-bg"   cx="80" cy="80" r="66"/>
+            <circle class="jsn-ring-fill" cx="80" cy="80" r="66"
+              id="jsn-ring-fill"
+              stroke-dasharray="414.69"
+              stroke-dashoffset="414.69"/>
+          </svg>
+          <div class="jsn-ring-inner">
+            <div class="jsn-ring-pct" id="jsn-ring-pct">—</div>
+            <div class="jsn-ring-label">Journey<br>Completed</div>
+          </div>
+        </div>
+        <div class="jsn-remaining-stats">
+          <div class="jsn-rem-item">
+            <span class="jsn-rem-val" id="jsn-rem-ramadans">—</span>
+            <span class="jsn-rem-key">Est. Ramadans Remaining</span>
+          </div>
+          <div class="jsn-rem-item">
+            <span class="jsn-rem-val" id="jsn-rem-jumuahs">—</span>
+            <span class="jsn-rem-key">Est. Jumu'ahs Remaining</span>
+          </div>
+        </div>
+        <div class="jsn-reflection-line">
+          Every remaining Ramadan is a gift not yet guaranteed.
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════
-     THIS DAY IN ISLAM
-     ══════════════════════════════════════════════════ -->
-<section class="section hadith-section" id="hadith-section" style="background:var(--bg2)">
+
+<!-- ═══════════════════════════════════════════
+     SECTION 5 — DAILY MUHASABAH
+     ═══════════════════════════════════════════ -->
+<section class="section home-muhasabah-section" id="home-muhasabah">
   <div class="section-inner">
     <div class="section-heading">
       <span class="sh-line"></span>
       <span class="sh-icon">◆</span>
-      <span class="sh-text">THIS DAY IN ISLAM</span>
+      <span class="sh-text">BEFORE TODAY ENDS</span>
       <span class="sh-icon">◆</span>
       <span class="sh-line"></span>
     </div>
-    <div class="wakeup-card" id="wakeup-card">
-      <!-- Rendered by JS -->
+    <p class="section-sub">Daily Muhasabah — a few honest moments with yourself before the day closes.</p>
+
+    <div class="home-muhasabah-card">
+      <div class="hm-question-block">
+        <div class="hm-q-num">01</div>
+        <div class="hm-q-text">What blessing am I grateful for today?</div>
+        <textarea class="hm-textarea" id="hm-q1" placeholder="Write something you are grateful for…" rows="3" aria-label="Gratitude"></textarea>
+      </div>
+      <div class="hm-question-block">
+        <div class="hm-q-num">02</div>
+        <div class="hm-q-text">What should I improve tomorrow?</div>
+        <textarea class="hm-textarea" id="hm-q2" placeholder="One honest thing to work on…" rows="3" aria-label="Improvement"></textarea>
+      </div>
+      <div class="hm-question-block">
+        <div class="hm-q-num">03</div>
+        <div class="hm-q-text">What good deed brought me closer to Allah today?</div>
+        <textarea class="hm-textarea" id="hm-q3" placeholder="Even something small counts…" rows="3" aria-label="Good deed"></textarea>
+      </div>
+      <div class="hm-footer">
+        <div class="hm-save-status" id="hm-save-status"></div>
+        <div class="hm-privacy">🔒 Stored only on your device.</div>
+        <a href="reflection.html" class="hm-full-link">Open Full Reflection Journal →</a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ STORY SHARE MODAL (from Random Reflection / Today's Story) ═══ -->
-<div class="share-modal hidden" id="story-viral-modal" role="dialog" aria-modal="true" aria-label="Share this story">
-  <div class="share-modal-inner viral-modal-inner">
-    <button class="modal-close" id="story-viral-close" aria-label="Close">✕</button>
-    <div class="viral-card-dl" id="viral-card-dl">
-      <!-- Rendered by JS -->
-    </div>
-    <div class="viral-share-actions">
-      <button class="btn-dl-card" id="btn-viral-dl">⬇ Download Image</button>
-      <button class="btn-viral-caption" id="btn-viral-caption">📋 Copy Caption</button>
-      <button class="btn-viral-link" id="btn-viral-link">🔗 Copy Link</button>
-    </div>
-    <div class="viral-whatsapp-caption" id="viral-whatsapp-caption"></div>
-  </div>
-</div>
 
-<!-- ═══ LIFE MIRROR MODAL ═══ -->
-<div class="life-mirror hidden" id="life-mirror" role="dialog" aria-modal="true" aria-label="Life Mirror">
-  <div class="life-mirror-inner">
-    <div class="lm-crescent">☽</div>
-    <div class="lm-question" id="lm-question"></div>
-    <div class="lm-sub">Take a moment. Breathe. Reflect.</div>
-    <button class="lm-btn" id="lm-close">I will reflect on this ✦</button>
-    <button class="lm-share-btn" id="lm-share-btn">📤 Share This Reflection</button>
-    <div class="lm-skip" id="lm-skip">Skip for now</div>
-  </div>
-</div>
-
-<!-- ═══ MIRROR SHARE CARD MODAL ═══ -->
-<div class="share-modal hidden" id="mirror-share-modal" role="dialog" aria-modal="true" aria-label="Share your reflection">
-  <div class="share-modal-inner mirror-share-modal-inner">
-    <button class="modal-close" id="mirror-share-close" aria-label="Close">✕</button>
-    <div class="mirror-card-dl" id="mirror-card-dl">
-      <!-- Rendered by JS -->
+<!-- ═══════════════════════════════════════════
+     SECTION 6 — THIS DAY IN ISLAMIC HISTORY
+     ═══════════════════════════════════════════ -->
+<section class="section this-day-section" id="this-day-section" style="background:var(--bg2)">
+  <div class="section-inner">
+    <div class="section-heading">
+      <span class="sh-line"></span>
+      <span class="sh-icon">◆</span>
+      <span class="sh-text">THIS DAY IN ISLAMIC HISTORY</span>
+      <span class="sh-icon">◆</span>
+      <span class="sh-line"></span>
     </div>
-    <div class="mirror-share-actions">
-      <button class="btn-dl-card" id="btn-mirror-dl">⬇ Download Card</button>
-      <button class="btn-mirror-copy" id="btn-mirror-copy">🔗 Copy Link</button>
+    <p class="section-sub">What happened on this day in Islamic history?</p>
+
+    <div class="this-day-card" id="this-day-card">
+      <div class="td-year" id="td-year">622 CE</div>
+      <div class="td-title" id="td-title">The Hijrah — A Journey of Faith</div>
+      <div class="td-body" id="td-body">
+        The Hijrah journey reached a defining moment as the Prophet ﷺ and his companions left Makkah for Madinah — sacrificing home, wealth, and comfort for the sake of Allah. It was not just a migration. It was the beginning of a new era in Islamic history.
+      </div>
+      <div class="td-reflection-label">What can we learn from this today?</div>
+      <div class="td-reflection" id="td-reflection">
+        The believer is always willing to leave behind what is comfortable for what is right.
+      </div>
+      <a href="stories.html" class="td-cta">Read Full Story →</a>
     </div>
   </div>
-</div>
+</section>
 
-<!-- ═══ SITUATION DETAIL MODAL ═══ -->
-<div class="share-modal hidden" id="situation-modal" role="dialog" aria-modal="true" aria-label="Situation guidance">
-  <div class="share-modal-inner situation-modal-inner">
-    <button class="modal-close" id="situation-modal-close" aria-label="Close">✕</button>
-    <div class="sit-modal-body" id="sit-modal-body">
-      <!-- Rendered by JS -->
+
+<!-- ═══════════════════════════════════════════
+     SECTION 7 — SPIRITUAL PROGRESS
+     ═══════════════════════════════════════════ -->
+<section class="section spiritual-progress-section" id="spiritual-progress-section">
+  <div class="section-inner">
+    <div class="section-heading">
+      <span class="sh-line"></span>
+      <span class="sh-icon">◆</span>
+      <span class="sh-text">SPIRITUAL PROGRESS</span>
+      <span class="sh-icon">◆</span>
+      <span class="sh-line"></span>
     </div>
-  </div>
-</div>
+    <p class="section-sub">Your consistency, tracked quietly — no judgment, only growth.</p>
 
-<div class="celebration hidden" id="celebration">
-  <div class="celebration-inner">
-    <div class="celebration-emoji">🎉</div>
-    <div class="celebration-title">All 5 Prayers Complete!</div>
-    <div class="celebration-sub" id="celebration-sub">Alhamdulillah — streak: <span id="cel-streak">0</span> days 🔥</div>
-  </div>
-</div>
-
-<!-- ═══ STORY SHARE MODAL ═══ -->
-<div class="share-modal hidden" id="story-modal" role="dialog" aria-modal="true" aria-label="Share your story">
-  <div class="share-modal-inner">
-    <button class="modal-close" id="story-modal-close" aria-label="Close">✕</button>
-    <div class="share-card-dl" id="story-card-dl">
-      <div class="scdl-logo">✦ WaqtX</div>
-      <div class="story-sc-days" id="story-sc-days">—</div>
-      <div class="story-sc-label">days of your journey</div>
-      <div class="story-sc-ramadans" id="story-sc-ramadans">— Ramadans witnessed</div>
-      <div class="story-sc-hijri" id="story-sc-hijri">— AH</div>
-      <div class="story-sc-quote">Still writing my story.</div>
-      <div class="scdl-footer">waqtx · mianhassam96.github.io/WaqtX</div>
-    </div>
-    <button class="btn-dl-card" id="btn-story-dl">⬇ Download Story Card</button>
-  </div>
-</div>
-
-<!-- ═══ VIRAL SHARE MODAL 2.0 ═══ -->
-<div class="share-modal hidden" id="share-modal" role="dialog" aria-modal="true" aria-label="Share your dashboard">
-  <div class="share-modal-inner v2-modal-inner">
-    <button class="modal-close" id="share-close" aria-label="Close">✕</button>
-
-    <!-- Mode tabs -->
-    <div class="v2-tabs" role="tablist">
-      <button class="v2-tab active" data-mode="reality" role="tab" aria-selected="true">
-        🔴 Reality Check
-      </button>
-      <button class="v2-tab" data-mode="ibadah" role="tab" aria-selected="false">
-        🟢 Ibadah Flex
-      </button>
-      <button class="v2-tab" data-mode="reflection" role="tab" aria-selected="false">
-        ⚫ Reflection
-      </button>
-    </div>
-
-    <!-- Card preview area -->
-    <div class="v2-card-wrap">
-
-      <!-- MODE 1: Reality Check -->
-      <div class="v2-card v2-card-reality active" id="v2-card-reality">
-        <div class="v2c-top">
-          <span class="v2c-logo">✦ WaqtX</span>
-          <span class="v2c-tag">Reality Check</span>
-        </div>
-        <div class="v2c-main-num" id="v2r-days">—</div>
-        <div class="v2c-main-label">days of your journey have passed.</div>
-        <div class="v2c-divider"></div>
-        <div class="v2c-stat-row">
-          <div class="v2c-stat">
-            <span class="v2c-stat-val" id="v2r-pct">—</span>
-            <span class="v2c-stat-lbl">of avg life used</span>
-          </div>
-          <div class="v2c-stat">
-            <span class="v2c-stat-val" id="v2r-ramadans">—</span>
-            <span class="v2c-stat-lbl">Ramadans witnessed</span>
-          </div>
-          <div class="v2c-stat">
-            <span class="v2c-stat-val" id="v2r-hijri">—</span>
-            <span class="v2c-stat-lbl">Hijri years passed</span>
-          </div>
-        </div>
-        <div class="v2c-ayah">وَمَا تَدْرِي نَفْسٌ مَّاذَا تَكْسِبُ غَدًا</div>
-        <div class="v2c-ayah-tr">"No soul knows what it will earn tomorrow." — Quran 31:34</div>
-        <div class="v2c-footer">
-          <span id="v2r-name"></span>
-          <span>mianhassam96.github.io/WaqtX</span>
+    <div class="sp-grid">
+      <div class="sp-card">
+        <div class="sp-icon">🕌</div>
+        <div class="sp-label">Prayer Consistency</div>
+        <div class="sp-value" id="sp-prayer-pct">—</div>
+        <div class="sp-bar-wrap">
+          <div class="sp-bar-fill sp-bar-gold" id="sp-bar-prayer"></div>
         </div>
       </div>
-
-      <!-- MODE 2: Ibadah Flex -->
-      <div class="v2-card v2-card-ibadah hidden" id="v2-card-ibadah">
-        <div class="v2c-top">
-          <span class="v2c-logo">✦ WaqtX</span>
-          <span class="v2c-tag v2c-tag-green">Ibadah Tracker</span>
-        </div>
-        <div class="v2c-streak-wrap">
-          <div class="v2c-streak-num" id="v2i-streak">0</div>
-          <div class="v2c-streak-label">day streak 🔥</div>
-        </div>
-        <div class="v2c-ibadah-grid">
-          <div class="v2c-ib-item">
-            <span class="v2c-ib-val" id="v2i-salah">0/5</span>
-            <span class="v2c-ib-lbl">Salah today</span>
-          </div>
-          <div class="v2c-ib-item">
-            <span class="v2c-ib-val" id="v2i-week">0/7</span>
-            <span class="v2c-ib-lbl">Full days this week</span>
-          </div>
-          <div class="v2c-ib-item">
-            <span class="v2c-ib-val" id="v2i-dhikr">0/5</span>
-            <span class="v2c-ib-lbl">Dhikr today</span>
-          </div>
-        </div>
-        <div class="v2c-ibadah-quote">"The most beloved deeds to Allah are those done consistently, even if small." — Bukhari</div>
-        <div class="v2c-footer">
-          <span id="v2i-name"></span>
-          <span>mianhassam96.github.io/WaqtX</span>
+      <div class="sp-card">
+        <div class="sp-icon">📓</div>
+        <div class="sp-label">Reflection Consistency</div>
+        <div class="sp-value" id="sp-reflect-pct">—</div>
+        <div class="sp-bar-wrap">
+          <div class="sp-bar-fill sp-bar-teal" id="sp-bar-reflect"></div>
         </div>
       </div>
-
-      <!-- MODE 3: Deep Reflection -->
-      <div class="v2-card v2-card-reflection hidden" id="v2-card-reflection">
-        <div class="v2c-top">
-          <span class="v2c-logo">✦ WaqtX</span>
-          <span class="v2c-tag v2c-tag-dim">Reflection</span>
-        </div>
-        <div class="v2c-reflection-arabic">إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ</div>
-        <div class="v2c-reflection-tr">We belong to Allah, and to Him we return.</div>
-        <div class="v2c-reflection-body" id="v2ref-body">—</div>
-        <div class="v2c-reflection-stat" id="v2ref-stat">—</div>
-        <div class="v2c-footer">
-          <span id="v2ref-name"></span>
-          <span>mianhassam96.github.io/WaqtX</span>
+      <div class="sp-card">
+        <div class="sp-icon">🌿</div>
+        <div class="sp-label">Gratitude Practice</div>
+        <div class="sp-value" id="sp-gratitude-pct">—</div>
+        <div class="sp-bar-wrap">
+          <div class="sp-bar-fill sp-bar-green" id="sp-bar-gratitude"></div>
         </div>
       </div>
-
-    </div><!-- /v2-card-wrap -->
-
-    <!-- Caption options -->
-    <div class="v2-captions">
-      <div class="v2-captions-label">Copy a caption to post with your card:</div>
-      <div class="v2-caption-btns" id="v2-caption-btns">
-        <!-- Rendered by JS per mode -->
+      <div class="sp-card sp-card-streak">
+        <div class="sp-icon">🔥</div>
+        <div class="sp-label">Current Streak</div>
+        <div class="sp-streak-val" id="sp-streak-val">—</div>
+        <div class="sp-streak-unit">Days</div>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- Action buttons -->
-    <div class="v2-actions">
-      <button class="v2-btn-dl" id="v2-btn-dl">⬇ Download Card</button>
-      <button class="v2-btn-link" id="v2-btn-link">🔗 Copy Link</button>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 8 — WHEN YOU FEEL…
+     ═══════════════════════════════════════════ -->
+<section class="section when-you-feel-section" id="when-you-feel-section" style="background:var(--bg2)">
+  <div class="section-inner">
+    <div class="section-heading">
+      <span class="sh-line"></span>
+      <span class="sh-icon">◆</span>
+      <span class="sh-text">FIND GUIDANCE FOR YOUR SITUATION</span>
+      <span class="sh-icon">◆</span>
+      <span class="sh-line"></span>
     </div>
+    <p class="section-sub">Whatever you are feeling right now — there is a story for it.</p>
 
-    <!-- Streak unlock hint -->
-    <div class="v2-unlock-hint" id="v2-unlock-hint"></div>
-
+    <div class="wyf-grid">
+      <a href="stories.html?feel=lost"          class="wyf-card">😔<span>Lost</span></a>
+      <a href="stories.html?feel=guilty"        class="wyf-card">😞<span>Guilty</span></a>
+      <a href="stories.html?feel=alone"         class="wyf-card">😔<span>Alone</span></a>
+      <a href="stories.html?feel=overwhelmed"   class="wyf-card">😩<span>Overwhelmed</span></a>
+      <a href="stories.html?feel=heartbroken"   class="wyf-card">😢<span>Heartbroken</span></a>
+      <a href="stories.html?feel=angry"         class="wyf-card">😤<span>Angry</span></a>
+      <a href="stories.html?feel=afraid"        class="wyf-card">😰<span>Afraid</span></a>
+      <a href="stories.html?feel=grieving"      class="wyf-card">😓<span>Grieving</span></a>
+      <a href="stories.html?feel=misunderstood" class="wyf-card">🤔<span>Misunderstood</span></a>
+      <a href="stories.html?feel=unmotivated"   class="wyf-card">😴<span>Unmotivated</span></a>
+    </div>
   </div>
-</div>
+</section>
 
-<!-- Keep legacy share-card-dl for html2canvas targeting -->
-<div style="position:absolute;left:-9999px;top:-9999px;pointer-events:none" aria-hidden="true">
-  <!-- JS compatibility stubs — removed sections -->
-  <div id="insight-card"></div>
-  <div id="reflect-gen-card"></div>
-  <button id="btn-reflect-gen"></button>
-  <button id="btn-share-reflection"></button>
-  <div id="liveage-empty"></div>
-  <div id="liveage-grid"></div>
-  <div id="birthday-card"><div id="bday-icon"></div><div id="bday-title"></div><div id="bday-val"></div><div id="bday-sub"></div></div>
-  <span id="la-years"></span><span id="la-months"></span><span id="la-weeks"></span>
-  <span id="la-days"></span><span id="la-hours"></span><span id="la-minutes"></span><span id="la-seconds"></span>
-  <span id="liveage-sub"></span>
-  <div class="share-card-dl" id="share-card-dl">
-    <div class="scdl-logo">✦ WaqtX</div>
-    <div class="scdl-pct" id="scdl-pct">—%</div>
-    <div class="scdl-label">of my life has passed.</div>
-    <div class="scdl-days" id="scdl-days">— Days</div>
-    <div class="scdl-hijri" id="scdl-hijri">— AH</div>
-    <div class="scdl-quote">Only Allah knows what remains.<br>May I use my time better.</div>
-    <div class="scdl-footer">mianhassam96.github.io/WaqtX</div>
-  </div>
-  <button class="btn-dl-card" id="btn-dl-card" style="display:none">⬇ Download Card</button>
-</div>
 
-<!-- ═══ SITE FOOTER ═══ -->
-<footer class="site-footer">
+<!-- ═══════════════════════════════════════════
+     SECTION 9 — FOOTER
+     ═══════════════════════════════════════════ -->
+<footer class="site-footer" id="site-footer">
   <div class="footer-inner">
+
+    <!-- Col 1: Brand -->
     <div class="footer-brand">
-      <span class="footer-logo">✦ WaqtX</span>
-      <p>A mirror for your time.<br>A guide for your life.</p>
+      <a href="index.html" class="footer-logo">
+        <span class="nav-logo-text">Waqt<span class="nav-logo-x">X</span></span>
+      </a>
+      <p class="footer-mission">
+        Helping Muslims reflect on, track, and make better use of the time Allah has given them.
+      </p>
+      <p class="footer-tagline">Your Time. Your Journey. Your Amanah.</p>
     </div>
-    <div class="footer-center">
-      Made with ♥ for a meaningful life
-      <div class="footer-socials">
-        <a href="https://github.com/Mianhassam96" target="_blank" rel="noopener" aria-label="GitHub">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
-        </a>
-        <a href="privacy.html" aria-label="Privacy">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </a>
-        <a href="https://www.linkedin.com/in/mianhassam96/" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        </a>
-        <a href="https://multimian.com" target="_blank" rel="noopener" aria-label="Website">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-        </a>
-      </div>
+
+    <!-- Col 2: Navigation -->
+    <div class="footer-col">
+      <div class="footer-col-title">Navigation</div>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="prayers.html">Prayers</a></li>
+        <li><a href="journey.html">Journey</a></li>
+        <li><a href="reflection.html">Reflection</a></li>
+        <li><a href="stories.html">Stories</a></li>
+        <li><a href="qibla.html">Qibla</a></li>
+      </ul>
     </div>
-    <div class="footer-links">
-      <a href="stories.html">Stories</a>
-      <a href="privacy.html">Privacy</a>
-      <div class="footer-copy">© 2026 MultiMian. All rights reserved.</div>
+
+    <!-- Col 3: Resources -->
+    <div class="footer-col">
+      <div class="footer-col-title">Resources</div>
+      <ul class="footer-links">
+        <li><a href="privacy.html">Privacy</a></li>
+        <li><a href="https://github.com/Mianhassam96" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/mianhassam96/" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://mianhassam96.github.io/" target="_blank" rel="noopener">Website</a></li>
+      </ul>
     </div>
+
+  </div>
+
+  <!-- Footer bottom bar -->
+  <div class="footer-bottom">
+    <span class="footer-logo-bottom">
+      <span class="nav-logo-text">Waqt<span class="nav-logo-x">X</span></span>
+    </span>
+    <span class="footer-bottom-tagline">Your Time. Your Journey. Your Amanah.</span>
+    <span class="footer-copy">© 2026 MultiMian</span>
   </div>
 </footer>
 
-<!-- PWA INSTALL -->
-<div class="pwa-prompt hidden" id="pwa-prompt">
-  <div class="pwa-inner">
-    <div class="pwa-icon">◆</div>
-    <div class="pwa-text">
-      <div class="pwa-title">Install WaqtX</div>
-      <div class="pwa-sub">Add to home screen for daily reflection</div>
-    </div>
-    <button class="pwa-install" id="pwa-install">Install</button>
-    <button class="pwa-dismiss" id="pwa-dismiss" aria-label="Dismiss">✕</button>
-  </div>
-</div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
-<script src="stories-data.js" defer></script>
-<script src="daily-islam.js" defer></script>
-<script src="js/core.js" defer></script>
-<script src="app.js" defer></script>
+<!-- ═══════════════════════════════════════════
+     SCRIPTS
+     ═══════════════════════════════════════════ -->
+<script src="js/core.js"></script>
+<script src="daily-islam.js"></script>
+<script src="app.js"></script>
+<script>
+/* ── Home Page Dashboard Logic ── */
+(function() {
+  'use strict';
+
+  /* ── Helpers ── */
+  function el(id) { return document.getElementById(id); }
+  function fmt(n) { return Number(Math.round(n)).toLocaleString(); }
+
+  /* ── Date badge ── */
+  function updateDateBadge() {
+    var now = new Date();
+    var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    var greg = days[now.getDay()] + ' · ' + now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+    var hijri = window.toHijri ? window.toHijri(now) : null;
+    var hijriText = hijri
+      ? window.HIJRI_MONTHS[hijri.month - 1] + ' ' + hijri.day + ', ' + hijri.year + ' AH'
+      : '';
+    var hEl = el('hero-hijri-date'); if (hEl) hEl.textContent = hijriText;
+    var gEl = el('hero-greg-date');  if (gEl) gEl.textContent = greg;
+  }
+  updateDateBadge();
+
+  /* ── Prayer countdown ── */
+  var PRAYER_ICONS = { Fajr:'🌙', Dhuhr:'☀️', Asr:'🌤️', Maghrib:'🌇', Isha:'🌃' };
+  var _prayerTimes = null;
+
+  function updateNextPrayer(times) {
+    if (!times) return;
+    var now = new Date();
+    var order = ['Fajr','Dhuhr','Asr','Maghrib','Isha'];
+    var nextName = null, nextMs = null;
+    for (var i = 0; i < order.length; i++) {
+      var t = times[order[i]];
+      if (!t) continue;
+      var parts = t.split(':');
+      var d = new Date(); d.setHours(+parts[0], +parts[1], 0, 0);
+      if (d > now) { nextName = order[i]; nextMs = d - now; break; }
+    }
+    if (!nextName) { nextName = 'Fajr'; nextMs = 86400000; }
+
+    function pad(v) { return String(v).padStart(2,'0'); }
+    var totalSec = Math.floor(nextMs / 1000);
+    var h = Math.floor(totalSec / 3600);
+    var m = Math.floor((totalSec % 3600) / 60);
+    var s = totalSec % 60;
+    var countStr = h > 0 ? h + ':' + pad(m) + ':' + pad(s) : pad(m) + ':' + pad(s);
+
+    /* Hero card */
+    var icon = PRAYER_ICONS[nextName] || '🕌';
+    var nameEl = el('hdc-prayer-name');     if (nameEl) nameEl.textContent = nextName;
+    var iconEl = el('hdc-prayer-icon');     if (iconEl) iconEl.textContent = icon;
+    var cntEl  = el('hdc-prayer-countdown'); if (cntEl) cntEl.textContent = countStr;
+
+    /* Section next-prayer card */
+    var hnpName = el('hnp-name');     if (hnpName) hnpName.textContent = nextName;
+    var hnpIcon = el('hnp-icon');     if (hnpIcon) hnpIcon.textContent = icon;
+    var hnpCnt  = el('hnp-countdown'); if (hnpCnt) hnpCnt.textContent = countStr + ' remaining';
+  }
+
+  /* Poll prayer times from localStorage (set by prayers.js) */
+  function loadAndUpdatePrayer() {
+    try {
+      var stored = localStorage.getItem('waqtx_prayer_times');
+      if (stored) {
+        _prayerTimes = JSON.parse(stored);
+        updateNextPrayer(_prayerTimes);
+        updateTimeline(_prayerTimes);
+        updatePrayerCards(_prayerTimes);
+      }
+    } catch(e) {}
+    updateNextPrayer(_prayerTimes);
+  }
+
+  function updateTimeline(times) {
+    if (!times) return;
+    var now = new Date();
+    var order = ['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha'];
+    order.forEach(function(name) {
+      var pill = el('ht-' + name);
+      if (!pill) return;
+      var t = times[name];
+      if (!t) return;
+      var parts = t.split(':');
+      var d = new Date(); d.setHours(+parts[0], +parts[1], 0, 0);
+      pill.className = 'ht-pill ' + (d < now ? 'ht-past' : d - now < 1800000 ? 'ht-active' : 'ht-upcoming');
+    });
+  }
+
+  function updatePrayerCards(times) {
+    var order = ['Fajr','Dhuhr','Asr','Maghrib','Isha'];
+    var now = new Date();
+    order.forEach(function(name) {
+      var timeEl  = el('hps-time-' + name);
+      var badgeEl = el('hps-badge-' + name);
+      var t = times[name];
+      if (!t || !timeEl || !badgeEl) return;
+      timeEl.textContent = formatTime12(t);
+      var parts = t.split(':');
+      var d = new Date(); d.setHours(+parts[0], +parts[1], 0, 0);
+      if (d < now) {
+        badgeEl.textContent = 'Passed';
+        badgeEl.className = 'hps-badge hps-past';
+      } else {
+        badgeEl.textContent = 'Upcoming';
+        badgeEl.className = 'hps-badge hps-upcoming';
+      }
+    });
+  }
+
+  function formatTime12(t) {
+    var parts = t.split(':');
+    var h = +parts[0], m = +parts[1];
+    var ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12 || 12;
+    return h + ':' + String(m).padStart(2,'0') + ' ' + ampm;
+  }
+
+  loadAndUpdatePrayer();
+  setInterval(loadAndUpdatePrayer, 30000);
+
+  /* ── Journey counters from DOB ── */
+  function loadJourneyCounters() {
+    var dob = null;
+    try { dob = localStorage.getItem('waqtx_dob') || localStorage.getItem('waqtx_hero_dob'); } catch(e){}
+    var nameStored = '';
+    try { nameStored = localStorage.getItem('waqtx_name') || localStorage.getItem('waqtx_hero_name') || ''; } catch(e){}
+
+    /* Update greeting name */
+    var nameEl = el('hdc-name');
+    if (nameEl && nameStored) nameEl.textContent = ', ' + nameStored;
+
+    if (!dob) {
+      var noDobEls = document.querySelectorAll('.hdc-age-stats, .jsn-counter-list, .jsn-ring-wrap, .jsn-remaining-stats');
+      noDobEls.forEach(function(e) { e.style.opacity = '0.35'; });
+      var noDob = el('hdc-no-dob'); if (noDob) noDob.classList.remove('hidden');
+      return;
+    }
+
+    var birth = new Date(dob);
+    var now   = new Date();
+    var diffMs = now - birth;
+    var diffDays = diffMs / 86400000;
+    var diffYears = diffDays / 365.25;
+
+    var ramadans = Math.floor(diffYears);
+    var jumuahs  = Math.floor(diffDays / 7);
+    var prayerOpps = Math.floor(diffDays * 5);
+    var laylatul = ramadans;
+    var pctDone  = Math.min(Math.round((diffYears / 75) * 100), 100);
+    var remYears = Math.max(0, 75 - diffYears);
+    var remRamadans = Math.floor(remYears);
+    var remJumuahs  = Math.floor(remYears * 52.18);
+
+    /* Hero card */
+    var r = el('hdc-ramadans'); if (r) r.textContent = fmt(ramadans);
+    var j = el('hdc-jumuahs');  if (j) j.textContent = fmt(jumuahs);
+    var p = el('hdc-prayers');  if (p) p.textContent = fmt(prayerOpps);
+
+    /* Journey snapshot left */
+    var hRam = el('hov-ramadans');    if (hRam) hRam.textContent = fmt(ramadans);
+    var hJum = el('hov-jumuahs');     if (hJum) hJum.textContent = fmt(jumuahs);
+    var hPr  = el('hov-prayer-opps'); if (hPr)  hPr.textContent  = fmt(prayerOpps);
+    var hLay = el('hov-laylatul');    if (hLay) hLay.textContent  = fmt(laylatul);
+
+    /* Journey snapshot right ring */
+    var pctEl = el('jsn-ring-pct');
+    if (pctEl) pctEl.textContent = pctDone + '%';
+    var ring = el('jsn-ring-fill');
+    if (ring) {
+      var circumference = 414.69;
+      var offset = circumference - (pctDone / 100) * circumference;
+      ring.style.strokeDashoffset = offset;
+    }
+    var remREl = el('jsn-rem-ramadans'); if (remREl) remREl.textContent = fmt(remRamadans);
+    var remJEl = el('jsn-rem-jumuahs');  if (remJEl) remJEl.textContent = fmt(remJumuahs);
+  }
+  loadJourneyCounters();
+
+  /* ── Spiritual progress bars ── */
+  function loadSpiritualProgress() {
+    var prayerStreak = 0;
+    var reflectDays  = 0;
+    var gratitudeDays = 0;
+    try {
+      prayerStreak  = parseInt(localStorage.getItem('waqtx_prayer_streak') || '0', 10) || 0;
+      reflectDays   = parseInt(localStorage.getItem('waqtx_reflection_streak') || '0', 10) || 0;
+      gratitudeDays = parseInt(localStorage.getItem('waqtx_gratitude_streak') || '0', 10) || 0;
+    } catch(e){}
+
+    /* Cap at 100% based on 30-day baseline */
+    var prayerPct   = Math.min(Math.round((prayerStreak  / 30) * 100), 100);
+    var reflectPct  = Math.min(Math.round((reflectDays   / 30) * 100), 100);
+    var gratitudePct= Math.min(Math.round((gratitudeDays / 30) * 100), 100);
+
+    function setBar(pctElId, barId, pct, label) {
+      var pEl = el(pctElId); if (pEl) pEl.textContent = pct ? pct + '%' : 'Start Today';
+      var bEl = el(barId);   if (bEl) bEl.style.width = pct + '%';
+    }
+    setBar('hdc-prayer-consistency', 'hdc-bar-prayer',    prayerPct);
+    setBar('hdc-muhasabah-streak',   'hdc-bar-muhasabah', reflectPct);
+    setBar('hdc-gratitude-streak',   'hdc-bar-gratitude', gratitudePct);
+
+    /* Section 7 */
+    setBar('sp-prayer-pct',   'sp-bar-prayer',   prayerPct);
+    setBar('sp-reflect-pct',  'sp-bar-reflect',  reflectPct);
+    setBar('sp-gratitude-pct','sp-bar-gratitude',gratitudePct);
+    var strEl = el('sp-streak-val'); if (strEl) strEl.textContent = prayerStreak || '0';
+
+    /* Hero card — show as "X days" */
+    var mEl = el('hdc-muhasabah-streak'); if (mEl && reflectDays)   mEl.textContent = reflectDays + ' Days';
+    var gEl = el('hdc-gratitude-streak'); if (gEl && gratitudeDays) gEl.textContent = gratitudeDays + ' Days';
+  }
+  loadSpiritualProgress();
+
+  /* ── Today's Guidance (Ayah/Dua/Action) ── */
+  function loadDailyGuidance() {
+    var dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 86400000) - 1;
+    if (window.DAILY_AYAHS && window.DAILY_AYAHS.length) {
+      var ayah = window.DAILY_AYAHS[dayOfYear % window.DAILY_AYAHS.length];
+      var aAr = el('dd-ayah-arabic');     if (aAr) aAr.textContent = ayah.arabic;
+      var aTr = el('dd-ayah-translation');if (aTr) aTr.textContent = '"' + ayah.translation + '"';
+      var aSr = el('dd-ayah-source');     if (aSr) aSr.textContent = ayah.source;
+      var aRf = el('dd-ayah-reflection'); if (aRf) aRf.textContent = ayah.reflection;
+    }
+    if (window.DAILY_DUAS && window.DAILY_DUAS.length) {
+      var dua = window.DAILY_DUAS[dayOfYear % window.DAILY_DUAS.length];
+      var dSit = el('dd-dua-situation');     if (dSit) dSit.textContent = dua.situation || '';
+      var dAr  = el('dd-dua-arabic');        if (dAr)  dAr.textContent  = dua.arabic;
+      var dTr  = el('dd-dua-transliteration');if(dTr)  dTr.textContent  = dua.transliteration || '';
+      var dTrans= el('dd-dua-translation');  if (dTrans)dTrans.textContent= '"' + dua.translation + '"';
+      var dSrc = el('dd-dua-source');        if (dSrc) dSrc.textContent  = dua.source || '';
+    }
+    if (window.DAILY_ACTIONS && window.DAILY_ACTIONS.length) {
+      var act = window.DAILY_ACTIONS[dayOfYear % window.DAILY_ACTIONS.length];
+      var aText = el('dd-action-text'); if (aText) aText.textContent = act.action || act.text || '';
+      var aWhy  = el('dd-action-why');  if (aWhy)  aWhy.textContent  = act.why || '';
+    }
+  }
+  loadDailyGuidance();
+
+  /* ── Done button ── */
+  var doneBtn = el('dd-done-btn');
+  var doneMsg = el('dd-done-msg');
+  if (doneBtn && doneMsg) {
+    var todayKey = new Date().toISOString().slice(0, 10);
+    var actionDoneKey = 'waqtx_action_done_' + todayKey;
+    try { if (localStorage.getItem(actionDoneKey)) { doneBtn.classList.add('hidden'); doneMsg.classList.remove('hidden'); } } catch(e){}
+    doneBtn.addEventListener('click', function() {
+      try { localStorage.setItem(actionDoneKey, '1'); } catch(e){}
+      doneBtn.classList.add('hidden');
+      doneMsg.classList.remove('hidden');
+    });
+  }
+
+  /* ── Muhasabah autosave ── */
+  var todayDate = new Date().toISOString().slice(0, 10);
+  ['hm-q1','hm-q2','hm-q3'].forEach(function(id, i) {
+    var textarea = el(id);
+    if (!textarea) return;
+    var key = 'waqtx_home_mq' + (i + 1) + '_' + todayDate;
+    try { var saved = localStorage.getItem(key); if (saved) textarea.value = saved; } catch(e){}
+    textarea.addEventListener('input', function() {
+      try { localStorage.setItem(key, textarea.value); } catch(e){}
+      var st = el('hm-save-status');
+      if (st) { st.textContent = '✓ Saved'; setTimeout(function(){ st.textContent = ''; }, 2000); }
+    });
+  });
+
+  /* ── This Day in Islamic History ── */
+  var ISLAMIC_HISTORY = [
+    { month: 1, day: 10, year: '680 CE', title: 'The Martyrdom of Husayn ibn Ali', body: 'On the Day of Ashura, Husayn ibn Ali RA, the grandson of the Prophet ﷺ, was martyred at Karbala. He stood firm against injustice, refusing to pledge allegiance to tyranny — a lesson in conviction that echoes through the centuries.', reflection: 'Sometimes standing for truth means standing alone. The believer does not measure courage by outcome, but by intention.' },
+    { month: 1, day: 1, year: '622 CE', title: 'The Islamic New Year — Hijri Calendar Begins', body: 'The Islamic calendar marks its beginning from the Hijrah — the migration of the Prophet ﷺ from Makkah to Madinah. Time itself was reoriented around faith and community.', reflection: 'Every new year is a new opportunity to redirect your life toward what truly matters.' },
+    { month: 3, day: 12, year: '570 CE', title: 'Birth of the Prophet Muhammad ﷺ', body: 'The Prophet Muhammad ﷺ was born in Makkah in the Year of the Elephant. His birth would reshape the world — bringing light, mercy, and a complete way of life for all of humanity.', reflection: 'To love the Prophet ﷺ is to follow his character in the smallest details of daily life.' },
+    { month: 7, day: 27, year: '610 CE', title: 'First Revelation — Laylat al-Qadr', body: 'The Angel Jibreel AS descended to the Cave of Hira with the first words of the Quran: "Iqra" — Read. In that moment, the greatest book ever given to humanity began to be revealed.', reflection: 'Every time you open the Quran, you connect to that sacred night.' },
+    { month: 9, day: 1, year: '2 AH', title: 'Fasting in Ramadan Prescribed', body: 'The command to fast in the month of Ramadan was revealed to the Prophet ﷺ and his companions in the second year after the Hijrah. This became one of the five pillars of Islam.', reflection: 'Hunger is not just physical — it is a reminder that the soul too must be fed.' },
+    { month: 10, day: 1, year: '1 AH', title: 'Eid al-Fitr — First Celebration', body: 'After completing the first Ramadan fast, the Prophet ﷺ and companions celebrated Eid al-Fitr — a day of gratitude, joy, and community. The first of many celebrations in Islam.', reflection: 'Celebration in Islam is rooted in gratitude, not excess.' },
+    { month: 12, day: 9, year: '10 AH', title: 'The Farewell Sermon — Arafah', body: 'On the plains of Arafah during his final Hajj, the Prophet ﷺ delivered the Farewell Sermon — a timeless charter of human rights, dignity, and brotherhood that predates all modern declarations.', reflection: 'His final words to us were not rules — they were reminders of what it means to be human.' }
+  ];
+
+  function loadThisDayHistory() {
+    var now = new Date();
+    var m = now.getMonth() + 1;
+    var d = now.getDate();
+    var entry = null;
+    /* Try exact match */
+    for (var i = 0; i < ISLAMIC_HISTORY.length; i++) {
+      if (ISLAMIC_HISTORY[i].month === m && ISLAMIC_HISTORY[i].day === d) { entry = ISLAMIC_HISTORY[i]; break; }
+    }
+    /* Fallback: pick by day of year */
+    if (!entry) {
+      var doy = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000) - 1;
+      entry = ISLAMIC_HISTORY[doy % ISLAMIC_HISTORY.length];
+    }
+    if (!entry) return;
+    var yr = el('td-year');   if (yr) yr.textContent = entry.year;
+    var ti = el('td-title');  if (ti) ti.textContent = entry.title;
+    var bd = el('td-body');   if (bd) bd.textContent = entry.body;
+    var rf = el('td-reflection'); if (rf) rf.textContent = entry.reflection;
+  }
+  loadThisDayHistory();
+
+})();
+</script>
 <script>
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js').catch(function() {});
+    navigator.serviceWorker.register('sw.js').catch(function(){});
   }
 </script>
 </body>
