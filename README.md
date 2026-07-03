@@ -1,7 +1,7 @@
 # ✦ WaqtX — Your Time is a Trust
 
 > *"By time — indeed, mankind is in loss. Except for those who have believed and done righteous deeds."*
-> — Quran 103:1-3
+> — Quran 103:1- 
 
 A **Muslim personal growth dashboard** built with vanilla HTML, CSS, and JavaScript. No frameworks. No backend. 100% private — everything lives on your device.
 
