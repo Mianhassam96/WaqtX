@@ -18,7 +18,7 @@ Rather than competing with apps that provide every Islamic utility, WaqtX owns a
 > **Islamic Time & History** — connecting your personal journey through time with the larger story of Islamic civilization.
 
 ---
-
+ 
 ## The 3 Pillars
 
 | Pillar | Description |
