@@ -1,35 +1,42 @@
 {
   "name": "WaqtX — Your Time. Your Faith. Your History.",
   "short_name": "WaqtX",
-  "description": "An immersive Islamic knowledge and personal reflection experience. Explore 1400 years of Islamic civilization, track your prayer rhythm, and reflect daily.",
+  "description": "Make today meaningful. Prayer times, Islamic history, reflection, and your personal journey — private and offline-first.",
   "start_url": "/WaqtX/",
   "scope": "/WaqtX/",
   "display": "standalone",
-  "background_color": "#0B1220",
-  "theme_color": "#0B1220",
+  "background_color": "#F7F8F5",
+  "theme_color": "#F7F8F5",
   "orientation": "portrait-primary",
   "categories": ["education", "lifestyle", "productivity"],
+  "lang": "en",
+  "dir": "ltr",
   "icons": [
-    { "src": "favicon.svg",    "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
-    { "src": "favicon.svg",    "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" },
+    { "src": "favicon.svg",    "sizes": "any",   "type": "image/svg+xml", "purpose": "any" },
+    { "src": "favicon.svg",    "sizes": "any",   "type": "image/svg+xml", "purpose": "maskable" },
     { "src": "favicon-32.svg", "sizes": "32x32", "type": "image/svg+xml" }
   ],
   "screenshots": [],
   "shortcuts": [
     {
-      "name": "Explore History",
-      "url": "/WaqtX/explore.html",
-      "description": "Open the Islamic History Explorer"
+      "name": "Today",
+      "url": "/WaqtX/",
+      "description": "Today's prayer, guidance and reflection"
     },
     {
       "name": "Prayer Times",
       "url": "/WaqtX/prayers.html",
-      "description": "View today's prayer times"
+      "description": "Prayer times, tracker and Qibla"
     },
     {
-      "name": "Daily Reflection",
+      "name": "Explore History",
+      "url": "/WaqtX/explore.html",
+      "description": "1,400 years of Islamic civilization"
+    },
+    {
+      "name": "Reflection",
       "url": "/WaqtX/reflection.html",
-      "description": "Open daily reflection journal"
+      "description": "Daily Muhasabah and private journal"
     }
   ]
 }
