@@ -1,14 +1,13 @@
 'use strict';
 /* ═══════════════════════════════════════════════
-   WaqtX V3 — Service Worker
-   Cache: waqtx-v23
+   WaqtX — Service Worker
+   Cache: waqtx-v24
+   Phase 0: cleaned asset list — legacy files removed
    ═══════════════════════════════════════════════ */
-var CACHE = 'waqtx-v23';
+var CACHE = 'waqtx-v24';
 var ASSETS = [
   './',
   './index.html',
-  './explore.html',
-  './search.html',
   './prayers.html',
   './journey.html',
   './reflection.html',
@@ -17,24 +16,25 @@ var ASSETS = [
   './settings.html',
   './qibla.html',
   './stories.html',
+  './explore.html',
+  './search.html',
   './privacy.html',
   './style.css',
-  './style-pages.css',
-  './app.js',
   './js/core.js',
   './js/home.js',
-  './js/explore.js',
-  './js/search.js',
-  './js/history-data.js',
   './js/prayers.js',
   './js/journey.js',
   './js/reflection.js',
   './js/calendar.js',
   './js/profile.js',
   './js/settings.js',
+  './js/explore.js',
+  './js/search.js',
+  './js/history-data.js',
   './daily-islam.js',
   './stories-data.js',
   './stories.js',
+  './sw-register.js',
   './manifest.json',
   './favicon.svg',
   './favicon-32.svg',
@@ -49,9 +49,21 @@ self.addEventListener('install', function(e) {
   self.skipWaiting();
   e.waitUntil(
     caches.open(CACHE).then(function(cache) {
-      return cache.addAll(ASSETS);
-    }).catch(function(err) {
-      console.warn('WaqtX SW: cache addAll partial failure', err);
+      /* Cache core assets; non-critical ones are fetched on demand */
+      var core = [
+        './', './index.html', './style.css',
+        './js/core.js', './js/home.js', './manifest.json',
+        './favicon.svg', './lang/en.json'
+      ];
+      return cache.addAll(core).then(function() {
+        /* Cache remaining assets in background — failures are non-fatal */
+        var rest = ASSETS.filter(function(a) { return core.indexOf(a) === -1; });
+        return Promise.allSettled
+          ? Promise.allSettled(rest.map(function(url) {
+              return cache.add(url).catch(function() { /* non-fatal */ });
+            }))
+          : Promise.resolve();
+      });
     })
   );
 });
@@ -70,34 +82,45 @@ self.addEventListener('activate', function(e) {
 });
 
 self.addEventListener('fetch', function(e) {
-  /* Only handle GET requests for same-origin or CDN assets */
   if (e.request.method !== 'GET') return;
   var url = new URL(e.request.url);
 
-  /* For API requests (prayer times), go network-first */
+  /* Prayer time API: network-first */
   if (url.hostname === 'api.aladhan.com' || url.hostname === 'cdn.islamic.network') {
     e.respondWith(
-      fetch(e.request).catch(function() {
-        return caches.match(e.request);
+      fetch(e.request).catch(function() { return caches.match(e.request); })
+    );
+    return;
+  }
+
+  /* Google Fonts: cache-first */
+  if (url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com') {
+    e.respondWith(
+      caches.match(e.request).then(function(cached) {
+        if (cached) return cached;
+        return fetch(e.request).then(function(res) {
+          if (res && res.status === 200) {
+            var clone = res.clone();
+            caches.open(CACHE).then(function(c) { c.put(e.request, clone); });
+          }
+          return res;
+        });
       })
     );
     return;
   }
 
-  /* For app assets: cache-first, fallback to network */
+  /* App assets: cache-first, fallback to network, fallback to index */
   e.respondWith(
     caches.match(e.request).then(function(cached) {
       if (cached) return cached;
       return fetch(e.request).then(function(response) {
-        /* Cache successful responses for our own assets */
-        if (response && response.status === 200 &&
-            (url.hostname === self.location.hostname || url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com')) {
+        if (response && response.status === 200 && url.hostname === self.location.hostname) {
           var clone = response.clone();
-          caches.open(CACHE).then(function(cache) { cache.put(e.request, clone); });
+          caches.open(CACHE).then(function(c) { c.put(e.request, clone); });
         }
         return response;
       }).catch(function() {
-        /* Offline fallback */
         return caches.match('./index.html');
       });
     })
