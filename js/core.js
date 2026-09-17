@@ -356,59 +356,80 @@ WaqtX.nav = {
       }
     });
 
-    /* Hamburger toggle — V2: opens .nav-drawer */
+    /* Hamburger toggle — Phase 3: uses .open class on nav-drawer */
     var ham = el('hamburger');
     var drawer = el('nav-drawer');
     if (ham && drawer) {
       /* Ensure drawer starts closed */
-      if (!drawer.classList.contains('hidden')) {
-        drawer.classList.add('hidden');
-        drawer.setAttribute('aria-hidden', 'true');
+      drawer.classList.remove('open');
+      drawer.setAttribute('aria-hidden', 'true');
+
+      function openDrawer() {
+        drawer.classList.add('open');
+        drawer.setAttribute('aria-hidden', 'false');
+        ham.classList.add('open');
+        ham.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
       }
-      ham.addEventListener('click', function(e) {
-        e.stopPropagation();
-        var isOpen = !drawer.classList.contains('hidden');
-        if (isOpen) {
-          drawer.classList.add('hidden');
-          drawer.setAttribute('aria-hidden', 'true');
-          ham.classList.remove('open');
-          ham.setAttribute('aria-expanded', 'false');
-        } else {
-          drawer.classList.remove('hidden');
-          drawer.setAttribute('aria-hidden', 'false');
-          ham.classList.add('open');
-          ham.setAttribute('aria-expanded', 'true');
-        }
-      });
-      /* Close drawer on outside click */
-      document.addEventListener('click', function(e) {
-        if (drawer.classList.contains('hidden')) return;
-        var navbar = el('navbar');
-        if (navbar && navbar.contains(e.target)) return;
-        drawer.classList.add('hidden');
+      function closeDrawer() {
+        drawer.classList.remove('open');
         drawer.setAttribute('aria-hidden', 'true');
         ham.classList.remove('open');
         ham.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+
+      ham.addEventListener('click', function(e) {
+        e.stopPropagation();
+        drawer.classList.contains('open') ? closeDrawer() : openDrawer();
       });
-      /* Close drawer on Escape */
+      /* Close on outside click */
+      document.addEventListener('click', function(e) {
+        if (!drawer.classList.contains('open')) return;
+        var navbar = el('navbar');
+        if (navbar && navbar.contains(e.target)) return;
+        closeDrawer();
+      });
+      /* Close on Escape */
       document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && !drawer.classList.contains('hidden')) {
-          drawer.classList.add('hidden');
-          drawer.setAttribute('aria-hidden', 'true');
-          ham.classList.remove('open');
-          ham.setAttribute('aria-expanded', 'false');
-        }
+        if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
+      });
+        ham.setAttribute('aria-expanded', 'false');
       });
     }
 
-    /* V3: Ramadan/Friday are content signals only — not visual themes.
-       isRamadan() and isFriday() remain available for page logic. */
+    /* Phase 3: scroll-hide navbar and bottom nav on mobile */
+    this.initScrollBehaviour();
 
     /* V3 More sheet (new bottom nav) */
     this.initMoreSheet();
 
     /* Legacy more menu fallback */
     this.initMoreMenu();
+  },
+
+  initScrollBehaviour: function() {
+    /* Auto-hide bottom nav on scroll down, show on scroll up */
+    var lastY = 0;
+    var ticking = false;
+    var bnav = el('bottom-nav');
+
+    window.addEventListener('scroll', function() {
+      if (ticking) return;
+      window.requestAnimationFrame(function() {
+        var y = window.scrollY;
+        if (bnav) {
+          if (y > lastY && y > 80) {
+            bnav.classList.add('bnav-hidden');
+          } else {
+            bnav.classList.remove('bnav-hidden');
+          }
+        }
+        lastY = y;
+        ticking = false;
+      });
+      ticking = true;
+    }, { passive: true });
   },
 
   initMoreSheet: function() {
