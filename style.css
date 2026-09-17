@@ -1,4 +1,4 @@
-/* ═══════════════════════════════════════════════════════════
+﻿/* ═══════════════════════════════════════════════════════════
    WaqtX — Design System V3
    Your Time. Your Faith. Your History.
 
@@ -1026,7 +1026,7 @@ html[lang="ur"] .lang-pill[data-lang="ur"] { font-family: var(--font-ur-ui); fon
   font-size: 1.5rem;
   line-height: 2;
   direction: rtl;
-  text-align: right;
+  text-align: end;
   color: var(--text);
   margin-bottom: var(--sp-3);
 }
@@ -1288,11 +1288,11 @@ html[lang="ur"] .lang-pill[data-lang="ur"] { font-family: var(--font-ur-ui); fon
    25. TIMELINE
    Blueprint: vertical, mobile responsive
    ───────────────────────────────────────── */
-.timeline { position: relative; padding-left: 28px; }
+.timeline { position: relative; padding-inline-start: 28px; }
 .timeline::before {
   content: '';
   position: absolute;
-  left: 9px; top: 8px; bottom: 8px;
+  inset-inline-start: 9px; top: 8px; bottom: 8px;
   width: 2px;
   background: linear-gradient(to bottom, var(--primary), rgba(23,74,58,0.1));
 }
@@ -1300,7 +1300,7 @@ html[lang="ur"] .lang-pill[data-lang="ur"] { font-family: var(--font-ur-ui); fon
 .timeline-item::before {
   content: '';
   position: absolute;
-  left: -22px; top: 6px;
+  inset-inline-start: -22px; top: 6px;
   width: 10px; height: 10px;
   border-radius: 50%;
   background: var(--surface);
@@ -1308,7 +1308,7 @@ html[lang="ur"] .lang-pill[data-lang="ur"] { font-family: var(--font-ur-ui); fon
   transition: all var(--ease);
 }
 .timeline-item:hover::before { background: var(--primary); }
-.timeline-item.featured::before { width: 14px; height: 14px; left: -24px; top: 4px; background: var(--primary); }
+.timeline-item.featured::before { width: 14px; height: 14px; inset-inline-start: -24px; top: 4px; background: var(--primary); }
 .tl-date  { font-size: var(--text-xs); font-weight: 700; color: var(--primary); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
 .tl-title { font-family: var(--font-heading); font-size: var(--text-md); font-weight: 700; color: var(--text); margin-bottom: 4px; line-height: var(--leading-snug); }
 .tl-body  { font-size: var(--text-sm); color: var(--text-2); line-height: var(--leading-relaxed); }
@@ -1495,7 +1495,7 @@ html[lang="ur"] .lang-pill[data-lang="ur"] { font-family: var(--font-ur-ui); fon
 .cons-label { font-size: var(--text-sm); font-weight: 600; color: var(--text-2); min-width: 100px; }
 .cons-bar-outer { flex: 1; height: 6px; background: var(--surface-alt); border-radius: var(--r-pill); overflow: hidden; }
 .cons-bar-inner { height: 100%; background: var(--primary); border-radius: var(--r-pill); }
-.cons-pct { font-size: var(--text-sm); font-weight: 700; color: var(--primary); min-width: 36px; text-align: right; }
+.cons-pct { font-size: var(--text-sm); font-weight: 700; color: var(--primary); min-width: 36px; text-align: end; }
 
 /* ─────────────────────────────────────────
    30. STORIES / CALENDAR / QIBLA
@@ -1564,7 +1564,7 @@ html[lang="ur"] {
 }
 html[lang="ur"] body {
   font-family: var(--font-ur-ui);
-  text-align: right;
+  text-align: start; /* logical: right in RTL, left in LTR */
 }
 html[lang="ur"] h1,
 html[lang="ur"] h2,
@@ -1583,7 +1583,7 @@ html[lang="ur"] .nav-links   { flex-direction: row-reverse; }
 html[lang="ur"] .nav-actions { flex-direction: row-reverse; }
 html[lang="ur"] .lang-pill:first-child { border-right: none; border-left: 1px solid var(--border); }
 html[lang="ur"] .bottom-nav  { flex-direction: row-reverse; }
-html[lang="ur"] .nav-drawer-section { text-align: right; }
+html[lang="ur"] .nav-drawer-section { text-align: start; }
 
 /* Card left-accent flips to right */
 html[lang="ur"] .card-accent { border-left: none; border-right: 3px solid var(--primary); }
@@ -1594,32 +1594,32 @@ html[lang="ur"] .guidance-card::before { left: auto; right: 0; border-radius: 0 
 html[lang="ur"] .today-hero-inner,
 html[lang="ur"] .detail-body,
 html[lang="ur"] .guidance-card,
-html[lang="ur"] .this-day-card { direction: rtl; text-align: right; }
+html[lang="ur"] .this-day-card { direction: rtl; text-align: start; }
 
-html[lang="ur"] .tdc-body { text-align: right; }
+html[lang="ur"] .tdc-body { text-align: start; }
 html[lang="ur"] .tdc-date-col { order: 2; }
 html[lang="ur"] .tdc-body { order: 1; }
 
 /* Arabic text always RTL */
 .gc-arabic,
 .arabic-text,
-[lang="ar"] { direction: rtl; text-align: right; font-family: var(--font-arabic); }
+[lang="ar"] { direction: rtl; text-align: start; font-family: var(--font-arabic); }
 
 /* Timeline RTL */
-html[lang="ur"] .timeline { padding-left: 0; padding-right: 28px; }
-html[lang="ur"] .timeline::before { left: auto; right: 9px; }
-html[lang="ur"] .timeline-item::before { left: auto; right: -22px; }
-html[lang="ur"] .timeline-item.featured::before { left: auto; right: -24px; }
+/* .timeline uses padding-inline-start by default; RTL flips it automatically */
+/* timeline::before uses inset-inline-start; auto-flips in RTL */
+/* timeline-item::before uses inset-inline-start; auto-flips in RTL */
+/* timeline-item.featured::before uses inset-inline-start; auto-flips in RTL */
 
 /* Detail modal RTL */
 html[lang="ur"] .detail-header,
-html[lang="ur"] .detail-body { direction: rtl; text-align: right; }
-html[lang="ur"] .detail-close { right: auto; left: var(--sp-5); }
+html[lang="ur"] .detail-body { direction: rtl; text-align: start; }
+html[lang="ur"] .detail-close { inset-inline-start: var(--sp-5); inset-inline-end: auto; }
 html[lang="ur"] .detail-meta-row { flex-direction: row-reverse; }
 
 /* Forms RTL */
 html[lang="ur"] .settings-row { flex-direction: row-reverse; }
-html[lang="ur"] .form-label { text-align: right; }
+html[lang="ur"] .form-label { text-align: start; }
 
 /* Numbers always LTR */
 html[lang="ur"] .jstat-val,
@@ -1695,3 +1695,156 @@ html[lang="ur"] .progress-bar-wrap { direction: ltr; }
   .navbar, .bottom-nav, .more-overlay, .more-sheet { display: none; }
   body { padding: 0; background: #fff; color: #000; }
 }
+
+
+/* ─────────────────────────────────────────
+   35. LOGICAL PROPERTIES — V3.4
+   Physical left/right → inline-start/end.
+   These work automatically with dir="rtl"
+   without needing separate [lang="ur"] rules.
+   ───────────────────────────────────────── */
+
+/* Nav — start-aligned logo, end-aligned actions */
+.nav-inner { padding-inline: var(--sp-6); }
+.nav-logo  { margin-inline-end: auto; }
+
+/* Cards: left-border accent → start-border */
+.card-accent { border-inline-start: 3px solid var(--primary); border-left: none; }
+.card-gold   { border-inline-start: 3px solid var(--gold); border-left: none; }
+
+/* History card hover accent */
+.history-card:hover {
+  border-inline-start: 2px solid var(--primary);
+  border-left: none;
+}
+
+/* Today hero date row */
+.today-date-row  { gap: var(--sp-3); }
+.today-hero-inner { padding-inline: var(--sp-5); }
+
+/* Guidance card: left-border → inline-start */
+.guidance-card::before {
+  inset-inline-start: 0;
+  inset-inline-end: auto;
+  left: unset; right: unset;
+}
+
+/* Timeline: uses padding-inline-start already; node positioning */
+.timeline-item::before {
+  inset-inline-start: calc(-1 * (28px - 9px + 1px));
+  left: unset;
+}
+
+/* Detail modal close button */
+.detail-close {
+  inset-inline-end: var(--sp-5);
+  inset-inline-start: auto;
+  right: unset; left: unset;
+}
+
+/* More sheet handle: centred */
+.more-sheet-handle { margin-inline: auto; }
+
+/* Source badges: gap before dot */
+.ev-badge-dot { margin-inline-end: 3px; }
+
+/* Settings rows: space-between stays logical via flex */
+.settings-row { padding-inline: var(--sp-5); }
+
+/* Search icon: end of input */
+.search-icon { inset-inline-end: 14px; inset-inline-start: auto; right: unset; }
+
+/* Form hints: start-aligned */
+.form-hint  { text-align: start; }
+.form-label { text-align: start; }
+
+/* Section label: start-aligned */
+.section-label { text-align: start; }
+
+/* Prayer rhythm: inline gap */
+.prayer-rhythm-wrap { padding-inline: 0; }
+
+/* Journey stats grid */
+.journey-stat-grid { gap: var(--sp-4); }
+
+/* Bottom nav items: symmetric */
+.bnav-item { padding-inline: var(--sp-1); }
+
+/* More sheet groups */
+.more-group-label { padding-inline: var(--sp-2) var(--sp-2); }
+
+/* Scrollbar — keep physical (browser compat) */
+
+/* ─────────────────────────────────────────
+   36. RTL — RESIDUAL OVERRIDES (V3.4)
+   These handle cases where logical props
+   alone are insufficient.
+   ───────────────────────────────────────── */
+
+/* Flex row reversal for RTL where needed */
+[dir="rtl"] .today-date-row    { flex-direction: row-reverse; }
+[dir="rtl"] .next-prayer-strip { flex-direction: row-reverse; }
+[dir="rtl"] .nps-left          { text-align: end; }
+[dir="rtl"] .this-day-card     { flex-direction: row-reverse; }
+[dir="rtl"] .tdc-date-col      { align-items: end; }
+[dir="rtl"] .hc-footer         { flex-direction: row-reverse; }
+[dir="rtl"] .hc-era-row        { flex-direction: row-reverse; }
+[dir="rtl"] .detail-meta-row   { flex-direction: row-reverse; }
+[dir="rtl"] .detail-people-list { justify-content: flex-end; }
+[dir="rtl"] .source-badges     { justify-content: flex-end; }
+[dir="rtl"] .ev-badge           { flex-direction: row-reverse; }
+[dir="rtl"] .settings-row      { flex-direction: row-reverse; }
+[dir="rtl"] .cons-row           { flex-direction: row-reverse; }
+[dir="rtl"] .jstat              { text-align: center; } /* numbers: always centred */
+
+/* RTL: more-sheet header */
+[dir="rtl"] .more-sheet-header { flex-direction: row-reverse; }
+[dir="rtl"] .more-group-label  { text-align: start; }
+
+/* RTL: nav links order */
+[dir="rtl"] .nav-inner  { flex-direction: row-reverse; }
+[dir="rtl"] .nav-links  { flex-direction: row-reverse; }
+[dir="rtl"] .nav-actions { flex-direction: row-reverse; }
+
+/* RTL: bottom nav */
+[dir="rtl"] .bottom-nav { flex-direction: row-reverse; }
+
+/* RTL: drawer */
+[dir="rtl"] .nav-drawer-section { text-align: start; }
+[dir="rtl"] .nav-drawer-links   { justify-content: flex-end; }
+
+/* RTL: guidance card accent moves to inline-start (auto via logical prop) */
+[dir="rtl"] .guidance-card::before {
+  inset-inline-start: 0;
+  inset-inline-end: auto;
+}
+
+/* RTL: timeline */
+[dir="rtl"] .timeline::before { background: linear-gradient(to bottom, var(--primary), rgba(23,74,58,0.1)); }
+
+/* RTL: page-hero centred — no change needed */
+
+/* RTL: history grid — logical auto-flow */
+[dir="rtl"] .history-grid     { direction: rtl; }
+[dir="rtl"] .history-era-grid { direction: rtl; }
+[dir="rtl"] .people-grid      { direction: rtl; }
+
+/* RTL: section-title in headings */
+[dir="rtl"] .section-title,
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3 { text-align: start; }
+
+/* RTL: search */
+[dir="rtl"] .search-wrap .search-icon {
+  inset-inline-end: auto;
+  inset-inline-start: 14px;
+}
+[dir="rtl"] .search-input { padding-inline: 44px 16px; }
+
+/* RTL: counter numbers — always LTR regardless of dir */
+[dir="rtl"] .jstat-val,
+[dir="rtl"] .nps-time,
+[dir="rtl"] .nps-countdown,
+[dir="rtl"] .prayer-card-time,
+[dir="rtl"] .progress-bar-wrap { direction: ltr; unicode-bidi: embed; }

@@ -169,19 +169,20 @@ WaqtX.theme = {
     this._updateButton(theme || 'light');
   },
   _updateButton: function(theme) {
-    /* Support both old #btn-theme-toggle textContent and new #theme-icon span */
+    /* Support both #theme-icon span (V3) and legacy btn textContent */
     var icon = el('theme-icon');
     var btn  = el('btn-theme-toggle');
-    /* Icon shows what clicking will switch TO */
-    var map = { light: '🌙', dark: '☀️', ramadan: '🌙✦', friday: '✦' };
-    var next = map[theme] || '🌙';
+    /* Only light/dark — icon shows what clicking will switch TO */
+    var next = (theme === 'dark') ? '☀️' : '🌙';
     if (icon) { icon.textContent = next; }
     else if (btn) { btn.textContent = next; }
     if (btn) btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
   },
   init: function() {
+    /* Only light/dark. Ramadan/Friday affect content, not visual theme. */
     var saved = S.get('theme') || 'light';
-    if (isRamadan() && !S.get('theme_user_set')) saved = 'ramadan';
+    /* Sanitise: if stored value is ramadan/friday (legacy), reset to light */
+    if (saved !== 'light' && saved !== 'dark') { saved = 'light'; S.set('theme', 'light'); }
     this.apply(saved);
     var self = this;
     var btn = el('btn-theme-toggle');
@@ -189,9 +190,8 @@ WaqtX.theme = {
       btn.addEventListener('click', function(e) {
         e.stopPropagation();
         var current = S.get('theme') || 'light';
-        var next = (current === 'dark') ? 'light' : 'dark';
-        S.set('theme_user_set', true);
-        self.apply(next);
+        /* Only toggle between light and dark */
+        self.apply(current === 'dark' ? 'light' : 'dark');
       });
     }
     /* Settings page theme option buttons */
@@ -206,11 +206,12 @@ WaqtX.theme = {
         });
       });
     }
-    /* Settings page preview buttons (data-theme on .theme-preview-btn) */
+    /* Settings page preview buttons */
     document.querySelectorAll('.theme-preview-btn').forEach(function(btn2) {
       btn2.addEventListener('click', function() {
         var t = btn2.getAttribute('data-theme');
-        S.set('theme_user_set', true);
+        /* Only allow light/dark */
+        if (t !== 'light' && t !== 'dark') return;
         self.apply(t);
         document.querySelectorAll('.theme-preview-btn').forEach(function(b) { b.classList.remove('active'); });
         btn2.classList.add('active');
@@ -397,17 +398,8 @@ WaqtX.nav = {
       });
     }
 
-    /* Ramadan badge */
-    var badge = el('ramadan-badge');
-    if (badge && isRamadan()) {
-      badge.classList.remove('hidden');
-    }
-
-    /* Friday banner */
-    var fridayBanner = el('friday-banner');
-    if (fridayBanner && isFriday()) {
-      fridayBanner.classList.remove('hidden');
-    }
+    /* V3: Ramadan/Friday are content signals only — not visual themes.
+       isRamadan() and isFriday() remain available for page logic. */
 
     /* V3 More sheet (new bottom nav) */
     this.initMoreSheet();
