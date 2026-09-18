@@ -43,12 +43,20 @@ function initNextPrayerStrip(timings) {
   var next = WaqtX.prayer.getNext(timings);
   if (!next) return;
 
-  setText('nps-name', next.name + (next.isTomorrow ? ' (tomorrow)' : ''));
+  var nameEl = el('nps-name');
+  if (nameEl) {
+    nameEl.innerHTML = '';
+    nameEl.textContent = next.name + (next.isTomorrow ? ' (tomorrow)' : '');
+  }
 
   /* Time display */
   var rawTime = timings[next.name] || '';
   var cleanTime = rawTime.split(' ')[0];
-  setText('nps-time', cleanTime);
+  var timeEl = el('nps-time');
+  if (timeEl) {
+    timeEl.innerHTML = '';
+    timeEl.textContent = cleanTime;
+  }
 
   /* Start live countdown */
   _startNextPrayerCountdown(next, timings);
@@ -89,10 +97,10 @@ function initPrayerRhythm(timings) {
     var pMin  = WaqtX.prayer.timeToMin(raw);
     var item  = document.querySelector('.pr-item[data-prayer="' + p + '"]');
 
-    setText('pr-time-' + p, clean);
+    var timeEl = el('pr-time-' + p);
+    if (timeEl) { timeEl.textContent = clean; timeEl.classList.remove('skeleton','skeleton-sm'); }
 
-    /* Update dot state */
-    var dot = document.getElementById('pr-dot-' + p);
+    var dot = el('pr-dot-' + p);
     if (!item) return;
 
     item.classList.remove('done','next','missed');
@@ -308,9 +316,13 @@ function initPrayerSection() {
   if (cached) {
     initNextPrayerStrip(cached);
     initPrayerRhythm(cached);
+    hideNoLocation();
   } else {
-    /* Show placeholder */
-    PRAYERS_5.forEach(function(p) { setText('pr-time-' + p, '--:--'); });
+    /* Show placeholder times */
+    PRAYERS_5.forEach(function(p) {
+      var el2 = el('pr-time-' + p);
+      if (el2) { el2.textContent = '--:--'; el2.classList.remove('skeleton','skeleton-sm'); }
+    });
 
     /* Auto-fetch if location saved */
     var lat = S.get('location_lat');
@@ -319,17 +331,27 @@ function initPrayerSection() {
       WaqtX.prayer.fetch(lat, lng, function(timings) {
         initNextPrayerStrip(timings);
         initPrayerRhythm(timings);
+        hideNoLocation();
       }, function() {
-        setText('nps-name', 'Set Location');
-        setText('nps-time', '—');
+        showNoLocation();
       });
     } else {
-      setText('nps-name', 'Enable Location');
-      setText('nps-time', '—');
-      var strip = el('nps-link');
-      if (strip) strip.href = 'settings.html';
+      showNoLocation();
     }
   }
+}
+
+function hideNoLocation() {
+  var noLoc = el('prayer-no-location');
+  if (noLoc) noLoc.classList.add('hidden');
+}
+function showNoLocation() {
+  var noLoc = el('prayer-no-location');
+  if (noLoc) noLoc.classList.remove('hidden');
+  var npsName = el('nps-name');
+  if (npsName) { npsName.innerHTML = '<span style="font-size:var(--text-base);font-weight:500;color:rgba(255,255,255,0.55)">Enable location for times</span>'; }
+  var npsTime = el('nps-time');
+  if (npsTime) { npsTime.innerHTML = ''; }
 }
 
 /* ══════════════════════════════════════
