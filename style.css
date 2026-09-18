@@ -3743,3 +3743,231 @@ html[lang="ur"] .progress-bar-wrap { direction: ltr; }
 [dir="rtl"] .notif-card       { flex-direction: row-reverse; }
 [dir="rtl"] .prayer-reflect-card { flex-direction: row-reverse; }
 [dir="rtl"] .tracker-grid     { direction: rtl; }
+
+
+/* ═══════════════════════════════════════════════════════════
+   PHASE 6 — JOURNEY PAGE
+   Life Overview · Islamic Counters · Milestones · Capsule
+   ═══════════════════════════════════════════════════════════ */
+
+.journey-section      { padding-block: var(--sp-7); }
+.journey-section-alt  { background: var(--surface-alt); padding-block: var(--sp-7); }
+.journey-section-sub  { font-size: var(--text-sm); color: var(--text-3); margin-block-end: var(--sp-5); line-height: var(--leading-relaxed); }
+
+@media (min-width: 768px) {
+  .journey-section, .journey-section-alt { padding-block: var(--sp-9); }
+}
+
+/* ── Life overview stats ── */
+.journey-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-4);
+  margin-block-end: var(--sp-5);
+}
+@media (min-width: 540px) {
+  .journey-overview-grid { grid-template-columns: repeat(4, 1fr); }
+}
+.jov-stat {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--sp-4);
+}
+.jov-label { font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-3); margin-block-end: var(--sp-1); }
+.jov-val   { font-family: var(--font-heading); font-size: var(--text-base); font-weight: 700; color: var(--text); line-height: var(--leading-snug); }
+
+/* ── DOB form ── */
+.journey-dob-form { padding: var(--sp-5); }
+.jdf-title  { font-size: var(--text-sm); font-weight: 700; color: var(--text); margin-block-end: var(--sp-3); }
+.jdf-row    { display: flex; gap: var(--sp-3); flex-wrap: wrap; }
+.jdf-input  { flex: 1; min-width: 160px; }
+.jdf-btn    { flex-shrink: 0; white-space: nowrap; }
+
+/* ── Islamic counters grid ── */
+.journey-counter-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-4);
+}
+@media (min-width: 540px) { .journey-counter-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.journey-counter-card { padding: var(--sp-5); text-align: center; }
+.jcc-icon  { font-size: 1.8rem; margin-block-end: var(--sp-3); }
+.jcc-value {
+  font-family: var(--font-heading);
+  font-size: var(--text-4xl);
+  font-weight: 900;
+  color: var(--primary);
+  line-height: 1;
+  margin-block-end: var(--sp-2);
+}
+.jcc-label { font-size: var(--text-sm); font-weight: 700; color: var(--text); margin-block-end: var(--sp-1); }
+.jcc-desc  { font-size: var(--text-xs); color: var(--text-3); line-height: var(--leading-relaxed); }
+
+/* ── Prayer moments hero card ── */
+.journey-prayer-card {
+  text-align: center;
+  padding: var(--sp-9) var(--sp-6);
+  border-radius: var(--r-xl);
+}
+.jpc-icon  { font-size: 2.5rem; margin-block-end: var(--sp-4); }
+.jpc-count {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-weight: 900;
+  color: var(--primary);
+  line-height: 1;
+  margin-block-end: var(--sp-3);
+}
+.jpc-label { font-size: var(--text-xl); font-weight: 700; color: var(--text); margin-block-end: var(--sp-3); }
+.jpc-desc  { font-size: var(--text-base); color: var(--text-3); line-height: var(--leading-relaxed); max-width: 480px; margin-inline: auto; }
+
+/* ── Life chapters / milestones ── */
+.life-chapters { display: flex; flex-direction: column; gap: 0; }
+.chapter-item {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: var(--sp-4);
+  position: relative;
+  padding-block-end: var(--sp-6);
+}
+.chapter-dot {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--border-2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  z-index: 1;
+  position: relative;
+  transition: border-color var(--ease);
+}
+.chapter-item.chapter-current .chapter-dot {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+  box-shadow: 0 0 0 4px var(--primary-soft);
+}
+.chapter-item.chapter-locked { opacity: 0.5; }
+.chapter-line {
+  position: absolute;
+  inset-inline-start: 21px;
+  inset-block-start: 44px;
+  width: 2px;
+  inset-block-end: 0;
+  background: var(--border);
+}
+.chapter-line.hidden { display: none; }
+.chapter-content { padding-block-start: var(--sp-2); }
+.chapter-label {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--text);
+  margin-block-end: var(--sp-2);
+}
+.chapter-reflection {
+  font-size: var(--text-sm);
+  color: var(--text-2);
+  line-height: var(--leading-relaxed);
+  margin-block-end: var(--sp-3);
+}
+.chapter-current-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  background: var(--primary);
+  color: #fff;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  border-radius: var(--r-pill);
+}
+.chapter-locked-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  background: var(--surface-alt);
+  color: var(--text-3);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--border);
+}
+
+/* ── Journey prompt (no DOB set) ── */
+.journey-prompt { text-align: center; padding: var(--sp-8) 0; }
+.jp-icon { font-size: 2.5rem; margin-block-end: var(--sp-4); }
+.jp-text { font-size: var(--text-base); color: var(--text-3); line-height: var(--leading-relaxed); }
+.jp-text a { color: var(--primary); font-weight: 600; text-decoration: none; }
+
+/* ── Life remaining ring ── */
+.lr-ring-wrap {
+  position: relative;
+  width: 120px; height: 120px;
+  margin-inline: auto;
+  margin-block-end: var(--sp-5);
+}
+.lr-ring { width: 100%; height: 100%; }
+.ring-bg  { fill: none; stroke: var(--border); stroke-width: 8; }
+.lr-ring-fill {
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 8;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1.2s ease;
+}
+.lr-pct {
+  position: absolute;
+  inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  color: var(--primary);
+}
+.lr-content { padding: var(--sp-5); }
+.lr-headline { font-family: var(--font-heading); font-size: var(--text-lg); font-weight: 600; color: var(--text); margin-block-end: var(--sp-3); line-height: var(--leading-snug); }
+.lr-body     { font-size: var(--text-sm); color: var(--text-2); line-height: var(--leading-relaxed); margin-block-end: var(--sp-5); }
+.lr-stats    { display: flex; gap: var(--sp-6); margin-block-end: var(--sp-5); flex-wrap: wrap; }
+.lr-stat     { display: flex; flex-direction: column; gap: 3px; }
+.lr-stat-val { font-family: var(--font-heading); font-size: var(--text-2xl); font-weight: 800; color: var(--primary); line-height: 1; }
+.lr-stat-lbl { font-size: var(--text-xs); color: var(--text-3); line-height: var(--leading-snug); }
+.lr-ayah     { font-size: var(--text-sm); color: var(--text-3); font-style: italic; line-height: var(--leading-relaxed); padding-block-start: var(--sp-4); border-block-start: 1px solid var(--border); }
+.lr-ayah-ref { font-weight: 700; font-style: normal; color: var(--primary); }
+
+/* ── Capsule card ── */
+.capsule-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: var(--sp-7);
+  text-align: center;
+  margin-block-end: var(--sp-5);
+}
+.cap-logo  { font-family: var(--font-logo); font-size: var(--text-sm); color: var(--primary); margin-block-end: var(--sp-4); letter-spacing: 0.1em; }
+.cap-name  { font-family: var(--font-heading); font-size: var(--text-3xl); font-weight: 800; color: var(--text); margin-block-end: var(--sp-1); }
+.cap-dob   { font-size: var(--text-sm); color: var(--text-3); margin-block-end: var(--sp-1); }
+.cap-hijri { font-size: var(--text-sm); color: var(--gold); font-weight: 600; margin-block-end: var(--sp-4); }
+.cap-divider { height: 1px; background: var(--border); margin: var(--sp-4) auto; width: 60%; }
+.cap-stats   { display: flex; justify-content: center; gap: var(--sp-6); flex-wrap: wrap; margin-block-end: var(--sp-5); }
+.cap-stat    { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.cap-stat-icon { font-size: 1.3rem; }
+.cap-stat-val { font-family: var(--font-heading); font-size: var(--text-xl); font-weight: 800; color: var(--primary); }
+.cap-stat-lbl { font-size: var(--text-xs); color: var(--text-3); text-transform: uppercase; letter-spacing: 0.06em; }
+.cap-watermark { font-size: var(--text-xs); color: var(--text-3); margin-block-start: var(--sp-4); }
+.capsule-actions {
+  display: flex;
+  gap: var(--sp-3);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* RTL journey */
+[dir="rtl"] .jdf-row            { flex-direction: row-reverse; }
+[dir="rtl"] .chapter-item       { grid-template-columns: 1fr 44px; direction: rtl; }
+[dir="rtl"] .chapter-line       { inset-inline-start: auto; inset-inline-end: 21px; }
+[dir="rtl"] .journey-overview-grid { direction: rtl; }
+[dir="rtl"] .journey-counter-grid  { direction: rtl; }
+[dir="rtl"] .lr-stats               { flex-direction: row-reverse; }
+[dir="rtl"] .cap-stats              { flex-direction: row-reverse; }
