@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>WaqtX — Prayer</title>
-  <meta name="description" content="Prayer times, tracker, streak, and orbit visualization."/>
+  <meta name="description" content="Your prayer times, weekly tracker, streak, and Qibla direction."/>
   <meta name="theme-color" content="#F7F8F5"/>
   <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
   <link rel="manifest" href="manifest.json"/>
@@ -12,169 +12,282 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&family=Cinzel:wght@600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
-  
   <script>
-    (function(){var s='light';try{s=localStorage.getItem('waqtx_theme')||'light';}catch(e){}if(s&&s!=='light')document.documentElement.setAttribute('data-theme',s);var l='en';try{l=localStorage.getItem('waqtx_lang')||'en';}catch(e){}if(l&&l!=='en'){document.documentElement.setAttribute('lang',l);if(l==='ur'||l==='ar')document.documentElement.setAttribute('dir','rtl');}})();
+    (function(){var s='light';try{s=localStorage.getItem('waqtx_theme')||'light';}catch(e){}if(s!=='light')document.documentElement.setAttribute('data-theme',s);var l='en';try{l=localStorage.getItem('waqtx_lang')||'en';}catch(e){}if(l!=='en'){document.documentElement.setAttribute('lang',l);if(l==='ur'||l==='ar')document.documentElement.setAttribute('dir','rtl');}})();
   </script>
 </head>
 <body>
+
+<!-- ═══ NAVBAR ═══ -->
 <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo" aria-label="WaqtX home"><span class="nav-logo-text">Waqt<span class="nav-logo-x">X</span></span></a>
+    <a href="index.html" class="nav-logo" aria-label="WaqtX home">
+      <span class="nav-logo-text">Waqt<span class="nav-logo-x">X</span></span>
+    </a>
     <div class="nav-links" role="list">
-      <a href="index.html" class="nav-link">Today</a>
-      <a href="prayers.html" class="nav-link active" aria-current="page">Prayer</a>
-      <a href="journey.html" class="nav-link">Journey</a>
-      <a href="explore.html" class="nav-link">History</a>
-      <a href="reflection.html" class="nav-link">Reflect</a>
+      <a href="index.html"      class="nav-link"        role="listitem">Today</a>
+      <a href="prayers.html"    class="nav-link active"  role="listitem" aria-current="page">Prayer</a>
+      <a href="journey.html"    class="nav-link"        role="listitem">Journey</a>
+      <a href="explore.html"    class="nav-link"        role="listitem">History</a>
+      <a href="reflection.html" class="nav-link"        role="listitem">Reflect</a>
     </div>
     <div class="nav-actions">
-      <div class="lang-toggle" role="group" aria-label="Language"><button class="lang-pill active" data-lang="en" aria-pressed="true">EN</button><button class="lang-pill" data-lang="ur" aria-pressed="false" style="font-family:'Noto Sans Arabic',sans-serif">&#x627;&#x631;&#x62F;&#x648;</button></div>
-      <button id="btn-theme-toggle" class="btn-theme" aria-label="Switch theme"><span id="theme-icon">&#x1F319;</span></button>
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button class="lang-pill active" data-lang="en" aria-pressed="true">EN</button>
+        <button class="lang-pill" data-lang="ur" aria-pressed="false" style="font-family:'Noto Sans Arabic',sans-serif">اردو</button>
+      </div>
+      <button id="btn-theme-toggle" class="btn-theme" aria-label="Switch theme"><span id="theme-icon">🌙</span></button>
+      <button class="btn-install-app hidden" id="btn-install-app" aria-label="Install WaqtX">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/><path d="M5 19h14"/></svg>
+      </button>
       <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer"><span></span><span></span><span></span></button>
     </div>
   </div>
 </nav>
+
+<!-- ═══ DRAWER ═══ -->
 <div class="nav-drawer" id="nav-drawer" aria-hidden="true" aria-label="Navigation menu">
-  <div class="nav-drawer-section"><div class="nav-drawer-label">Navigate</div><div class="nav-drawer-links">
-      <a href="index.html" class="nav-link">Today</a>
-      <a href="prayers.html" class="nav-link active">Prayer</a>
-      <a href="journey.html" class="nav-link">Journey</a>
-      <a href="explore.html" class="nav-link">History</a>
+  <div class="nav-drawer-section">
+    <div class="nav-drawer-label">Navigate</div>
+    <div class="nav-drawer-links">
+      <a href="index.html"      class="nav-link">Today</a>
+      <a href="prayers.html"    class="nav-link active">Prayer</a>
+      <a href="journey.html"    class="nav-link">Journey</a>
+      <a href="explore.html"    class="nav-link">History</a>
       <a href="reflection.html" class="nav-link">Reflect</a>
-  </div></div>
-  <div class="nav-drawer-section"><div class="nav-drawer-label">More</div><div class="nav-drawer-links"><a href="calendar.html" class="nav-link">Calendar</a> <a href="stories.html" class="nav-link">Stories</a> <a href="qibla.html" class="nav-link">Qibla</a> <a href="profile.html" class="nav-link">Profile</a> <a href="settings.html" class="nav-link">Settings</a></div></div>
+    </div>
+  </div>
+  <div class="nav-drawer-section">
+    <div class="nav-drawer-label">More</div>
+    <div class="nav-drawer-links">
+      <a href="calendar.html" class="nav-link">Calendar</a>
+      <a href="stories.html"  class="nav-link">Stories</a>
+      <a href="qibla.html"    class="nav-link">Qibla</a>
+      <a href="profile.html"  class="nav-link">Profile</a>
+      <a href="settings.html" class="nav-link">Settings</a>
+    </div>
+  </div>
 </div>
 
+<!-- ═══ PAGE WRAP ═══ -->
 <div class="page-wrap">
+
+<!-- Page hero -->
 <div class="page-hero">
   <div class="page-hero-inner">
-    <div class="page-hero-icon" aria-hidden="true">&#x1F54C;</div>
-    <h1 class="page-hero-title">Your Prayers</h1>
-    <p class="page-hero-sub">Prayer times, rhythm, and weekly tracker.</p>
+    <div class="page-hero-icon" aria-hidden="true">🕌</div>
+    <h1 class="page-hero-title">Prayer</h1>
+    <p class="page-hero-sub">Every prayer is an invitation. Your rhythm today.</p>
   </div>
 </div>
 
+<!-- ════════ PRAYER ORBIT ════════ -->
+<section class="prayer-section prayer-section-alt" id="prayer-orbit-section" aria-label="Prayer orbit">
+  <div class="container">
+    <div class="type-eyebrow">Prayer Orbit</div>
+    <p class="prayer-section-sub">The arc of your day — six moments of connection.</p>
 
-
-</section>
-
-<!-- SECTION 5: POST-PRAYER REFLECTION -->
-<section class="section prayer-reflection-section" style="background:var(--bg2)">
-  <div class="section-inner">
-    <div class="section-heading">
-      <span class="sh-line"></span><span class="sh-icon">◆</span>
-      <span class="sh-text">AFTER PRAYER REFLECTION</span>
-      <span class="sh-icon">◆</span><span class="sh-line"></span>
+    <div class="prayer-orbit-wrap">
+      <svg id="orbit-svg" class="orbit-svg" aria-label="Prayer orbit visualization" role="img"></svg>
     </div>
-    <div class="section-sub">One tap. One note. What did this prayer remind you of?</div>
-    <div class="prayer-reflect-grid" id="prayer-reflect-grid">
-      <!-- Rendered by JS -->
+
+    <div class="prayer-orbit-meta">
+      <span class="prayer-orbit-next-label">Next</span>
+      <span class="prayer-orbit-next-name skeleton skeleton-md" id="prayer-next-name">—</span>
+      <span class="prayer-orbit-countdown skeleton skeleton-sm" id="prayer-countdown">—</span>
     </div>
-    <p class="privacy-notice" style="text-align:center;margin-top:16px;">🔒 Stored on your device only.</p>
+
+    <!-- Load prayer times button -->
+    <div style="text-align:center;margin-block-start:var(--sp-5)">
+      <button class="btn btn-primary" id="btn-prayer-times">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        Get Prayer Times
+      </button>
+      <span class="prayer-status-text" id="prayer-status"></span>
+    </div>
+
+    <!-- No location empty state -->
+    <div class="state-empty hidden" id="prayer-no-location" style="padding-block:var(--sp-6)">
+      <div class="state-empty-sub">Prayer times need your location.</div>
+      <a href="settings.html" class="btn btn-primary btn-sm" style="margin-block-start:var(--sp-3)">Set Location</a>
+    </div>
   </div>
 </section>
 
-<!-- SECTION 5: NOTIFICATIONS -->
-<section class="section notif-section">
-  <div class="section-inner">
-    <div class="section-heading">
-      <span class="sh-line"></span><span class="sh-icon">◆</span>
-      <span class="sh-text">PRAYER REMINDERS</span>
-      <span class="sh-icon">◆</span><span class="sh-line"></span>
+<!-- ════════ PRAYER SCHEDULE ════════ -->
+<section class="prayer-section" id="prayer-schedule-section" aria-label="Prayer schedule">
+  <div class="container">
+    <div class="type-eyebrow">Today's Prayer Times</div>
+
+    <div class="prayer-grid" id="prayer-grid" role="list">
+      <!-- Rendered by prayers.js -->
+      <div class="prayer-placeholder state-empty">
+        <div class="state-empty-sub">Enable location to see today's prayer times.</div>
+      </div>
     </div>
+
+    <div class="prayer-meta-row" id="prayer-meta"></div>
+  </div>
+</section>
+
+<!-- ════════ WEEKLY TRACKER ════════ -->
+<section class="prayer-section prayer-section-alt" id="tracker-section" aria-label="Weekly prayer tracker">
+  <div class="container">
+    <div class="type-eyebrow">Weekly Tracker</div>
+    <p class="prayer-section-sub">Tap a cell to mark a prayer. Saved on your device.</p>
+
+    <div class="tracker-wrap">
+      <div class="tracker-grid" id="tracker-grid" role="grid" aria-label="Weekly prayer tracker">
+        <!-- Rendered by prayers.js -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ CONSISTENCY ════════ -->
+<section class="prayer-section" id="consistency-section" aria-label="Prayer consistency">
+  <div class="container">
+    <div class="type-eyebrow">Your Consistency</div>
+
+    <div class="consistency-grid">
+
+      <!-- Streak card -->
+      <div class="card-secondary consistency-streak-card">
+        <div class="streak-icon" aria-hidden="true">🔥</div>
+        <div class="streak-number" id="streak-count">0</div>
+        <div class="streak-label">Day Streak</div>
+        <div class="streak-desc">Pray all 5 prayers every day to keep your streak going.</div>
+      </div>
+
+      <!-- This week -->
+      <div class="card-secondary consistency-bar-card">
+        <div class="type-eyebrow" style="margin-block-end:var(--sp-3)">This Week</div>
+        <div class="cons-score" id="cons-weekly">—%</div>
+        <div class="cons-bar-wrap">
+          <div class="cons-bar-fill" id="cons-weekly-bar" style="width:0%"></div>
+        </div>
+        <div class="cons-sub skeleton skeleton-xl" id="cons-weekly-sub">—</div>
+      </div>
+
+      <!-- This month -->
+      <div class="card-secondary consistency-bar-card">
+        <div class="type-eyebrow" style="margin-block-end:var(--sp-3)">This Month</div>
+        <div class="cons-score" id="cons-monthly">—%</div>
+        <div class="cons-bar-wrap">
+          <div class="cons-bar-fill" id="cons-monthly-bar" style="width:0%"></div>
+        </div>
+        <div class="cons-sub skeleton skeleton-xl" id="cons-monthly-sub">—</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════ AFTER-PRAYER REFLECTION ════════ -->
+<section class="prayer-section prayer-section-alt" id="prayer-reflection-section" aria-label="After prayer reflection">
+  <div class="container">
+    <div class="type-eyebrow">After Prayer</div>
+    <p class="prayer-section-sub">One quiet note per prayer. What did this prayer remind you of?</p>
+
+    <div class="prayer-reflect-grid" id="prayer-reflect-grid">
+      <!-- Rendered by prayers.js -->
+    </div>
+    <p style="text-align:center;margin-block-start:var(--sp-4);font-size:var(--text-xs);color:var(--text-3)">🔒 Stored on your device only.</p>
+  </div>
+</section>
+
+<!-- ════════ NOTIFICATIONS ════════ -->
+<section class="prayer-section" id="notifications-section" aria-label="Prayer notifications">
+  <div class="container">
+    <div class="type-eyebrow">Prayer Reminders</div>
+
     <div class="notif-cards">
-      <div class="notif-card">
-        <div class="notif-card-icon">🔔</div>
+      <div class="notif-card card-secondary">
+        <div class="notif-card-icon" aria-hidden="true">🔔</div>
         <div class="notif-card-info">
           <div class="notif-card-title">Adhan</div>
           <div class="notif-card-desc">Notification at prayer time.</div>
         </div>
-        <label class="toggle-switch" aria-label="Adhan notification">
+        <label class="toggle" aria-label="Adhan notification">
           <input type="checkbox" id="notif-adhan"/>
-          <span class="toggle-slider"></span>
+          <span class="toggle-track"></span>
         </label>
       </div>
-      <div class="notif-card">
-        <div class="notif-card-icon">⏰</div>
+      <div class="notif-card card-secondary">
+        <div class="notif-card-icon" aria-hidden="true">⏰</div>
         <div class="notif-card-info">
           <div class="notif-card-title">Reminder</div>
           <div class="notif-card-desc">15 minutes before each prayer.</div>
         </div>
-        <label class="toggle-switch" aria-label="Reminder notification">
+        <label class="toggle" aria-label="Reminder notification">
           <input type="checkbox" id="notif-reminder"/>
-          <span class="toggle-slider"></span>
+          <span class="toggle-track"></span>
         </label>
       </div>
-      <div class="notif-card">
-        <div class="notif-card-icon">🔕</div>
+      <div class="notif-card card-secondary">
+        <div class="notif-card-icon" aria-hidden="true">🔕</div>
         <div class="notif-card-info">
           <div class="notif-card-title">Silent</div>
           <div class="notif-card-desc">Notification only, no sound.</div>
         </div>
-        <label class="toggle-switch" aria-label="Silent notification">
+        <label class="toggle" aria-label="Silent notification">
           <input type="checkbox" id="notif-silent"/>
-          <span class="toggle-slider"></span>
+          <span class="toggle-track"></span>
         </label>
       </div>
     </div>
-    <div class="notif-denied hidden" id="notif-denied-msg">
-      Notification permission denied. Enable it in your browser settings and reload.
+
+    <div class="state-error hidden" id="notif-denied-msg" style="margin-block-start:var(--sp-4)">
+      <div class="state-error-msg">Notification permission denied. Enable it in your browser settings.</div>
     </div>
   </div>
 </section>
 
-
-
-<!-- More Menu (slide-up) -->
-
-
-<script src="js/core.js"></script>
-<script src="js/prayers.js"></script>
-
 <!-- ═══ BOTTOM NAV ═══ -->
+<nav class="bottom-nav" id="bottom-nav" aria-label="Mobile navigation">
+  <a href="index.html"      class="bnav-item"><span class="bnav-icon" aria-hidden="true">☀️</span><span class="bnav-label">Today</span></a>
+  <a href="prayers.html"    class="bnav-item active" aria-current="page"><span class="bnav-icon" aria-hidden="true">🕌</span><span class="bnav-label">Prayer</span></a>
+  <a href="journey.html"    class="bnav-item"><span class="bnav-icon" aria-hidden="true">🌙</span><span class="bnav-label">Journey</span></a>
+  <a href="explore.html"    class="bnav-item"><span class="bnav-icon" aria-hidden="true">📚</span><span class="bnav-label">History</span></a>
+  <button class="bnav-item" id="btn-more" aria-expanded="false" aria-controls="more-sheet"><span class="bnav-icon" aria-hidden="true">⋯</span><span class="bnav-label">More</span></button>
+</nav>
 
-
-
-
-
-
-
-
+<div class="more-overlay" id="more-overlay" aria-hidden="true"></div>
+<div class="more-sheet" id="more-sheet" role="dialog" aria-modal="true" aria-label="More navigation" aria-hidden="true">
+  <div class="more-sheet-handle" aria-hidden="true"></div>
+  <div class="more-sheet-header"><span>More</span><button class="more-close" id="more-close" aria-label="Close menu">✕</button></div>
+  <div class="more-group">
+    <div class="more-group-label">Explore</div>
+    <div class="more-grid">
+      <a href="explore.html"    class="more-item"><span class="more-item-icon" aria-hidden="true">🏛️</span>Explore</a>
+      <a href="stories.html"    class="more-item"><span class="more-item-icon" aria-hidden="true">📖</span>Stories</a>
+      <a href="calendar.html"   class="more-item"><span class="more-item-icon" aria-hidden="true">📅</span>Calendar</a>
+      <a href="qibla.html"      class="more-item"><span class="more-item-icon" aria-hidden="true">🧭</span>Qibla</a>
+    </div>
+  </div>
   <div class="more-group">
     <div class="more-group-label">Personal</div>
     <div class="more-grid">
-      <a href="profile.html"    class="more-item"><span class="more-item-icon" aria-hidden="true">&#x1F464;</span>Profile</a>
-      <a href="journey.html"    class="more-item"><span class="more-item-icon" aria-hidden="true">&#x1F319;</span>Journey</a>
-      <a href="reflection.html" class="more-item"><span class="more-item-icon" aria-hidden="true">&#x1FA94;</span>Reflect</a>
-      <a href="search.html"     class="more-item"><span class="more-item-icon" aria-hidden="true">&#x1F50E;</span>Search</a>
+      <a href="profile.html"    class="more-item"><span class="more-item-icon" aria-hidden="true">👤</span>Profile</a>
+      <a href="journey.html"    class="more-item"><span class="more-item-icon" aria-hidden="true">🌙</span>Journey</a>
+      <a href="reflection.html" class="more-item"><span class="more-item-icon" aria-hidden="true">🪔</span>Reflect</a>
+      <a href="search.html"     class="more-item"><span class="more-item-icon" aria-hidden="true">🔍</span>Search</a>
     </div>
   </div>
   <div class="more-group">
     <div class="more-group-label">App</div>
     <div class="more-grid">
-      <a href="settings.html"   class="more-item"><span class="more-item-icon" aria-hidden="true">&#x2699;&#xFE0F;</span>Settings</a>
-      <a href="privacy.html"    class="more-item"><span class="more-item-icon" aria-hidden="true">&#x1F512;</span>Privacy</a>
+      <a href="settings.html" class="more-item"><span class="more-item-icon" aria-hidden="true">⚙️</span>Settings</a>
+      <a href="privacy.html"  class="more-item"><span class="more-item-icon" aria-hidden="true">🔒</span>Privacy</a>
     </div>
   </div>
 </div>
 
-</div><!-- /page-wrap -->
-<nav class="bottom-nav" id="bottom-nav" aria-label="Mobile navigation">
-  <a href="index.html" class="bnav-item"><span class="bnav-icon" aria-hidden="true">&#x2600;&#xFE0F;</span><span class="bnav-label">Today</span></a>
-  <a href="prayers.html" class="bnav-item active" aria-current="page"><span class="bnav-icon" aria-hidden="true">&#x1F54C;</span><span class="bnav-label">Prayer</span></a>
-  <a href="journey.html" class="bnav-item"><span class="bnav-icon" aria-hidden="true">&#x1F319;</span><span class="bnav-label">Journey</span></a>
-  <a href="explore.html" class="bnav-item"><span class="bnav-icon" aria-hidden="true">&#x1F4DA;</span><span class="bnav-label">History</span></a>
-  <button class="bnav-item" id="btn-more" aria-expanded="false" aria-controls="more-sheet"><span class="bnav-icon" aria-hidden="true">&#x22EF;</span><span class="bnav-label">More</span></button>
-</nav>
-<div class="more-overlay" id="more-overlay" aria-hidden="true"></div>
-<div class="more-sheet" id="more-sheet" role="dialog" aria-modal="true" aria-label="More navigation" aria-hidden="true">
-  <div class="more-sheet-handle" aria-hidden="true"></div>
-  <div class="more-sheet-header"><span>More</span><button class="more-close" id="more-close" aria-label="Close">&#x2715;</button></div>
-  <div class="more-group"><div class="more-group-label">Explore</div><div class="more-grid"><a href="explore.html" class="more-item"><span class="more-item-icon">&#x1F3DB;</span>Explore</a><a href="stories.html" class="more-item"><span class="more-item-icon">&#x1F4D6;</span>Stories</a><a href="calendar.html" class="more-item"><span class="more-item-icon">&#x1F4C5;</span>Calendar</a><a href="qibla.html" class="more-item"><span class="more-item-icon">&#x1F9ED;</span>Qibla</a></div></div>
-  <div class="more-group"><div class="more-group-label">Personal</div><div class="more-grid"><a href="profile.html" class="more-item"><span class="more-item-icon">&#x1F464;</span>Profile</a><a href="journey.html" class="more-item"><span class="more-item-icon">&#x1F319;</span>Journey</a><a href="reflection.html" class="more-item"><span class="more-item-icon">&#x1FA94;</span>Reflect</a><a href="search.html" class="more-item"><span class="more-item-icon">&#x1F50E;</span>Search</a></div></div>
-  <div class="more-group"><div class="more-group-label">App</div><div class="more-grid"><a href="settings.html" class="more-item"><span class="more-item-icon">&#x2699;</span>Settings</a><a href="privacy.html" class="more-item"><span class="more-item-icon">&#x1F512;</span>Privacy</a></div></div>
-</div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+</div><!-- /page-wrap -->
+
+<script src="js/core.js"></script>
+<script src="js/prayers.js"></script>
 </body>
 </html>

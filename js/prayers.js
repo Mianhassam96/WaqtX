@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 /* ═══════════════════════════════════════════════
    WaqtX — Prayers Page Logic
    Prayer Orbit · Schedule · Tracker · Streak · Notifications
@@ -54,7 +54,7 @@ function renderOrbit(timings) {
     var isPast = pMin < nowMin;
     var isNext = next && name === next.name && !next.isTomorrow;
     var nodeR = isNext ? 10 : 7;
-    var fill = isNext ? 'var(--gold)' : isPast ? 'var(--green)' : 'rgba(255,255,255,0.2)';
+    var fill = isNext ? 'var(--gold)' : isPast ? 'var(--primary)' : 'rgba(255,255,255,0.2)';
     var glow = isNext ? ' filter="url(#nodeGlow)"' : '';
 
     nodes += '<circle cx="' + nx + '" cy="' + ny + '" r="' + nodeR + '" fill="' + fill + '"' + glow + '/>';
@@ -75,7 +75,7 @@ function renderOrbit(timings) {
   /* Center text */
   var centerText = next ?
     '<text x="' + cx + '" y="' + (cy - 8) + '" text-anchor="middle" font-size="12" fill="rgba(248,250,252,0.5)" font-family="Inter,sans-serif">Next</text>' +
-    '<text x="' + cx + '" y="' + (cy + 10) + '" text-anchor="middle" font-size="18" font-weight="700" fill="var(--gold)" font-family="Outfit,sans-serif">' + (next.name) + '</text>' : '';
+    '<text x="' + cx + '" y="' + (cy + 10) + '" text-anchor="middle" font-size="18" font-weight="700" fill="var(--gold)" font-family='Noto Serif,Georgia,serif'>' + (next.name) + '</text>' : '';
 
   svg.innerHTML =
     '<defs>' +
