@@ -4955,3 +4955,242 @@ html[lang="ur"] .progress-bar-wrap { direction: ltr; }
 
 /* RTL qibla */
 [dir="rtl"] .qibla-direction-row { flex-direction: row-reverse; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   PHASE 9 — RESPONSIVE QA
+   Breakpoints: 360 · 480 · 640 · 768 · 1024 · 1280
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Global touch targets ──────────────────────────────────────
+   Every interactive element ≥ 44×44px (WCAG 2.5.5)               */
+.feel-tag,
+.cal-day,
+.ach-card,
+.theme-preview-btn,
+.settings-font-btn,
+.settings-btn-danger,
+.settings-btn-danger-confirm,
+.detail-close,
+.story-card {
+  min-height: 44px;
+}
+.cal-day { min-height: 40px; } /* grid forces aspect-ratio; 40px minimum */
+
+/* ── Base container padding on phones ─────────────────────────── */
+@media (max-width: 479px) {
+  .container { padding-inline: var(--sp-4); }
+  .container-wide { padding-inline: var(--sp-4); }
+
+  /* Page hero tighter on small screens */
+  .page-hero { padding-block: var(--sp-7) var(--sp-6); }
+  .page-hero-title { font-size: var(--text-2xl); }
+  .page-hero-icon  { font-size: 1.6rem; }
+
+  /* ── Profile ── */
+  .profile-header-card {
+    flex-wrap: wrap;          /* allow stat blocks to wrap on 360px */
+    border-radius: var(--r-lg);
+  }
+  .phc-stat  { min-width: calc(50% - 1px); }
+  .phc-divider { display: none; }  /* hide dividers when wrapped */
+
+  .profile-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .achievements-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .spiritual-grid {
+    grid-template-columns: repeat(7, 1fr); /* keep 7-col, just smaller */
+    gap: 2px;
+  }
+
+  /* ── Settings ── */
+  .settings-page-wrap { padding-inline: var(--sp-3); }
+  .settings-row { flex-wrap: wrap; gap: var(--sp-3); padding-inline: var(--sp-4); }
+  .settings-select { max-width: 100%; width: 100%; }
+  .settings-city-row { flex-wrap: wrap; }
+  .settings-city-input { max-width: 100%; }
+  .settings-theme-pills { flex-wrap: wrap; }
+  .notif-cards { gap: var(--sp-2); }
+
+  /* ── Calendar ── */
+  .cal-header { gap: var(--sp-2); }
+  .cal-month-title { font-size: var(--text-lg); }
+  .cal-day { font-size: var(--text-xs); border-radius: var(--r-xs, 4px); }
+  .event-countdown-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp-3);
+  }
+  .ecc-days-val { font-size: var(--text-3xl); }
+
+  /* ── Stories ── */
+  .stories-grid {
+    grid-template-columns: 1fr;
+  }
+  .feel-grid { gap: var(--sp-2); }
+
+  /* ── Qibla ── */
+  .qibla-direction-row { gap: var(--sp-4); }
+  .qibla-info { padding: var(--sp-4); }
+}
+
+/* ── Small-medium (480–639px) ─────────────────────────────────── */
+@media (min-width: 480px) and (max-width: 639px) {
+  .profile-stats-grid    { grid-template-columns: repeat(2, 1fr); }
+  .achievements-grid     { grid-template-columns: repeat(2, 1fr); }
+  .stories-grid          { grid-template-columns: 1fr; }
+  .settings-page-wrap    { padding-inline: var(--sp-4); }
+  .event-countdown-card  { flex-wrap: wrap; }
+}
+
+/* ── Medium (640–767px) ───────────────────────────────────────── */
+@media (min-width: 640px) and (max-width: 767px) {
+  .profile-stats-grid    { grid-template-columns: repeat(3, 1fr); }
+  .achievements-grid     { grid-template-columns: repeat(3, 1fr); }
+  .stories-grid          { grid-template-columns: repeat(2, 1fr); }
+  .settings-page-wrap    { padding-inline: var(--sp-5); }
+}
+
+/* ── Tablet+ (768px+) ─────────────────────────────────────────── */
+@media (min-width: 768px) {
+  /* Profile */
+  .profile-section,
+  .profile-section-alt   { padding-block: var(--sp-10); }
+  .profile-stats-grid    { grid-template-columns: repeat(3, 1fr); }
+  .achievements-grid     { grid-template-columns: repeat(4, 1fr); }
+
+  /* Settings — centred column */
+  .settings-page-wrap    { padding-block: var(--sp-8) var(--sp-12); }
+
+  /* Calendar */
+  .calendar-section,
+  .calendar-section-alt  { padding-block: var(--sp-10); }
+  .cal-day               { font-size: var(--text-sm); }
+
+  /* Stories */
+  .stories-section,
+  .stories-section-alt   { padding-block: var(--sp-10); }
+  .stories-grid          { grid-template-columns: repeat(2, 1fr); }
+
+  /* Qibla */
+  .qibla-section         { padding-block: var(--sp-10); }
+  .qibla-compass-svg     { width: 300px; height: 300px; }
+}
+
+/* ── Desktop (1024px+) ────────────────────────────────────────── */
+@media (min-width: 1024px) {
+  /* Profile */
+  .profile-stats-grid    { grid-template-columns: repeat(5, 1fr); }
+  .achievements-grid     { grid-template-columns: repeat(5, 1fr); }
+  .phc-stat              { padding: var(--sp-8) var(--sp-6); }
+
+  /* Settings — wider on desktop */
+  .settings-page-wrap    { max-width: 700px; }
+
+  /* Stories — 3-col on desktop */
+  .stories-grid          { grid-template-columns: repeat(3, 1fr); }
+
+  /* Qibla — side-by-side layout */
+  .qibla-section .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-10);
+    align-items: center;
+  }
+  .qibla-compass-wrap    { margin-block-end: 0; }
+  .qibla-hadith          { grid-column: 1 / -1; }
+}
+
+/* ── Wide desktop (1280px+) ───────────────────────────────────── */
+@media (min-width: 1280px) {
+  .stories-grid { grid-template-columns: repeat(3, 1fr); }
+  .profile-stats-grid { grid-template-columns: repeat(5, 1fr); }
+  .achievements-grid  { grid-template-columns: repeat(6, 1fr); }
+}
+
+/* ── Overflow guard ───────────────────────────────────────────── */
+/* Prevent any horizontal overflow on small screens */
+.profile-header-card,
+.event-countdown-card,
+.cal-grid,
+.stories-grid,
+.feel-grid,
+.achievements-grid,
+.profile-stats-grid,
+.settings-page-wrap,
+.qibla-info {
+  min-width: 0;
+  overflow-x: visible; /* let parent container clip */
+}
+
+/* Prevent long words breaking layout */
+.story-card-title,
+.story-card-excerpt,
+.ach-name,
+.ach-desc,
+.event-name,
+.ecc-title,
+.chapter-label {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* ── RTL responsive fixes ─────────────────────────────────────── */
+@media (max-width: 479px) {
+  [dir="rtl"] .profile-header-card { flex-direction: row-reverse; flex-wrap: wrap; }
+  [dir="rtl"] .event-countdown-card { flex-direction: column; align-items: flex-end; }
+  [dir="rtl"] .settings-row  { flex-direction: column; align-items: flex-end; }
+  [dir="rtl"] .qibla-direction-row { flex-direction: row-reverse; }
+}
+
+@media (min-width: 480px) {
+  [dir="rtl"] .profile-header-card { flex-direction: row-reverse; }
+  [dir="rtl"] .event-countdown-card { flex-direction: row-reverse; }
+}
+
+/* Detail panel — always full-width on mobile, max-width on desktop */
+@media (min-width: 768px) {
+  .detail-overlay { align-items: center; }
+  .detail-panel {
+    border-radius: var(--r-xl);
+    max-height: 80dvh;
+    max-width: 640px;
+  }
+}
+
+/* ── Settings select: full width on mobile ───────────────────── */
+@media (max-width: 639px) {
+  .settings-section .settings-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: var(--sp-3);
+  }
+  .settings-select,
+  .settings-theme-pills,
+  .settings-font-btns,
+  .settings-radio-group {
+    width: 100%;
+  }
+  .settings-btn-danger { align-self: flex-start; }
+}
+
+/* ── Calendar grid: ensure header cells visible ──────────────── */
+@media (max-width: 359px) {
+  .cal-header-cell { font-size: 0.55rem; padding: 2px 0; }
+  .cal-day         { font-size: 0.6rem; }
+}
+
+/* ── More sheet grid: 3 cols on very small screens ───────────── */
+@media (max-width: 380px) {
+  .more-grid { grid-template-columns: repeat(3, 1fr); gap: var(--sp-2); }
+  .more-item { font-size: var(--text-xs); padding: var(--sp-2); }
+}
+
+/* ── Bottom nav safe area on iOS ─────────────────────────────── */
+.bottom-nav {
+  padding-block-end: env(safe-area-inset-bottom, 0px);
+}
+.bnav-item { padding-block-end: 2px; } /* slight vertical breathing room */
