@@ -4,322 +4,193 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>WaqtX — Qibla</title>
-  <meta name="description" content="Find the direction of the Kaaba from anywhere in the world — clean, simple, accurate."/>
+  <meta name="description" content="Find the direction of the Kaaba from your location."/>
   <meta name="theme-color" content="#F7F8F5"/>
   <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
   <link rel="manifest" href="manifest.json"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&family=Cinzel:wght@600&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&family=Cinzel:wght@600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
-  
-  <script>
-    (function(){var s='light';try{s=localStorage.getItem('waqtx_theme')||'light';}catch(e){}if(s&&s!=='light')document.documentElement.setAttribute('data-theme',s);var l='en';try{l=localStorage.getItem('waqtx_lang')||'en';}catch(e){}if(l&&l!=='en'){document.documentElement.setAttribute('lang',l);if(l==='ur'||l==='ar')document.documentElement.setAttribute('dir','rtl');}})();
-  </script>
+  <script>(function(){var s='light';try{s=localStorage.getItem('waqtx_theme')||'light';}catch(e){}if(s!=='light')document.documentElement.setAttribute('data-theme',s);var l='en';try{l=localStorage.getItem('waqtx_lang')||'en';}catch(e){}if(l!=='en'){document.documentElement.setAttribute('lang',l);if(l==='ur'||l==='ar')document.documentElement.setAttribute('dir','rtl');}})();</script>
 </head>
 <body>
 <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo" aria-label="WaqtX home"><span class="nav-logo-text">Waqt<span class="nav-logo-x">X</span></span></a>
     <div class="nav-links" role="list">
-      <a href="index.html" class="nav-link">Today</a>
-      <a href="prayers.html" class="nav-link">Prayer</a>
-      <a href="journey.html" class="nav-link">Journey</a>
-      <a href="explore.html" class="nav-link">History</a>
-      <a href="reflection.html" class="nav-link">Reflect</a>
+      <a href="index.html" class="nav-link" role="listitem">Today</a>
+      <a href="prayers.html" class="nav-link" role="listitem">Prayer</a>
+      <a href="journey.html" class="nav-link" role="listitem">Journey</a>
+      <a href="explore.html" class="nav-link" role="listitem">History</a>
+      <a href="reflection.html" class="nav-link" role="listitem">Reflect</a>
     </div>
     <div class="nav-actions">
-      <div class="lang-toggle" role="group" aria-label="Language"><button class="lang-pill active" data-lang="en" aria-pressed="true">EN</button><button class="lang-pill" data-lang="ur" aria-pressed="false" style="font-family:'Noto Sans Arabic',sans-serif">&#x627;&#x631;&#x62F;&#x648;</button></div>
-      <button id="btn-theme-toggle" class="btn-theme" aria-label="Switch theme"><span id="theme-icon">&#x1F319;</span></button>
+      <div class="lang-toggle" role="group" aria-label="Language"><button class="lang-pill active" data-lang="en" aria-pressed="true">EN</button><button class="lang-pill" data-lang="ur" aria-pressed="false" style="font-family:'Noto Sans Arabic',sans-serif">اردو</button></div>
+      <button id="btn-theme-toggle" class="btn-theme" aria-label="Switch theme"><span id="theme-icon">🌙</span></button>
       <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer"><span></span><span></span><span></span></button>
     </div>
   </div>
 </nav>
 <div class="nav-drawer" id="nav-drawer" aria-hidden="true" aria-label="Navigation menu">
-  <div class="nav-drawer-section"><div class="nav-drawer-label">Navigate</div><div class="nav-drawer-links">
-      <a href="index.html" class="nav-link">Today</a>
-      <a href="prayers.html" class="nav-link">Prayer</a>
-      <a href="journey.html" class="nav-link">Journey</a>
-      <a href="explore.html" class="nav-link">History</a>
-      <a href="reflection.html" class="nav-link">Reflect</a>
-  </div></div>
-  <div class="nav-drawer-section"><div class="nav-drawer-label">More</div><div class="nav-drawer-links"><a href="calendar.html" class="nav-link">Calendar</a> <a href="stories.html" class="nav-link">Stories</a> <a href="qibla.html" class="nav-link">Qibla</a> <a href="profile.html" class="nav-link">Profile</a> <a href="settings.html" class="nav-link">Settings</a></div></div>
+  <div class="nav-drawer-section"><div class="nav-drawer-label">Navigate</div><div class="nav-drawer-links"><a href="index.html" class="nav-link">Today</a><a href="prayers.html" class="nav-link">Prayer</a><a href="journey.html" class="nav-link">Journey</a><a href="explore.html" class="nav-link">History</a><a href="reflection.html" class="nav-link">Reflect</a></div></div>
+  <div class="nav-drawer-section"><div class="nav-drawer-label">More</div><div class="nav-drawer-links"><a href="calendar.html" class="nav-link">Calendar</a><a href="stories.html" class="nav-link">Stories</a><a href="qibla.html" class="nav-link active">Qibla</a><a href="profile.html" class="nav-link">Profile</a><a href="settings.html" class="nav-link">Settings</a></div></div>
 </div>
-
 <div class="page-wrap">
+
 <div class="page-hero">
   <div class="page-hero-inner">
-    <div class="page-hero-icon" aria-hidden="true">&#x1F9ED;</div>
+    <div class="page-hero-icon" aria-hidden="true">🧭</div>
     <h1 class="page-hero-title">Qibla</h1>
-    <p class="page-hero-sub">Find the direction of the Kaaba from your location.</p>
+    <p class="page-hero-sub">Find the direction of the Kaaba from wherever you are.</p>
   </div>
 </div>
 
+<!-- Qibla compass -->
+<section class="qibla-section" aria-label="Qibla compass">
+  <div class="container">
 
-
-<!-- QIBLA MAIN -->
-<main class="qibla-page">
-
-  <div style="text-align:center;margin-bottom:8px;">
-    <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);opacity:0.8;margin-bottom:6px;">QIBLA DIRECTION</div>
-    <h1 style="font-size:clamp(1.8rem,4vw,2.4rem);font-weight:900;color:var(--text);letter-spacing:-0.02em;margin-bottom:6px;">Face the Kaaba</h1>
-    <p style="font-size:0.9rem;color:var(--text2);line-height:1.6;max-width:320px;margin:0 auto;">Enable location to find the direction of the Kaaba from where you are.</p>
-  </div>
-
-  <!-- Compass -->
-  <div class="qibla-compass-wrap">
-    <svg class="qibla-compass-svg" viewBox="0 0 280 280" aria-label="Qibla compass">
-      <!-- Outer ring -->
-      <circle cx="140" cy="140" r="128" fill="none" stroke="rgba(212,160,23,0.1)" stroke-width="2"/>
-      <!-- Inner rings -->
-      <circle cx="140" cy="140" r="108" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-      <circle cx="140" cy="140" r="88"  fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-      <!-- Tick marks -->
-      <g stroke="rgba(212,160,23,0.25)" stroke-width="1">
-        <line x1="140" y1="12"  x2="140" y2="24"/>  <!-- N -->
-        <line x1="268" y1="140" x2="256" y2="140"/> <!-- E -->
-        <line x1="140" y1="268" x2="140" y2="256"/> <!-- S -->
-        <line x1="12"  y1="140" x2="24"  y2="140"/> <!-- W -->
-      </g>
-      <!-- Cardinal labels -->
-      <text x="140" y="10" text-anchor="middle" fill="rgba(212,160,23,0.6)" font-size="11" font-family="Outfit,sans-serif" font-weight="700">N</text>
-      <text x="273" y="144" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="10" font-family="Outfit,sans-serif">E</text>
-      <text x="140" y="278" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="10" font-family="Outfit,sans-serif">S</text>
-      <text x="8" y="144" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="10" font-family="Outfit,sans-serif">W</text>
-      <!-- Needle group — rotated by JS -->
-      <g id="qibla-needle" class="qibla-needle">
-        <!-- Kaaba direction (gold) -->
-        <polygon points="140,28 134,140 140,150 146,140" fill="var(--gold)" opacity="0.9"/>
-        <!-- Opposite tail (dim) -->
-        <polygon points="140,252 134,140 140,130 146,140" fill="rgba(255,255,255,0.15)"/>
-        <!-- Center dot -->
-        <circle cx="140" cy="140" r="7" fill="var(--bg)" stroke="var(--gold)" stroke-width="2"/>
-      </g>
-      <!-- Kaaba icon at top -->
-      <text id="qibla-kaaba-icon" x="140" y="50" text-anchor="middle" font-size="18" opacity="0.5">🕋</text>
-    </svg>
-  </div>
-
-  <!-- Info card -->
-  <div class="qibla-info-card">
-    <div class="qibla-info-row">
-      <span class="qi-label">📍 Location</span>
-      <span class="qi-val" id="qibla-location">—</span>
+    <div class="qibla-compass-wrap">
+      <svg class="qibla-compass-svg" viewBox="0 0 280 280" aria-label="Qibla compass" role="img">
+        <circle cx="140" cy="140" r="128" fill="none" stroke="var(--border)" stroke-width="2"/>
+        <circle cx="140" cy="140" r="108" fill="none" stroke="var(--border)" stroke-width="1" opacity="0.5"/>
+        <g stroke="var(--border-2)" stroke-width="1.5">
+          <line x1="140" y1="12" x2="140" y2="24"/>
+          <line x1="268" y1="140" x2="256" y2="140"/>
+          <line x1="140" y1="268" x2="140" y2="256"/>
+          <line x1="12" y1="140" x2="24" y2="140"/>
+        </g>
+        <text x="140" y="9" text-anchor="middle" fill="var(--primary)" font-size="13" font-family="Inter,sans-serif" font-weight="800">N</text>
+        <text x="275" y="145" text-anchor="middle" fill="var(--text-3)" font-size="11" font-family="Inter,sans-serif">E</text>
+        <text x="140" y="278" text-anchor="middle" fill="var(--text-3)" font-size="11" font-family="Inter,sans-serif">S</text>
+        <text x="6" y="145" text-anchor="middle" fill="var(--text-3)" font-size="11" font-family="Inter,sans-serif">W</text>
+        <g id="qibla-needle" style="transform-origin:140px 140px;transition:transform 0.6s ease;">
+          <polygon points="140,28 134,140 140,152 146,140" fill="var(--primary)" opacity="0.95"/>
+          <polygon points="140,252 134,140 140,128 146,140" fill="var(--border-2)"/>
+          <circle cx="140" cy="140" r="8" fill="var(--bg)" stroke="var(--primary)" stroke-width="2.5"/>
+        </g>
+        <text id="qibla-kaaba-icon" x="140" y="52" text-anchor="middle" font-size="20" opacity="0.6">🕋</text>
+      </svg>
     </div>
-    <div class="qibla-info-row">
-      <span class="qi-label">📏 Distance to Kaaba</span>
-      <span class="qi-val" id="qibla-distance">—</span>
+
+    <!-- Info card -->
+    <div class="qibla-info card-secondary">
+      <div class="qibla-direction-row">
+        <div class="qibla-bearing-wrap">
+          <div class="qibla-bearing-val skeleton skeleton-md" id="qibla-bearing">—°</div>
+          <div class="qibla-bearing-lbl" id="qibla-direction-label">Qibla Direction</div>
+        </div>
+        <div class="qibla-distance-wrap">
+          <div class="qibla-distance-val skeleton skeleton-md" id="qibla-distance">—</div>
+          <div class="qibla-distance-lbl">to Kaaba</div>
+        </div>
+      </div>
+      <div class="qibla-location-text" id="qibla-location"></div>
+      <div class="qibla-status" id="qibla-status" aria-live="polite">Enable location to find your Qibla direction.</div>
     </div>
-    <div class="qibla-info-row">
-      <span class="qi-label">🧭 Bearing</span>
-      <span class="qi-val" id="qibla-bearing">—</span>
+
+    <div style="text-align:center;margin-block-start:var(--sp-5)">
+      <button class="btn btn-primary" id="btn-qibla-find">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        Find My Qibla
+      </button>
     </div>
+
+    <!-- Hadith note -->
+    <div class="qibla-hadith">
+      "Face the Sacred Mosque — wherever you are, turn your faces towards it." — Quran 2:144
+    </div>
+
   </div>
-
-  <button class="btn-qibla-find" id="btn-qibla-find" aria-label="Find Qibla direction">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-    Find Qibla
-  </button>
-
-  <div class="qibla-direction-label" id="qibla-direction-label"></div>
-  <div class="qibla-status" id="qibla-status">Tap "Find Qibla" to detect your location.</div>
-
-  <p style="font-size:0.72rem;color:var(--text3);text-align:center;margin-top:24px;opacity:0.6;max-width:320px;">
-    For best accuracy, use on a mobile device with compass support. Calculation uses the great-circle bearing to Makkah (21.4225° N, 39.8262° E).
-  </p>
-
-</main>
-
-
-
-<!-- More Menu (slide-up) -->
-
-
-<script src="js/core.js"></script>
-<script>
-'use strict';
-/* Qibla page logic — standalone, no separate JS file needed */
-var KAABA_LAT = 21.4225;
-var KAABA_LNG = 39.8262;
-
-function toRad(d) { return d * Math.PI / 180; }
-function toDeg(r) { return r * 180 / Math.PI; }
-
-function calcQibla(lat, lng) {
-  var dLng = toRad(KAABA_LNG - lng);
-  var lat1 = toRad(lat);
-  var lat2 = toRad(KAABA_LAT);
-  var y = Math.sin(dLng) * Math.cos(lat2);
-  var x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLng);
-  var bearing = (toDeg(Math.atan2(y, x)) + 360) % 360;
-  return bearing;
-}
-
-function calcDistance(lat1, lng1) {
-  var R = 6371;
-  var dLat = toRad(KAABA_LAT - lat1);
-  var dLng = toRad(KAABA_LNG - lng1);
-  var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-          Math.cos(toRad(lat1)) * Math.cos(toRad(KAABA_LAT)) *
-          Math.sin(dLng/2) * Math.sin(dLng/2);
-  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-}
-
-function bearingToDirection(b) {
-  var dirs = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
-  return dirs[Math.round(b / 22.5) % 16];
-}
-
-var _qiblaBearing = null;
-var _deviceAlpha = null;
-
-function rotateNeedle(bearing, alpha) {
-  var needle = document.getElementById('qibla-needle');
-  if (!needle) return;
-  var rot = bearing;
-  if (alpha !== null) rot = bearing - alpha;
-  needle.setAttribute('transform', 'rotate(' + rot + ',140,140)');
-}
-
-document.getElementById('btn-qibla-find').addEventListener('click', function() {
-  var btn = this;
-  var status = document.getElementById('qibla-status');
-  if (!navigator.geolocation) {
-    status.textContent = 'Geolocation is not supported by your browser.';
-    return;
-  }
-  btn.disabled = true;
-  btn.textContent = 'Locating…';
-  status.textContent = 'Detecting your location…';
-
-  navigator.geolocation.getCurrentPosition(function(pos) {
-    var lat = pos.coords.latitude;
-    var lng = pos.coords.longitude;
-
-    /* Save for reuse */
-    try {
-      localStorage.setItem('waqtx_location_lat', lat);
-      localStorage.setItem('waqtx_location_lng', lng);
-    } catch(e) {}
-
-    _qiblaBearing = calcQibla(lat, lng);
-    var dist = calcDistance(lat, lng);
-    var dir = bearingToDirection(_qiblaBearing);
-
-    /* Update UI */
-    var locEl = document.getElementById('qibla-location');
-    var distEl = document.getElementById('qibla-distance');
-    var bearEl = document.getElementById('qibla-bearing');
-    var dirLbl = document.getElementById('qibla-direction-label');
-
-    if (locEl) locEl.textContent = lat.toFixed(3) + '°, ' + lng.toFixed(3) + '°';
-    if (distEl) distEl.textContent = dist.toFixed(0) + ' km';
-    if (bearEl) bearEl.textContent = _qiblaBearing.toFixed(1) + '° ' + dir;
-    if (dirLbl) dirLbl.textContent = 'Face ' + _qiblaBearing.toFixed(0) + '° — ' + dir;
-
-    rotateNeedle(_qiblaBearing, _deviceAlpha);
-
-    btn.textContent = '↺ Refresh';
-    btn.disabled = false;
-    status.textContent = 'Qibla found. Turn until the gold needle points toward you.';
-
-    /* Try device orientation */
-    if (window.DeviceOrientationEvent) {
-      if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-        DeviceOrientationEvent.requestPermission().then(function(p) {
-          if (p === 'granted') listenOrientation();
-        }).catch(function() {});
-      } else {
-        listenOrientation();
-      }
-    }
-  }, function(err) {
-    var msgs = { 1:'Location access denied.', 2:'Location unavailable.', 3:'Request timed out.' };
-    status.textContent = msgs[err.code] || 'Could not get location.';
-    btn.disabled = false;
-    btn.textContent = 'Try Again';
-  }, { timeout: 10000, maximumAge: 300000 });
-});
-
-function listenOrientation() {
-  window.addEventListener('deviceorientation', function(e) {
-    if (e.alpha === null) return;
-    _deviceAlpha = e.webkitCompassHeading !== undefined ? e.webkitCompassHeading : (360 - e.alpha);
-    if (_qiblaBearing !== null) rotateNeedle(_qiblaBearing, _deviceAlpha);
-  });
-}
-
-/* Auto-load if location was previously saved */
-(function() {
-  try {
-    var lat = parseFloat(localStorage.getItem('waqtx_location_lat'));
-    var lng = parseFloat(localStorage.getItem('waqtx_location_lng'));
-    if (lat && lng) {
-      _qiblaBearing = calcQibla(lat, lng);
-      var dist = calcDistance(lat, lng);
-      var dir = bearingToDirection(_qiblaBearing);
-      var locEl = document.getElementById('qibla-location');
-      var distEl = document.getElementById('qibla-distance');
-      var bearEl = document.getElementById('qibla-bearing');
-      var dirLbl = document.getElementById('qibla-direction-label');
-      if (locEl) locEl.textContent = lat.toFixed(3) + '°, ' + lng.toFixed(3) + '°';
-      if (distEl) distEl.textContent = dist.toFixed(0) + ' km';
-      if (bearEl) bearEl.textContent = _qiblaBearing.toFixed(1) + '° ' + dir;
-      if (dirLbl) dirLbl.textContent = 'Face ' + _qiblaBearing.toFixed(0) + '° — ' + dir;
-      rotateNeedle(_qiblaBearing, null);
-      var status = document.getElementById('qibla-status');
-      if (status) status.textContent = 'Using saved location. Tap Refresh for current position.';
-      var btn = document.getElementById('btn-qibla-find');
-      if (btn) btn.textContent = '↺ Refresh';
-    }
-  } catch(e) {}
-})();
-</script>
-
-<!-- ═══ BOTTOM NAV ═══ -->
-
-
-
-
-
-
-
-
-  <div class="more-group">
-    <div class="more-group-label">Personal</div>
-    <div class="more-grid">
-      <a href="profile.html"    class="more-item"><span class="more-item-icon" aria-hidden="true">&#x1F464;</span>Profile</a>
-      <a href="journey.html"    class="more-item"><span class="more-item-icon" aria-hidden="true">&#x1F319;</span>Journey</a>
-      <a href="reflection.html" class="more-item"><span class="more-item-icon" aria-hidden="true">&#x1FA94;</span>Reflect</a>
-      <a href="search.html"     class="more-item"><span class="more-item-icon" aria-hidden="true">&#x1F50E;</span>Search</a>
-    </div>
-  </div>
-  <div class="more-group">
-    <div class="more-group-label">App</div>
-    <div class="more-grid">
-      <a href="settings.html"   class="more-item"><span class="more-item-icon" aria-hidden="true">&#x2699;&#xFE0F;</span>Settings</a>
-      <a href="privacy.html"    class="more-item"><span class="more-item-icon" aria-hidden="true">&#x1F512;</span>Privacy</a>
-    </div>
-  </div>
-</div>
+</section>
 
 </div><!-- /page-wrap -->
 <nav class="bottom-nav" id="bottom-nav" aria-label="Mobile navigation">
-  <a href="index.html" class="bnav-item"><span class="bnav-icon" aria-hidden="true">&#x2600;&#xFE0F;</span><span class="bnav-label">Today</span></a>
-  <a href="prayers.html" class="bnav-item"><span class="bnav-icon" aria-hidden="true">&#x1F54C;</span><span class="bnav-label">Prayer</span></a>
-  <a href="journey.html" class="bnav-item"><span class="bnav-icon" aria-hidden="true">&#x1F319;</span><span class="bnav-label">Journey</span></a>
-  <a href="explore.html" class="bnav-item"><span class="bnav-icon" aria-hidden="true">&#x1F4DA;</span><span class="bnav-label">History</span></a>
-  <button class="bnav-item" id="btn-more" aria-expanded="false" aria-controls="more-sheet"><span class="bnav-icon" aria-hidden="true">&#x22EF;</span><span class="bnav-label">More</span></button>
+  <a href="index.html" class="bnav-item"><span class="bnav-icon">☀️</span><span class="bnav-label">Today</span></a>
+  <a href="prayers.html" class="bnav-item"><span class="bnav-icon">🕌</span><span class="bnav-label">Prayer</span></a>
+  <a href="journey.html" class="bnav-item"><span class="bnav-icon">🌙</span><span class="bnav-label">Journey</span></a>
+  <a href="explore.html" class="bnav-item"><span class="bnav-icon">📚</span><span class="bnav-label">History</span></a>
+  <button class="bnav-item" id="btn-more" aria-expanded="false" aria-controls="more-sheet"><span class="bnav-icon">⋯</span><span class="bnav-label">More</span></button>
 </nav>
 <div class="more-overlay" id="more-overlay" aria-hidden="true"></div>
 <div class="more-sheet" id="more-sheet" role="dialog" aria-modal="true" aria-label="More navigation" aria-hidden="true">
-  <div class="more-sheet-handle" aria-hidden="true"></div>
-  <div class="more-sheet-header"><span>More</span><button class="more-close" id="more-close" aria-label="Close">&#x2715;</button></div>
-  <div class="more-group"><div class="more-group-label">Explore</div><div class="more-grid"><a href="explore.html" class="more-item"><span class="more-item-icon">&#x1F3DB;</span>Explore</a><a href="stories.html" class="more-item"><span class="more-item-icon">&#x1F4D6;</span>Stories</a><a href="calendar.html" class="more-item"><span class="more-item-icon">&#x1F4C5;</span>Calendar</a><a href="qibla.html" class="more-item"><span class="more-item-icon">&#x1F9ED;</span>Qibla</a></div></div>
-  <div class="more-group"><div class="more-group-label">Personal</div><div class="more-grid"><a href="profile.html" class="more-item"><span class="more-item-icon">&#x1F464;</span>Profile</a><a href="journey.html" class="more-item"><span class="more-item-icon">&#x1F319;</span>Journey</a><a href="reflection.html" class="more-item"><span class="more-item-icon">&#x1FA94;</span>Reflect</a><a href="search.html" class="more-item"><span class="more-item-icon">&#x1F50E;</span>Search</a></div></div>
-  <div class="more-group"><div class="more-group-label">App</div><div class="more-grid"><a href="settings.html" class="more-item"><span class="more-item-icon">&#x2699;</span>Settings</a><a href="privacy.html" class="more-item"><span class="more-item-icon">&#x1F512;</span>Privacy</a></div></div>
+  <div class="more-sheet-handle"></div>
+  <div class="more-sheet-header"><span>More</span><button class="more-close" id="more-close" aria-label="Close">✕</button></div>
+  <div class="more-group"><div class="more-group-label">Explore</div><div class="more-grid"><a href="explore.html" class="more-item"><span class="more-item-icon">🏛️</span>Explore</a><a href="stories.html" class="more-item"><span class="more-item-icon">📖</span>Stories</a><a href="calendar.html" class="more-item"><span class="more-item-icon">📅</span>Calendar</a><a href="qibla.html" class="more-item"><span class="more-item-icon">🧭</span>Qibla</a></div></div>
+  <div class="more-group"><div class="more-group-label">Personal</div><div class="more-grid"><a href="profile.html" class="more-item"><span class="more-item-icon">👤</span>Profile</a><a href="journey.html" class="more-item"><span class="more-item-icon">🌙</span>Journey</a><a href="reflection.html" class="more-item"><span class="more-item-icon">🪔</span>Reflect</a><a href="search.html" class="more-item"><span class="more-item-icon">🔍</span>Search</a></div></div>
+  <div class="more-group"><div class="more-group-label">App</div><div class="more-grid"><a href="settings.html" class="more-item"><span class="more-item-icon">⚙️</span>Settings</a><a href="privacy.html" class="more-item"><span class="more-item-icon">🔒</span>Privacy</a></div></div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="js/core.js"></script>
+<script>
+/* Qibla compass logic */
+(function(){
+  var KAABA = { lat: 21.4225, lng: 39.8262 };
+  function toRad(d){ return d * Math.PI / 180; }
+  function calcQibla(lat, lng){
+    var dLng = toRad(KAABA.lng - lng);
+    var y = Math.sin(dLng) * Math.cos(toRad(KAABA.lat));
+    var x = Math.cos(toRad(lat)) * Math.sin(toRad(KAABA.lat)) -
+            Math.sin(toRad(lat)) * Math.cos(toRad(KAABA.lat)) * Math.cos(dLng);
+    var bearing = (Math.atan2(y, x) * 180 / Math.PI + 360) % 360;
+    return Math.round(bearing);
+  }
+  function calcDistance(lat1, lng1, lat2, lng2){
+    var R = 6371, dLat = toRad(lat2-lat1), dLng = toRad(lng2-lng1);
+    var a = Math.sin(dLat/2)*Math.sin(dLat/2) +
+            Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*Math.sin(dLng/2)*Math.sin(dLng/2);
+    return Math.round(R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)));
+  }
+  function compassDir(b){
+    var dirs = ['N','NE','E','SE','S','SW','W','NW','N'];
+    return dirs[Math.round(b/45)];
+  }
+  function setEl(id, v){ var e = document.getElementById(id); if(e){ e.textContent = v; e.classList.remove('skeleton','skeleton-md','skeleton-sm'); } }
+  function setStatus(msg, isErr){
+    var el = document.getElementById('qibla-status');
+    if(el){ el.textContent = msg; el.style.color = isErr ? 'var(--danger)' : 'var(--text-3)'; }
+  }
+  function showQibla(lat, lng){
+    var bearing = calcQibla(lat, lng);
+    var dist = calcDistance(lat, lng, KAABA.lat, KAABA.lng);
+    var needle = document.getElementById('qibla-needle');
+    if(needle) needle.style.transform = 'rotate(' + bearing + 'deg)';
+    setEl('qibla-bearing', bearing + '°');
+    setEl('qibla-direction-label', compassDir(bearing) + ' — Qibla Direction');
+    setEl('qibla-distance', dist.toLocaleString() + ' km');
+    setStatus('Facing Makkah al-Mukarramah');
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    var btn = document.getElementById('btn-qibla-find');
+    if(!btn) return;
+    btn.addEventListener('click', function(){
+      if(!navigator.geolocation){ setStatus('Geolocation is not supported by your browser.', true); return; }
+      setStatus('Locating you…');
+      btn.disabled = true;
+      navigator.geolocation.getCurrentPosition(
+        function(pos){
+          btn.disabled = false;
+          var lat = pos.coords.latitude, lng = pos.coords.longitude;
+          setEl('qibla-location', 'Your location: ' + lat.toFixed(4) + ', ' + lng.toFixed(4));
+          showQibla(lat, lng);
+          try { localStorage.setItem('waqtx_location_lat', lat); localStorage.setItem('waqtx_location_lng', lng); } catch(e){}
+        },
+        function(err){
+          btn.disabled = false;
+          var msgs = { 1:'Location permission denied. Please allow access.', 2:'Location unavailable. Check your connection.', 3:'Location request timed out. Please try again.' };
+          setStatus(msgs[err.code] || 'Could not determine your location.', true);
+        },
+        { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 }
+      );
+    });
+    /* Auto-use saved location */
+    try {
+      var lat = parseFloat(localStorage.getItem('waqtx_location_lat'));
+      var lng = parseFloat(localStorage.getItem('waqtx_location_lng'));
+      if(!isNaN(lat) && !isNaN(lng)) showQibla(lat, lng);
+    } catch(e){}
+  });
+})();
+</script>
 </body>
 </html>

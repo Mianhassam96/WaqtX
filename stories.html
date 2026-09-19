@@ -4,127 +4,111 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>WaqtX — Stories</title>
-  <meta name="description" content="They lived before you. They struggled like you. They chose differently. Stories of Prophets, Companions and great women of Islam."/>
+  <meta name="description" content="Stories of Prophets, Companions and Islamic civilization. Find a story for how you feel right now."/>
   <meta name="theme-color" content="#F7F8F5"/>
   <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+  <link rel="manifest" href="manifest.json"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&family=Cinzel:wght@600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
-  
-  <link rel="manifest" href="manifest.json"/>
-  <!-- Inline theme flash-prevention -->
-  <script>
-    (function(){var s='light';try{s=localStorage.getItem('waqtx_theme')||'light';}catch(e){}if(s&&s!=='light')document.documentElement.setAttribute('data-theme',s);var l='en';try{l=localStorage.getItem('waqtx_lang')||'en';}catch(e){}if(l&&l!=='en'){document.documentElement.setAttribute('lang',l);if(l==='ur'||l==='ar')document.documentElement.setAttribute('dir','rtl');}})();
-  </script>
+  <script>(function(){var s='light';try{s=localStorage.getItem('waqtx_theme')||'light';}catch(e){}if(s!=='light')document.documentElement.setAttribute('data-theme',s);var l='en';try{l=localStorage.getItem('waqtx_lang')||'en';}catch(e){}if(l!=='en'){document.documentElement.setAttribute('lang',l);if(l==='ur'||l==='ar')document.documentElement.setAttribute('dir','rtl');}})();</script>
 </head>
 <body>
 <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo" aria-label="WaqtX home"><span class="nav-logo-text">Waqt<span class="nav-logo-x">X</span></span></a>
     <div class="nav-links" role="list">
-      <a href="index.html" class="nav-link">Today</a>
-      <a href="prayers.html" class="nav-link">Prayer</a>
-      <a href="journey.html" class="nav-link">Journey</a>
-      <a href="explore.html" class="nav-link">History</a>
-      <a href="reflection.html" class="nav-link">Reflect</a>
+      <a href="index.html" class="nav-link" role="listitem">Today</a>
+      <a href="prayers.html" class="nav-link" role="listitem">Prayer</a>
+      <a href="journey.html" class="nav-link" role="listitem">Journey</a>
+      <a href="explore.html" class="nav-link" role="listitem">History</a>
+      <a href="reflection.html" class="nav-link" role="listitem">Reflect</a>
     </div>
     <div class="nav-actions">
-      <div class="lang-toggle" role="group" aria-label="Language"><button class="lang-pill active" data-lang="en" aria-pressed="true">EN</button><button class="lang-pill" data-lang="ur" aria-pressed="false" style="font-family:'Noto Sans Arabic',sans-serif">&#x627;&#x631;&#x62F;&#x648;</button></div>
-      <button id="btn-theme-toggle" class="btn-theme" aria-label="Switch theme"><span id="theme-icon">&#x1F319;</span></button>
+      <div class="lang-toggle" role="group" aria-label="Language"><button class="lang-pill active" data-lang="en" aria-pressed="true">EN</button><button class="lang-pill" data-lang="ur" aria-pressed="false" style="font-family:'Noto Sans Arabic',sans-serif">اردو</button></div>
+      <button id="btn-theme-toggle" class="btn-theme" aria-label="Switch theme"><span id="theme-icon">🌙</span></button>
       <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer"><span></span><span></span><span></span></button>
     </div>
   </div>
 </nav>
 <div class="nav-drawer" id="nav-drawer" aria-hidden="true" aria-label="Navigation menu">
-  <div class="nav-drawer-section"><div class="nav-drawer-label">Navigate</div><div class="nav-drawer-links">
-      <a href="index.html" class="nav-link">Today</a>
-      <a href="prayers.html" class="nav-link">Prayer</a>
-      <a href="journey.html" class="nav-link">Journey</a>
-      <a href="explore.html" class="nav-link">History</a>
-      <a href="reflection.html" class="nav-link">Reflect</a>
-  </div></div>
-  <div class="nav-drawer-section"><div class="nav-drawer-label">More</div><div class="nav-drawer-links"><a href="calendar.html" class="nav-link">Calendar</a> <a href="stories.html" class="nav-link">Stories</a> <a href="qibla.html" class="nav-link">Qibla</a> <a href="profile.html" class="nav-link">Profile</a> <a href="settings.html" class="nav-link">Settings</a></div></div>
+  <div class="nav-drawer-section"><div class="nav-drawer-label">Navigate</div><div class="nav-drawer-links"><a href="index.html" class="nav-link">Today</a><a href="prayers.html" class="nav-link">Prayer</a><a href="journey.html" class="nav-link">Journey</a><a href="explore.html" class="nav-link">History</a><a href="reflection.html" class="nav-link">Reflect</a></div></div>
+  <div class="nav-drawer-section"><div class="nav-drawer-label">More</div><div class="nav-drawer-links"><a href="calendar.html" class="nav-link">Calendar</a><a href="stories.html" class="nav-link active">Stories</a><a href="qibla.html" class="nav-link">Qibla</a><a href="profile.html" class="nav-link">Profile</a><a href="settings.html" class="nav-link">Settings</a></div></div>
 </div>
-
 <div class="page-wrap">
+
 <div class="page-hero">
   <div class="page-hero-inner">
-    <div class="page-hero-icon" aria-hidden="true">&#x1F4D6;</div>
+    <div class="page-hero-icon" aria-hidden="true">📖</div>
     <h1 class="page-hero-title">Stories</h1>
-    <p class="page-hero-sub">Stories of Prophets, Companions and Islamic civilization.</p>
+    <p class="page-hero-sub">They lived before you. They struggled like you. They chose differently.</p>
   </div>
 </div>
 
-
-
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <span class="footer-logo">✦ WaqtX</span>
-      <p>A mirror for your time.<br>A guide for your life.</p>
-    </div>
-    <div class="footer-center">Made with ♥ for a meaningful life</div>
-      <div class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="https://github.com/Mianhassam96" target="_blank" rel="noopener">GitHub</a>
-      <div class="footer-copy">© 2026 MultiMian. All rights reserved.</div>
+<!-- How are you feeling? -->
+<section class="stories-section" id="feel-section" aria-label="How are you feeling">
+  <div class="container">
+    <div class="type-eyebrow">How are you feeling?</div>
+    <p class="stories-section-sub">Find a story that speaks to where you are right now.</p>
+    <div class="feel-grid" id="feel-grid" role="list">
+      <!-- Rendered by stories.js -->
     </div>
   </div>
-</footer>
+</section>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
-<script src="stories-data.js"></script>
-<script src="js/core.js"></script>
-<script src="stories.js"></script>
-
-
-
-
-<!-- ═══ BOTTOM NAV ═══ -->
-
-
-
-
-
-
-
-
-  <div class="more-group">
-    <div class="more-group-label">Personal</div>
-    <div class="more-grid">
-      <a href="profile.html"    class="more-item"><span class="more-item-icon" aria-hidden="true">&#x1F464;</span>Profile</a>
-      <a href="journey.html"    class="more-item"><span class="more-item-icon" aria-hidden="true">&#x1F319;</span>Journey</a>
-      <a href="reflection.html" class="more-item"><span class="more-item-icon" aria-hidden="true">&#x1FA94;</span>Reflect</a>
-      <a href="search.html"     class="more-item"><span class="more-item-icon" aria-hidden="true">&#x1F50E;</span>Search</a>
+<!-- Story search -->
+<section class="stories-section stories-section-alt" id="stories-search-section" aria-label="Search stories">
+  <div class="container">
+    <div class="search-wrap" style="max-width:480px;margin-inline:auto">
+      <input type="search" class="search-input" id="stories-search" placeholder="Search by name or feeling…" aria-label="Search stories" autocomplete="off"/>
+      <span class="search-icon" aria-hidden="true">🔍</span>
     </div>
   </div>
-  <div class="more-group">
-    <div class="more-group-label">App</div>
-    <div class="more-grid">
-      <a href="settings.html"   class="more-item"><span class="more-item-icon" aria-hidden="true">&#x2699;&#xFE0F;</span>Settings</a>
-      <a href="privacy.html"    class="more-item"><span class="more-item-icon" aria-hidden="true">&#x1F512;</span>Privacy</a>
+</section>
+
+<!-- Stories grid -->
+<section class="stories-section" id="stories-grid-section" aria-label="Stories">
+  <div class="container">
+    <div class="type-eyebrow" id="stories-section-label">All Stories</div>
+    <div class="stories-grid" id="stories-grid" role="list">
+      <!-- Rendered by stories.js -->
+      <div class="state-empty"><div class="state-empty-sub">Loading stories…</div></div>
     </div>
+  </div>
+</section>
+
+<!-- Story modal -->
+<div class="detail-overlay hidden" id="story-modal-overlay" role="dialog" aria-modal="true" aria-label="Story" aria-labelledby="story-modal-title">
+  <div class="detail-panel" id="story-modal">
+    <div class="detail-header">
+      <button class="detail-close" id="story-modal-close" aria-label="Close story">✕</button>
+      <div style="font-size:var(--text-xs);font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--primary);margin-block-end:var(--sp-2)" id="story-modal-category"></div>
+      <h2 class="detail-title" id="story-modal-title"></h2>
+    </div>
+    <div class="detail-body" id="story-modal-body"></div>
   </div>
 </div>
 
 </div><!-- /page-wrap -->
 <nav class="bottom-nav" id="bottom-nav" aria-label="Mobile navigation">
-  <a href="index.html" class="bnav-item"><span class="bnav-icon" aria-hidden="true">&#x2600;&#xFE0F;</span><span class="bnav-label">Today</span></a>
-  <a href="prayers.html" class="bnav-item"><span class="bnav-icon" aria-hidden="true">&#x1F54C;</span><span class="bnav-label">Prayer</span></a>
-  <a href="journey.html" class="bnav-item"><span class="bnav-icon" aria-hidden="true">&#x1F319;</span><span class="bnav-label">Journey</span></a>
-  <a href="explore.html" class="bnav-item"><span class="bnav-icon" aria-hidden="true">&#x1F4DA;</span><span class="bnav-label">History</span></a>
-  <button class="bnav-item" id="btn-more" aria-expanded="false" aria-controls="more-sheet"><span class="bnav-icon" aria-hidden="true">&#x22EF;</span><span class="bnav-label">More</span></button>
+  <a href="index.html" class="bnav-item"><span class="bnav-icon">☀️</span><span class="bnav-label">Today</span></a>
+  <a href="prayers.html" class="bnav-item"><span class="bnav-icon">🕌</span><span class="bnav-label">Prayer</span></a>
+  <a href="journey.html" class="bnav-item"><span class="bnav-icon">🌙</span><span class="bnav-label">Journey</span></a>
+  <a href="explore.html" class="bnav-item"><span class="bnav-icon">📚</span><span class="bnav-label">History</span></a>
+  <button class="bnav-item" id="btn-more" aria-expanded="false" aria-controls="more-sheet"><span class="bnav-icon">⋯</span><span class="bnav-label">More</span></button>
 </nav>
 <div class="more-overlay" id="more-overlay" aria-hidden="true"></div>
 <div class="more-sheet" id="more-sheet" role="dialog" aria-modal="true" aria-label="More navigation" aria-hidden="true">
-  <div class="more-sheet-handle" aria-hidden="true"></div>
-  <div class="more-sheet-header"><span>More</span><button class="more-close" id="more-close" aria-label="Close">&#x2715;</button></div>
-  <div class="more-group"><div class="more-group-label">Explore</div><div class="more-grid"><a href="explore.html" class="more-item"><span class="more-item-icon">&#x1F3DB;</span>Explore</a><a href="stories.html" class="more-item"><span class="more-item-icon">&#x1F4D6;</span>Stories</a><a href="calendar.html" class="more-item"><span class="more-item-icon">&#x1F4C5;</span>Calendar</a><a href="qibla.html" class="more-item"><span class="more-item-icon">&#x1F9ED;</span>Qibla</a></div></div>
-  <div class="more-group"><div class="more-group-label">Personal</div><div class="more-grid"><a href="profile.html" class="more-item"><span class="more-item-icon">&#x1F464;</span>Profile</a><a href="journey.html" class="more-item"><span class="more-item-icon">&#x1F319;</span>Journey</a><a href="reflection.html" class="more-item"><span class="more-item-icon">&#x1FA94;</span>Reflect</a><a href="search.html" class="more-item"><span class="more-item-icon">&#x1F50E;</span>Search</a></div></div>
-  <div class="more-group"><div class="more-group-label">App</div><div class="more-grid"><a href="settings.html" class="more-item"><span class="more-item-icon">&#x2699;</span>Settings</a><a href="privacy.html" class="more-item"><span class="more-item-icon">&#x1F512;</span>Privacy</a></div></div>
+  <div class="more-sheet-handle"></div>
+  <div class="more-sheet-header"><span>More</span><button class="more-close" id="more-close" aria-label="Close">✕</button></div>
+  <div class="more-group"><div class="more-group-label">Explore</div><div class="more-grid"><a href="explore.html" class="more-item"><span class="more-item-icon">🏛️</span>Explore</a><a href="stories.html" class="more-item"><span class="more-item-icon">📖</span>Stories</a><a href="calendar.html" class="more-item"><span class="more-item-icon">📅</span>Calendar</a><a href="qibla.html" class="more-item"><span class="more-item-icon">🧭</span>Qibla</a></div></div>
+  <div class="more-group"><div class="more-group-label">Personal</div><div class="more-grid"><a href="profile.html" class="more-item"><span class="more-item-icon">👤</span>Profile</a><a href="journey.html" class="more-item"><span class="more-item-icon">🌙</span>Journey</a><a href="reflection.html" class="more-item"><span class="more-item-icon">🪔</span>Reflect</a><a href="search.html" class="more-item"><span class="more-item-icon">🔍</span>Search</a></div></div>
+  <div class="more-group"><div class="more-group-label">App</div><div class="more-grid"><a href="settings.html" class="more-item"><span class="more-item-icon">⚙️</span>Settings</a><a href="privacy.html" class="more-item"><span class="more-item-icon">🔒</span>Privacy</a></div></div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="stories-data.js"></script>
+<script src="js/core.js"></script>
+<script src="stories.js"></script>
 </body>
 </html>

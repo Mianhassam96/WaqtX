@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>WaqtX — Settings</title>
-  <meta name="description" content="Customise WaqtX — prayer method, theme, language, location, notifications, and accessibility."/>
+  <meta name="description" content="Customise WaqtX — prayer method, theme, language, location, notifications and accessibility."/>
   <meta name="theme-color" content="#F7F8F5"/>
   <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
   <link rel="manifest" href="manifest.json"/>
@@ -12,62 +12,79 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&family=Cinzel:wght@600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
-  
-  <script>
-    (function(){var s='light';try{s=localStorage.getItem('waqtx_theme')||'light';}catch(e){}if(s&&s!=='light')document.documentElement.setAttribute('data-theme',s);var l='en';try{l=localStorage.getItem('waqtx_lang')||'en';}catch(e){}if(l&&l!=='en'){document.documentElement.setAttribute('lang',l);if(l==='ur'||l==='ar')document.documentElement.setAttribute('dir','rtl');}})();
-  </script>
+  <script>(function(){var s='light';try{s=localStorage.getItem('waqtx_theme')||'light';}catch(e){}if(s!=='light')document.documentElement.setAttribute('data-theme',s);var l='en';try{l=localStorage.getItem('waqtx_lang')||'en';}catch(e){}if(l!=='en'){document.documentElement.setAttribute('lang',l);if(l==='ur'||l==='ar')document.documentElement.setAttribute('dir','rtl');}})();</script>
 </head>
 <body>
 <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo" aria-label="WaqtX home"><span class="nav-logo-text">Waqt<span class="nav-logo-x">X</span></span></a>
     <div class="nav-links" role="list">
-      <a href="index.html" class="nav-link">Today</a>
-      <a href="prayers.html" class="nav-link">Prayer</a>
-      <a href="journey.html" class="nav-link">Journey</a>
-      <a href="explore.html" class="nav-link">History</a>
-      <a href="reflection.html" class="nav-link">Reflect</a>
+      <a href="index.html" class="nav-link" role="listitem">Today</a>
+      <a href="prayers.html" class="nav-link" role="listitem">Prayer</a>
+      <a href="journey.html" class="nav-link" role="listitem">Journey</a>
+      <a href="explore.html" class="nav-link" role="listitem">History</a>
+      <a href="reflection.html" class="nav-link" role="listitem">Reflect</a>
     </div>
     <div class="nav-actions">
-      <div class="lang-toggle" role="group" aria-label="Language"><button class="lang-pill active" data-lang="en" aria-pressed="true">EN</button><button class="lang-pill" data-lang="ur" aria-pressed="false" style="font-family:'Noto Sans Arabic',sans-serif">&#x627;&#x631;&#x62F;&#x648;</button></div>
-      <button id="btn-theme-toggle" class="btn-theme" aria-label="Switch theme"><span id="theme-icon">&#x1F319;</span></button>
+      <div class="lang-toggle" role="group" aria-label="Language"><button class="lang-pill active" data-lang="en" aria-pressed="true">EN</button><button class="lang-pill" data-lang="ur" aria-pressed="false" style="font-family:'Noto Sans Arabic',sans-serif">اردو</button></div>
+      <button id="btn-theme-toggle" class="btn-theme" aria-label="Switch theme"><span id="theme-icon">🌙</span></button>
       <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer"><span></span><span></span><span></span></button>
     </div>
   </div>
 </nav>
 <div class="nav-drawer" id="nav-drawer" aria-hidden="true" aria-label="Navigation menu">
-  <div class="nav-drawer-section"><div class="nav-drawer-label">Navigate</div><div class="nav-drawer-links">
-      <a href="index.html" class="nav-link">Today</a>
-      <a href="prayers.html" class="nav-link">Prayer</a>
-      <a href="journey.html" class="nav-link">Journey</a>
-      <a href="explore.html" class="nav-link">History</a>
-      <a href="reflection.html" class="nav-link">Reflect</a>
-  </div></div>
-  <div class="nav-drawer-section"><div class="nav-drawer-label">More</div><div class="nav-drawer-links"><a href="calendar.html" class="nav-link">Calendar</a> <a href="stories.html" class="nav-link">Stories</a> <a href="qibla.html" class="nav-link">Qibla</a> <a href="profile.html" class="nav-link">Profile</a> <a href="settings.html" class="nav-link">Settings</a></div></div>
+  <div class="nav-drawer-section"><div class="nav-drawer-label">Navigate</div><div class="nav-drawer-links"><a href="index.html" class="nav-link">Today</a><a href="prayers.html" class="nav-link">Prayer</a><a href="journey.html" class="nav-link">Journey</a><a href="explore.html" class="nav-link">History</a><a href="reflection.html" class="nav-link">Reflect</a></div></div>
+  <div class="nav-drawer-section"><div class="nav-drawer-label">More</div><div class="nav-drawer-links"><a href="calendar.html" class="nav-link">Calendar</a><a href="stories.html" class="nav-link">Stories</a><a href="qibla.html" class="nav-link">Qibla</a><a href="profile.html" class="nav-link">Profile</a><a href="settings.html" class="nav-link active">Settings</a></div></div>
 </div>
-
 <div class="page-wrap">
-
-
 
 <div class="page-hero">
   <div class="page-hero-inner">
-    <div class="page-hero-icon">⚙️</div>
+    <div class="page-hero-icon" aria-hidden="true">⚙️</div>
     <h1 class="page-hero-title">Settings</h1>
-    <p class="page-hero-sub">Customise WaqtX to fit your life. All changes save instantly.</p>
+    <p class="page-hero-sub">Customise WaqtX to fit your life. Changes save instantly.</p>
   </div>
 </div>
 
-<main class="settings-page">
+<main class="settings-page-wrap">
 
-  <!-- Prayer Method -->
-  <div class="settings-group">
-    <div class="settings-group-title">🕌 Prayer Calculation</div>
+  <!-- Appearance -->
+  <div class="settings-section">
+    <div class="settings-section-title">Appearance</div>
     <div class="settings-row">
-      <div>
-        <div class="settings-label">Calculation Method</div>
-        <div class="settings-desc">Affects Fajr and Isha calculation</div>
+      <div><div class="settings-row-label">Theme</div><div class="settings-row-desc">Choose how WaqtX looks</div></div>
+      <div class="settings-theme-pills">
+        <button class="theme-preview-btn" data-theme="light" aria-label="Light theme">
+          <div class="theme-preview-dot" style="background:#F7F8F5;border:2px solid #164A3A;"></div>
+          <span>Light</span>
+        </button>
+        <button class="theme-preview-btn" data-theme="dark" aria-label="Dark theme">
+          <div class="theme-preview-dot" style="background:#08110D;border:2px solid #79C5A4;"></div>
+          <span>Dark</span>
+        </button>
       </div>
+    </div>
+  </div>
+
+  <!-- Language -->
+  <div class="settings-section">
+    <div class="settings-section-title">Language</div>
+    <div class="settings-row">
+      <div><div class="settings-row-label">Interface Language</div><div class="settings-row-desc">Arabic Quran text is never translated</div></div>
+      <select class="settings-select" id="setting-language" aria-label="Interface language">
+        <option value="en">🇬🇧 English</option>
+        <option value="ur">🇵🇰 اردو</option>
+        <option value="ar">🌙 العربية</option>
+        <option value="roman">🔤 Roman Urdu</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Prayer -->
+  <div class="settings-section">
+    <div class="settings-section-title">Prayer</div>
+    <div class="settings-row">
+      <div><div class="settings-row-label">Calculation Method</div><div class="settings-row-desc">Affects Fajr and Isha calculation</div></div>
       <select class="settings-select" id="setting-prayer-method" aria-label="Prayer calculation method">
         <option value="2">ISNA (North America)</option>
         <option value="3">Muslim World League</option>
@@ -79,208 +96,101 @@
     </div>
   </div>
 
-  <!-- Theme -->
-  <div class="settings-group">
-    <div class="settings-group-title">🎨 Theme</div>
-    <div class="theme-previews">
-      <button class="theme-preview-btn" data-theme="dark" aria-label="Dark theme">
-        <div class="theme-preview-dot" style="background:#0D1512;border:2px solid #174A3A;"></div>
-        <div class="theme-preview-label">Dark</div>
-      </button>
-      <button class="theme-preview-btn" data-theme="light" aria-label="Light theme">
-        <div class="theme-preview-dot" style="background:#F8F7F2;border:2px solid #174A3A;"></div>
-        <div class="theme-preview-label">Light</div>
-      </button>
-    </div>
-  </div>
-
-  <!-- Language -->
-  <div class="settings-group">
-    <div class="settings-group-title">🌐 Language</div>
-    <div class="settings-row">
-      <div>
-        <div class="settings-label">Interface Language</div>
-        <div class="settings-desc">Arabic Quran text is never translated</div>
-      </div>
-      <select class="settings-select" id="setting-language" aria-label="Interface language">
-        <option value="en">🇬🇧 English</option>
-        <option value="ur">🇵🇰 اردو</option>
-        <option value="ar">🌙 العربية</option>
-        <option value="roman">🔤 Roman Urdu</option>
-      </select>
-    </div>
-  </div>
-
   <!-- Location -->
-  <div class="settings-group">
-    <div class="settings-group-title">📍 Location</div>
-    <div class="settings-row">
-      <div class="settings-label">Location Mode</div>
+  <div class="settings-section">
+    <div class="settings-section-title">Location</div>
+    <div class="settings-row"><div class="settings-row-label">Location Mode</div></div>
+    <div class="settings-radio-group">
+      <label class="settings-radio-row"><input type="radio" name="location-mode" id="location-auto" value="auto"/> Auto-detect (GPS)</label>
+      <label class="settings-radio-row"><input type="radio" name="location-mode" id="location-manual" value="manual"/> Enter city manually</label>
     </div>
-    <div class="radio-group">
-      <label class="radio-row">
-        <input type="radio" name="location-mode" id="location-auto" value="auto"/>
-        Auto-detect (GPS)
-      </label>
-      <label class="radio-row">
-        <input type="radio" name="location-mode" id="location-manual" value="manual"/>
-        Enter city manually
-      </label>
+    <div class="settings-city-row">
+      <input type="text" id="setting-city" class="form-input settings-city-input" placeholder="e.g. Karachi, London" aria-label="City name" disabled/>
+      <button class="btn btn-ghost btn-sm" id="btn-city-lookup" disabled aria-label="Look up city">Look up</button>
     </div>
-    <div class="location-city-row">
-      <input type="text" id="setting-city" class="settings-city-input" placeholder="e.g. Karachi, Lahore, London" aria-label="City name" disabled/>
-      <button class="btn-city-lookup" id="btn-city-lookup" disabled aria-label="Look up city">Look up</button>
-    </div>
-    <div class="city-status" id="city-status"></div>
-    <div class="location-current" id="location-current"></div>
+    <div class="settings-row-desc" id="city-status"></div>
+    <div class="settings-row-desc" id="location-current"></div>
   </div>
 
   <!-- Notifications -->
-  <div class="settings-group">
-    <div class="settings-group-title">🔔 Prayer Reminders</div>
+  <div class="settings-section">
+    <div class="settings-section-title">Prayer Reminders</div>
     <div class="notif-cards">
-      <div class="notif-card">
-        <div class="notif-card-icon">🔔</div>
-        <div class="notif-card-info">
-          <div class="notif-card-title">Adhan</div>
-          <div class="notif-card-desc">Notification at prayer time.</div>
-        </div>
-        <label class="toggle-switch" aria-label="Adhan notification">
-          <input type="checkbox" id="notif-adhan-s"/>
-          <span class="toggle-slider"></span>
-        </label>
-      </div>
-      <div class="notif-card">
-        <div class="notif-card-icon">⏰</div>
-        <div class="notif-card-info">
-          <div class="notif-card-title">Reminder</div>
-          <div class="notif-card-desc">15 minutes before each prayer.</div>
-        </div>
-        <label class="toggle-switch" aria-label="Reminder notification">
-          <input type="checkbox" id="notif-reminder-s"/>
-          <span class="toggle-slider"></span>
-        </label>
-      </div>
-      <div class="notif-card">
-        <div class="notif-card-icon">🔕</div>
-        <div class="notif-card-info">
-          <div class="notif-card-title">Silent</div>
-          <div class="notif-card-desc">Notification only, no sound.</div>
-        </div>
-        <label class="toggle-switch" aria-label="Silent notification">
-          <input type="checkbox" id="notif-silent-s"/>
-          <span class="toggle-slider"></span>
-        </label>
-      </div>
+      <div class="notif-card card-sm"><div class="notif-card-icon">🔔</div><div class="notif-card-info"><div class="notif-card-title">Adhan</div><div class="notif-card-desc">Notification at prayer time.</div></div><label class="toggle" aria-label="Adhan"><input type="checkbox" id="notif-adhan-s"/><span class="toggle-track"></span></label></div>
+      <div class="notif-card card-sm"><div class="notif-card-icon">⏰</div><div class="notif-card-info"><div class="notif-card-title">Reminder</div><div class="notif-card-desc">15 minutes before each prayer.</div></div><label class="toggle" aria-label="Reminder"><input type="checkbox" id="notif-reminder-s"/><span class="toggle-track"></span></label></div>
+      <div class="notif-card card-sm"><div class="notif-card-icon">🔕</div><div class="notif-card-info"><div class="notif-card-title">Silent</div><div class="notif-card-desc">Notification only, no sound.</div></div><label class="toggle" aria-label="Silent"><input type="checkbox" id="notif-silent-s"/><span class="toggle-track"></span></label></div>
     </div>
-    <div class="notif-denied hidden" id="notif-denied-msg">
-      Notification permission denied. Enable it in your browser settings and reload.
-    </div>
-    <div class="notif-support-msg" id="notif-support-msg"></div>
+    <div class="state-error hidden" id="notif-denied-msg" style="margin-block-start:var(--sp-3)"><div class="state-error-msg">Notifications denied. Enable in browser settings.</div></div>
+    <div class="settings-row-desc" id="notif-support-msg"></div>
   </div>
 
   <!-- Accessibility -->
-  <div class="settings-group">
-    <div class="settings-group-title">♿ Accessibility</div>
+  <div class="settings-section">
+    <div class="settings-section-title">Accessibility</div>
     <div class="settings-row">
-      <div>
-        <div class="settings-label">Font Size</div>
-        <div class="settings-desc">Applies across the whole app</div>
-      </div>
-      <div class="font-size-btns">
-        <button class="font-size-btn" data-size="small"   aria-label="Small font">A</button>
-        <button class="font-size-btn" data-size="default" aria-label="Default font" style="font-size:1em;">A</button>
-        <button class="font-size-btn" data-size="large"   aria-label="Large font"  style="font-size:1.2em;">A</button>
+      <div><div class="settings-row-label">Font Size</div></div>
+      <div class="settings-font-btns">
+        <button class="settings-font-btn" data-size="small"   aria-label="Small font">A</button>
+        <button class="settings-font-btn active" data-size="default" aria-label="Default font">A</button>
+        <button class="settings-font-btn" data-size="large"   aria-label="Large font" style="font-size:1.1em;">A</button>
       </div>
     </div>
     <div class="settings-row">
-      <div>
-        <div class="settings-label">High Contrast</div>
-        <div class="settings-desc">Increases text and border contrast</div>
-      </div>
-      <label class="toggle-switch" aria-label="High contrast">
-        <input type="checkbox" id="setting-contrast"/>
-        <span class="toggle-slider"></span>
-      </label>
+      <div><div class="settings-row-label">Reduce Motion</div><div class="settings-row-desc">Minimises animations</div></div>
+      <label class="toggle" aria-label="Reduce motion"><input type="checkbox" id="setting-motion"/><span class="toggle-track"></span></label>
+    </div>
+    <div class="settings-row">
+      <div><div class="settings-row-label">High Contrast</div><div class="settings-row-desc">Increases text and border contrast</div></div>
+      <label class="toggle" aria-label="High contrast"><input type="checkbox" id="setting-contrast"/><span class="toggle-track"></span></label>
     </div>
   </div>
 
-  <!-- Data -->
-  <div class="settings-group">
-    <div class="settings-group-title">🗑️ Your Data</div>
+  <!-- Privacy -->
+  <div class="settings-section">
+    <div class="settings-section-title">Privacy &amp; Data</div>
     <div class="settings-row">
-      <div>
-        <div class="settings-label">Clear All Data</div>
-        <div class="settings-desc">Removes all saved data — journal, streak, tracker, preferences</div>
-      </div>
-      <button class="btn-clear-data" id="btn-clear-data" aria-label="Clear all data">Clear All</button>
+      <div><div class="settings-row-label">Clear All Data</div><div class="settings-row-desc">Removes all saved data — journal, streak, tracker, preferences</div></div>
+      <button class="btn settings-btn-danger" id="btn-clear-data">Clear All</button>
     </div>
-    <div class="clear-confirm hidden" id="clear-confirm">
-      <p>This will permanently delete all your WaqtX data including your streak, journal, and prayer tracker. This cannot be undone.</p>
-      <div class="clear-confirm-btns">
-        <button class="btn-confirm-yes" id="btn-clear-confirm-yes">Yes, clear everything</button>
-        <button class="btn-confirm-no"  id="btn-clear-confirm-no">Cancel</button>
+    <div class="settings-clear-confirm hidden" id="clear-confirm">
+      <p>This will permanently delete all your WaqtX data. This cannot be undone.</p>
+      <div style="display:flex;gap:var(--sp-3);margin-block-start:var(--sp-3)">
+        <button class="btn settings-btn-danger-confirm" id="btn-clear-confirm-yes">Yes, clear everything</button>
+        <button class="btn btn-ghost" id="btn-clear-confirm-no">Cancel</button>
       </div>
     </div>
-    <div class="privacy-notice" style="margin-top:12px;">🔒 All data is stored only on your device. WaqtX never sends your data anywhere.</div>
+    <p style="font-size:var(--text-xs);color:var(--text-3);margin-block-start:var(--sp-3)">🔒 All data is stored only on your device. WaqtX never sends your data anywhere.</p>
+  </div>
+
+  <!-- About -->
+  <div class="settings-section">
+    <div class="settings-section-title">About</div>
+    <div class="settings-row"><div class="settings-row-label">WaqtX</div><div class="settings-row-desc">Your Time. Your Faith. Your History.</div></div>
+    <div class="settings-row"><a href="privacy.html" style="font-size:var(--text-sm);color:var(--primary);font-weight:600;">Privacy Policy →</a></div>
   </div>
 
 </main>
 
-<!-- Toast -->
 <div class="settings-toast hidden" id="settings-toast" aria-live="polite"></div>
-
-
-
-<!-- More Menu (slide-up) -->
-
-
-<script src="js/core.js"></script>
-<script src="js/settings.js"></script>
-
-<!-- ═══ BOTTOM NAV ═══ -->
-
-
-
-
-
-
-
-
-  <div class="more-group">
-    <div class="more-group-label">Personal</div>
-    <div class="more-grid">
-      <a href="profile.html"    class="more-item"><span class="more-item-icon" aria-hidden="true">&#x1F464;</span>Profile</a>
-      <a href="journey.html"    class="more-item"><span class="more-item-icon" aria-hidden="true">&#x1F319;</span>Journey</a>
-      <a href="reflection.html" class="more-item"><span class="more-item-icon" aria-hidden="true">&#x1FA94;</span>Reflect</a>
-      <a href="search.html"     class="more-item"><span class="more-item-icon" aria-hidden="true">&#x1F50E;</span>Search</a>
-    </div>
-  </div>
-  <div class="more-group">
-    <div class="more-group-label">App</div>
-    <div class="more-grid">
-      <a href="settings.html"   class="more-item"><span class="more-item-icon" aria-hidden="true">&#x2699;&#xFE0F;</span>Settings</a>
-      <a href="privacy.html"    class="more-item"><span class="more-item-icon" aria-hidden="true">&#x1F512;</span>Privacy</a>
-    </div>
-  </div>
-</div>
 
 </div><!-- /page-wrap -->
 <nav class="bottom-nav" id="bottom-nav" aria-label="Mobile navigation">
-  <a href="index.html" class="bnav-item"><span class="bnav-icon" aria-hidden="true">&#x2600;&#xFE0F;</span><span class="bnav-label">Today</span></a>
-  <a href="prayers.html" class="bnav-item"><span class="bnav-icon" aria-hidden="true">&#x1F54C;</span><span class="bnav-label">Prayer</span></a>
-  <a href="journey.html" class="bnav-item"><span class="bnav-icon" aria-hidden="true">&#x1F319;</span><span class="bnav-label">Journey</span></a>
-  <a href="explore.html" class="bnav-item"><span class="bnav-icon" aria-hidden="true">&#x1F4DA;</span><span class="bnav-label">History</span></a>
-  <button class="bnav-item" id="btn-more" aria-expanded="false" aria-controls="more-sheet"><span class="bnav-icon" aria-hidden="true">&#x22EF;</span><span class="bnav-label">More</span></button>
+  <a href="index.html" class="bnav-item"><span class="bnav-icon">☀️</span><span class="bnav-label">Today</span></a>
+  <a href="prayers.html" class="bnav-item"><span class="bnav-icon">🕌</span><span class="bnav-label">Prayer</span></a>
+  <a href="journey.html" class="bnav-item"><span class="bnav-icon">🌙</span><span class="bnav-label">Journey</span></a>
+  <a href="explore.html" class="bnav-item"><span class="bnav-icon">📚</span><span class="bnav-label">History</span></a>
+  <button class="bnav-item" id="btn-more" aria-expanded="false" aria-controls="more-sheet"><span class="bnav-icon">⋯</span><span class="bnav-label">More</span></button>
 </nav>
 <div class="more-overlay" id="more-overlay" aria-hidden="true"></div>
 <div class="more-sheet" id="more-sheet" role="dialog" aria-modal="true" aria-label="More navigation" aria-hidden="true">
-  <div class="more-sheet-handle" aria-hidden="true"></div>
-  <div class="more-sheet-header"><span>More</span><button class="more-close" id="more-close" aria-label="Close">&#x2715;</button></div>
-  <div class="more-group"><div class="more-group-label">Explore</div><div class="more-grid"><a href="explore.html" class="more-item"><span class="more-item-icon">&#x1F3DB;</span>Explore</a><a href="stories.html" class="more-item"><span class="more-item-icon">&#x1F4D6;</span>Stories</a><a href="calendar.html" class="more-item"><span class="more-item-icon">&#x1F4C5;</span>Calendar</a><a href="qibla.html" class="more-item"><span class="more-item-icon">&#x1F9ED;</span>Qibla</a></div></div>
-  <div class="more-group"><div class="more-group-label">Personal</div><div class="more-grid"><a href="profile.html" class="more-item"><span class="more-item-icon">&#x1F464;</span>Profile</a><a href="journey.html" class="more-item"><span class="more-item-icon">&#x1F319;</span>Journey</a><a href="reflection.html" class="more-item"><span class="more-item-icon">&#x1FA94;</span>Reflect</a><a href="search.html" class="more-item"><span class="more-item-icon">&#x1F50E;</span>Search</a></div></div>
-  <div class="more-group"><div class="more-group-label">App</div><div class="more-grid"><a href="settings.html" class="more-item"><span class="more-item-icon">&#x2699;</span>Settings</a><a href="privacy.html" class="more-item"><span class="more-item-icon">&#x1F512;</span>Privacy</a></div></div>
+  <div class="more-sheet-handle"></div>
+  <div class="more-sheet-header"><span>More</span><button class="more-close" id="more-close" aria-label="Close">✕</button></div>
+  <div class="more-group"><div class="more-group-label">Explore</div><div class="more-grid"><a href="explore.html" class="more-item"><span class="more-item-icon">🏛️</span>Explore</a><a href="stories.html" class="more-item"><span class="more-item-icon">📖</span>Stories</a><a href="calendar.html" class="more-item"><span class="more-item-icon">📅</span>Calendar</a><a href="qibla.html" class="more-item"><span class="more-item-icon">🧭</span>Qibla</a></div></div>
+  <div class="more-group"><div class="more-group-label">Personal</div><div class="more-grid"><a href="profile.html" class="more-item"><span class="more-item-icon">👤</span>Profile</a><a href="journey.html" class="more-item"><span class="more-item-icon">🌙</span>Journey</a><a href="reflection.html" class="more-item"><span class="more-item-icon">🪔</span>Reflect</a><a href="search.html" class="more-item"><span class="more-item-icon">🔍</span>Search</a></div></div>
+  <div class="more-group"><div class="more-group-label">App</div><div class="more-grid"><a href="settings.html" class="more-item"><span class="more-item-icon">⚙️</span>Settings</a><a href="privacy.html" class="more-item"><span class="more-item-icon">🔒</span>Privacy</a></div></div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="js/core.js"></script>
+<script src="js/settings.js"></script>
 </body>
 </html>

@@ -1,10 +1,10 @@
 'use strict';
 /* ═══════════════════════════════════════════════
    WaqtX — Service Worker
-   Cache: waqtx-v24
-   Phase 0: cleaned asset list — legacy files removed
+   Cache: waqtx-v25
+   Phase 8: Profile, Settings, Calendar, Stories, Qibla pages added
    ═══════════════════════════════════════════════ */
-var CACHE = 'waqtx-v24';
+var CACHE = 'waqtx-v25';
 var ASSETS = [
   './',
   './index.html',
