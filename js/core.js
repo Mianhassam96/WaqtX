@@ -370,6 +370,11 @@ WaqtX.nav = {
         ham.classList.add('open');
         ham.setAttribute('aria-expanded', 'true');
         document.body.style.overflow = 'hidden';
+        /* Focus first link in drawer */
+        setTimeout(function() {
+          var first = drawer.querySelector('a[href],button:not([disabled])');
+          if (first) first.focus();
+        }, 50);
       }
       function closeDrawer() {
         drawer.classList.remove('open');
@@ -377,6 +382,8 @@ WaqtX.nav = {
         ham.classList.remove('open');
         ham.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
+        /* Return focus to hamburger */
+        ham.focus();
       }
 
       ham.addEventListener('click', function(e) {
@@ -439,6 +446,8 @@ WaqtX.nav = {
     var closeBtn = el('more-close');
     if (!moreBtn || !sheet) return;
 
+    var FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
+
     function openSheet() {
       sheet.classList.add('open');
       if (overlay) overlay.classList.add('open');
@@ -446,6 +455,11 @@ WaqtX.nav = {
       if (overlay) overlay.setAttribute('aria-hidden', 'false');
       moreBtn.setAttribute('aria-expanded', 'true');
       document.body.style.overflow = 'hidden';
+      /* Focus first focusable element in sheet */
+      setTimeout(function() {
+        var first = sheet.querySelector(FOCUSABLE);
+        if (first) first.focus();
+      }, 50);
     }
     function closeSheet() {
       sheet.classList.remove('open');
@@ -454,6 +468,8 @@ WaqtX.nav = {
       if (overlay) overlay.setAttribute('aria-hidden', 'true');
       moreBtn.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
+      /* Return focus to trigger button */
+      moreBtn.focus();
     }
 
     moreBtn.addEventListener('click', function() {
@@ -461,6 +477,20 @@ WaqtX.nav = {
     });
     if (overlay) overlay.addEventListener('click', closeSheet);
     if (closeBtn) closeBtn.addEventListener('click', closeSheet);
+
+    /* Trap focus inside sheet when open */
+    sheet.addEventListener('keydown', function(e) {
+      if (e.key !== 'Tab') return;
+      var focusable = Array.from(sheet.querySelectorAll(FOCUSABLE)).filter(function(el) { return !el.closest('[aria-hidden="true"]'); });
+      if (!focusable.length) return;
+      var first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    });
+
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape' && sheet.classList.contains('open')) closeSheet();
     });

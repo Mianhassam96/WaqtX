@@ -1,10 +1,10 @@
 'use strict';
 /* ═══════════════════════════════════════════════
    WaqtX — Service Worker
-   Cache: waqtx-v26
-   Phase 9: Responsive QA — style.css updated
+   Cache: waqtx-v27
+   Phase 10: PWA/Accessibility — meta, skip links, focus traps, manifest
    ═══════════════════════════════════════════════ */
-var CACHE = 'waqtx-v26';
+var CACHE = 'waqtx-v27';
 var ASSETS = [
   './',
   './index.html',

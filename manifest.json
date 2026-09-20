@@ -1,16 +1,19 @@
 {
+  "id": "/WaqtX/",
   "name": "WaqtX — Your Time. Your Faith. Your History.",
   "short_name": "WaqtX",
   "description": "Make today meaningful. Prayer times, Islamic history, reflection, and your personal journey — private and offline-first.",
   "start_url": "/WaqtX/",
   "scope": "/WaqtX/",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone"],
   "background_color": "#F7F8F5",
-  "theme_color": "#F7F8F5",
+  "theme_color": "#164A3A",
   "orientation": "portrait-primary",
   "categories": ["education", "lifestyle", "productivity"],
   "lang": "en",
   "dir": "ltr",
+  "prefer_related_applications": false,
   "icons": [
     { "src": "favicon.svg",    "sizes": "any",   "type": "image/svg+xml", "purpose": "any" },
     { "src": "favicon.svg",    "sizes": "any",   "type": "image/svg+xml", "purpose": "maskable" },
@@ -20,21 +23,25 @@
   "shortcuts": [
     {
       "name": "Today",
+      "short_name": "Today",
       "url": "/WaqtX/",
       "description": "Today's prayer, guidance and reflection"
     },
     {
       "name": "Prayer Times",
+      "short_name": "Prayer",
       "url": "/WaqtX/prayers.html",
       "description": "Prayer times, tracker and Qibla"
     },
     {
       "name": "Explore History",
+      "short_name": "History",
       "url": "/WaqtX/explore.html",
       "description": "1,400 years of Islamic civilization"
     },
     {
       "name": "Reflection",
+      "short_name": "Reflect",
       "url": "/WaqtX/reflection.html",
       "description": "Daily Muhasabah and private journal"
     }

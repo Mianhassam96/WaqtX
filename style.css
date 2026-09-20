@@ -5194,3 +5194,59 @@ html[lang="ur"] .progress-bar-wrap { direction: ltr; }
   padding-block-end: env(safe-area-inset-bottom, 0px);
 }
 .bnav-item { padding-block-end: 2px; } /* slight vertical breathing room */
+
+
+/* ═══════════════════════════════════════════════════════════════
+   PHASE 10 — PWA / ACCESSIBILITY
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Skip to content link (keyboard navigation) ─────────────── */
+.skip-link {
+  position: absolute;
+  inset-block-start: var(--sp-3);
+  inset-inline-start: var(--sp-3);
+  z-index: 9999;
+  padding: var(--sp-2) var(--sp-5);
+  background: var(--primary);
+  color: #fff;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  border-radius: var(--r-md);
+  text-decoration: none;
+  /* Hidden by default — visible on keyboard focus */
+  transform: translateY(calc(-100% - var(--sp-6)));
+  transition: transform 0.2s ease;
+  white-space: nowrap;
+}
+.skip-link:focus {
+  transform: translateY(0);
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* ── Focus ring — visible for keyboard, invisible for mouse ──── */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: var(--r-sm);
+}
+:focus:not(:focus-visible) { outline: none; }
+
+/* ── High contrast mode support ─────────────────────────────── */
+@media (forced-colors: active) {
+  .skip-link    { forced-color-adjust: none; background: Highlight; color: HighlightText; }
+  .btn-primary  { forced-color-adjust: none; background: Highlight; color: HighlightText; }
+  .nav-link.active { text-decoration: underline; }
+  .bnav-item.active { text-decoration: underline; }
+}
+
+/* ── Reduced motion: disable all transitions/animations ─────── */
+@media (prefers-reduced-motion: reduce) {
+  .skip-link { transition: none; }
+  .story-card { transition: none; }
+  .qibla-compass-svg { filter: none; }
+}
+
+/* ── Main landmark — no visual change, just semantic ─────────── */
+main#main-content { display: block; outline: none; }
+main#main-content:focus { outline: none; }
