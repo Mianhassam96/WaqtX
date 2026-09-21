@@ -153,8 +153,76 @@ window.daysToNextRamadan = function() {
 };
 
 /* ══════════════════════════════════════
-   THEME
+   SHARED DATA CONTRACTS
+   Canonical storage keys — all pages MUST use these.
+   Never hardcode 'muhasabah_' + date in page JS.
    ══════════════════════════════════════ */
+WaqtX.keys = {
+  /* Muhasabah — one entry per day */
+  muhasabah: function(dateKey) {
+    return 'muhasabah_' + (dateKey || getTodayKey());
+  },
+  /* Prayer tracker — one entry per day */
+  tracker: function(dateKey) {
+    return 'tracker_' + (dateKey || getTodayKey());
+  },
+  /* Gratitude journal — one entry per day */
+  gratitude: function(dateKey) {
+    return 'gratitude_' + (dateKey || getTodayKey());
+  }
+};
+
+/* Canonical muhasabah field keys — HTML IDs AND storage keys */
+WaqtX.MUHASABAH_FIELDS = [
+  { id: 'mq-gratitude', key: 'gratitude' },
+  { id: 'mq-mistake',   key: 'mistake'   },
+  { id: 'mq-deed',      key: 'deed'      }
+];
+
+/**
+ * Read today's muhasabah answers.
+ * Returns { gratitude, mistake, deed } — always an object, never null.
+ */
+WaqtX.getMuhasabah = function(dateKey) {
+  return S.get(WaqtX.keys.muhasabah(dateKey)) || {};
+};
+
+/**
+ * Save a single muhasabah field for today.
+ * key must be 'gratitude' | 'mistake' | 'deed'
+ */
+WaqtX.saveMuhasabahField = function(key, value, dateKey) {
+  var data = WaqtX.getMuhasabah(dateKey);
+  data[key] = value;
+  S.set(WaqtX.keys.muhasabah(dateKey), data);
+};
+
+/* ══════════════════════════════════════
+   USER PROFILE HELPERS
+   Name and DOB accessed via these — never raw S.get('name')
+   ══════════════════════════════════════ */
+WaqtX.profile = {
+  getName: function() {
+    return (S.get('name') || '').trim();
+  },
+  setName: function(name) {
+    S.set('name', (name || '').trim());
+  },
+  getDob: function() {
+    return S.get('dob') || '';
+  },
+  setDob: function(dob) {
+    S.set('dob', dob || '');
+  },
+  /**
+   * Safe greeting — never "undefined", never empty personalisation.
+   * Returns "Assalamu Alaikum, Mian" or "Assalamu Alaikum" if no name.
+   */
+  greeting: function() {
+    var name = WaqtX.profile.getName();
+    return name ? 'Assalamu Alaikum, ' + name : 'Assalamu Alaikum';
+  }
+};
 WaqtX.theme = {
   apply: function(theme) {
     try {
@@ -770,14 +838,31 @@ window.addEventListener('beforeinstallprompt', function(e) {
 })();
 
 /* ══════════════════════════════════════
-   ACCESSIBILITY — font size & contrast
+   ACCESSIBILITY — font size, contrast, motion
+   Applied immediately on every page (IIFE so no FOUC)
    ══════════════════════════════════════ */
-(function() {
-  var fs = S.get('font_size') || 'default';
-  document.documentElement.classList.remove('font-small','font-default','font-large');
-  document.documentElement.classList.add('font-' + fs);
-  var contrast = S.get('contrast');
-  if (contrast === 'high') document.documentElement.setAttribute('data-contrast','high');
+(function applyAccessibilityPrefs() {
+  try {
+    var fs = S.get('font_size') || 'default';
+    document.documentElement.classList.remove('font-small','font-default','font-large');
+    document.documentElement.classList.add('font-' + fs);
+
+    /* High contrast */
+    var contrast = S.get('contrast');
+    if (contrast === 'high') {
+      document.documentElement.setAttribute('data-contrast', 'high');
+    } else {
+      document.documentElement.removeAttribute('data-contrast');
+    }
+
+    /* Reduce motion — manual override */
+    var motion = S.get('reduce_motion');
+    if (motion === true || motion === 'true') {
+      document.documentElement.classList.add('reduce-motion');
+    } else {
+      document.documentElement.classList.remove('reduce-motion');
+    }
+  } catch(e) {}
 })();
 
 /* ══════════════════════════════════════

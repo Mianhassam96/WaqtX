@@ -5250,3 +5250,86 @@ html[lang="ur"] .progress-bar-wrap { direction: ltr; }
 /* ── Main landmark — no visual change, just semantic ─────────── */
 main#main-content { display: block; outline: none; }
 main#main-content:focus { outline: none; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   PHASE 0.5 — FOUNDATION FIXES
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Reduce Motion (manual toggle OR system preference) ─────── */
+html.reduce-motion *,
+html.reduce-motion *::before,
+html.reduce-motion *::after {
+  animation-duration:        0.01ms !important;
+  animation-iteration-count: 1      !important;
+  transition-duration:       0.01ms !important;
+  scroll-behavior:           auto   !important;
+}
+
+/* ── High Contrast ───────────────────────────────────────────── */
+[data-contrast="high"] {
+  --text:    #000000;
+  --text-2:  #1a1a1a;
+  --text-3:  #333333;
+  --border:  rgba(0,0,0,0.35);
+  --border-2: rgba(0,0,0,0.55);
+}
+[data-theme="dark"][data-contrast="high"] {
+  --text:    #ffffff;
+  --text-2:  #f0f0f0;
+  --text-3:  #cccccc;
+  --border:  rgba(255,255,255,0.45);
+  --border-2: rgba(255,255,255,0.65);
+}
+
+/* Stronger focus ring in high contrast */
+[data-contrast="high"] :focus-visible {
+  outline: 3px solid var(--primary) !important;
+  outline-offset: 3px !important;
+}
+
+/* ── Font size classes ───────────────────────────────────────── */
+html.font-small  { font-size: 14px; }
+html.font-default { font-size: 16px; }
+html.font-large  { font-size: 18px; }
+
+/* ── Profile identity form ───────────────────────────────────── */
+.profile-identity-form {
+  margin-block-start: var(--sp-5);
+}
+.profile-field {}
+.profile-field-label {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--text);
+  margin-block-end: var(--sp-2);
+}
+.profile-field-desc {
+  font-size: var(--text-xs);
+  color: var(--text-3);
+  line-height: var(--leading-relaxed);
+  margin-block-end: var(--sp-3);
+}
+.profile-field-row {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: center;
+  flex-wrap: wrap;
+}
+.profile-name-input,
+.profile-dob-input {
+  flex: 1;
+  min-width: 180px;
+  max-width: 320px;
+}
+.profile-field-status {
+  font-size: var(--text-xs);
+  color: var(--primary);
+  font-weight: 600;
+  margin-block-start: var(--sp-2);
+  min-height: 1em;
+}
+
+/* RTL profile form */
+[dir="rtl"] .profile-field-row { flex-direction: row-reverse; }

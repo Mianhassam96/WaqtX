@@ -55,6 +55,36 @@
   </div>
 </div>
 
+<!-- ── Personal information ── -->
+<section class="profile-section" aria-label="Personal information">
+  <div class="container">
+    <div class="type-eyebrow">Personal Information</div>
+    <p class="profile-section-sub">Your name and birth date personalise the app. Stored only on your device.</p>
+    <div class="profile-identity-form">
+      <div class="profile-field">
+        <label class="profile-field-label" for="profile-name-input">Your name</label>
+        <div class="profile-field-row">
+          <input type="text" id="profile-name-input" class="form-input profile-name-input"
+            placeholder="e.g. Mian" maxlength="40" autocomplete="given-name"
+            aria-label="Your first name or preferred name"/>
+          <button class="btn btn-primary btn-sm" id="btn-save-name" aria-label="Save name">Save</button>
+        </div>
+        <div class="profile-field-status" id="name-save-status" aria-live="polite"></div>
+      </div>
+      <div class="profile-field" style="margin-block-start:var(--sp-5)">
+        <label class="profile-field-label" for="profile-dob-input">Date of birth</label>
+        <p class="profile-field-desc">Used to calculate your personal Islamic journey — Ramadans lived, Jumu'ahs, days. Never shared.</p>
+        <div class="profile-field-row">
+          <input type="date" id="profile-dob-input" class="form-input profile-dob-input"
+            aria-label="Your date of birth" max="" />
+          <button class="btn btn-primary btn-sm" id="btn-save-dob" aria-label="Save birth date">Save</button>
+        </div>
+        <div class="profile-field-status" id="dob-save-status" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ── Dashboard header ── -->
 <section class="profile-section" aria-label="Profile dashboard">
   <div class="container">

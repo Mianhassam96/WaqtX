@@ -187,45 +187,64 @@ function initDailyGuidance() {
 
 /* ══════════════════════════════════════
    5. THIS DAY IN ISLAMIC HISTORY
+   Uses WAQTX_HISTORY.getTodayEntry() — never hardcoded fallback
    ══════════════════════════════════════ */
 function initThisDaySection() {
-  var now = new Date();
+  var now  = new Date();
   var mons = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   setText('td-day',   now.getDate());
   setText('td-month', mons[now.getMonth()]);
 
-  /* Pull from history-data.js if available */
-  if (window.WAQTX_HISTORY && WAQTX_HISTORY.getTodayEntry) {
-    var entry = WAQTX_HISTORY.getTodayEntry();
-    if (entry) {
-      var H = WAQTX_HISTORY;
-      var dateStr = entry.date.gregorian || '';
-      setText('td-year',    dateStr.substring(0, 8));
-      setText('td-era',     H.ERA_LABELS ? (H.ERA_LABELS[entry.era] || entry.era) : entry.era);
-      setText('td-title',   entry.title);
-      setText('td-summary', entry.summary);
+  var linkEl = el('td-link');
 
-      /* Source badges */
-      var badgesEl = el('td-sources');
-      if (badgesEl && entry.sources && entry.sources.length) {
-        var html = '';
-        entry.sources.slice(0, 3).forEach(function(src) {
-          html += '<span class="ev-badge ev-' + src.type + '">' +
-                  '<span class="ev-badge-dot"></span>' +
-                  _esc(H.sourceTypeLabel ? H.sourceTypeLabel(src.type) : src.type) +
-                  (src.ref ? ': ' + _esc(src.ref.substring(0, 32)) + (src.ref.length > 32 ? '…' : '') : '') +
-                  '</span>';
-        });
-        badgesEl.innerHTML = html;
-      }
+  /* Requires history-data.js */
+  if (!window.WAQTX_HISTORY || !WAQTX_HISTORY.getTodayEntry) {
+    setText('td-title',   'History data loading…');
+    return;
+  }
 
-      /* CTA link */
-      var linkEl = el('td-link');
-      if (linkEl && entry.title) {
-        var q = encodeURIComponent(entry.title.replace(/\s*[—–-].*$/, '').trim());
-        linkEl.href = 'search.html?q=' + q;
-      }
-    }
+  var entry = WAQTX_HISTORY.getTodayEntry();
+
+  if (!entry) {
+    setText('td-era',     '');
+    setText('td-year',    '');
+    setText('td-title',   'No major event recorded for this date yet.');
+    setText('td-summary', 'More history entries are being added regularly.');
+    if (linkEl) linkEl.classList.add('hidden');
+    return;
+  }
+
+  var H = WAQTX_HISTORY;
+
+  /* Date */
+  setText('td-year', entry.date ? (entry.date.gregorian || '') : '');
+
+  /* Era */
+  setText('td-era', H.ERA_LABELS ? (H.ERA_LABELS[entry.era] || entry.era) : entry.era);
+
+  /* Title + summary */
+  setText('td-title',   entry.title   || '');
+  setText('td-summary', entry.summary || '');
+
+  /* Source badges */
+  var badgesEl = el('td-sources');
+  if (badgesEl && entry.sources && entry.sources.length) {
+    badgesEl.innerHTML = entry.sources.slice(0, 3).map(function(src) {
+      var typeLabel = H.sourceTypeLabel ? H.sourceTypeLabel(src.type) : src.type;
+      var cls       = H.evClass ? H.evClass(src.type) : 'ev-academic';
+      return '<span class="ev-badge ' + cls + '">' +
+             '<span class="ev-badge-dot" aria-hidden="true"></span>' +
+             _esc(typeLabel) +
+             (src.ref ? ': ' + _esc(src.ref.substring(0, 28)) + (src.ref.length > 28 ? '…' : '') : '') +
+             '</span>';
+    }).join('');
+  }
+
+  /* Search link — query by title */
+  if (linkEl) {
+    var q = encodeURIComponent((entry.title || '').replace(/\s*[—–\-].*$/, '').trim());
+    linkEl.href = 'search.html?q=' + q;
+    linkEl.classList.remove('hidden');
   }
 }
 
@@ -240,10 +259,11 @@ function initMuhasabah() {
   var today  = _getTodayKey();
   var saved  = S.get('muhasabah_' + today) || {};
 
+  /* Canonical field map — IDs must match index.html AND reflection.html */
   var fields = [
-    { id: 'mq-1', key: 'gratitude' },
-    { id: 'mq-2', key: 'mistake'   },
-    { id: 'mq-3', key: 'deed'      }
+    { id: 'mq-gratitude', key: 'gratitude' },
+    { id: 'mq-mistake',   key: 'mistake'   },
+    { id: 'mq-deed',      key: 'deed'      }
   ];
 
   fields.forEach(function(f) {

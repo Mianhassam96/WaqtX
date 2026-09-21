@@ -10,18 +10,16 @@ var S = WaqtX.storage;
    PERSONAL DASHBOARD
    ══════════════════════════════════════ */
 function renderProfileDashboard() {
-  var name   = S.get('name') || '';
-  var dob    = S.get('dob')  || '';
   var h      = toHijri(new Date());
   var streak = getStreakCount();
 
-  setText('profile-greeting', name
-    ? 'Assalamu Alaikum, ' + name + ' ✦'
-    : 'Assalamu Alaikum ✦');
+  /* Safe greeting via shared helper — never "undefined" */
+  setText('profile-greeting', WaqtX.profile.greeting() + ' ✦');
   setText('profile-hijri', hijriStr(h));
   setText('profile-streak', streak);
-  setText('profile-streak-label', streak === 1 ? 'Day Streak' : 'Day Streak');
+  setText('profile-streak-label', 'Day Streak');
 
+  var dob = WaqtX.profile.getDob();
   if (dob) {
     var birth = new Date(dob.replace(/-/g, '/'));
     var days  = Math.floor((Date.now() - birth) / 86400000);
@@ -31,6 +29,68 @@ function renderProfileDashboard() {
   } else {
     setText('profile-days', '—');
     setText('profile-age', '—');
+  }
+}
+
+/* ══════════════════════════════════════
+   PERSONAL INFORMATION FORM
+   Name + DOB save/load
+   ══════════════════════════════════════ */
+function initIdentityForm() {
+  var nameInput  = el('profile-name-input');
+  var nameBtn    = el('btn-save-name');
+  var nameStatus = el('name-save-status');
+  var dobInput   = el('profile-dob-input');
+  var dobBtn     = el('btn-save-dob');
+  var dobStatus  = el('dob-save-status');
+
+  /* Load saved values */
+  if (nameInput) {
+    nameInput.value = WaqtX.profile.getName();
+  }
+  if (dobInput) {
+    dobInput.value = WaqtX.profile.getDob();
+    /* Prevent future dates */
+    dobInput.setAttribute('max', new Date().toISOString().split('T')[0]);
+  }
+
+  /* Save name */
+  if (nameBtn && nameInput) {
+    nameBtn.addEventListener('click', function() {
+      var name = nameInput.value.trim();
+      WaqtX.profile.setName(name);
+      renderProfileDashboard();
+      if (nameStatus) {
+        nameStatus.textContent = name ? '✓ Saved — greeting updated' : '✓ Name cleared';
+        setTimeout(function() { nameStatus.textContent = ''; }, 3000);
+      }
+    });
+    /* Also save on Enter */
+    nameInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') nameBtn.click();
+    });
+  }
+
+  /* Save DOB */
+  if (dobBtn && dobInput) {
+    dobBtn.addEventListener('click', function() {
+      var dob = dobInput.value;
+      if (!dob) {
+        if (dobStatus) dobStatus.textContent = 'Please enter a valid date.';
+        return;
+      }
+      /* Sanity check — not in the future */
+      if (new Date(dob) > new Date()) {
+        if (dobStatus) dobStatus.textContent = 'Date of birth cannot be in the future.';
+        return;
+      }
+      WaqtX.profile.setDob(dob);
+      renderProfileDashboard();
+      if (dobStatus) {
+        dobStatus.textContent = '✓ Saved — your journey is now personalised';
+        setTimeout(function() { dobStatus.textContent = ''; }, 3000);
+      }
+    });
   }
 }
 
@@ -317,6 +377,7 @@ function renderAchievements() {
    BOOT
    ══════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', function() {
+  initIdentityForm();      /* Fix 4: name + DOB input must run before dashboard */
   renderProfileDashboard();
   renderSpiritualDashboard();
   renderStatistics();

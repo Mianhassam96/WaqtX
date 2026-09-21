@@ -198,7 +198,7 @@ function initNotificationSettings() {
    ══════════════════════════════════════ */
 function initAccessibility() {
   /* Font size */
-  var fontBtns = document.querySelectorAll('.font-size-btn');
+  var fontBtns = document.querySelectorAll('.settings-font-btn');
   var savedFs = S.get('font_size') || 'default';
   fontBtns.forEach(function(btn) {
     var size = btn.getAttribute('data-size');
@@ -209,19 +209,42 @@ function initAccessibility() {
       S.set('font_size', size);
       document.documentElement.classList.remove('font-small','font-default','font-large');
       document.documentElement.classList.add('font-' + size);
+      showSavedToast('Font size updated.');
     });
   });
 
   /* High contrast */
-  initToggle('setting-contrast', 'contrast', function(on) {
-    if (on) {
-      document.documentElement.setAttribute('data-contrast','high');
-      S.set('contrast', 'high');
-    } else {
-      document.documentElement.removeAttribute('data-contrast');
-      S.set('contrast', 'normal');
-    }
-  });
+  var contrastToggle = el('setting-contrast');
+  if (contrastToggle) {
+    contrastToggle.checked = S.get('contrast') === 'high';
+    contrastToggle.addEventListener('change', function() {
+      if (contrastToggle.checked) {
+        document.documentElement.setAttribute('data-contrast', 'high');
+        S.set('contrast', 'high');
+      } else {
+        document.documentElement.removeAttribute('data-contrast');
+        S.set('contrast', 'normal');
+      }
+      showSavedToast('Contrast preference saved.');
+    });
+  }
+
+  /* Reduce motion — manual override */
+  var motionToggle = el('setting-motion');
+  if (motionToggle) {
+    var saved = S.get('reduce_motion');
+    motionToggle.checked = (saved === true || saved === 'true');
+    motionToggle.addEventListener('change', function() {
+      if (motionToggle.checked) {
+        document.documentElement.classList.add('reduce-motion');
+        S.set('reduce_motion', true);
+      } else {
+        document.documentElement.classList.remove('reduce-motion');
+        S.set('reduce_motion', false);
+      }
+      showSavedToast('Motion preference saved.');
+    });
+  }
 }
 
 /* ══════════════════════════════════════
