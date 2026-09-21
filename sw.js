@@ -1,10 +1,10 @@
 'use strict';
 /* ═══════════════════════════════════════════════
    WaqtX — Service Worker
-   Cache: waqtx-v29
-   Phase 1: Reflection UX redesign — unified flow, history, streak
+   Cache: waqtx-v30
+   Phase 1.2: Today page UX — hierarchy, clean contracts
    ═══════════════════════════════════════════════ */
-var CACHE = 'waqtx-v29';
+var CACHE = 'waqtx-v30';
 var ASSETS = [
   './',
   './index.html',
