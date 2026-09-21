@@ -4,24 +4,22 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>WaqtX — Reflection</title>
-  <meta name="description" content="Daily Muhasabah, Quranic verse, gratitude journal and personal notes — private, local-first."/>
+  <meta name="description" content="A quiet space to receive, consider, and write. Daily Muhasabah — private and local-first."/>
   <meta name="theme-color" content="#F7F8F5"/>
-    <meta property="og:type"        content="website"/>
+  <meta property="og:type"        content="website"/>
   <meta property="og:title"       content="WaqtX — Reflection"/>
-  <meta property="og:description" content="Daily Muhasabah, Quranic verse, gratitude journal and personal notes — private and local-first."/>
+  <meta property="og:description" content="A quiet space to receive, consider, and write. Daily Muhasabah — private and local-first."/>
   <meta property="og:url"         content="https://mianhassam96.github.io/WaqtX/reflection.html"/>
   <meta property="og:image"       content="https://mianhassam96.github.io/WaqtX/og-image.svg"/>
   <meta name="twitter:card"       content="summary_large_image"/>
   <link rel="canonical"           href="https://mianhassam96.github.io/WaqtX/reflection.html"/>
-<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
   <link rel="manifest" href="manifest.json"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&family=Cinzel:wght@600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
-  <script>
-    (function(){var s='light';try{s=localStorage.getItem('waqtx_theme')||'light';}catch(e){}if(s!=='light')document.documentElement.setAttribute('data-theme',s);var l='en';try{l=localStorage.getItem('waqtx_lang')||'en';}catch(e){}if(l!=='en'){document.documentElement.setAttribute('lang',l);if(l==='ur'||l==='ar')document.documentElement.setAttribute('dir','rtl');}})();
-  </script>
+  <script>(function(){var s='light';try{s=localStorage.getItem('waqtx_theme')||'light';}catch(e){}if(s!=='light')document.documentElement.setAttribute('data-theme',s);var l='en';try{l=localStorage.getItem('waqtx_lang')||'en';}catch(e){}if(l!=='en'){document.documentElement.setAttribute('lang',l);if(l==='ur'||l==='ar')document.documentElement.setAttribute('dir','rtl');}})();</script>
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to content</a>
@@ -81,126 +79,196 @@
 <div class="page-wrap">
 <main id="main-content" aria-label="Daily reflection">
 
-<!-- Page hero -->
-<div class="page-hero">
-  <div class="page-hero-inner">
-    <div class="page-hero-icon" aria-hidden="true">🪔</div>
-    <h1 class="page-hero-title">Reflection</h1>
-    <p class="page-hero-sub">A quiet space to read, write, and remember what matters.</p>
-  </div>
-</div>
-
-<!-- ════════ TODAY'S VERSE ════════ -->
-<section class="reflect-section" id="daily-verse" aria-label="Today's verse">
+<!-- ══════════════════════════════════════════
+     ZONE 1 — ARRIVE
+     Calm entry point. Streak context. No clutter.
+══════════════════════════════════════════ -->
+<section class="rl-arrive" aria-label="Begin reflection">
   <div class="container">
-    <div class="type-eyebrow">Today's Verse</div>
 
-    <!-- Streak badge -->
-    <div class="reflect-streak" id="reflection-streak-bar">
-      <span aria-hidden="true">🪔</span>
-      <span id="rsb-text">Reflect today to begin your streak</span>
-    </div>
-
-    <div class="reflect-verse-card card-secondary">
-      <div class="rvc-arabic" id="verse-arabic" lang="ar" dir="rtl">
-        <span class="skeleton-line h-xl w-full" style="display:block;border-radius:6px;margin-block-end:8px"></span>
-        <span class="skeleton-line h-xl w-3-4" style="display:block;border-radius:6px"></span>
+    <div class="rl-arrive-inner">
+      <div class="rl-arrive-heading">
+        <h1 class="rl-title">Take a quiet moment.</h1>
+        <p  class="rl-sub">Read. Consider. Write. Everything here stays private.</p>
       </div>
-      <div class="rvc-translation"  id="verse-translation"></div>
-      <div class="rvc-source"       id="verse-source"></div>
-      <div class="rvc-reflection"   id="verse-reflection"></div>
-      <button class="btn btn-ghost btn-sm rvc-audio-btn" id="btn-verse-audio" aria-label="Play verse recitation">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        Play Recitation
-      </button>
+
+      <!-- Streak — attached to the arrive zone, not floating -->
+      <div class="rl-streak" id="rl-streak" aria-live="polite">
+        <span class="rl-streak-icon" aria-hidden="true">🪔</span>
+        <span class="rl-streak-text" id="rl-streak-text">Begin today's reflection</span>
+      </div>
     </div>
+
   </div>
 </section>
 
-<!-- ════════ DAILY MUHASABAH ════════ -->
-<section class="reflect-section reflect-section-alt" id="reflection-prompt" aria-label="Daily Muhasabah">
+<!-- ══════════════════════════════════════════
+     ZONE 2 — RECEIVE
+     One primary guidance item. Ayah + reflection prompt.
+     No hadith/story at equal visual weight here.
+══════════════════════════════════════════ -->
+<section class="rl-section rl-section-alt" id="rl-guidance" aria-label="Today's guidance">
   <div class="container">
-    <div class="type-eyebrow">Daily Muhasabah</div>
-    <p class="reflect-section-sub">Three questions. Every day. Stored privately on your device.</p>
 
-    <div class="reflect-muhasabah-card">
-      <!-- Q1 -->
-      <div class="rmq-block">
-        <label class="rmq-num" for="mq-gratitude">01</label>
-        <div class="rmq-body">
-          <div class="rmq-question">What blessing am I most grateful for today?</div>
-          <textarea class="form-textarea rmq-textarea" id="mq-gratitude" placeholder="Write freely — only you can see this." aria-label="Gratitude reflection" rows="3"></textarea>
-        </div>
-      </div>
-      <!-- Q2 -->
-      <div class="rmq-block">
-        <label class="rmq-num" for="mq-mistake">02</label>
-        <div class="rmq-body">
-          <div class="rmq-question">What mistake should I correct or improve tomorrow?</div>
-          <textarea class="form-textarea rmq-textarea" id="mq-mistake" placeholder="Be honest with yourself." aria-label="Improvement reflection" rows="3"></textarea>
-        </div>
-      </div>
-      <!-- Q3 -->
-      <div class="rmq-block">
-        <label class="rmq-num" for="mq-deed">03</label>
-        <div class="rmq-body">
-          <div class="rmq-question">What good deed brought me closer to Allah today?</div>
-          <textarea class="form-textarea rmq-textarea" id="mq-deed" placeholder="Even something small counts." aria-label="Good deed reflection" rows="3"></textarea>
-        </div>
-      </div>
+    <div class="rl-section-label">Today's Guidance</div>
 
-      <div class="rmq-footer">
-        <p class="rmq-privacy">🔒 Stored on your device only. Never sent anywhere.</p>
-        <span class="rmq-status" id="mq-status" aria-live="polite"></span>
+    <!-- Ayah card -->
+    <div class="rl-ayah-card" role="article" aria-label="Quranic verse">
+      <div class="rl-ayah-arabic" id="verse-arabic" lang="ar" dir="rtl">
+        <span class="skeleton-line" style="display:block;height:2rem;border-radius:6px;margin-block-end:8px"></span>
+        <span class="skeleton-line" style="display:block;height:2rem;width:70%;border-radius:6px"></span>
+      </div>
+      <div class="rl-ayah-translation" id="verse-translation"></div>
+      <div class="rl-ayah-source"      id="verse-source"></div>
+
+      <div class="rl-ayah-actions">
+        <button class="btn btn-ghost btn-sm" id="btn-verse-audio" aria-label="Play verse recitation">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Play
+        </button>
       </div>
     </div>
+
+    <!-- Consider prompt — bridges guidance to muhasabah -->
+    <div class="rl-consider" id="rl-consider">
+      <div class="rl-consider-label">Consider</div>
+      <p class="rl-consider-text" id="verse-reflection"></p>
+    </div>
+
   </div>
 </section>
 
-<!-- ════════ GRATITUDE JOURNAL ════════ -->
-<section class="reflect-section" id="gratitude" aria-label="Gratitude journal">
+<!-- ══════════════════════════════════════════
+     ZONE 3 — MUHASABAH
+     Three canonical questions. Autosave. Clear status.
+══════════════════════════════════════════ -->
+<section class="rl-section" id="rl-muhasabah" aria-label="Daily Muhasabah">
   <div class="container">
-    <div class="type-eyebrow">Three Blessings Today</div>
-    <p class="reflect-section-sub">"Look at those below you, not those above you — it is better so that you do not undervalue Allah's blessings." — Muslim</p>
 
-    <div class="reflect-gratitude-card card-secondary">
-      <div class="rg-row">
-        <span class="rg-num" aria-hidden="true">1</span>
-        <input type="text" id="gratitude-1" class="form-input rg-input" placeholder="I am grateful for…" aria-label="Blessing one" maxlength="200" autocomplete="off"/>
+    <div class="rl-section-label">Muhasabah</div>
+    <p class="rl-section-desc">Three questions. Honest answers. Saved only on your device.</p>
+
+    <div class="rl-muhasabah">
+
+      <div class="rl-mq-item">
+        <label class="rl-mq-label" for="mq-gratitude">
+          <span class="rl-mq-num" aria-hidden="true">01</span>
+          What am I grateful for today?
+        </label>
+        <textarea
+          class="rl-mq-textarea"
+          id="mq-gratitude"
+          placeholder="Write freely — only you can see this."
+          aria-label="Gratitude reflection"
+          rows="3"
+          autocomplete="off"
+          spellcheck="true"></textarea>
       </div>
-      <div class="rg-row">
-        <span class="rg-num" aria-hidden="true">2</span>
-        <input type="text" id="gratitude-2" class="form-input rg-input" placeholder="I am grateful for…" aria-label="Blessing two" maxlength="200" autocomplete="off"/>
+
+      <div class="rl-mq-item">
+        <label class="rl-mq-label" for="mq-mistake">
+          <span class="rl-mq-num" aria-hidden="true">02</span>
+          What could I improve tomorrow?
+        </label>
+        <textarea
+          class="rl-mq-textarea"
+          id="mq-mistake"
+          placeholder="Be honest with yourself."
+          aria-label="Improvement reflection"
+          rows="3"
+          autocomplete="off"
+          spellcheck="true"></textarea>
       </div>
-      <div class="rg-row">
-        <span class="rg-num" aria-hidden="true">3</span>
-        <input type="text" id="gratitude-3" class="form-input rg-input" placeholder="I am grateful for…" aria-label="Blessing three" maxlength="200" autocomplete="off"/>
+
+      <div class="rl-mq-item">
+        <label class="rl-mq-label" for="mq-deed">
+          <span class="rl-mq-num" aria-hidden="true">03</span>
+          What brought me closer to Allah today?
+        </label>
+        <textarea
+          class="rl-mq-textarea"
+          id="mq-deed"
+          placeholder="Even something small counts."
+          aria-label="Good deed reflection"
+          rows="3"
+          autocomplete="off"
+          spellcheck="true"></textarea>
       </div>
-      <p class="rmq-privacy" style="margin-block-start:var(--sp-4)">🔒 Saved locally — only you can see this.</p>
+
     </div>
+
+    <!-- Save status — visible, calm, not intrusive -->
+    <div class="rl-save-row">
+      <span class="rl-save-status" id="mq-status" aria-live="polite"></span>
+      <span class="rl-privacy">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Private — stored on this device only
+      </span>
+    </div>
+
   </div>
 </section>
 
-<!-- ════════ PERSONAL NOTES ════════ -->
-<section class="reflect-section reflect-section-alt" id="personal-notes-section" aria-label="Personal notes">
+<!-- ══════════════════════════════════════════
+     ZONE 4 — WRITE
+     Free personal note. Separate from muhasabah.
+     Muhasabah = guided. Note = completely free.
+══════════════════════════════════════════ -->
+<section class="rl-section rl-section-alt" id="rl-note" aria-label="Personal note">
   <div class="container">
-    <div class="type-eyebrow">Personal Notes</div>
-    <p class="reflect-section-sub">A permanent notepad — your thoughts, duas, and goals. Stays here between visits.</p>
 
-    <div class="card-secondary reflect-notes-card">
-      <textarea class="form-textarea reflect-notes-textarea" id="personal-notes" placeholder="Anything on your mind — duas you want to make, goals for this week, reminders to yourself…" aria-label="Personal notes"></textarea>
-      <div class="reflect-notes-footer">
-        <span class="rmq-status" id="notes-status" aria-live="polite"></span>
-        <span class="rmq-privacy">🔒 100% Private — stored on your device only.</span>
+    <div class="rl-section-label">Your Note</div>
+    <p class="rl-section-desc">Anything else you'd like to remember — a dua, a goal, a thought.</p>
+
+    <div class="rl-note-wrap">
+      <textarea
+        class="rl-note-textarea"
+        id="personal-notes"
+        placeholder="Write freely…"
+        aria-label="Personal notes"
+        rows="5"
+        autocomplete="off"
+        spellcheck="true"></textarea>
+      <div class="rl-note-footer">
+        <span class="rl-save-status" id="notes-status" aria-live="polite"></span>
+        <span class="rl-privacy">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Permanent notepad — stays between visits
+        </span>
       </div>
     </div>
+
   </div>
 </section>
 
-<!-- ═══ BOTTOM NAV ═══ -->
+<!-- ══════════════════════════════════════════
+     ZONE 5 — HISTORY
+     Recent reflections. Progressively quieter.
+     Today at top. Past entries below.
+══════════════════════════════════════════ -->
+<section class="rl-section" id="rl-history" aria-label="Reflection history">
+  <div class="container">
+
+    <div class="rl-section-label">Your Reflections</div>
+
+    <div class="rl-history-list" id="rl-history-list" aria-live="polite">
+      <!-- Rendered by reflection.js -->
+      <div class="rl-history-empty" id="rl-history-empty">
+        <p>Your past reflections will appear here.</p>
+      </div>
+    </div>
+
+    <div class="rl-history-footer" id="rl-history-footer" style="display:none">
+      <button class="btn btn-ghost btn-sm" id="btn-history-more">Show more</button>
+    </div>
+
+  </div>
+</section>
+
 </main>
 </div><!-- /page-wrap -->
 
+<!-- ═══ BOTTOM NAV ═══ -->
 <nav class="bottom-nav" id="bottom-nav" aria-label="Mobile navigation">
   <a href="index.html"      class="bnav-item"><span class="bnav-icon" aria-hidden="true">☀️</span><span class="bnav-label">Today</span></a>
   <a href="prayers.html"    class="bnav-item"><span class="bnav-icon" aria-hidden="true">🕌</span><span class="bnav-label">Prayer</span></a>

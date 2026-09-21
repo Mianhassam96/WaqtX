@@ -5333,3 +5333,356 @@ html.font-large  { font-size: 18px; }
 
 /* RTL profile form */
 [dir="rtl"] .profile-field-row { flex-direction: row-reverse; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   PHASE 1 — REFLECTION UX REDESIGN
+   Five zones: Arrive · Receive · Muhasabah · Write · History
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Zone 1: Arrive ──────────────────────────────────────────── */
+.rl-arrive {
+  padding-block: var(--sp-10) var(--sp-8);
+  border-block-end: 1px solid var(--border);
+}
+.rl-arrive-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+.rl-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 5vw, 2.2rem);
+  font-weight: 700;
+  color: var(--text);
+  line-height: var(--leading-tight);
+  margin: 0;
+}
+.rl-sub {
+  font-size: var(--text-base);
+  color: var(--text-3);
+  line-height: var(--leading-relaxed);
+  margin-block-start: var(--sp-2);
+}
+
+/* Streak indicator */
+.rl-streak {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-pill);
+  font-size: var(--text-sm);
+  color: var(--text-3);
+  width: fit-content;
+  transition: border-color var(--ease), color var(--ease);
+}
+.rl-streak[data-streak="1"],
+.rl-streak[data-streak="2"],
+.rl-streak[data-streak="3"] {
+  border-color: var(--primary-soft);
+  color: var(--primary);
+}
+.rl-streak[data-streak="7plus"] {
+  border-color: var(--gold3);
+  color: var(--gold);
+}
+.rl-streak-icon { font-size: 1rem; line-height: 1; }
+.rl-streak-text { font-weight: 600; }
+
+/* ── Shared section structure ────────────────────────────────── */
+.rl-section {
+  padding-block: var(--sp-9);
+}
+.rl-section-alt {
+  background: var(--surface-alt);
+  border-block: 1px solid var(--border);
+}
+.rl-section-label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--primary);
+  margin-block-end: var(--sp-3);
+}
+.rl-section-desc {
+  font-size: var(--text-sm);
+  color: var(--text-3);
+  line-height: var(--leading-relaxed);
+  margin-block-end: var(--sp-6);
+  max-width: 520px;
+}
+
+/* ── Zone 2: Ayah card ───────────────────────────────────────── */
+.rl-ayah-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: var(--sp-6) var(--sp-6) var(--sp-5);
+  margin-block-end: var(--sp-5);
+}
+.rl-ayah-arabic {
+  font-family: 'Amiri', serif;
+  font-size: clamp(1.35rem, 4vw, 1.7rem);
+  line-height: 2;
+  color: var(--text);
+  text-align: end;
+  direction: rtl;
+  margin-block-end: var(--sp-4);
+}
+.rl-ayah-translation {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--text-2);
+  line-height: var(--leading-relaxed);
+  margin-block-end: var(--sp-2);
+}
+.rl-ayah-source {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-block-end: var(--sp-4);
+}
+.rl-ayah-actions {
+  display: flex;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+}
+
+/* Consider prompt — bridge between guidance and muhasabah */
+.rl-consider {
+  padding: var(--sp-4) var(--sp-5);
+  border-inline-start: 3px solid var(--primary);
+  background: var(--surface);
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+}
+.rl-consider-label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--primary);
+  margin-block-end: var(--sp-2);
+}
+.rl-consider-text {
+  font-size: var(--text-sm);
+  color: var(--text-2);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+  font-style: italic;
+}
+
+/* ── Zone 3: Muhasabah ───────────────────────────────────────── */
+.rl-muhasabah {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+  margin-block-end: var(--sp-5);
+}
+.rl-mq-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+.rl-mq-label {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-3);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--text);
+  line-height: var(--leading-tight);
+  cursor: pointer;
+}
+.rl-mq-num {
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: 800;
+  color: var(--primary);
+  min-width: 24px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.rl-mq-textarea {
+  width: 100%;
+  padding: var(--sp-4);
+  background: var(--surface);
+  border: 1.5px solid var(--border-2);
+  border-radius: var(--r-lg);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--text);
+  line-height: var(--leading-relaxed);
+  resize: vertical;
+  min-height: 80px;
+  transition: border-color var(--ease), box-shadow var(--ease);
+}
+.rl-mq-textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+}
+.rl-mq-textarea::placeholder {
+  color: var(--text-3);
+  font-style: italic;
+}
+
+/* Save row */
+.rl-save-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+  padding-block-start: var(--sp-1);
+}
+.rl-save-status {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  min-height: 1.2em;
+  transition: color var(--ease);
+}
+.rl-save-partial  { color: var(--text-3); }
+.rl-save-complete { color: var(--primary); }
+
+.rl-privacy {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+  font-size: var(--text-xs);
+  color: var(--text-3);
+}
+
+/* ── Zone 4: Free note ───────────────────────────────────────── */
+.rl-note-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+.rl-note-textarea {
+  width: 100%;
+  padding: var(--sp-4);
+  background: var(--surface);
+  border: 1.5px solid var(--border-2);
+  border-radius: var(--r-lg);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--text);
+  line-height: var(--leading-relaxed);
+  resize: vertical;
+  min-height: 120px;
+  transition: border-color var(--ease), box-shadow var(--ease);
+}
+.rl-note-textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+}
+.rl-note-textarea::placeholder {
+  color: var(--text-3);
+  font-style: italic;
+}
+.rl-note-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+}
+
+/* ── Zone 5: History ─────────────────────────────────────────── */
+.rl-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  margin-block-end: var(--sp-5);
+}
+.rl-history-empty {
+  font-size: var(--text-sm);
+  color: var(--text-3);
+  padding-block: var(--sp-4);
+}
+.rl-history-item {
+  padding: var(--sp-4) var(--sp-5);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  transition: border-color var(--ease);
+}
+.rl-history-item:hover { border-color: var(--border-2); }
+.rl-history-today {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+}
+.rl-history-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-block-end: var(--sp-2);
+}
+.rl-history-date {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--text);
+}
+.rl-history-today .rl-history-date { color: var(--primary); }
+.rl-history-count {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--text-3);
+}
+.rl-history-preview {
+  font-size: var(--text-sm);
+  color: var(--text-3);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.rl-history-footer { text-align: center; }
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (min-width: 640px) {
+  .rl-arrive-inner {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  .rl-arrive-heading { max-width: 480px; }
+}
+
+@media (min-width: 768px) {
+  .rl-arrive    { padding-block: var(--sp-12) var(--sp-10); }
+  .rl-section   { padding-block: var(--sp-10); }
+  .rl-ayah-card { padding: var(--sp-8); }
+  .rl-muhasabah { gap: var(--sp-8); }
+  .rl-mq-textarea,
+  .rl-note-textarea { font-size: var(--text-base); }
+}
+
+/* ── RTL ─────────────────────────────────────────────────────── */
+[dir="rtl"] .rl-arrive-inner   { flex-direction: row-reverse; }
+[dir="rtl"] .rl-consider       { border-inline-start: none; border-inline-end: 3px solid var(--primary); border-radius: var(--r-md) 0 0 var(--r-md); }
+[dir="rtl"] .rl-mq-label       { flex-direction: row-reverse; }
+[dir="rtl"] .rl-save-row       { flex-direction: row-reverse; }
+[dir="rtl"] .rl-history-meta   { flex-direction: row-reverse; }
+[dir="rtl"] .rl-note-footer    { flex-direction: row-reverse; }
+[dir="rtl"] .rl-ayah-arabic    { text-align: start; } /* already RTL — just ensure alignment */
+
+/* ── Dark mode adjustments ───────────────────────────────────── */
+[data-theme="dark"] .rl-ayah-card { border-color: var(--border-2); }
+[data-theme="dark"] .rl-history-today {
+  border-color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
+}
+[data-theme="dark"] .rl-mq-textarea,
+[data-theme="dark"] .rl-note-textarea {
+  background: var(--bg3);
+}
