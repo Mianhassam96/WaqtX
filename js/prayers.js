@@ -1,294 +1,238 @@
 ﻿'use strict';
 /* ═══════════════════════════════════════════════
-   WaqtX — Prayers Page Logic
-   Prayer Orbit · Schedule · Tracker · Streak · Notifications
+   WaqtX — Prayer Page  (Phase 1.3 rebuild)
+
+   Hierarchy:
+     Level 1 — Primary:   Next prayer name · time · live countdown
+     Level 2 — Secondary: 6-prayer schedule · consistency (streak + bars)
+     Level 3 — Tertiary:  Weekly tracker · after-prayer reflections · notifications
+
+   Storage contracts:
+     WaqtX.keys.tracker(dateKey)  → 'tracker_YYYY-MM-DD'
+     WaqtX.storage                → S
    ═══════════════════════════════════════════════ */
 
-var S = WaqtX.storage;
+var S         = WaqtX.storage;
 var PRAYERS_5 = ['Fajr','Dhuhr','Asr','Maghrib','Isha'];
 var PRAYERS_6 = ['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha'];
-var PRAYER_ICONS = { Fajr:'🌙', Sunrise:'🌅', Dhuhr:'☀️', Asr:'🌤', Maghrib:'🌇', Isha:'🌃' };
+var PR_ICONS  = { Fajr:'🌙', Sunrise:'🌅', Dhuhr:'☀️', Asr:'🌤️', Maghrib:'🌇', Isha:'🌃' };
 
-/* ══════════════════════════════════════
-   PRAYER ORBIT (SVG)
-   ══════════════════════════════════════ */
-function renderOrbit(timings) {
-  var svg = el('orbit-svg');
-  if (!svg) return;
-
-  var size = svg.parentElement.clientWidth || 400;
-  size = Math.min(Math.max(size, 260), 480);
-  var cx = size / 2, cy = size / 2, r = size * 0.42;
-  svg.setAttribute('viewBox', '0 0 ' + size + ' ' + size);
-  svg.setAttribute('width', size);
-  svg.setAttribute('height', size);
-
-  var now = new Date();
-  var nowMin = now.getHours() * 60 + now.getMinutes();
-  var next = timings ? WaqtX.prayer.getNext(timings) : null;
-
-  /* Background ring */
-  var circ = 2 * Math.PI * r;
-  var bgCircle = '<circle cx="' + cx + '" cy="' + cy + '" r="' + r +
-    '" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="3"/>';
-
-  /* Progress arc */
-  var elapsed = nowMin / 1440;
-  var progressOffset = circ * (1 - elapsed);
-  var progressArc = '<circle cx="' + cx + '" cy="' + cy + '" r="' + r +
-    '" fill="none" stroke="var(--gold)" stroke-width="3" stroke-linecap="round"' +
-    ' stroke-dasharray="' + circ + '" stroke-dashoffset="' + progressOffset + '"' +
-    ' transform="rotate(-90,' + cx + ',' + cy + ')" opacity="0.7"/>';
-
-  /* Nodes */
-  var nodes = '';
-  var labels = '';
-  PRAYERS_6.forEach(function(name) {
-    if (!timings || !timings[name]) return;
-    var pMin = WaqtX.prayer.timeToMin(timings[name]);
-    var angle = (pMin / 1440) * 360 - 90;
-    var rad = angle * Math.PI / 180;
-    var nx = cx + r * Math.cos(rad);
-    var ny = cy + r * Math.sin(rad);
-
-    var isPast = pMin < nowMin;
-    var isNext = next && name === next.name && !next.isTomorrow;
-    var nodeR = isNext ? 10 : 7;
-    var fill = isNext ? 'var(--gold)' : isPast ? 'var(--primary)' : 'rgba(255,255,255,0.2)';
-    var glow = isNext ? ' filter="url(#nodeGlow)"' : '';
-
-    nodes += '<circle cx="' + nx + '" cy="' + ny + '" r="' + nodeR + '" fill="' + fill + '"' + glow + '/>';
-
-    /* Label position — push outward */
-    var lr = r + 26;
-    var lx = cx + lr * Math.cos(rad);
-    var ly = cy + lr * Math.sin(rad);
-    var anchor = lx < cx - 5 ? 'end' : lx > cx + 5 ? 'start' : 'middle';
-    var timeClean = timings[name].split(' ')[0];
-    labels += '<text x="' + lx + '" y="' + (ly - 4) + '" text-anchor="' + anchor +
-      '" font-size="10" fill="' + (isNext ? 'var(--gold)' : 'rgba(248,250,252,0.6)') +
-      '" font-family="Inter,sans-serif">' + name + '</text>';
-    labels += '<text x="' + lx + '" y="' + (ly + 9) + '" text-anchor="' + anchor +
-      '" font-size="9" fill="rgba(248,250,252,0.4)" font-family="Inter,sans-serif">' + timeClean + '</text>';
-  });
-
-  /* Center text */
-  var centerText = next ?
-    '<text x="' + cx + '" y="' + (cy - 8) + '" text-anchor="middle" font-size="12" fill="rgba(248,250,252,0.5)" font-family="Inter,sans-serif">Next</text>' +
-    '<text x="' + cx + '" y="' + (cy + 10) + '" text-anchor="middle" font-size="18" font-weight="700" fill="var(--gold)" font-family='Noto Serif,Georgia,serif'>' + (next.name) + '</text>' : '';
-
-  svg.innerHTML =
-    '<defs>' +
-      '<filter id="nodeGlow" x="-50%" y="-50%" width="200%" height="200%">' +
-        '<feGaussianBlur stdDeviation="3" result="coloredBlur"/>' +
-        '<feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>' +
-      '</filter>' +
-    '</defs>' +
-    bgCircle + progressArc + nodes + labels + centerText;
-}
-
-/* ══════════════════════════════════════
-   PRAYER SCHEDULE CARDS
-   ══════════════════════════════════════ */
-function renderSchedule(timings) {
-  var grid = el('prayer-grid');
-  if (!grid) return;
-
-  var now = new Date();
-  var nowMin = now.getHours() * 60 + now.getMinutes();
-  var next = WaqtX.prayer.getNext(timings);
-  var html = '';
-
-  PRAYERS_6.forEach(function(name) {
-    if (!timings[name]) return;
-    var timeClean = timings[name].split(' ')[0];
-    var pMin = WaqtX.prayer.timeToMin(timings[name]);
-    var isPast = pMin < nowMin && !next.isTomorrow;
-    var isNext = name === next.name && !next.isTomorrow;
-    var isSunrise = name === 'Sunrise';
-    var statusBadge = isNext
-      ? '<span class="prayer-badge prayer-badge-next">Next</span>'
-      : isPast && !isSunrise
-        ? '<span class="prayer-badge prayer-badge-done">✓ Done</span>'
-        : '<span class="prayer-badge prayer-badge-upcoming">Upcoming</span>';
-    html += '<div class="prayer-card' + (isNext ? ' prayer-next' : '') +
-      (isPast && !isSunrise ? ' prayer-past' : '') +
-      (isSunrise ? ' prayer-sunrise' : '') + '">' +
-      '<div class="prayer-card-icon">' + (PRAYER_ICONS[name] || '🕌') + '</div>' +
-      '<div class="prayer-card-name">' + name + '</div>' +
-      '<div class="prayer-card-time">' + timeClean + '</div>' +
-      statusBadge +
-      '</div>';
-  });
-
-  grid.innerHTML = html;
-}
-
-/* ══════════════════════════════════════
-   COUNTDOWN TICKER
-   ══════════════════════════════════════ */
 var _ticker = null;
-function startCountdown(timings) {
+
+/* ══════════════════════════════════════
+   HELPERS
+   ══════════════════════════════════════ */
+function _esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function _todayKey(){ return getDateKey(0); }
+
+/* ══════════════════════════════════════
+   LEVEL 1 — NEXT PRAYER + COUNTDOWN
+   ══════════════════════════════════════ */
+function renderNextPrayer(timings) {
+  var next = WaqtX.prayer.getNext(timings);
+  if (!next) return;
+
+  setText('prayer-next-name', next.name + (next.isTomorrow ? ' (tomorrow)' : ''));
+  setText('prayer-next-time', (timings[next.name] || '').split(' ')[0]);
+
   clearInterval(_ticker);
   function tick() {
-    var now = new Date();
+    var now    = new Date();
     var nowSec = now.getHours()*3600 + now.getMinutes()*60 + now.getSeconds();
-    var next = WaqtX.prayer.getNext(timings);
-    var nextSec = next.minutes * 60;
+    var nextSec = WaqtX.prayer.timeToMin(timings[next.name]) * 60;
     var diff = nextSec - nowSec;
     if (diff < 0) diff += 86400;
-    setText('prayer-countdown', WaqtX.prayer.formatCountdown(diff));
-    setText('prayer-next-name', next.name + (next.isTomorrow ? ' (tomorrow)' : ''));
-    /* Also update hero */
-    setText('hero-next-countdown', WaqtX.prayer.formatCountdown(diff));
-    setText('hero-next-prayer', next.name + (next.isTomorrow ? ' (tomorrow)' : ''));
+    setText('prayer-countdown', WaqtX.prayer.formatCountdown(diff) + ' away');
   }
   tick();
   _ticker = setInterval(tick, 1000);
 }
 
 /* ══════════════════════════════════════
-   WEEKLY TRACKER
+   LEVEL 2 — PRAYER SCHEDULE (6 cards)
+   ══════════════════════════════════════ */
+function renderSchedule(timings) {
+  var grid = el('prayer-grid');
+  if (!grid) return;
+
+  var now    = new Date();
+  var nowMin = now.getHours()*60 + now.getMinutes();
+  var next   = WaqtX.prayer.getNext(timings);
+  var logged = S.get(WaqtX.keys.tracker(_todayKey())) || {};
+
+  var html = '';
+  PRAYERS_6.forEach(function(name) {
+    if (!timings[name]) return;
+    var clean   = timings[name].split(' ')[0];
+    var pMin    = WaqtX.prayer.timeToMin(timings[name]);
+    var isSun   = name === 'Sunrise';
+    var isNext  = !isSun && next && name === next.name && !next.isTomorrow;
+    var isPast  = pMin < nowMin;
+    var isDone  = !isSun && isPast && !!logged[name];
+    var isMissed = !isSun && isPast && !logged[name];
+
+    var stateClass = isNext  ? ' pr-card-next'
+                   : isDone  ? ' pr-card-done'
+                   : isMissed ? ' pr-card-missed'
+                   : isSun   ? ' pr-card-sunrise'
+                   : '';
+
+    var badge = isNext   ? '<span class="pr-badge pr-badge-next">Next</span>'
+              : isDone   ? '<span class="pr-badge pr-badge-done">✓</span>'
+              : isMissed ? '<span class="pr-badge pr-badge-missed">○</span>'
+              : '';
+
+    html +=
+      '<div class="pr-card' + stateClass + '" role="listitem" aria-label="' + _esc(name) + ' at ' + _esc(clean) + '">' +
+        '<span class="pr-card-icon" aria-hidden="true">' + (PR_ICONS[name]||'🕌') + '</span>' +
+        '<span class="pr-card-name">' + _esc(name) + '</span>' +
+        '<span class="pr-card-time">' + _esc(clean) + '</span>' +
+        badge +
+      '</div>';
+  });
+
+  grid.innerHTML = html || '<p class="pr-schedule-placeholder">Enable location to see prayer times. <a href="settings.html">Settings →</a></p>';
+}
+
+/* ══════════════════════════════════════
+   LEVEL 2 — CONSISTENCY
+   Streak + weekly + monthly bars
+   ══════════════════════════════════════ */
+function renderConsistency() {
+  /* Streak */
+  var streak = recalcStreak();
+  setText('streak-count', streak);
+  var labelEl = el('streak-label');
+  if (labelEl) labelEl.textContent = streak === 1 ? 'Day streak' : 'Day streak';
+
+  /* Bar helper */
+  function calcPct(days) {
+    var done = 0;
+    for (var i = 0; i < days; i++) {
+      var data = S.get(WaqtX.keys.tracker(getDateKey(-i))) || {};
+      PRAYERS_5.forEach(function(p){ if(data[p]) done++; });
+    }
+    return Math.round((done / (days*5)) * 100);
+  }
+
+  var weekly  = calcPct(7);
+  var monthly = calcPct(30);
+
+  /* Weekly */
+  setText('cons-weekly', weekly + '%');
+  var wBar = el('cons-weekly-bar');
+  var wWrap = el('cons-weekly-bar-wrap');
+  if (wBar) { wBar.style.width = weekly + '%'; _setBarClass(wBar, weekly); }
+  if (wWrap) wWrap.setAttribute('aria-valuenow', weekly);
+  var wDone = Math.round((weekly/100)*35);
+  setText('cons-weekly-sub', wDone + ' of 35 prayers this week');
+
+  /* Monthly */
+  setText('cons-monthly', monthly + '%');
+  var mBar = el('cons-monthly-bar');
+  var mWrap = el('cons-monthly-bar-wrap');
+  if (mBar) { mBar.style.width = monthly + '%'; _setBarClass(mBar, monthly); }
+  if (mWrap) mWrap.setAttribute('aria-valuenow', monthly);
+  var mDone = Math.round((monthly/100)*150);
+  setText('cons-monthly-sub', mDone + ' of 150 prayers this month');
+}
+
+function _setBarClass(bar, pct) {
+  bar.classList.remove('pr-bar-good','pr-bar-mid','pr-bar-low');
+  if      (pct >= 80) bar.classList.add('pr-bar-good');
+  else if (pct >= 50) bar.classList.add('pr-bar-mid');
+  else                bar.classList.add('pr-bar-low');
+}
+
+/* ══════════════════════════════════════
+   LEVEL 3 — WEEKLY TRACKER
+   Uses WaqtX.keys.tracker contract
    ══════════════════════════════════════ */
 function renderTracker() {
   var grid = el('tracker-grid');
   if (!grid) return;
 
-  var today = getTodayKey();
+  /* Build 7-day column headers */
   var days = [];
   for (var i = 6; i >= 0; i--) {
     var d = new Date(); d.setDate(d.getDate() - i);
     days.push({
-      key: getDateKey(-i),
-      label: d.toLocaleDateString('en-US', { weekday: 'short' }),
+      key:     getDateKey(-i),
+      short:   d.toLocaleDateString('en-US', { weekday: 'short' }),
+      dateNum: d.getDate(),
       isToday: i === 0
     });
   }
 
-  var html = '<div class="tracker-header"><div class="tracker-day-label"></div>';
+  var html = '';
+
+  /* Header row */
+  html += '<div class="tr-row tr-header"><div class="tr-cell tr-prayer-col"></div>';
   days.forEach(function(d) {
-    html += '<div class="tracker-day-label' + (d.isToday ? ' tracker-today-col' : '') + '">' +
-      d.label + '<span class="tracker-date-num">' +
-      new Date(d.key).getDate() + '</span></div>';
+    html += '<div class="tr-cell tr-day-col' + (d.isToday ? ' tr-today-col' : '') + '">' +
+            '<span class="tr-day-name">' + d.short + '</span>' +
+            '<span class="tr-day-num">'  + d.dateNum + '</span>' +
+            '</div>';
   });
   html += '</div>';
 
+  /* Prayer rows */
   PRAYERS_5.forEach(function(prayer) {
-    html += '<div class="tracker-row">';
-    html += '<div class="tracker-prayer-label">' + prayer + '</div>';
+    html += '<div class="tr-row"><div class="tr-cell tr-prayer-col">' + prayer + '</div>';
     days.forEach(function(d) {
-      var data = S.get('tracker_' + d.key) || {};
+      var data = S.get(WaqtX.keys.tracker(d.key)) || {};
       var done = !!data[prayer];
-      html += '<button class="tracker-cell' +
-        (done ? ' tracker-done' : '') +
-        (d.isToday ? ' tracker-today-col' : '') + '"' +
-        ' data-date="' + d.key + '" data-prayer="' + prayer + '"' +
-        ' aria-label="' + prayer + ' on ' + d.key + (done ? ' - completed' : '') + '"' +
-        ' title="' + prayer + ' · ' + d.key + '">' +
-        (done ? '✓' : '') +
-        '</button>';
+      html += '<div class="tr-cell tr-day-col' + (d.isToday ? ' tr-today-col' : '') + '">' +
+              '<button class="tr-btn' + (done ? ' tr-done' : '') + '"' +
+              ' data-date="' + d.key + '" data-prayer="' + prayer + '"' +
+              ' aria-label="' + prayer + ' on ' + d.key + (done ? ' — completed' : '') + '"' +
+              ' aria-pressed="' + done + '">' +
+              (done ? '✓' : '') +
+              '</button></div>';
     });
     html += '</div>';
   });
 
   grid.innerHTML = html;
 
-  /* Click to toggle */
-  grid.querySelectorAll('.tracker-cell').forEach(function(btn) {
+  /* Toggle on click */
+  grid.querySelectorAll('.tr-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
-      var date = btn.getAttribute('data-date');
+      var key    = btn.getAttribute('data-date');
       var prayer = btn.getAttribute('data-prayer');
-      var data = S.get('tracker_' + date) || {};
+      var data   = S.get(WaqtX.keys.tracker(key)) || {};
       data[prayer] = !data[prayer];
-      S.set('tracker_' + date, data);
+      S.set(WaqtX.keys.tracker(key), data);
       renderTracker();
-      updateStreakDisplay();
+      renderConsistency();
     });
   });
 }
 
-function updateStreakDisplay() {
-  var streak = recalcStreak();
-  setText('streak-count', streak);
-  setText('streak-label', streak === 1 ? 'Day Streak' : 'Day Streak');
-  renderConsistency();
-  renderPrayerReflections();
-}
-
 /* ══════════════════════════════════════
-   SALAH CONSISTENCY SCORES
-   ══════════════════════════════════════ */
-function calcConsistency(days) {
-  var totalPossible = days * 5;
-  var totalDone = 0;
-  for (var i = 0; i < days; i++) {
-    var key  = getDateKey(-i);
-    var data = S.get('tracker_' + key) || {};
-    PRAYERS_5.forEach(function(p) { if (data[p]) totalDone++; });
-  }
-  if (totalPossible === 0) return 0;
-  return Math.round((totalDone / totalPossible) * 100);
-}
-
-function renderConsistency() {
-  var weekly  = calcConsistency(7);
-  var monthly = calcConsistency(30);
-
-  /* Weekly */
-  var wEl  = el('cons-weekly');
-  var wBar = el('cons-weekly-bar');
-  var wSub = el('cons-weekly-sub');
-  if (wEl)  wEl.textContent  = weekly + '%';
-  if (wBar) wBar.style.width = weekly + '%';
-  if (wSub) {
-    var weeklyDone = Math.round((weekly / 100) * 35); /* 7 days × 5 prayers */
-    wSub.textContent = weeklyDone + ' of 35 prayers this week';
-  }
-
-  /* Monthly */
-  var mEl  = el('cons-monthly');
-  var mBar = el('cons-monthly-bar');
-  var mSub = el('cons-monthly-sub');
-  if (mEl)  mEl.textContent  = monthly + '%';
-  if (mBar) mBar.style.width = monthly + '%';
-  if (mSub) {
-    var monthlyDone = Math.round((monthly / 100) * 150); /* 30 days × 5 prayers */
-    mSub.textContent = monthlyDone + ' of 150 prayers this month';
-  }
-
-  /* Colour the bars by score */
-  [wBar, mBar].forEach(function(bar) {
-    if (!bar) return;
-    bar.className = 'cons-bar-fill';
-    var pct = parseInt(bar.style.width);
-    if (pct >= 80)      bar.classList.add('cons-good');
-    else if (pct >= 50) bar.classList.add('cons-mid');
-    else                bar.classList.add('cons-low');
-  });
-}
-
-/* ══════════════════════════════════════
-   POST-PRAYER REFLECTION NOTES
+   LEVEL 3 — AFTER-PRAYER REFLECTIONS
    ══════════════════════════════════════ */
 function renderPrayerReflections() {
   var grid = el('prayer-reflect-grid');
   if (!grid) return;
-  var today = getTodayKey();
+  var today = _todayKey();
 
   var html = PRAYERS_5.map(function(prayer) {
     var saved = S.get('prayer_note_' + prayer + '_' + today) || '';
-    return '<div class="pr-card">' +
-      '<div class="pr-name">' + prayer + '</div>' +
-      '<textarea class="pr-textarea" ' +
-        'id="pr-note-' + prayer + '" ' +
-        'placeholder="What did this prayer remind you of?" ' +
-        'aria-label="' + prayer + ' reflection note" ' +
-        'rows="2">' + saved + '</textarea>' +
+    return '<div class="pr-reflect-item">' +
+      '<label class="pr-reflect-label" for="pr-note-' + prayer + '">' +
+        '<span class="pr-reflect-icon" aria-hidden="true">' + (PR_ICONS[prayer]||'🕌') + '</span>' +
+        prayer +
+      '</label>' +
+      '<textarea class="pr-reflect-textarea" id="pr-note-' + prayer + '"' +
+        ' placeholder="What did this prayer remind you of?" rows="2"' +
+        ' aria-label="' + prayer + ' reflection note">' + _esc(saved) + '</textarea>' +
     '</div>';
   }).join('');
 
   grid.innerHTML = html;
 
+  /* Autosave */
   PRAYERS_5.forEach(function(prayer) {
     var ta = el('pr-note-' + prayer);
     if (!ta) return;
@@ -302,117 +246,101 @@ function renderPrayerReflections() {
    NOTIFICATIONS
    ══════════════════════════════════════ */
 function initNotifications() {
-  var toggles = {
+  var map = {
     'notif-adhan':    'notif_adhan',
     'notif-reminder': 'notif_reminder',
     'notif-silent':   'notif_silent'
   };
-  Object.keys(toggles).forEach(function(id) {
+  Object.keys(map).forEach(function(id) {
     var toggle = el(id);
     if (!toggle) return;
-    toggle.checked = !!S.get(toggles[id]);
+    toggle.checked = !!S.get(map[id]);
     toggle.addEventListener('change', function() {
-      if (toggle.checked) {
-        requestNotifPermission(function(granted) {
-          if (!granted) {
-            toggle.checked = false;
-            var msg = el('notif-denied-msg');
-            if (msg) msg.classList.remove('hidden');
-          } else {
-            S.set(toggles[id], true);
-            scheduleNotifications();
-          }
-        });
-      } else {
-        S.set(toggles[id], false);
+      if (!toggle.checked) { S.set(map[id], false); return; }
+      if (!('Notification' in window)) { toggle.checked = false; return; }
+      if (Notification.permission === 'granted') { S.set(map[id], true); return; }
+      if (Notification.permission === 'denied') {
+        toggle.checked = false;
+        var msg = el('notif-denied-msg');
+        if (msg) msg.classList.remove('hidden');
+        return;
       }
-    });
-  });
-}
-
-function requestNotifPermission(callback) {
-  if (!('Notification' in window)) { callback(false); return; }
-  if (Notification.permission === 'granted') { callback(true); return; }
-  if (Notification.permission === 'denied') { callback(false); return; }
-  Notification.requestPermission().then(function(p) { callback(p === 'granted'); });
-}
-
-function scheduleNotifications() {
-  var timings = WaqtX.prayer.getCached();
-  if (!timings || !navigator.serviceWorker || !navigator.serviceWorker.controller) return;
-  var adhan    = !!S.get('notif_adhan');
-  var reminder = !!S.get('notif_reminder');
-  var silent   = !!S.get('notif_silent');
-  if (!adhan && !reminder && !silent) return;
-
-  PRAYERS_5.forEach(function(name) {
-    var timeStr = timings[name];
-    if (!timeStr) return;
-    var parts = timeStr.split(' ')[0].split(':');
-    var today = new Date();
-    var fireAt = new Date(today.getFullYear(), today.getMonth(), today.getDate(),
-                          parseInt(parts[0]), parseInt(parts[1]), 0).getTime();
-    if (fireAt <= Date.now()) return;
-
-    var mode = adhan ? 'adhan' : reminder ? 'reminder' : 'silent';
-    var msgFireAt = reminder ? fireAt - 15*60*1000 : fireAt;
-
-    navigator.serviceWorker.controller.postMessage({
-      type: 'SCHEDULE_NOTIFICATION',
-      prayer: name,
-      fireAt: msgFireAt,
-      mode: mode
+      Notification.requestPermission().then(function(p) {
+        if (p === 'granted') { S.set(map[id], true); }
+        else {
+          toggle.checked = false;
+          var msg = el('notif-denied-msg');
+          if (msg) msg.classList.remove('hidden');
+        }
+      });
     });
   });
 }
 
 /* ══════════════════════════════════════
-   LOCATION & FETCH
+   LOCATION + FETCH
    ══════════════════════════════════════ */
+function _showNoLocation() {
+  var noLoc = el('prayer-no-location');
+  if (noLoc) noLoc.classList.remove('hidden');
+  setText('prayer-next-name', 'No location set');
+  setText('prayer-next-time', '');
+  setText('prayer-countdown', '');
+}
+function _hideNoLocation() {
+  var noLoc = el('prayer-no-location');
+  if (noLoc) noLoc.classList.add('hidden');
+}
+function _showStatus(msg, isErr) {
+  var s = el('prayer-status');
+  if (!s) return;
+  s.textContent = msg;
+  s.style.color = isErr ? 'var(--danger, #dc2626)' : 'var(--text-3)';
+}
+
 function initPrayerPage() {
-  /* Try cached first */
   var cached = WaqtX.prayer.getCached();
   if (cached) {
-    renderOrbit(cached);
+    _hideNoLocation();
+    renderNextPrayer(cached);
     renderSchedule(cached);
-    startCountdown(cached);
-    /* re-render orbit every minute */
     setInterval(function() {
-      renderOrbit(WaqtX.prayer.getCached());
-      renderSchedule(WaqtX.prayer.getCached());
+      var t = WaqtX.prayer.getCached();
+      if (t) { renderNextPrayer(t); renderSchedule(t); }
     }, 60000);
   }
 
-  /* Get prayer times button */
   var btn = el('btn-prayer-times');
   if (btn) {
-    /* If location already saved, auto-fetch */
+    /* Auto-fetch if location saved but no cached times */
     var lat = S.get('location_lat');
     var lng = S.get('location_lng');
     if (lat && lng && !cached) {
-      btn.textContent = '↺ Refreshing…';
+      btn.textContent = 'Refreshing…';
+      btn.disabled = true;
       WaqtX.prayer.fetch(lat, lng, function(timings) {
         btn.textContent = '↺ Refresh';
-        renderOrbit(timings);
+        btn.disabled = false;
+        _hideNoLocation();
+        renderNextPrayer(timings);
         renderSchedule(timings);
-        startCountdown(timings);
-        scheduleNotifications();
         setInterval(function() {
-          renderOrbit(WaqtX.prayer.getCached());
-          renderSchedule(WaqtX.prayer.getCached());
+          var t = WaqtX.prayer.getCached();
+          if (t) { renderNextPrayer(t); renderSchedule(t); }
         }, 60000);
-      }, function(e) {
+      }, function() {
         btn.textContent = 'Get Prayer Times';
-        _showPrayerError('Could not load prayer times. Check your connection.');
+        btn.disabled = false;
+        _showStatus('Could not load prayer times. Check your connection.', true);
       });
     } else if (!lat && !lng && !cached) {
-      /* No location saved at all */
-      _showPrayerNoLocation();
+      _showNoLocation();
     }
 
+    /* Manual tap */
     btn.addEventListener('click', function() {
       if (!navigator.geolocation) {
-        _showPrayerError('Geolocation is not supported by your browser.');
+        _showStatus('Geolocation not supported by your browser.', true);
         return;
       }
       btn.textContent = 'Locating…';
@@ -420,29 +348,24 @@ function initPrayerPage() {
       navigator.geolocation.getCurrentPosition(
         function(pos) {
           var lat = pos.coords.latitude, lng = pos.coords.longitude;
-          S.set('location_lat', lat);
-          S.set('location_lng', lng);
+          S.set('location_lat', lat); S.set('location_lng', lng);
           S.set('location_mode', 'auto');
           btn.textContent = '↺ Refresh';
           btn.disabled = false;
+          _hideNoLocation();
           WaqtX.prayer.fetch(lat, lng, function(timings) {
-            renderOrbit(timings);
+            renderNextPrayer(timings);
             renderSchedule(timings);
-            startCountdown(timings);
-            scheduleNotifications();
           }, function() {
-            _showPrayerError('Could not load prayer times. Try again.');
+            _showStatus('Could not load prayer times. Try again.', true);
           });
         },
         function(err) {
           btn.textContent = 'Get Prayer Times';
           btn.disabled = false;
-          var msgs = {
-            1: 'Location access denied. Enable it in browser settings.',
-            2: 'Location unavailable. Try again.',
-            3: 'Location request timed out.'
-          };
-          _showPrayerError(msgs[err.code] || 'Could not get location.');
+          var msgs = {1:'Location access denied.',2:'Location unavailable.',3:'Request timed out.'};
+          _showStatus(msgs[err.code] || 'Could not get location.', true);
+          _showNoLocation();
         },
         { timeout: 10000, maximumAge: 300000 }
       );
@@ -450,33 +373,12 @@ function initPrayerPage() {
   }
 
   renderTracker();
-  updateStreakDisplay();
   renderConsistency();
   renderPrayerReflections();
   initNotifications();
 }
 
-function _showPrayerNoLocation() {
-  var grid = el('prayer-grid');
-  if (grid) {
-    grid.innerHTML =
-      '<div class="empty-state">' +
-        '<div class="empty-state-icon">📍</div>' +
-        '<div>Tap <strong>Get Prayer Times</strong> above to detect your location, or set it in <a href="settings.html">Settings</a>.</div>' +
-      '</div>';
-  }
-  setText('prayer-next-name', 'No location set');
-}
-
-function _showPrayerError(msg) {
-  var statusEl = el('prayer-status');
-  if (statusEl) {
-    statusEl.innerHTML =
-      '<div class="error-state" style="margin-top:12px">' +
-        '<span class="error-state-icon">⚠️</span>' +
-        '<span>' + msg + '</span>' +
-      '</div>';
-  }
-}
-
+/* ══════════════════════════════════════
+   BOOT
+   ══════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', initPrayerPage);

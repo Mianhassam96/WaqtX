@@ -4,24 +4,22 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>WaqtX — Prayer</title>
-  <meta name="description" content="Your prayer times, weekly tracker, streak, and Qibla direction."/>
+  <meta name="description" content="Your prayer times, weekly tracker, streak, and consistency — private and offline-first."/>
   <meta name="theme-color" content="#F7F8F5"/>
-    <meta property="og:type"        content="website"/>
+  <meta property="og:type"        content="website"/>
   <meta property="og:title"       content="WaqtX — Prayer"/>
-  <meta property="og:description" content="Prayer times, weekly tracker, streak, and Qibla — private and offline-first."/>
+  <meta property="og:description" content="Prayer times, weekly tracker, streak, and consistency — private and offline-first."/>
   <meta property="og:url"         content="https://mianhassam96.github.io/WaqtX/prayers.html"/>
   <meta property="og:image"       content="https://mianhassam96.github.io/WaqtX/og-image.svg"/>
   <meta name="twitter:card"       content="summary_large_image"/>
   <link rel="canonical"           href="https://mianhassam96.github.io/WaqtX/prayers.html"/>
-<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
   <link rel="manifest" href="manifest.json"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&family=Cinzel:wght@600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
-  <script>
-    (function(){var s='light';try{s=localStorage.getItem('waqtx_theme')||'light';}catch(e){}if(s!=='light')document.documentElement.setAttribute('data-theme',s);var l='en';try{l=localStorage.getItem('waqtx_lang')||'en';}catch(e){}if(l!=='en'){document.documentElement.setAttribute('lang',l);if(l==='ur'||l==='ar')document.documentElement.setAttribute('dir','rtl');}})();
-  </script>
+  <script>(function(){var s='light';try{s=localStorage.getItem('waqtx_theme')||'light';}catch(e){}if(s!=='light')document.documentElement.setAttribute('data-theme',s);var l='en';try{l=localStorage.getItem('waqtx_lang')||'en';}catch(e){}if(l!=='en'){document.documentElement.setAttribute('lang',l);if(l==='ur'||l==='ar')document.documentElement.setAttribute('dir','rtl');}})();</script>
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to content</a>
@@ -81,71 +79,114 @@
 <div class="page-wrap">
 <main id="main-content" aria-label="Prayer times">
 
-<!-- Page hero -->
-<div class="page-hero">
-  <div class="page-hero-inner">
-    <div class="page-hero-icon" aria-hidden="true">🕌</div>
-    <h1 class="page-hero-title">Prayer</h1>
-    <p class="page-hero-sub">Every prayer is an invitation. Your rhythm today.</p>
-  </div>
-</div>
+<!-- ══════════════════════════════════════════
+     LEVEL 1 — PRIMARY
+     Next prayer. Time. Countdown.
+     The one thing you came for.
+══════════════════════════════════════════ -->
+<section class="pr-hero" id="prayer-hero" aria-label="Next prayer">
+  <div class="pr-hero-inner">
 
-<!-- ════════ PRAYER ORBIT ════════ -->
-<section class="prayer-section prayer-section-alt" id="prayer-orbit-section" aria-label="Prayer orbit">
-  <div class="container">
-    <div class="type-eyebrow">Prayer Orbit</div>
-    <p class="prayer-section-sub">The arc of your day — six moments of connection.</p>
-
-    <div class="prayer-orbit-wrap">
-      <svg id="orbit-svg" class="orbit-svg" aria-label="Prayer orbit visualization" role="img"></svg>
+    <div class="pr-hero-label">Next Prayer</div>
+    <div class="pr-hero-main">
+      <span class="pr-hero-name" id="prayer-next-name"><span class="skeleton skeleton-md">—</span></span>
+      <span class="pr-hero-time" id="prayer-next-time"><span class="skeleton skeleton-md">—</span></span>
     </div>
+    <div class="pr-hero-countdown" id="prayer-countdown" aria-live="polite">—</div>
 
-    <div class="prayer-orbit-meta">
-      <span class="prayer-orbit-next-label">Next</span>
-      <span class="prayer-orbit-next-name skeleton skeleton-md" id="prayer-next-name">—</span>
-      <span class="prayer-orbit-countdown skeleton skeleton-sm" id="prayer-countdown">—</span>
-    </div>
-
-    <!-- Load prayer times button -->
-    <div style="text-align:center;margin-block-start:var(--sp-5)">
-      <button class="btn btn-primary" id="btn-prayer-times">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+    <!-- Location / load action -->
+    <div class="pr-hero-actions">
+      <button class="btn pr-hero-btn" id="btn-prayer-times" aria-label="Get prayer times for your location">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
         Get Prayer Times
       </button>
-      <span class="prayer-status-text" id="prayer-status"></span>
+      <span class="pr-hero-status" id="prayer-status" aria-live="polite"></span>
     </div>
 
-    <!-- No location empty state -->
-    <div class="state-empty hidden" id="prayer-no-location" style="padding-block:var(--sp-6)">
-      <div class="state-empty-sub">Prayer times need your location.</div>
-      <a href="settings.html" class="btn btn-primary btn-sm" style="margin-block-start:var(--sp-3)">Set Location</a>
+    <!-- No location inline state -->
+    <div class="pr-no-location hidden" id="prayer-no-location" aria-live="polite">
+      <span>Prayer times need your location.</span>
+      <a href="settings.html" class="pr-no-location-link">Set location →</a>
     </div>
+
   </div>
 </section>
 
-<!-- ════════ PRAYER SCHEDULE ════════ -->
-<section class="prayer-section" id="prayer-schedule-section" aria-label="Prayer schedule">
+<!-- ══════════════════════════════════════════
+     LEVEL 2 — SECONDARY
+     Today's 6 prayer times with status.
+     Past ✓/○  Next →  Upcoming ○
+══════════════════════════════════════════ -->
+<section class="pr-section" id="prayer-schedule-section" aria-label="Today's prayer times">
   <div class="container">
-    <div class="type-eyebrow">Today's Prayer Times</div>
-
-    <div class="prayer-grid" id="prayer-grid" role="list">
+    <div class="pr-section-label">Today's Prayers</div>
+    <div class="pr-schedule" id="prayer-grid" role="list" aria-label="Prayer schedule">
       <!-- Rendered by prayers.js -->
-      <div class="prayer-placeholder state-empty">
-        <div class="state-empty-sub">Enable location to see today's prayer times.</div>
+      <div class="pr-schedule-placeholder">
+        <p>Enable location to see today's prayer times.</p>
+        <a href="settings.html" class="btn btn-ghost btn-sm">Settings →</a>
       </div>
     </div>
-
-    <div class="prayer-meta-row" id="prayer-meta"></div>
+    <div class="pr-meta" id="prayer-meta"></div>
   </div>
 </section>
 
-<!-- ════════ WEEKLY TRACKER ════════ -->
-<section class="prayer-section prayer-section-alt" id="tracker-section" aria-label="Weekly prayer tracker">
+<!-- ══════════════════════════════════════════
+     LEVEL 2 — SECONDARY
+     Consistency at a glance: streak + week + month
+══════════════════════════════════════════ -->
+<section class="pr-section pr-section-alt" id="consistency-section" aria-label="Prayer consistency">
   <div class="container">
-    <div class="type-eyebrow">Weekly Tracker</div>
-    <p class="prayer-section-sub">Tap a cell to mark a prayer. Saved on your device.</p>
+    <div class="pr-section-label">Your Consistency</div>
 
-    <div class="tracker-wrap">
+    <div class="pr-consistency-row">
+
+      <!-- Streak -->
+      <div class="pr-streak-card">
+        <div class="pr-streak-num" id="streak-count">0</div>
+        <div class="pr-streak-label" id="streak-label">Day Streak</div>
+        <div class="pr-streak-icon" aria-hidden="true">🔥</div>
+      </div>
+
+      <!-- This week bar -->
+      <div class="pr-bar-card">
+        <div class="pr-bar-header">
+          <span class="pr-bar-title">This week</span>
+          <span class="pr-bar-score" id="cons-weekly">—</span>
+        </div>
+        <div class="pr-bar-wrap" role="progressbar" aria-label="Weekly consistency" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="cons-weekly-bar-wrap">
+          <div class="pr-bar-fill" id="cons-weekly-bar" style="width:0%"></div>
+        </div>
+        <div class="pr-bar-sub" id="cons-weekly-sub">—</div>
+      </div>
+
+      <!-- This month bar -->
+      <div class="pr-bar-card">
+        <div class="pr-bar-header">
+          <span class="pr-bar-title">This month</span>
+          <span class="pr-bar-score" id="cons-monthly">—</span>
+        </div>
+        <div class="pr-bar-wrap" role="progressbar" aria-label="Monthly consistency" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="cons-monthly-bar-wrap">
+          <div class="pr-bar-fill" id="cons-monthly-bar" style="width:0%"></div>
+        </div>
+        <div class="pr-bar-sub" id="cons-monthly-sub">—</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     LEVEL 3 — TRACKER
+     7-day tap grid. Secondary interaction.
+══════════════════════════════════════════ -->
+<section class="pr-section" id="tracker-section" aria-label="Weekly prayer tracker">
+  <div class="container">
+    <div class="pr-section-header">
+      <div class="pr-section-label" style="margin-block-end:0">Weekly Tracker</div>
+    </div>
+    <p class="pr-section-desc">Tap any cell to mark a prayer. Saved on your device.</p>
+    <div class="pr-tracker-wrap">
       <div class="tracker-grid" id="tracker-grid" role="grid" aria-label="Weekly prayer tracker">
         <!-- Rendered by prayers.js -->
       </div>
@@ -153,104 +194,55 @@
   </div>
 </section>
 
-<!-- ════════ CONSISTENCY ════════ -->
-<section class="prayer-section" id="consistency-section" aria-label="Prayer consistency">
+<!-- ══════════════════════════════════════════
+     LEVEL 3 — AFTER-PRAYER REFLECTIONS
+     Quietest section. Optional writing space.
+══════════════════════════════════════════ -->
+<section class="pr-section pr-section-alt" id="prayer-reflection-section" aria-label="After-prayer reflection">
   <div class="container">
-    <div class="type-eyebrow">Your Consistency</div>
-
-    <div class="consistency-grid">
-
-      <!-- Streak card -->
-      <div class="card-secondary consistency-streak-card">
-        <div class="streak-icon" aria-hidden="true">🔥</div>
-        <div class="streak-number" id="streak-count">0</div>
-        <div class="streak-label">Day Streak</div>
-        <div class="streak-desc">Pray all 5 prayers every day to keep your streak going.</div>
-      </div>
-
-      <!-- This week -->
-      <div class="card-secondary consistency-bar-card">
-        <div class="type-eyebrow" style="margin-block-end:var(--sp-3)">This Week</div>
-        <div class="cons-score" id="cons-weekly">—%</div>
-        <div class="cons-bar-wrap">
-          <div class="cons-bar-fill" id="cons-weekly-bar" style="width:0%"></div>
-        </div>
-        <div class="cons-sub skeleton skeleton-xl" id="cons-weekly-sub">—</div>
-      </div>
-
-      <!-- This month -->
-      <div class="card-secondary consistency-bar-card">
-        <div class="type-eyebrow" style="margin-block-end:var(--sp-3)">This Month</div>
-        <div class="cons-score" id="cons-monthly">—%</div>
-        <div class="cons-bar-wrap">
-          <div class="cons-bar-fill" id="cons-monthly-bar" style="width:0%"></div>
-        </div>
-        <div class="cons-sub skeleton skeleton-xl" id="cons-monthly-sub">—</div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ════════ AFTER-PRAYER REFLECTION ════════ -->
-<section class="prayer-section prayer-section-alt" id="prayer-reflection-section" aria-label="After prayer reflection">
-  <div class="container">
-    <div class="type-eyebrow">After Prayer</div>
-    <p class="prayer-section-sub">One quiet note per prayer. What did this prayer remind you of?</p>
-
-    <div class="prayer-reflect-grid" id="prayer-reflect-grid">
+    <div class="pr-section-label">After Prayer</div>
+    <p class="pr-section-desc">One quiet note per prayer. What did this prayer remind you of?</p>
+    <div class="pr-reflect-grid" id="prayer-reflect-grid">
       <!-- Rendered by prayers.js -->
     </div>
-    <p style="text-align:center;margin-block-start:var(--sp-4);font-size:var(--text-xs);color:var(--text-3)">🔒 Stored on your device only.</p>
+    <p class="pr-reflect-privacy">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Private — stored on this device only
+    </p>
   </div>
 </section>
 
-<!-- ════════ NOTIFICATIONS ════════ -->
-<section class="prayer-section" id="notifications-section" aria-label="Prayer notifications">
+<!-- ══════════════════════════════════════════
+     NOTIFICATIONS
+══════════════════════════════════════════ -->
+<section class="pr-section" id="notifications-section" aria-label="Prayer reminders">
   <div class="container">
-    <div class="type-eyebrow">Prayer Reminders</div>
-
+    <div class="pr-section-label">Prayer Reminders</div>
     <div class="notif-cards">
       <div class="notif-card card-secondary">
         <div class="notif-card-icon" aria-hidden="true">🔔</div>
-        <div class="notif-card-info">
-          <div class="notif-card-title">Adhan</div>
-          <div class="notif-card-desc">Notification at prayer time.</div>
-        </div>
-        <label class="toggle" aria-label="Adhan notification">
-          <input type="checkbox" id="notif-adhan"/>
-          <span class="toggle-track"></span>
-        </label>
+        <div class="notif-card-info"><div class="notif-card-title">Adhan</div><div class="notif-card-desc">Notification at prayer time.</div></div>
+        <label class="toggle" aria-label="Adhan notification"><input type="checkbox" id="notif-adhan"/><span class="toggle-track"></span></label>
       </div>
       <div class="notif-card card-secondary">
         <div class="notif-card-icon" aria-hidden="true">⏰</div>
-        <div class="notif-card-info">
-          <div class="notif-card-title">Reminder</div>
-          <div class="notif-card-desc">15 minutes before each prayer.</div>
-        </div>
-        <label class="toggle" aria-label="Reminder notification">
-          <input type="checkbox" id="notif-reminder"/>
-          <span class="toggle-track"></span>
-        </label>
+        <div class="notif-card-info"><div class="notif-card-title">Reminder</div><div class="notif-card-desc">15 minutes before each prayer.</div></div>
+        <label class="toggle" aria-label="Reminder notification"><input type="checkbox" id="notif-reminder"/><span class="toggle-track"></span></label>
       </div>
       <div class="notif-card card-secondary">
         <div class="notif-card-icon" aria-hidden="true">🔕</div>
-        <div class="notif-card-info">
-          <div class="notif-card-title">Silent</div>
-          <div class="notif-card-desc">Notification only, no sound.</div>
-        </div>
-        <label class="toggle" aria-label="Silent notification">
-          <input type="checkbox" id="notif-silent"/>
-          <span class="toggle-track"></span>
-        </label>
+        <div class="notif-card-info"><div class="notif-card-title">Silent</div><div class="notif-card-desc">Notification only, no sound.</div></div>
+        <label class="toggle" aria-label="Silent notification"><input type="checkbox" id="notif-silent"/><span class="toggle-track"></span></label>
       </div>
     </div>
-
     <div class="state-error hidden" id="notif-denied-msg" style="margin-block-start:var(--sp-4)">
       <div class="state-error-msg">Notification permission denied. Enable it in your browser settings.</div>
     </div>
   </div>
 </section>
+
+</main>
+</div><!-- /page-wrap -->
 
 <!-- ═══ BOTTOM NAV ═══ -->
 <nav class="bottom-nav" id="bottom-nav" aria-label="Mobile navigation">
@@ -293,9 +285,6 @@
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-</main>
-</div><!-- /page-wrap -->
 
 <script src="js/core.js"></script>
 <script src="js/prayers.js"></script>

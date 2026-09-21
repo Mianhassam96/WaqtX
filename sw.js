@@ -1,10 +1,10 @@
 'use strict';
 /* ═══════════════════════════════════════════════
    WaqtX — Service Worker
-   Cache: waqtx-v30
-   Phase 1.2: Today page UX — hierarchy, clean contracts
+   Cache: waqtx-v31
+   Phase 1.3: Prayer page UX — 3-level hierarchy, orbit removed
    ═══════════════════════════════════════════════ */
-var CACHE = 'waqtx-v30';
+var CACHE = 'waqtx-v31';
 var ASSETS = [
   './',
   './index.html',
